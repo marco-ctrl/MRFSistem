@@ -5,24 +5,46 @@
             <div class="col-md-4">
                 <form id="form1">
                     <div class="form-group">
+                        <input type="hidden" id="txt_codMiembro" placeholder="Codigo" class="form-control"></input>
+                    </div>
+                    <div class="form-group">
+                        <label >Carnet de Identidad</label>
                         <input type="number" id="txt_ci" placeholder="Carnet de Identidad" class="form-control"
                             min="0"></input>
                     </div>
                     <div class="form-group">
+                    <label >Nombre</label>
                         <input type="text" id="txt_nombre" placeholder="Nombre" class="form-control"></input>
                     </div>
                     <div class="form-group">
+                    <label >Apellido Paterno</label>
                         <input type="text" id="txt_paterno" placeholder="Apellido Paterno" class="form-control"></input>
                     </div>
                     <div class="form-group">
+                        <label >Apellido Materno</label>
                         <input type="text" id="txt_materno" placeholder="Apellido Materno" class="form-control"></input>
                     </div>
                     <div class="form-group">
-                        <input type="text" id="txt_materno" placeholder="Apellido Materno" class="form-control"></input>
-                    </div>
-                    <div class="form-group">
+                        <label >Numero de Contacto</label>
                         <input type="number" id="txt_numcontacto" placeholder="Numero de Contacto"
                             class="form-control"></input>
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="col-md-4 p-3">
+                <form id="form2">
+
+                    <div class="form-group">
+                        <label>Fecha de Nacimiento</label>
+                        <input type="date" id="txt_fecnac" placeholder="Fecha de Nacimiento"
+                            class="form-control"></input>
+                    </div>
+                    <div class="form-group">
+                        <label>Lugar de Nacimiento</label>
+                        <select id="cbx_ciudad" class="form-control">
+
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Estado Civil</label>
@@ -34,22 +56,6 @@
                             <option value="DIVORCIADO/A" class="form-control">DIVORCIADO/A</option>
                         </select>
                     </div>
-                </form>
-            </div>
-            <div class="col-md-4">
-                <form id="form2">
-
-                    <div class="form-group">
-                        <label>Fecha de Nacimiento</label>
-                        <input type="date" id="txt_fecnac" placeholder="Fecha de Nacimiento"
-                            class="form-control"></input>
-                    </div>
-                    <div class="form-group">
-                        <label>Lugar de Nacimiento</label>
-                        <select id="cbx_nacimiento" class="form-control">
-
-                        </select>
-                    </div>
                     <div class="form-group">
                         <label>Profesion</label>
                         <select id="cbx_profesion" class="form-control">
@@ -57,6 +63,7 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label >Direccion</label>
                         <textarea id="txt_direccion" rows="3" placeholder="Direccion de Domicilio"
                             class="form-control"></textarea>
                     </div>
@@ -89,4 +96,5 @@
             </div>
         </div>
     </div>
+    <script src="/MRFIglesiaBermejo/Script/CameraApp.js"></script>
     

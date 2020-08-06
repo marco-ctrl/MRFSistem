@@ -10,7 +10,7 @@ $(document).ready(function() {
 
     $("#mn_celula").click(function(event) {
         
-        $("#trabajo").load('FRM_Contenido.php');
+        $("#trabajo").load('FRM_Celula.php');
 
     });
 

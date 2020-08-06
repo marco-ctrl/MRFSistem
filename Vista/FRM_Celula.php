@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">Materia</a>
+    <a href="#" class="navbar-brand">Celula</a>
     <ul class="navbar-nav ml-auto">
         <form class="form-inline my-2 my-lg-0">
-            <input type="search" id="txt_buscar" class="form-control mr-ms-2" placeholder="Buscar Materia">
+            <input type="search" id="txt_buscar" class="form-control mr-ms-2" placeholder="Buscar Celula">
             <button class="btn btn-success my-2 my-sm-0" type="submit">
                 Buscar
             </button>
@@ -17,26 +17,40 @@
             <div class="card text-white bg-primary">
                 <div class="card-body">
                     <div class="card-header text-center">
-                        <h4>Agregar Contenido</h4>
+                        <h4>Agregar Celula</h4>
                     </div>
                     <br>
                     <form id="form_user" clas="p-2">
                         <div class="form-group">
-                            <input type="text" id="txt_codContenido" placeholder="Codigo" class="form-control"></input>
+
+                            <input type="hidden" id="txt_codCelula" placeholder="Codigo" class="form-control"></input>
                         </div>
                         <div class="form-group">
-                            <input type="text" id="txt_contenido" placeholder="Nombre de Contenido" class="form-control"
-                                value="" onkeyUp="javascript:this.value=this.value.toUpperCase();"></input>
+                            <label>Nombre de Celula</label>
+                            <input type="text" id="txt_nomCelula" placeholder="Nombre" class="form-control" value=""
+                                onkeyUp="javascript:this.value=this.value.toUpperCase();"></input>
                         </div>
                         <div class="form-group">
-                        <textarea class="form-control" id="txt_descripcion" placeholder="Descripcion"
-                            rows="3"></textarea>
+                            <label>Numero de Celula</label>
+                            <input type="number" id="txt_numCelula" placeholder="Numero" class="form-control"></input>
+                        </div>
+                        <div class="form-group">
+                            <label>Barrio</label>
+                            <select id="cbx_barrio" class="form-control">
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Calle</label>
+                            <select id="cbx_Calle" class="form-control">
+
+                            </select>
                         </div>
                         <br>
                         <div>
                             <button type="submit" class="btn btn-primary btn-block
                                             text-center">
-                                Guardar Contenido
+                                Guardar Celula
                             </button>
                         </div>
                     </form>
@@ -50,12 +64,12 @@
             <table class="table table-hover table-sm">
                 <thead>
                     <tr>
-                        <td>CODIGO</td>
-                        <td>MATERIA</td>
-                        <td>DESCRIPCION</td>
+                        <td>NOMBRE</td>
+                        <td>NUMERO</td>
+                        <td>DIRECCION</td>
                     </tr>
                 </thead>
-                <tbody id="tb_contenido">
+                <tbody id="tb_celula">
 
                 </tbody>
             </table>

@@ -4,11 +4,11 @@
             <table class="table table-hover table-sm">
                 <thead>
                     <tr>
-                        <td>C. IDENTIDAD</td>
+                        <td>CARNET IDENTIDAD</td>
                         <td>NOMBRE</td>
                         <td>APELLIDO</td>
-                        <td>F. NACIMIENTO</td>
-                        <td>Num. CONTACTO</td>
+                        <td>FECHA DE NACIMIENTO</td>
+                        <td>NUMERO DE CONTACTO</td>
                         <td>PROFESION</td>
                         <td>DIRECCION</td>
                     </tr>

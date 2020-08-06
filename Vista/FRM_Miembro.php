@@ -77,7 +77,7 @@
 <br>
 <div class="container p-2">
     <div class="row">
-        <div class="col-md-3 p-2">
+        <div class="col-md-2 p-2">
             <div>
                 <button type="button" id="btn_guardar" class="btn btn-primary btn-block
                                     text-center">
@@ -86,7 +86,7 @@
             </div>
 
         </div>
-        <div class="col-md-3 p-2">
+        <div class="col-md-2 p-2">
             <div>
                 <button type="button" id="btn_nuevo" class="btn btn-primary btn-block
                                     text-center">
@@ -96,5 +96,6 @@
         </div>
     </div>
 </div>
+<script src="/MRFIglesiaBermejo/Script/MiembroApp.js"></script>
 <br>
 <br>
