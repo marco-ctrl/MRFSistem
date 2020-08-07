@@ -1,4 +1,4 @@
-<? 
+<?php 
     include 'Conexion.php';
 
     if(isset($_POST['codigo']) && isset($_POST['correlativo'])){

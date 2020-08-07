@@ -69,6 +69,7 @@ $(document).ready(function () {
             $('#form1').trigger('reset');
             $('#form2').trigger('reset');
             $('#form3').trigger('reset');
+            DeshabilitarFormulario();
         });
         //console.log(postData);
         //e.preventDefault();

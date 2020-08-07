@@ -31,7 +31,7 @@ function guardarSecuencia(){
         codigo: getCodigo(),
         correlativo: getCorrelativo()
     };
-    $.post('MRFIglesiaBermejo/AccesoDatos/Codigo/GuardarSecuencia.php', 
+    $.post('/MRFIglesiaBermejo/AccesoDatos/Codigo/GuardarSecuencia.php', 
         postData, function (response) {
         console.log(response);
     });
@@ -42,7 +42,8 @@ function modificarSecuencia(){
         codigo: getCodigo(),
         correlativo: getCorrelativo()
     };
-    $.post('MRFIglesiaBermejo/AccesoDatos/Codigo/ModificarSecuencia.php', 
+    console.log(postData);
+    $.post('/MRFIglesiaBermejo/AccesoDatos/Codigo/ModificarSecuencia.php', 
         postData, function (response) {
         console.log(response);
     });
