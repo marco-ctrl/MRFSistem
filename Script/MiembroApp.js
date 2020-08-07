@@ -16,23 +16,26 @@ $(document).ready(function () {
         if ($('#txt_buscar').val()) {
             let buscar = $('#txt_buscar').val();
             $.ajax({
-                url: 'BuscarUsuario.php',
+                url: '/MRFIglesiaBermejo/AccesoDatos/Miembro/BuscarMiembro.php',
                 type: 'POST',
                 data: {buscar},
                 success: function (response) {
-                    let usuario = JSON.parse(response);
-                let plantilla = '';
-                usuario.forEach(usuario => {
-                    plantilla=MostrarTabla(plantilla, usuario);
-                });
-                $('#tb_usuario').html(plantilla);
+                    console.log(response);
+                    //if (response!=[]){
+                        let usuario = JSON.parse(response);
+                        let plantilla = '';
+                        usuario.forEach(usuario => {
+                            plantilla=MostrarTabla(plantilla, usuario);
+                        });
+                    //}
+                $('#tb_miembro').html(plantilla);
                     //console.log(usaurio);
                 }
 
             });
         }
         else{
-            ListarUsuario();
+            ListarMiembro();
         }
         //console.log(buscar);
 

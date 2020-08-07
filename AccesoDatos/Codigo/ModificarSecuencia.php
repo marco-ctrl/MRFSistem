@@ -2,7 +2,7 @@
     
     include 'Conexion.php';
 
-    echo "hola mundo" ;
+    //echo "hola mundo" ;
     if(isset($_POST['codigo']) && isset($_POST['correlativo'])){
         $codigo=$_POST['codigo'];
         $correlativo=$_POST['correlativo'];

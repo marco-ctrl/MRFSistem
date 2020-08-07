@@ -11,6 +11,8 @@
                         <td>NUMERO DE CONTACTO</td>
                         <td>PROFESION</td>
                         <td>DIRECCION</td>
+                        <td>DAR BAJA</td>
+                        <td>MODIFICAR</td>
                     </tr>
                 </thead>
                 <tbody id="tb_miembro">
