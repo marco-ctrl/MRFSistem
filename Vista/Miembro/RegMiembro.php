@@ -74,12 +74,13 @@
                     <video id="video" playsinline autoplay></video>
                     <!--<canvas id="canvas" width="140" height="120"></canvas>-->
                 </div>
-
+                <br>
                 <!-- Trigger canvas web API -->
                 <div class="controller ">
                     <button id="snap" class="btn-secondary btn-block
                             text-center">Tomar Foto</button>
                 </div>
+               
                 <form id="form3">
                     <div class="p-3">
                         <table>

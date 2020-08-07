@@ -6,7 +6,8 @@ $(document).ready(function () {
     let edit=false;
 
     let codProfesion, codCiudad;
-
+    let codMiembro;
+    
     DeshabilitarFormulario();
 
     
@@ -36,27 +37,41 @@ $(document).ready(function () {
         //console.log(buscar);
 
     });
-    $('#form_user').submit(function (e) {//permiete guardar Usuario
+    $('#btn_guardar').click(function (e) {//permiete guardar Usuario
         const canvas = document.getElementById('canvas');
         var foto=canvas.toDataURL('image/jpeg', 1.0);
-        console.log(foto);
+        //console.log(foto);
         const postData = {
-            documento: $('#txt_documento').val(),
-            nombre: $('#txt_nombreUser').val(),
-            profesion: $('#txt_profesion').val(),
-            imagen: encodeURIComponent(foto)
+            pacodmie: codMiembro,
+            cacidmie: $('#txt_ci').val(),
+            canommie: $('#txt_nombre').val(),
+            capatmie: $('#txt_paterno').val(),
+            camatmie: $('#txt_materno').val(),
+            cacelmie: $('#txt_numcontacto').val(),
+            cafecnac: $('#txt_fecnac').val(),
+            caestciv: $('#cbx_estadoCivil').val(),
+            cadirmie: $('#txt_direccion').val(),
+            caestmie: true,
+            facodpro: codProfesion,
+            facodciu: codCiudad,
+            cafotmie: encodeURIComponent(foto)
         };
         
-        let url = edit === false ? 'AgregarUsuario.php':'ModificarUsuario.php';
+        let url = edit === false ? 
+        '/MRFIglesiaBermejo/AccesoDatos/Miembro/AgregarMiembro.php':
+        '/MRFIglesiaBermejo/AccesoDatos/Miembro/ModificarMiembro.php';
         
         $.post(url, postData, function (response) {
-            console.log(response);
-            ListarUsuario();
+            //console.log(response);
+            actualizarSecuencia("MBR");
+            ListarMiembro();
             //$('#txt_documento').trigger('reset');
-            $('#form_user').trigger('reset');
+            $('#form1').trigger('reset');
+            $('#form2').trigger('reset');
+            $('#form3').trigger('reset');
         });
-        console.log(postData);
-        e.preventDefault();
+        //console.log(postData);
+        //e.preventDefault();
     });
 
     function ListarMiembro() {//lista usuarios
@@ -142,7 +157,7 @@ $(document).ready(function () {
             type: 'GET',
             success: function (response) {
                 let profesion = JSON.parse(response);
-                let plantilla = '';
+                let plantilla = '<option value=0>Eligir Profesion</option>';
                 profesion.forEach(profesion => {
                     plantilla+=`<option value="${profesion.pacodpro}" class="cod-profesion">${profesion.canompro}</option>`;            
                 });
@@ -165,7 +180,7 @@ $(document).ready(function () {
             type: 'GET',
             success: function (response) {
                 let ciudad = JSON.parse(response);
-                let plantilla = '';
+                let plantilla = '<option value=0>Eligir Ciudad</option>';
                 ciudad.forEach(ciudad => {
                     plantilla+=`<option value="${ciudad.pacodciu}" class="ciudad">${ciudad.canomciu}</option>`;            
                 });
@@ -175,8 +190,6 @@ $(document).ready(function () {
     }
 
     $('#cbx_ciudad').change(function (e) {//asignar codigo de cuidad
-        //let elemento = $(this)[0];
-        //console.log(elemento);
         codCiudad=$('#cbx_ciudad').val();
         console.log("codigo ciudad "+codCiudad); 
         e.preventDefault();
@@ -184,8 +197,19 @@ $(document).ready(function () {
     });
 
     $("#btn_nuevo").click(function(event) {
-        
         habilitarFormulario();
+        verificarSecuencia("MBR");
+        if(!getBan()){
+            setCodigo("MBR");
+            setCorrelativo(1);
+        }
+        else{
+            setCodigo("MBR");
+            obtenerCorrelativo("MBR");
+            setCorrelativo(obtenerSiguinete("MBR"));
+        }
+        codMiembro=getCodigo()+'-'+getCorrelativo();
+        console.log(codMiembro);
 
     });
     

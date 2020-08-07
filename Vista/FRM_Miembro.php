@@ -96,6 +96,7 @@
         </div>
     </div>
 </div>
+<script src="/MRFIglesiaBermejo/Script/CodigoApp.js"></script>
 <script src="/MRFIglesiaBermejo/Script/MiembroApp.js"></script>
 <br>
 <br>
