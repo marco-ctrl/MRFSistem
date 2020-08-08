@@ -133,4 +133,4 @@
         </div>
     </div>
 </div>
-<script src="/MRFIglesiaBermejo/Script/CameraApp.js"></script>
+<!--<script src="/MRFIglesiaBermejo/Script/CameraApp.js"></script>-->

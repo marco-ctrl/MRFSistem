@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');

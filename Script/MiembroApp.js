@@ -48,7 +48,7 @@ $(document).ready(function () {
             $('#mensaje').hide();
             ListarMiembro();
         }
-        
+
     });
     $('#btn_guardar').click(function (e) {//permiete guardar Usuario
         const canvas = document.getElementById('canvas');
@@ -97,7 +97,7 @@ $(document).ready(function () {
             $('#form2').trigger('reset');
             $('#form3').trigger('reset');
             DeshabilitarFormulario();
-            edit=false;
+            edit = false;
         });
     });
 
@@ -141,24 +141,24 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.baja-miembro', function () {//elimina usuario
-        
+
         if (confirm("Seguro que desea dar de baja este Miembro de la iglesia")) {
             let elemento = $(this)[0].parentElement.parentElement;
             let pacodmie = $(elemento).attr('UserDocu');
             console.log('dando de baja...');
-            $.post('/MRFIglesiaBermejo/AccesoDatos/Miembro/DarBaja.php', 
+            $.post('/MRFIglesiaBermejo/AccesoDatos/Miembro/DarBaja.php',
                 { pacodmie }, function (responce) {
-                if(responce=='baja'){
-                    ListarMiembro();
-                    let mensaje = `<div class="alert alert-dismissible alert-primary">
+                    if (responce == 'baja') {
+                        ListarMiembro();
+                        let mensaje = `<div class="alert alert-dismissible alert-primary">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 <strong>Miembro dado de baja</strong>
                                 </div>`;
-                    $('#mensaje').html(mensaje);
-                    $('#mensaje').show();
-                }
-                
-            });
+                        $('#mensaje').html(mensaje);
+                        $('#mensaje').show();
+                    }
+
+                });
         }
     });
 
@@ -309,20 +309,45 @@ $(document).ready(function () {
         $("#btn_nuevo").attr("disabled", false);
     }
 
-    function Mensaje(message, cssClass) {
-        const div = document.createElement('div');
-        div.className = `alert alert-${cssClass}`;
-        div.appendChild(document.createTextNode(message));
-        // Show in The DOM
-        const app = document.querySelector('#App');
-        const form = document.querySelector('#mensaje');
-        // Insert Message in the UI
-        app.insertBefore(div, form);
-        // Remove the Message after 3 seconds
-        setTimeout(function () {
-            document.querySelector('.alert').remove();
-        }, 3000);
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const snap = document.getElementById("snap");
+    const foto = document.getElementById('imagen');
+    const errorMsgElement = document.querySelector('span#errorMsg');
+
+    const constraints = {
+        audio: false,
+        video: {
+            width: 140, height: 120
+        }
+    };
+
+    // Access webcam
+    async function init() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia(constraints);
+            handleSuccess(stream);
+        } catch (e) {
+            errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+        }
     }
+
+    // Success
+    function handleSuccess(stream) {
+        window.stream = stream;
+        video.srcObject = stream;
+    }
+
+    //Load init
+    init();
+
+    // Draw image
+    var context = canvas.getContext('2d');
+    var imagenes;
+    snap.addEventListener("click", function () {
+        context.drawImage(video, 0, 0, 140, 120);
+    });
+
 
 });
 
