@@ -41,8 +41,8 @@
                 </div>
                 <div class="form-group">
                     <label>Estado Civil</label>
-                    <select id="cbx_estadoCivil" class="btn-primary form-control
-                            text-center">
+                    <select id="cbx_estadoCivil" class="form-control">
+                        <option value="0" class="form-control">Estado Civil</option>
                         <option value="SOLTERO/A" class="form-control">SOLTERO/A</option>
                         <option value="CASADO/A" class="form-control">CASADO/A</option>
                         <option value="VIUDO/A" class="form-control">VIUDO/A</option>
@@ -104,7 +104,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 p-3">
 
             <div class="video-wrap">
                 <video id="video" playsinline autoplay></video>

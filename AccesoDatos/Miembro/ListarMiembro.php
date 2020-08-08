@@ -21,6 +21,7 @@ pacodciu,
 canomciu
 FROM amiebro m, aproion p, aciudad c 
 where m.facodpro=p.pacodpro 
+and m.caestmie=true
 and m.facodciu=c.pacodciu
 order by pacodmie desc LIMIT 15";
 $resultado = pg_query($conexion, $consulta);

@@ -12,11 +12,12 @@
 </nav>
 
 <div class=" p-2 container">
-    <div class="row">
+    <div id="App" class="row">
         <div class="col-md-12">
-            <div class="card my-4" id="mensaje">
-                <div class="card-body">
-                    <ul id="container"></ul>
+            <div id="mensaje">
+                <div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <p class="mb-0">Miembro no encotrado</p>
                 </div>
             </div>
             <ul class="nav nav-tabs">

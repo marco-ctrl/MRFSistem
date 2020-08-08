@@ -1,85 +1,107 @@
 $(document).ready(function () {
-    
+
     ListarMiembro();
     ListarProfesion();
     ListarCiudad();
-    let edit=false;
+    let edit = false;
 
     let codProfesion, codCiudad;
     let codMiembro;
-    
+
     DeshabilitarFormulario();
 
-    
     $('#mensaje').hide();
-    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de usuarios
+
+    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de miembros
         if ($('#txt_buscar').val()) {
-            let buscar = $('#txt_buscar').val();
+            let buscar = $('#txt_buscar').val().toUpperCase();
+            let plantilla = '';
             $.ajax({
                 url: '/MRFIglesiaBermejo/AccesoDatos/Miembro/BuscarMiembro.php',
                 type: 'POST',
-                data: {buscar},
+                data: { buscar },
                 success: function (response) {
-                    console.log(response);
-                    //if (response!=[]){
+                    if (response != "no encontrado") {
                         let usuario = JSON.parse(response);
-                        let plantilla = '';
+
                         usuario.forEach(usuario => {
-                            plantilla=MostrarTabla(plantilla, usuario);
+                            plantilla = MostrarTabla(plantilla, usuario);
                         });
-                    //}
-                $('#tb_miembro').html(plantilla);
-                    //console.log(usaurio);
+                        $('#tb_miembro').html(plantilla);
+                    }
+                    else {
+                        $('#tb_miembro').html(plantilla);
+                        let mensaje = `<div class="alert alert-dismissible alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Miembro ${buscar} no se encuentra registrado en la base de datos</strong></div>`;
+                        $('#mensaje').html(mensaje);
+                        $('#mensaje').show();
+                    }
+                },
+                error: function (xhr, status) {
+                    alert('error al buscar miembro');
                 }
 
             });
         }
-        else{
+        else {
+            $('#mensaje').hide();
             ListarMiembro();
         }
-        //console.log(buscar);
-
+        
     });
     $('#btn_guardar').click(function (e) {//permiete guardar Usuario
         const canvas = document.getElementById('canvas');
-        var foto=canvas.toDataURL('image/jpeg', 1.0);
-        //console.log(foto);
+        var foto = canvas.toDataURL('image/jpeg', 1.0);
         const postData = {
             pacodmie: codMiembro,
             cacidmie: $('#txt_ci').val(),
-            canommie: $('#txt_nombre').val(),
-            capatmie: $('#txt_paterno').val(),
-            camatmie: $('#txt_materno').val(),
+            canommie: $('#txt_nombre').val().toUpperCase(),
+            capatmie: $('#txt_paterno').val().toUpperCase(),
+            camatmie: $('#txt_materno').val().toUpperCase(),
             cacelmie: $('#txt_numcontacto').val(),
             cafecnac: $('#txt_fecnac').val(),
             caestciv: $('#cbx_estadoCivil').val(),
-            cadirmie: $('#txt_direccion').val(),
+            cadirmie: $('#txt_direccion').val().toUpperCase(),
             caestmie: true,
             facodpro: codProfesion,
             facodciu: codCiudad,
             cafotmie: encodeURIComponent(foto)
         };
-        
-        let url = edit === false ? 
-        '/MRFIglesiaBermejo/AccesoDatos/Miembro/AgregarMiembro.php':
-        '/MRFIglesiaBermejo/AccesoDatos/Miembro/ModificarMiembro.php';
-        
+
+        let url = edit === false ?
+            '/MRFIglesiaBermejo/AccesoDatos/Miembro/AgregarMiembro.php' :
+            '/MRFIglesiaBermejo/AccesoDatos/Miembro/ModificarMiembro.php';
+
         $.post(url, postData, function (response) {
-            //console.log(response);
-            actualizarSecuencia("MBR");
+            console.log(response);
+            if (!edit && response == 'registra') {
+                actualizarSecuencia("MBR");
+                let mensaje = `<div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Datos guardados correctamente</strong>
+              </div>`;
+                $('#mensaje').html(mensaje);
+                $('#mensaje').show();
+            }
+            if (edit && response == 'modificado') {
+                let mensaje = `<div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Datos modificados correctamente</strong>
+              </div>`;
+                $('#mensaje').html(mensaje);
+                $('#mensaje').show();
+            }
             ListarMiembro();
-            //$('#txt_documento').trigger('reset');
             $('#form1').trigger('reset');
             $('#form2').trigger('reset');
             $('#form3').trigger('reset');
             DeshabilitarFormulario();
+            edit=false;
         });
-        //console.log(postData);
-        //e.preventDefault();
     });
 
     function ListarMiembro() {//lista usuarios
-        //console.log('hola mundo Miembro');
         $.ajax({
             url: '/MRFIglesiaBermejo/AccesoDatos/Miembro/ListarMiembro.php',
             type: 'GET',
@@ -87,21 +109,19 @@ $(document).ready(function () {
                 let miembros = JSON.parse(response);
                 let plantilla = '';
                 miembros.forEach(miembros => {
-                    plantilla=MostrarTabla(plantilla, miembros);            
+                    plantilla = MostrarTabla(plantilla, miembros);
                 });
                 $('#tb_miembro').html(plantilla);
             }
         });
     }
 
-    
-    function MostrarTabla(plantilla, miembros){
+
+    function MostrarTabla(plantilla, miembros) {
         plantilla +=
-        `<tr UserDocu="${miembros.pacodmie}" class="table-secondary">
+            `<tr UserDocu="${miembros.pacodmie}" class="table-light">
                 <td>${miembros.cacidmie}</td>
-                <td>
-                    <a href="#" class="user-item">${miembros.canommie}</a>
-                </td>
+                <td>${miembros.canommie}</td>
                 <td>${miembros.capatmie} ${miembros.camatmie}</td>
                 <td>${miembros.cafecnac}</td>
                 <td>${miembros.cacelmie}</td>
@@ -114,48 +134,72 @@ $(document).ready(function () {
                 </td>
                 <td>
                     <button class="modificar-miembro btn btn-secondary">
-                        modificar
-                    </button>
+                        modificar</button>
                 </td>
             </tr>`
         return plantilla;
     }
 
     $(document).on('click', '.baja-miembro', function () {//elimina usuario
-        if (confirm("Seguro que desea eliminar este usuario")) {
+        
+        if (confirm("Seguro que desea dar de baja este Miembro de la iglesia")) {
             let elemento = $(this)[0].parentElement.parentElement;
-            let documento = $(elemento).attr('UserDocu');
-            $.post('BorrarUsuario.php', {documento}, function (responce) {
-                //console.log(responce);
-                ListarUsuario();
+            let pacodmie = $(elemento).attr('UserDocu');
+            console.log('dando de baja...');
+            $.post('/MRFIglesiaBermejo/AccesoDatos/Miembro/DarBaja.php', 
+                { pacodmie }, function (responce) {
+                if(responce=='baja'){
+                    ListarMiembro();
+                    let mensaje = `<div class="alert alert-dismissible alert-primary">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong>Miembro dado de baja</strong>
+                                </div>`;
+                    $('#mensaje').html(mensaje);
+                    $('#mensaje').show();
+                }
+                
             });
         }
     });
 
     $(document).on('click', '.modificar-miembro', function () {//modifica usuario
-        //console.log("editando.."); 
+        habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
-        let documento = $(elemento).attr('UserDocu');
-        $.post('UsuarioSingle.php', {documento}, function (responce) {
-            const usuario = JSON.parse(responce);
-            var foto;
-            usuario.forEach(usuario => {
-                $('#txt_documento').val(usuario.documento);
-                $('#txt_nombreUser').val(usuario.nombre);
-                $('#txt_profesion').val(usuario.profesion);
-                foto=decodeURIComponent(usuario.imagen);
+        let pacodmie = $(elemento).attr('UserDocu');
+        $.post('/MRFIglesiaBermejo/AccesoDatos/Miembro/SingleMiembro.php',
+            { pacodmie }, function (responce) {
+                const miembro = JSON.parse(responce);
+                var foto;
+                miembro.forEach(miembro => {
+                    codMiembro = miembro.pacodmie,
+                        $('#txt_ci').val(miembro.cacidmie),
+                        $('#txt_nombre').val(miembro.canommie),
+                        $('#txt_paterno').val(miembro.capatmie),
+                        $('#txt_materno').val(miembro.camatmie),
+                        $('#txt_numcontacto').val(miembro.cacelmie),
+                        $('#txt_fecnac').val(miembro.cafecnac),
+                        $('#cbx_estadoCivil').val(miembro.caestciv),
+                        $('#txt_direccion').val(miembro.cadirmie),
+                        //caestmie: true,
+                        codProfesion = miembro.facodpro,
+                        codCiudad = miembro.facodciu,
+                        console.log(miembro.caestciv);
+                    $('#cbx_profesion').val(miembro.pacodpro),
+                        $('#cbx_ciudad').val(miembro.pacodciu),
+                        //cafotmie: encodeURIComponent(foto)
+                        foto = decodeURIComponent(miembro.cafotmie);
+                });
+                const canvas = document.getElementById('canvas');
+                var contex = canvas.getContext('2d');
+                imagenes = document.getElementById('imagen');
+                imagenes.setAttribute('src', "data:image/jpeg;base64," + foto);
+                contex.drawImage(imagenes, 0, 0, 140, 120);
+                //contex.hide();
+                edit = true;
             });
-            const canvas=document.getElementById('canvas');
-            var contex = canvas.getContext('2d');
-            imagenes=document.getElementById('imagen');
-            imagenes.setAttribute('src', "data:image/jpeg;base64," + foto);
-            contex.drawImage(imagenes, 0, 0, 140, 120);
-            //contex.hide();
-            edit=true;
-        });
     });
 
-    function ListarProfesion(){//listar profesion
+    function ListarProfesion() {//listar profesion
         $.ajax({
             url: '/MRFIglesiaBermejo/AccesoDatos/Miembro/ListarProfesion.php',
             type: 'GET',
@@ -163,22 +207,22 @@ $(document).ready(function () {
                 let profesion = JSON.parse(response);
                 let plantilla = '<option value=0>Eligir Profesion</option>';
                 profesion.forEach(profesion => {
-                    plantilla+=`<option value="${profesion.pacodpro}" class="cod-profesion">${profesion.canompro}</option>`;            
+                    plantilla += `<option value="${profesion.pacodpro}" class="cod-profesion">${profesion.canompro}</option>`;
                 });
                 $('#cbx_profesion').html(plantilla);
             }
         });
-        
+
     }
 
     $('#cbx_profesion').change(function (e) {//asigar codigo profesion
-        codProfesion=$('#cbx_profesion').val();
-        console.log("codigo profesion "+codProfesion); 
+        codProfesion = $('#cbx_profesion').val();
+        console.log("codigo profesion " + codProfesion);
         e.preventDefault();
-        
+
     });
 
-    function ListarCiudad(){//listar ciudad
+    function ListarCiudad() {//listar ciudad
         $.ajax({
             url: '/MRFIglesiaBermejo/AccesoDatos/Miembro/ListarCiudad.php',
             type: 'GET',
@@ -186,7 +230,7 @@ $(document).ready(function () {
                 let ciudad = JSON.parse(response);
                 let plantilla = '<option value=0>Eligir Ciudad</option>';
                 ciudad.forEach(ciudad => {
-                    plantilla+=`<option value="${ciudad.pacodciu}" class="ciudad">${ciudad.canomciu}</option>`;            
+                    plantilla += `<option value="${ciudad.pacodciu}" class="ciudad">${ciudad.canomciu}</option>`;
                 });
                 $('#cbx_ciudad').html(plantilla);
             }
@@ -194,31 +238,31 @@ $(document).ready(function () {
     }
 
     $('#cbx_ciudad').change(function (e) {//asignar codigo de cuidad
-        codCiudad=$('#cbx_ciudad').val();
-        console.log("codigo ciudad "+codCiudad); 
+        codCiudad = $('#cbx_ciudad').val();
+        console.log("codigo ciudad " + codCiudad);
         e.preventDefault();
-        
+
     });
 
-    $("#btn_nuevo").click(function(event) {
+    $("#btn_nuevo").click(function (event) {
         habilitarFormulario();
         verificarSecuencia("MBR");
-        if(!getBan()){
+        if (!getBan()) {
             setCodigo("MBR");
             setCorrelativo(1);
         }
-        else{
+        else {
             setCodigo("MBR");
             obtenerCorrelativo("MBR");
             setCorrelativo(obtenerSiguinete("MBR"));
         }
-        codMiembro=getCodigo()+'-'+getCorrelativo();
+        codMiembro = getCodigo() + '-' + getCorrelativo();
         console.log(codMiembro);
 
     });
-    
+
     //DesabilitarFormulario
-    function habilitarFormulario(){
+    function habilitarFormulario() {
         $("#txt_nombre").attr("disabled", false);
         $("#txt_codMiembro").attr("disabled", false);
         $("#txt_ci").attr("disabled", false);
@@ -242,7 +286,7 @@ $(document).ready(function () {
         document.getElementById("txt_ci").focus();
     }
 
-    function DeshabilitarFormulario(){
+    function DeshabilitarFormulario() {
         $("#txt_nombre").attr("disabled", true);
         $("#txt_codMiembro").attr("disabled", true);
         $("#txt_ci").attr("disabled", true);
@@ -263,6 +307,21 @@ $(document).ready(function () {
         $("#cbx_celula").attr("disabled", true);
         $("#cbx_funcion").attr("disabled", true);
         $("#btn_nuevo").attr("disabled", false);
+    }
+
+    function Mensaje(message, cssClass) {
+        const div = document.createElement('div');
+        div.className = `alert alert-${cssClass}`;
+        div.appendChild(document.createTextNode(message));
+        // Show in The DOM
+        const app = document.querySelector('#App');
+        const form = document.querySelector('#mensaje');
+        // Insert Message in the UI
+        app.insertBefore(div, form);
+        // Remove the Message after 3 seconds
+        setTimeout(function () {
+            document.querySelector('.alert').remove();
+        }, 3000);
     }
 
 });

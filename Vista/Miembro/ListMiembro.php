@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <table class="table table-hover table-sm">
-                <thead>
+                <thead class="bg-primary text-white">
                     <tr>
                         <td>CARNET IDENTIDAD</td>
                         <td>NOMBRE</td>

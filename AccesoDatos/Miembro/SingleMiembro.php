@@ -2,8 +2,8 @@
 
 include 'Conexion.php';
 
-$buscar = $_POST['buscar'];
-//$buscar = "B";
+$pacodmie = $_POST['pacodmie'];
+//$pacodmie = "MBR-9";
 
 $consulta = "SELECT camatmie, 
 capatmie, 
@@ -23,11 +23,9 @@ canompro,
 pacodciu,
 canomciu
 FROM amiebro m, aproion p, aciudad c 
-where m.facodpro=p.pacodpro
-and m.caestmie=true 
+where m.facodpro=p.pacodpro 
 and m.facodciu=c.pacodciu
-and canommie like'%{$buscar}%'
-order by pacodmie desc LIMIT 15";
+and m.pacodmie='{$pacodmie}'";
 $resultado = pg_query($conexion, $consulta);
 //if ($resultado) {
     $json=array();
@@ -40,7 +38,8 @@ $resultado = pg_query($conexion, $consulta);
                         'caestmie' => $row['caestmie'],
                         'caestciv' => $row['caestciv'],
                         'cafecnac' => $row['cafecnac'],
-                        'cafotmie' => $row['cafotmie'],
+                        'cafotmie' => urlencode(base64_encode(
+                            pg_unescape_bytea($row['cafotmie']))),
                         'canommie' => $row['canommie'],
                         'pacodmie' => $row['pacodmie'],
                         'facodciu' => $row['facodciu'],
