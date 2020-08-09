@@ -62,11 +62,40 @@ $bytesArchivo = pg_escape_bytea($bytesArchivo);
         '{$facodpro}');";
     $stm = pg_query($conexion, $sql);
 }
-if ($stm) {
-    echo "registra";
-} else {
+
+if($stm){
+    $cafecenc = $_POST['cafecenc'];
+    $cafecbau = $_POST['cafecbau'];
+    $cafecigl = $_POST['cafecigl'];
+    $cafeccon = $_POST['cafeccon'];
+    $pacodcre = $_POST['pacodcre'];
+
+    $sql = "INSERT INTO public.acreesp(
+            cafecenc, 
+            cafecbau, 
+            cafecigl, 
+            cafeccon, 
+            pacodcre)
+            VALUES (
+            '{$cafecenc}', 
+            '{$cafecbau}', 
+            '{$cafecigl}', 
+            '{$cafeccon}',
+            '{$pacodcre}')";
+    
+    $stm1 = pg_query($conexion, $sql);
+    
+    if ($stm1) {
+        echo "registra";
+    } else {
+        echo "noRegistra";
+    }
+}
+else{
     echo "noRegistra";
 }
+    
+
 
 pg_close($conexion);
 ?>

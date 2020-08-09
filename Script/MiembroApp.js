@@ -51,54 +51,19 @@ $(document).ready(function () {
 
     });
     $('#btn_guardar').click(function (e) {//permiete guardar Usuario
+        CapturarCrecimiento();
+        GuardarMiembro();
+        ListarMiembro();
+        $('#form1').trigger('reset');
+        $('#form2').trigger('reset');
+        $('#form3').trigger('reset');
         const canvas = document.getElementById('canvas');
-        var foto = canvas.toDataURL('image/jpeg', 1.0);
-        const postData = {
-            pacodmie: codMiembro,
-            cacidmie: $('#txt_ci').val(),
-            canommie: $('#txt_nombre').val().toUpperCase(),
-            capatmie: $('#txt_paterno').val().toUpperCase(),
-            camatmie: $('#txt_materno').val().toUpperCase(),
-            cacelmie: $('#txt_numcontacto').val(),
-            cafecnac: $('#txt_fecnac').val(),
-            caestciv: $('#cbx_estadoCivil').val(),
-            cadirmie: $('#txt_direccion').val().toUpperCase(),
-            caestmie: true,
-            facodpro: codProfesion,
-            facodciu: codCiudad,
-            cafotmie: encodeURIComponent(foto)
-        };
-
-        let url = edit === false ?
-            '/MRFIglesiaBermejo/AccesoDatos/Miembro/AgregarMiembro.php' :
-            '/MRFIglesiaBermejo/AccesoDatos/Miembro/ModificarMiembro.php';
-
-        $.post(url, postData, function (response) {
-            console.log(response);
-            if (!edit && response == 'registra') {
-                actualizarSecuencia("MBR");
-                let mensaje = `<div class="alert alert-dismissible alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Datos guardados correctamente</strong>
-              </div>`;
-                $('#mensaje').html(mensaje);
-                $('#mensaje').show();
-            }
-            if (edit && response == 'modificado') {
-                let mensaje = `<div class="alert alert-dismissible alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Datos modificados correctamente</strong>
-              </div>`;
-                $('#mensaje').html(mensaje);
-                $('#mensaje').show();
-            }
-            ListarMiembro();
-            $('#form1').trigger('reset');
-            $('#form2').trigger('reset');
-            $('#form3').trigger('reset');
-            DeshabilitarFormulario();
-            edit = false;
-        });
+        var contex = canvas.getContext('2d');
+        contex.clearRect(0, 0, canvas.width, canvas.height);
+        imagenes = document.getElementById('imagen');
+        imagenes.setAttribute('src', " ");
+        DeshabilitarFormulario();
+        
     });
 
     function ListarMiembro() {//lista usuarios
@@ -180,14 +145,17 @@ $(document).ready(function () {
                         $('#txt_fecnac').val(miembro.cafecnac),
                         $('#cbx_estadoCivil').val(miembro.caestciv),
                         $('#txt_direccion').val(miembro.cadirmie),
-                        //caestmie: true,
                         codProfesion = miembro.facodpro,
                         codCiudad = miembro.facodciu,
                         console.log(miembro.caestciv);
                     $('#cbx_profesion').val(miembro.pacodpro),
                         $('#cbx_ciudad').val(miembro.pacodciu),
-                        //cafotmie: encodeURIComponent(foto)
-                        foto = decodeURIComponent(miembro.cafotmie);
+                        foto = decodeURIComponent(miembro.cafotmie),
+                        $('#dat_fecbau').val(miembro.cafecbau),
+                        $('#dat_feccon').val(miembro.cafeccon),
+                        $('#dat_fecenc').val(miembro.cafecenc),
+                        $('#dat_fecigl').val(miembro.cafecigl),
+                        setPacodcre(miembro.pacodcre)
                 });
                 const canvas = document.getElementById('canvas');
                 var contex = canvas.getContext('2d');
@@ -201,7 +169,7 @@ $(document).ready(function () {
 
     function ListarProfesion() {//listar profesion
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Miembro/ListarProfesion.php',
+            url: '/MRFIglesiaBermejo/AccesoDatos/Profesion/ListarProfesion.php',
             type: 'GET',
             success: function (response) {
                 let profesion = JSON.parse(response);
@@ -224,7 +192,7 @@ $(document).ready(function () {
 
     function ListarCiudad() {//listar ciudad
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Miembro/ListarCiudad.php',
+            url: '/MRFIglesiaBermejo/AccesoDatos/Ciudad/ListarCiudad.php',
             type: 'GET',
             success: function (response) {
                 let ciudad = JSON.parse(response);
@@ -235,6 +203,71 @@ $(document).ready(function () {
                 $('#cbx_ciudad').html(plantilla);
             }
         });
+    }
+
+    function GuardarMiembro() {
+        const canvas = document.getElementById('canvas');
+        var foto = canvas.toDataURL('image/jpeg', 1.0);
+        const postData = {
+            pacodmie: codMiembro,
+            cacidmie: $('#txt_ci').val(),
+            canommie: $('#txt_nombre').val().toUpperCase(),
+            capatmie: $('#txt_paterno').val().toUpperCase(),
+            camatmie: $('#txt_materno').val().toUpperCase(),
+            cacelmie: $('#txt_numcontacto').val(),
+            cafecnac: $('#txt_fecnac').val(),
+            caestciv: $('#cbx_estadoCivil').val(),
+            cadirmie: $('#txt_direccion').val().toUpperCase(),
+            caestmie: true,
+            facodpro: codProfesion,
+            facodciu: codCiudad,
+            cafotmie: encodeURIComponent(foto),
+            cafecbau: getCafecbau(),
+            cafeccon: getCafeccon(),
+            cafecigl: getCafecigl(),
+            cafecenc: getCafecenc(),
+            pacodcre: codMiembro
+        };
+
+        let url = edit === false ?
+            '/MRFIglesiaBermejo/AccesoDatos/Miembro/AgregarMiembro.php' :
+            '/MRFIglesiaBermejo/AccesoDatos/Miembro/ModificarMiembro.php';
+
+        $.post(url, postData, function (response) {
+            console.log(response);
+            if (!edit && response == 'registra') {
+                actualizarSecuencia("MBR");
+                let mensaje = `<div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Datos guardados correctamente</strong>
+              </div>`;
+                $('#mensaje').html(mensaje);
+                $('#mensaje').show();
+            }
+            if (edit && response == 'modificado') {
+                let mensaje = `<div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Datos modificados correctamente</strong>
+              </div>`;
+                $('#mensaje').html(mensaje);
+                $('#mensaje').show();
+
+            }
+            //console.log(edit);
+            edit = false;
+        });
+
+    }
+
+    function CapturarCrecimiento() {
+        setCafecbau($('#dat_fecbau').val());
+        setCafeccon($('#dat_feccon').val());
+        setCafecenc($('#dat_fecenc').val());
+        setCafecigl($('#dat_fecigl').val());
+        setPacodcre(codMiembro);
+        console.log(getCafeccon() + ' ' + getCafecenc() + ' ' +
+            getCafecenc() + ' ' + getCafecigl() + ' ' +
+            getPacodcre());
     }
 
     $('#cbx_ciudad').change(function (e) {//asignar codigo de cuidad
@@ -301,8 +334,8 @@ $(document).ready(function () {
         $("#snap").attr("disabled", true);
         $("#dat_feccon").attr("disabled", true);
         $("#dat_fecbau").attr("disabled", true);
-        $("#dat_fecentrada").attr("disabled", true);
-        $("#dat_fecencuentro").attr("disabled", true);
+        $("#dat_fecigl").attr("disabled", true);
+        $("#dat_fecenc").attr("disabled", true);
         $("#btn_guardar").attr("disabled", true);
         $("#cbx_celula").attr("disabled", true);
         $("#cbx_funcion").attr("disabled", true);

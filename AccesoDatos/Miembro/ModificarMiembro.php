@@ -48,10 +48,31 @@ $bytesArchivo = pg_escape_bytea($bytesArchivo);
         WHERE pacodmie='{$pacodmie}'";
     $stm = pg_query($conexion, $sql);
 }
-if ($stm) {
-    echo 'modificado';
-} else {
-    echo 'noModificado';
+if($stm){
+    $cafecenc = $_POST['cafecenc'];
+    $cafecbau = $_POST['cafecbau'];
+    $cafecigl = $_POST['cafecigl'];
+    $cafeccon = $_POST['cafeccon'];
+    $pacodcre = $_POST['pacodcre'];
+
+    $sql = "UPDATE public.acreesp
+	SET 
+	cafecenc='{$cafecenc}', 
+	cafecbau='{$cafecbau}', 
+	cafecigl='{$cafecigl}', 
+	cafeccon='{$cafeccon}' 
+	WHERE pacodcre='{$pacodcre}';";
+    
+    $stm1 = pg_query($conexion, $sql);
+    
+    if ($stm1) {
+        echo "modificado";
+    } else {
+        echo "noModifica";
+    }
+}
+else{
+    echo "noRegistra";
 }
 
 pg_close($conexion);

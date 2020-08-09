@@ -70,19 +70,19 @@
                 </div>
                 <div class="form-group">
                     <label>Fecha de Conversion</label>
-                    <input type="date" id="dat_feccon" placeholder="" class="form-control"></input>
+                    <input type="date" id="dat_feccon" min="1994-01-01" max="2020-01-01" placeholder="" class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label>Fecha de Bautismo</label>
-                    <input type="date" id="dat_fecbau" placeholder="" class="form-control"></input>
+                    <input type="date" id="dat_fecbau" min="1994-01-01" max="2020-01-01" placeholder="" class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label>Entrada a la Iglesia</label>
-                    <input type="date" id="dat_fecentrada" placeholder="" class="form-control"></input>
+                    <input type="date" id="dat_fecigl" min="1994-01-01" max="2020-01-01" placeholder="" class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label>Encuentro Con Dios</label>
-                    <input type="date" id="dat_fecencuentro" placeholder="" class="form-control"></input>
+                    <input type="date" id="dat_fecenc" min="1994-01-01" max="2020-01-01" placeholder="" class="form-control"></input>
                 </div>
                 <div class="form-group text-center">
                     <label>Asignar Celula</label>

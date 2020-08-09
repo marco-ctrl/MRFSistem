@@ -5,7 +5,8 @@ include 'Conexion.php';
 $pacodmie = $_POST['pacodmie'];
 //$pacodmie = "MBR-9";
 
-$consulta = "SELECT camatmie, 
+$consulta = "SELECT 
+camatmie, 
 capatmie, 
 cacelmie, 
 cacidmie, 
@@ -21,10 +22,19 @@ facodpro,
 pacodpro,
 canompro,
 pacodciu,
-canomciu
-FROM amiebro m, aproion p, aciudad c 
+canomciu,
+cafeccon,
+cafecbau,
+cafecenc,
+cafecigl,
+pacodcre
+FROM amiebro m, 
+	 aproion p, 
+	 aciudad c,
+	 acreesp a
 where m.facodpro=p.pacodpro 
 and m.facodciu=c.pacodciu
+and a.pacodcre=m.pacodmie
 and m.pacodmie='{$pacodmie}'";
 $resultado = pg_query($conexion, $consulta);
 //if ($resultado) {
@@ -47,7 +57,12 @@ $resultado = pg_query($conexion, $consulta);
                         'pacodpro' => $row['pacodpro'],
                         'canompro' => $row['canompro'],
                         'pacodciu' => $row['pacodciu'],
-                        'canomciu' => $row['canomciu']);
+                        'canomciu' => $row['canomciu'],
+                        'cafeccon' => $row['cafeccon'] ,
+                        'cafecbau' => $row['cafecbau'],
+                        'cafecenc' => $row['cafecenc'],
+                        'cafecigl' => $row['cafecigl'],
+                        'pacodcre' => $row['pacodcre']);
     }
     if($json!=null){
         echo json_encode($json);
