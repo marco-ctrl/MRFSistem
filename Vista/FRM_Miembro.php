@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
     <a href="#" class="navbar-brand">Miembro</a>
-    <ul class="navbar-nav ml-auto">
+    <!--<ul class="navbar-nav ml-auto">-->
         <form class="form-inline my-2 my-lg-0">
             <input type="search" id="txt_buscar" class="form-control mr-ms-2" placeholder="Buscar Miembro">
             <button class="btn btn-success my-2 my-sm-0" type="submit">
@@ -8,7 +8,7 @@
             </button>
 
         </form>
-    </ul>
+    <!--</ul>-->
 </nav>
 
 <div class=" p-2 container">
@@ -20,7 +20,7 @@
                     <p class="mb-0">Miembro no encotrado</p>
                 </div>
             </div>
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-pills nav-justified">
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#home">Listar Miembros</a>
                 </li>

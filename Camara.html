@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Prueba de cámara Web</title>
+    <script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+    <style type="text/css">
+        .contenedor{ width: 350px; float: left;}
+        .titulo{ font-size: 12pt; font-weight: bold;}
+        #camara, #foto{
+            width: 320px;
+            min-height: 240px;
+            border: 1px solid #008000;
+        }
+    </style>
+    <script type="text/javascript" >
+        //El código Javascript está en la siguiente sección del post
+		
+    </script>
+</head>
+<body>
+    <div id='botonera'>
+        <input id='botonIniciar' type='button' value = 'Iniciar'></input>
+        <input id='botonDetener' type='button' value = 'Detener'></input>
+        <input id='botonFoto' type='button' value = 'Foto'></input>
+    </div>
+    <div class="contenedor">
+        <div class="titulo">Cámara</div>
+        <video id="camara" autoplay controls></video>
+    </div>
+    <div class="contenedor">
+        <div class="titulo">Foto</div>
+        <canvas id="foto" ></canvas>
+    </div>
+		<script src="Camara.js"></script>
+</body>
+</html>

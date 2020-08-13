@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
-            <table class="table table-hover table-sm">
-                <thead class="bg-primary text-white">
+        <div class="col-md-12 table-responsive">
+            <table class="table table-hover table-sm table-striped">
+                <thead class="">
                     <tr>
                         <td>CARNET IDENTIDAD</td>
                         <td>NOMBRE</td>

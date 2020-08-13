@@ -53,7 +53,7 @@ $(document).ready(function () {
     $('#btn_guardar').click(function (e) {//permiete guardar Usuario
         CapturarCrecimiento();
         GuardarMiembro();
-        ListarMiembro();
+        
         $('#form1').trigger('reset');
         $('#form2').trigger('reset');
         $('#form3').trigger('reset');
@@ -63,7 +63,7 @@ $(document).ready(function () {
         imagenes = document.getElementById('imagen');
         imagenes.setAttribute('src', " ");
         DeshabilitarFormulario();
-        
+        ListarMiembro();
     });
 
     function ListarMiembro() {//lista usuarios
@@ -98,7 +98,7 @@ $(document).ready(function () {
                     </button>
                 </td>
                 <td>
-                    <button class="modificar-miembro btn btn-secondary">
+                    <button class="modificar-miembro btn btn-secondary ">
                         modificar</button>
                 </td>
             </tr>`
@@ -128,6 +128,8 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.modificar-miembro', function () {//modifica usuario
+        //$(".nav li").removeClass("active");
+        //this.addClass("active");
         habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodmie = $(elemento).attr('UserDocu');
@@ -147,7 +149,7 @@ $(document).ready(function () {
                         $('#txt_direccion').val(miembro.cadirmie),
                         codProfesion = miembro.facodpro,
                         codCiudad = miembro.facodciu,
-                        console.log(miembro.caestciv);
+                        //console.log(miembro.caestciv);
                     $('#cbx_profesion').val(miembro.pacodpro),
                         $('#cbx_ciudad').val(miembro.pacodciu),
                         foto = decodeURIComponent(miembro.cafotmie),
@@ -310,8 +312,8 @@ $(document).ready(function () {
         $("#snap").attr("disabled", false);
         $("#dat_feccon").attr("disabled", false);
         $("#dat_fecbau").attr("disabled", false);
-        $("#dat_fecentrada").attr("disabled", false);
-        $("#dat_fecencuentro").attr("disabled", false);
+        $("#dat_fecigl").attr("disabled", false);
+        $("#dat_fecenc").attr("disabled", false);
         $("#cbx_celula").attr("disabled", false);
         $("#cbx_funcion").attr("disabled", false);
         $("#btn_guardar").attr("disabled", false);
@@ -345,7 +347,7 @@ $(document).ready(function () {
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
     const snap = document.getElementById("snap");
-    const foto = document.getElementById('imagen');
+    //const foto = document.getElementById('imagen');
     const errorMsgElement = document.querySelector('span#errorMsg');
 
     const constraints = {
@@ -357,6 +359,7 @@ $(document).ready(function () {
 
     // Access webcam
     async function init() {
+    //function init(){
         try {
             const stream = await navigator.mediaDevices.getUserMedia(constraints);
             handleSuccess(stream);
@@ -372,11 +375,14 @@ $(document).ready(function () {
     }
 
     //Load init
-    init();
+    $('#encender').click(function (event) {
+        init();
+    });
+    
 
     // Draw image
     var context = canvas.getContext('2d');
-    var imagenes;
+    //var imagenes;
     snap.addEventListener("click", function () {
         context.drawImage(video, 0, 0, 140, 120);
     });

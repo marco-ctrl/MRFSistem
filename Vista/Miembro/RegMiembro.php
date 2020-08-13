@@ -70,19 +70,23 @@
                 </div>
                 <div class="form-group">
                     <label>Fecha de Conversion</label>
-                    <input type="date" id="dat_feccon" min="1994-01-01" max="2020-01-01" placeholder="" class="form-control"></input>
+                    <input type="date" id="dat_feccon" min="1994-01-01" max="2020-01-01" placeholder=""
+                        class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label>Fecha de Bautismo</label>
-                    <input type="date" id="dat_fecbau" min="1994-01-01" max="2020-01-01" placeholder="" class="form-control"></input>
+                    <input type="date" id="dat_fecbau" min="1994-01-01" max="2020-01-01" placeholder=""
+                        class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label>Entrada a la Iglesia</label>
-                    <input type="date" id="dat_fecigl" min="1994-01-01" max="2020-01-01" placeholder="" class="form-control"></input>
+                    <input type="date" id="dat_fecigl" min="1994-01-01" max="2020-01-01" placeholder=""
+                        class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label>Encuentro Con Dios</label>
-                    <input type="date" id="dat_fecenc" min="1994-01-01" max="2020-01-01" placeholder="" class="form-control"></input>
+                    <input type="date" id="dat_fecenc" min="1994-01-01" max="2020-01-01" placeholder=""
+                        class="form-control"></input>
                 </div>
                 <div class="form-group text-center">
                     <label>Asignar Celula</label>
@@ -105,9 +109,24 @@
             </form>
         </div>
         <div class="col-md-4 p-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <form>
+                        <button type="button" id="apagar" class="btn-secondary btn-block
+                            text-center">Apagar</button>
+                    </form>
+
+                </div>
+                <div class="col-md-6">
+                    <form>
+                        <button type="button" id="encender" class="btn-secondary btn-block
+                            text-center">Encender</button>
+                    </form>
+                </div>
+            </div>
 
             <div class="video-wrap">
-                <video id="video" playsinline autoplay></video>
+                <video id="video" autoplay></video>
                 <!--<canvas id="canvas" width="140" height="120"></canvas>-->
             </div>
             <br>
