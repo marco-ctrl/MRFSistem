@@ -48,6 +48,7 @@
             <div>
                 <button type="button" id="btn_guardar" class="btn btn-primary btn-block
                                     text-center">
+                                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
                     Guardar
                 </button>
             </div>
