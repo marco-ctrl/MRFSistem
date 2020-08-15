@@ -1,9 +1,9 @@
-$(document).ready(function () {
-    let cafecenc="";
-    let cafecbau="";
-    let cafecigl="";
-    let cafeccon="";
-    let pacodcre="";
+//$(document).ready(function () {
+    var cafecenc;
+    var cafecbau;
+    var cafecigl;
+    var cafeccon;
+    var pacodcre;
 
     function setCafecenc(_cafecenc) {
         cafecenc = _cafecenc;
@@ -46,4 +46,4 @@ $(document).ready(function () {
     }
 
 
-});
+//});

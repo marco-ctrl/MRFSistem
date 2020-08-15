@@ -113,27 +113,27 @@
                 <div class="col-md-6">
                     <form>
                         <button type="button" id="apagar" class="btn-secondary btn-block
-                            text-center">Apagar</button>
+                            text-center"><i class="fas fa-video-slash"></i> Apagar</button>
                     </form>
 
                 </div>
                 <div class="col-md-6">
                     <form>
                         <button type="button" id="encender" class="btn-secondary btn-block
-                            text-center">Encender</button>
+                            text-center"><i class="fas fa-video"></i> Encender</button>
                     </form>
                 </div>
             </div>
 
             <div class="video-wrap">
-                <video id="video" autoplay></video>
+                <video id="video" width="140" height="120" poster="/MRFIglesiaBermejo/img/photo.svg" > </video>
                 <!--<canvas id="canvas" width="140" height="120"></canvas>-->
             </div>
             <br>
             <!-- Trigger canvas web API -->
             <div class="controller ">
                 <button id="snap" class="btn-secondary btn-block
-                            text-center">Tomar Foto</button>
+                            text-center"><i class="fas fa-camera"></i> Tomar Foto</button>
             </div>
 
             <form id="form3">
@@ -142,7 +142,7 @@
                         <tbody>
                             <tr>
                                 <td><canvas id="canvas" width="140" height="120"></canvas></td>
-                                <td><img id="imagen" width="140" height="120"></img></td>
+                                <td><img id="imagen"  width="140" height="120"></img></td>
                             </tr>
                         </tbody>
                     </table>
@@ -151,5 +151,25 @@
 
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-4 p-2">
+            <div>
+                <button type="button" id="btn_guardar" class="btn btn-primary btn-block
+                                    text-center">
+                    <i class="far fa-save"></i>
+                    Guardar
+                </button>
+            </div>
+
+        </div>
+        <div class="col-md-4 p-2">
+            <div>
+                <button type="button" id="btn_cancelar" class="btn btn-warning btn-block
+                                    text-center"><i class="far fa-window-close"></i>
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
-<!--<script src="/MRFIglesiaBermejo/Script/CameraApp.js"></script>-->
+<script src="/MRFIglesiaBermejo/Script/CrecimientoApp.js"></script>

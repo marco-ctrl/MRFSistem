@@ -3,16 +3,81 @@ $(document).ready(function () {
     ListarMiembro();
     ListarProfesion();
     ListarCiudad();
-    let edit = false;
 
-    let codProfesion, codCiudad;
-    let codMiembro;
+    ImagenCanvas();
+
+    var edit = false;
+
+    var codProfesion, codCiudad;
+    var codMiembro;
+
+    var video = document.getElementById('video');
+    var canvas = document.getElementById('canvas');
+    const snap = document.getElementById("snap");
+    const errorMsgElement = document.querySelector('span#errorMsg');
+
+    const constraints = {
+        audio: false,
+        video: {
+            width: 140, height: 120
+        }
+    };
 
     DeshabilitarFormulario();
 
     $('#mensaje').hide();
+    $('#profile').hide();
+
+    // Access webcam
+    async function init() {
+        //function init(){
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia(constraints);
+            handleSuccess(stream);
+        } catch (e) {
+            errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+        }
+    }
+
+    // Success
+    function handleSuccess(stream) {
+        window.stream = stream;
+        video.srcObject = stream;
+    }
+
+    //Load init
+    $('#encender').click(function (event) {
+        init();
+        video.play();
+    });
+
+    $('#apagar').click(function (event) {
+        Apagar();
+    })
+
+    //Apagar camara//
+    function Apagar() {
+        stream = video.srcObject;
+        if (stream != null) {
+            tracks = stream.getTracks();
+            tracks.forEach(function (track) {
+                track.stop();
+            });
+            video.srcObject = null;
+            video.setAttribute('poster', "/MRFIglesiaBermejo/img/photo.svg");
+        }
+    }
+
+    // Draw image
+    snap.addEventListener("click", function () {
+        let context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0, 140, 120);
+    });
+
 
     $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de miembros
+        $('#profile').hide();
+        $('#home').show();
         if ($('#txt_buscar').val()) {
             let buscar = $('#txt_buscar').val().toUpperCase();
             let plantilla = '';
@@ -53,18 +118,21 @@ $(document).ready(function () {
     $('#btn_guardar').click(function (e) {//permiete guardar Usuario
         CapturarCrecimiento();
         GuardarMiembro();
-        
+        limpiar();
+        ListarMiembro();
+    });
+
+    function limpiar() {
         $('#form1').trigger('reset');
         $('#form2').trigger('reset');
         $('#form3').trigger('reset');
-        const canvas = document.getElementById('canvas');
-        var contex = canvas.getContext('2d');
-        contex.clearRect(0, 0, canvas.width, canvas.height);
-        imagenes = document.getElementById('imagen');
-        imagenes.setAttribute('src', " ");
+        const context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        ImagenCanvas();
         DeshabilitarFormulario();
-        ListarMiembro();
-    });
+        $('#profile').hide();
+        $('#home').show();
+    }
 
     function ListarMiembro() {//lista usuarios
         $.ajax({
@@ -94,12 +162,13 @@ $(document).ready(function () {
                 <td>${miembros.cadirmie}</td>
                 <td>
                     <button class="baja-miembro btn btn-danger">
-                        Baja
+                        <i class="fas fa-trash-alt"></i>
                     </button>
                 </td>
                 <td>
-                    <button class="modificar-miembro btn btn-secondary ">
-                        modificar</button>
+                    <button class="modificar-miembro btn btn-secondary">
+                        <i class="far fa-edit"></i>
+                    </button>
                 </td>
             </tr>`
         return plantilla;
@@ -128,15 +197,17 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.modificar-miembro', function () {//modifica usuario
-        //$(".nav li").removeClass("active");
-        //this.addClass("active");
+        $('#home').hide();
+        $('#profile').show();
+
         habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodmie = $(elemento).attr('UserDocu');
         $.post('/MRFIglesiaBermejo/AccesoDatos/Miembro/SingleMiembro.php',
             { pacodmie }, function (responce) {
                 const miembro = JSON.parse(responce);
-                var foto;
+                //console.log(responce);
+                let foto;
                 miembro.forEach(miembro => {
                     codMiembro = miembro.pacodmie,
                         $('#txt_ci').val(miembro.cacidmie),
@@ -150,7 +221,7 @@ $(document).ready(function () {
                         codProfesion = miembro.facodpro,
                         codCiudad = miembro.facodciu,
                         //console.log(miembro.caestciv);
-                    $('#cbx_profesion').val(miembro.pacodpro),
+                        $('#cbx_profesion').val(miembro.pacodpro),
                         $('#cbx_ciudad').val(miembro.pacodciu),
                         foto = decodeURIComponent(miembro.cafotmie),
                         $('#dat_fecbau').val(miembro.cafecbau),
@@ -160,7 +231,7 @@ $(document).ready(function () {
                         setPacodcre(miembro.pacodcre)
                 });
                 const canvas = document.getElementById('canvas');
-                var contex = canvas.getContext('2d');
+                let contex = canvas.getContext('2d');
                 imagenes = document.getElementById('imagen');
                 imagenes.setAttribute('src', "data:image/jpeg;base64," + foto);
                 contex.drawImage(imagenes, 0, 0, 140, 120);
@@ -168,6 +239,15 @@ $(document).ready(function () {
                 edit = true;
             });
     });
+
+    function ImagenCanvas() {
+        //video.setAttribute('poster', "/MRFIglesiaBermejo/img/photo.svg");
+        const canvas = document.getElementById('canvas');
+        let contex = canvas.getContext('2d');
+        imagenes = document.getElementById('imagen');
+        imagenes.setAttribute('src', "/MRFIglesiaBermejo/img/user.svg");
+        contex.drawImage(imagenes, 0, 0, 120, 120);
+    }
 
     function ListarProfesion() {//listar profesion
         $.ajax({
@@ -279,7 +359,18 @@ $(document).ready(function () {
 
     });
 
+    $('#btn_cancelar').click(function (event) {
+        Apagar();
+        $('#profile').hide();
+        $('#home').show();
+        limpiar();
+    });
+
     $("#btn_nuevo").click(function (event) {
+        $('#home').hide();
+        $('#profile').show();
+        //limpiar();
+        ImagenCanvas();
         habilitarFormulario();
         verificarSecuencia("MBR");
         if (!getBan()) {
@@ -343,50 +434,6 @@ $(document).ready(function () {
         $("#cbx_funcion").attr("disabled", true);
         $("#btn_nuevo").attr("disabled", false);
     }
-
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const snap = document.getElementById("snap");
-    //const foto = document.getElementById('imagen');
-    const errorMsgElement = document.querySelector('span#errorMsg');
-
-    const constraints = {
-        audio: false,
-        video: {
-            width: 140, height: 120
-        }
-    };
-
-    // Access webcam
-    async function init() {
-    //function init(){
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia(constraints);
-            handleSuccess(stream);
-        } catch (e) {
-            errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
-        }
-    }
-
-    // Success
-    function handleSuccess(stream) {
-        window.stream = stream;
-        video.srcObject = stream;
-    }
-
-    //Load init
-    $('#encender').click(function (event) {
-        init();
-    });
-    
-
-    // Draw image
-    var context = canvas.getContext('2d');
-    //var imagenes;
-    snap.addEventListener("click", function () {
-        context.drawImage(video, 0, 0, 140, 120);
-    });
-
 
 });
 
