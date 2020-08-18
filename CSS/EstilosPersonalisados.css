@@ -74,4 +74,9 @@ html,body{ margin: 0;}
     .contenedor{
         width: 85%;
     }
+
+    .mapas { 
+        height: 300px;
+        width: 600px; 
+    }
         

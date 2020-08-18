@@ -28,10 +28,10 @@
                 <form id="form1" clas="p-2">
 
                     <div class="form-group">
-                        <label>Tipo de Usuario</label>
+                        <label>ROL de Usuario</label>
                         <select id="cbx_tipo" class="btn-primary form-control
                             text-center">
-                            <option value="0" class="form-control">FUNCION DE USUARIO</option>
+                            <option value="0" class="form-control">ROL DE USUARIO</option>
                             <option value="LIDER" class="form-control">LIDER</option>
                             <option value="ADMINISTRADOR" class="form-control">ADMINISTRADOR</option>
                             <option value="TESORERO" class="form-control">TESORERO</option>
@@ -56,19 +56,22 @@
             <div class="col-md-4">
                 <br>
                 <form id="form2" class="p-1">
-                    <div class="form-group">
-                        <label for="exampleSelect2">Codigo de Miembro</label>
-                        <input type="text" id="lbl_codigo" for="" class="form-control" placeholder="Codigo"></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleSelect2">Miembro</label>
-                        <input type="text" class="form-control" id="lbl_miembro" placeholder="Miembro">
-                        </input>
-                    </div>
+                    <!--<fieldset disabled>-->
+                        <div class="form-group">
+                            <label for="exampleSelect2">Codigo de Miembro</label>
+                            <input type="text" id="txt_codigo" class="form-control" placeholder="Codigo" disabled></input>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleSelect2">Miembro</label>
+                            <input type="text" id="txt_miembro" class="form-control" placeholder="Miembro" disabled>
+                            </input>
+                        </div>
+
+                    <!--</fielset>-->
                     <div class="form-group">
                         <label for="exampleSelect2">Buscar Miembro</label>
                         <input type="search" id="txt_buscarMiembro" class="form-control mr-ms-2"
-                            placeholder="Buscar Miembro">
+                                placeholder="Buscar Miembro">
                     </div>
                 </form>
             </div>

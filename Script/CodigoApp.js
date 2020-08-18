@@ -56,17 +56,13 @@ function verificarSecuencia(codigo){
         async: false,
         data: {codigo},
         success: function (response) {
-            let existencia = JSON.parse(response);
-            existencia.forEach(existencia => {
-                setBan(existencia.ban);       
-            });
-            
+            setBan(response);
+            console.log(getBan());
         }
     });
 }
 
 function obtenerCorrelativo(codigo){
-    //var dato=0;
     $.ajax({
         url: '/MRFIglesiaBermejo/AccesoDatos/Codigo/ObtenerCorrelativo.php',
         type: 'POST',
@@ -79,8 +75,6 @@ function obtenerCorrelativo(codigo){
             });
         }
     });
-    //return dato;
-    //console.log(correlativo);
 }
 
 function obtenerSiguinete(codigo){

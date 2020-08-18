@@ -165,7 +165,7 @@
         <div class="col-md-4 p-2">
             <div>
                 <button type="button" id="btn_cancelar" class="btn btn-warning btn-block
-                                    text-center"><i class="far fa-window-close"></i>
+                        text-center"><i class="far fa-window-close"></i>
                     Cancelar
                 </button>
             </div>

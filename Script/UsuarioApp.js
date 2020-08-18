@@ -184,8 +184,9 @@ $(document).ready(function () {
         $('#formulario').show();
 
         habilitarFormulario();
+        let num = "";
         verificarSecuencia("USU");
-        if (!getBan()) {
+        if (getBan()!="true") {
             setCodigo("USU");
             setCorrelativo(1);
         }
@@ -194,12 +195,39 @@ $(document).ready(function () {
             obtenerCorrelativo("USU");
             setCorrelativo(obtenerSiguinete("USU"));
         }
-        codUsuario = getCodigo() + '-' + getCorrelativo();
+        num=ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
+        codUsuario = getCodigo() + '-' + num;
         console.log(codUsuario);
 
     });
 
     ///////////////funciones//////////
+    function ObtenerNumeroCorrelativo(numero, num){//sirve para obtener numero correlativo
+        switch (numero.length) {
+            case 1:
+                num = "00000" + numero;
+                break;
+            case 2:
+                num = "0000" + numero;
+                break;
+            case 3:
+                num = "000" + numero;
+                break;
+            case 4:
+                num = "00" + numero;
+                break;
+            case 5:
+                num = "0" + numero;
+                break;
+            case 6:
+                num = "" + numero;
+                break;
+            default:
+                break;
+        }
+        return num;
+    }
+    
     ////////Listar Usuario////////
     function ListarMiembro() {//lista usuarios
         $.ajax({
@@ -307,7 +335,6 @@ $(document).ready(function () {
         $("#txt_contrasena").attr("disabled", false);
         $("#cbx_tipo").attr("disabled", false);
         $("#txt_buscarMiembro").attr("disabled", false);
-        $("#sel_miembro").attr("disabled", false);
         $("#btn_guardar").attr("disabled", false);
         $("#btn_nuevo").attr("disabled", true);
         document.getElementById("cbx_tipo").focus();
@@ -319,11 +346,8 @@ $(document).ready(function () {
         $("#txt_contrasena").attr("disabled", true);
         $("#cbx_tipo").attr("disabled", true);
         $("#txt_buscarMiembro").attr("disabled", true);
-        $("#sel_miembro").attr("disabled", true);
         $("#btn_guardar").attr("disabled", true);
         $("#btn_nuevo").attr("disabled", false);
-        $('#lbl_codigo').attr("disabled", false);
-        $('#lbl_miembro').attr("disabled", false);
     }
 
 

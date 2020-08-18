@@ -1,16 +1,8 @@
 $(document).ready(function () {
-
-    ListarMiembro();
-    ListarProfesion();
-    ListarCiudad();
-
-    ImagenCanvas();
-
+    //Declaracion de Variables///
     var edit = false;
-
     var codProfesion, codCiudad;
     var codMiembro;
-
     var video = document.getElementById('video');
     var canvas = document.getElementById('canvas');
     const snap = document.getElementById("snap");
@@ -23,10 +15,18 @@ $(document).ready(function () {
         }
     };
 
-    DeshabilitarFormulario();
+    
 
     $('#mensaje').hide();
     $('#profile').hide();
+
+    ListarMiembro();
+    ListarProfesion();
+    ListarCiudad();
+
+    ImagenCanvas();
+
+    DeshabilitarFormulario();
 
     // Access webcam
     async function init() {
@@ -199,7 +199,6 @@ $(document).ready(function () {
     $(document).on('click', '.modificar-miembro', function () {//modifica usuario
         $('#home').hide();
         $('#profile').show();
-
         habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodmie = $(elemento).attr('UserDocu');
@@ -220,7 +219,6 @@ $(document).ready(function () {
                         $('#txt_direccion').val(miembro.cadirmie),
                         codProfesion = miembro.facodpro,
                         codCiudad = miembro.facodciu,
-                        //console.log(miembro.caestciv);
                         $('#cbx_profesion').val(miembro.pacodpro),
                         $('#cbx_ciudad').val(miembro.pacodciu),
                         foto = decodeURIComponent(miembro.cafotmie),
@@ -241,7 +239,6 @@ $(document).ready(function () {
     });
 
     function ImagenCanvas() {
-        //video.setAttribute('poster', "/MRFIglesiaBermejo/img/photo.svg");
         const canvas = document.getElementById('canvas');
         let contex = canvas.getContext('2d');
         imagenes = document.getElementById('imagen');
@@ -335,7 +332,6 @@ $(document).ready(function () {
                 $('#mensaje').show();
 
             }
-            //console.log(edit);
             edit = false;
         });
 
@@ -372,8 +368,9 @@ $(document).ready(function () {
         //limpiar();
         ImagenCanvas();
         habilitarFormulario();
+        let num = "";
         verificarSecuencia("MBR");
-        if (!getBan()) {
+        if (getBan()!="true") {
             setCodigo("MBR");
             setCorrelativo(1);
         }
@@ -382,10 +379,38 @@ $(document).ready(function () {
             obtenerCorrelativo("MBR");
             setCorrelativo(obtenerSiguinete("MBR"));
         }
-        codMiembro = getCodigo() + '-' + getCorrelativo();
+        num=ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
+        codMiembro = getCodigo() + '-' + num;
         console.log(codMiembro);
 
     });
+
+    function ObtenerNumeroCorrelativo(numero, num){//sirve para obtener numero correlativo
+        switch (numero.length) {
+            case 1:
+                num = "00000" + numero;
+                break;
+            case 2:
+                num = "0000" + numero;
+                break;
+            case 3:
+                num = "000" + numero;
+                break;
+            case 4:
+                num = "00" + numero;
+                break;
+            case 5:
+                num = "0" + numero;
+                break;
+            case 6:
+                num = "" + numero;
+                break;
+            default:
+                break;
+        }
+        return num;
+    }
+    
 
     //DesabilitarFormulario
     function habilitarFormulario() {
@@ -436,9 +461,3 @@ $(document).ready(function () {
     }
 
 });
-
-
-
-
-//console.log('Hola mundo');
-

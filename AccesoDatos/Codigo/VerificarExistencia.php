@@ -4,18 +4,24 @@ include 'Conexion.php';
 
 $codigo=$_POST['codigo'];
 
+//$codigo="CEL";
 $sql="select * from num_correlativo where codigo='{$codigo}'";
 
 $stm= pg_query($conexion, $sql);
- 
-if($stm){
-    $json[]=array('ban'=>true);
-    //echo ''.true;
+$json=array();
+while($row=pg_fetch_array($stm)){
+    $json[]=array('correlativo'=>$row['correlativo']);
+}
+
+//echo sizeof();
+//echo sizeof($json);
+//echo $stm;
+if(sizeof($json)>0){
+    echo 'true';
 }
 else{
-    $json[]=array('ban'=>false);
-    //echo ''.true;
+    echo 'false';
 }
 pg_close($conexion);
-echo json_encode($json);
+//echo json_encode($json);
 ?>
