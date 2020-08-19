@@ -1,5 +1,5 @@
 <?php 
-    include 'Conexion.php';
+    include '../Conexion/Conexion.php';
 
     if(isset($_POST['codigo']) && isset($_POST['correlativo'])){
         $codigo=$_POST['codigo'];

@@ -1,6 +1,6 @@
 <?php
     
-    include 'Conexion.php';
+    include '../Conexion/Conexion.php';
 
     //echo "hola mundo" ;
     if(isset($_POST['codigo']) && isset($_POST['correlativo'])){

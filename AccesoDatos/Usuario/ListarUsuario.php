@@ -1,5 +1,5 @@
 <?php
-    include 'Conexion.php';
+    include '../Conexion/Conexion.php';
 
     $consulta = "SELECT usu.caconusu, 
     usu.catipusu, 

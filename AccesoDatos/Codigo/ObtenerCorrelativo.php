@@ -1,6 +1,6 @@
 <?php
 
-include 'Conexion.php'; 
+include '../Conexion/Conexion.php';
 
 $codigo=$_POST['codigo'];
 

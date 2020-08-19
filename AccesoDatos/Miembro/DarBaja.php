@@ -1,6 +1,6 @@
 <?php
 
-include 'Conexion.php';
+include '../Conexion/Conexion.php';
 
 //if (isset($_POST["pacodmie"])) {
     $pacodmie = $_POST['pacodmie'];

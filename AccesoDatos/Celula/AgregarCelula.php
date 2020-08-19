@@ -1,6 +1,6 @@
 <?php
 
-include 'Conexion.php';
+include '../Conexion/Conexion.php';
 
 
 //if (isset($_POST["pacodusu"]) && isset($_POST["facodmie"]) && isset($_POST["canomusu"])) {

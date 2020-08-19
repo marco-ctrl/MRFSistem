@@ -1,6 +1,6 @@
 <?php
 
-include 'Conexion.php';
+include '../Conexion/Conexion.php';
 
 $pacodmie = $_POST['pacodmie'];
 //$pacodmie = "MBR-9";

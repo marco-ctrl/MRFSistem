@@ -1,6 +1,6 @@
 <?php
 
-include 'Conexion.php';
+include '../Conexion/Conexion.php';
 
 $imagenCodificada = $_POST["cafotmie"]; //Obtener la imagen
 if(strlen($imagenCodificada) <= 0) exit("No se recibió ninguna imagen");
