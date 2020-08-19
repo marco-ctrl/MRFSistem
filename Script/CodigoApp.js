@@ -33,7 +33,7 @@ function guardarSecuencia(){
     };
     $.post('/MRFIglesiaBermejo/AccesoDatos/Codigo/GuardarSecuencia.php', 
         postData, function (response) {
-        console.log(response);
+        //console.log(response);
     });
 }
 
@@ -45,7 +45,7 @@ function modificarSecuencia(){
     console.log(postData);
     $.post('/MRFIglesiaBermejo/AccesoDatos/Codigo/ModificarSecuencia.php', 
         postData, function (response) {
-        console.log(response);
+        //console.log(response);
     });
 }
 
@@ -86,12 +86,10 @@ function obtenerSiguinete(codigo){
 
 function actualizarSecuencia(codigo){
     verificarSecuencia(codigo);
-    if(getBan()){
+    if(getBan()=='true'){
         modificarSecuencia(codigo);
-        console.log(getBan());
     }
     else{
-        console.log(getBan());
         guardarSecuencia(codigo);
     }
 }

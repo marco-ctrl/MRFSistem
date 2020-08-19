@@ -184,12 +184,7 @@ $(document).ready(function () {
                 { pacodmie }, function (responce) {
                     if (responce == 'baja') {
                         ListarMiembro();
-                        let mensaje = `<div class="alert alert-dismissible alert-primary">
-                                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                <strong>Miembro dado de baja</strong>
-                                </div>`;
-                        $('#mensaje').html(mensaje);
-                        $('#mensaje').show();
+                        MostrarMensaje("Miembro dado de baja", 'warning');
                     }
 
                 });
@@ -237,6 +232,15 @@ $(document).ready(function () {
                 edit = true;
             });
     });
+
+    function MostrarMensaje(cadena, clase) {
+        let mensaje = `<div class="alert alert-dismissible alert-${clase}">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>${cadena}</strong>
+              </div>`;
+        $('#mensaje').html(mensaje);
+        $('#mensaje').show();
+    }
 
     function ImagenCanvas() {
         const canvas = document.getElementById('canvas');
@@ -316,20 +320,10 @@ $(document).ready(function () {
             console.log(response);
             if (!edit && response == 'registra') {
                 actualizarSecuencia("MBR");
-                let mensaje = `<div class="alert alert-dismissible alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Datos guardados correctamente</strong>
-              </div>`;
-                $('#mensaje').html(mensaje);
-                $('#mensaje').show();
+                MostrarMensaje("Datos de Miembro guardado correctamente", "success");
             }
             if (edit && response == 'modificado') {
-                let mensaje = `<div class="alert alert-dismissible alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Datos modificados correctamente</strong>
-              </div>`;
-                $('#mensaje').html(mensaje);
-                $('#mensaje').show();
+                MostrarMensaje("Datos de Miembro modificados correctamente", "success");
 
             }
             edit = false;

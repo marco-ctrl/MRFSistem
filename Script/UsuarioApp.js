@@ -141,12 +141,7 @@ $(document).ready(function () {
                 { pacodusu }, function (responce) {
                     if (responce == 'baja') {
                         ListarUsuario();
-                        let mensaje = `<div class="alert alert-dismissible alert-primary">
-                                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                <strong>Usuario dado de baja</strong>
-                                </div>`;
-                        $('#mensaje').html(mensaje);
-                        $('#mensaje').show();
+                        MostrarMensaje("Usuario dado de baja", "warning");
                     }
 
                 });
@@ -202,6 +197,15 @@ $(document).ready(function () {
     });
 
     ///////////////funciones//////////
+    function MostrarMensaje(cadena, clase) {//mostrar mensaje de alerta
+        let mensaje = `<div class="alert alert-dismissible alert-${clase}">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>${cadena}</strong>
+              </div>`;
+        $('#mensaje').html(mensaje);
+        $('#mensaje').show();
+    }
+
     function ObtenerNumeroCorrelativo(numero, num){//sirve para obtener numero correlativo
         switch (numero.length) {
             case 1:
@@ -304,21 +308,10 @@ $(document).ready(function () {
         $.post(url, postData, function (response) {
             if (!edit && response == 'registra') {
                 actualizarSecuencia("USU");
-                let mensaje = `<div class="alert alert-dismissible alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Datos guardados correctamente</strong>
-              </div>`;
-                $('#mensaje').html(mensaje);
-                $('#mensaje').show();
+                MostrarMensaje("Datos de usuario guardados correctamente", "success");
             }
             if (edit && response == 'modificado') {
-                let mensaje = `<div class="alert alert-dismissible alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Datos modificados correctamente</strong>
-              </div>`;
-                $('#mensaje').html(mensaje);
-                $('#mensaje').show();
-
+                MostrarMensaje("Datos de usuario modificados correctamente", "success");
             }
             edit = false;
             ListarUsuario();

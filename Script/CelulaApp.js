@@ -20,6 +20,7 @@ $(document).ready(function () {
     //Listar Datos//
     listarBarrio();
     listarCalle();
+    ListarCelula();
 
     $('#formulario').hide();//ocultar formulario
 
@@ -38,11 +39,95 @@ $(document).ready(function () {
             mymap.removeLayer(marker);
         };
         //Add a marker to show where you clicked.
-        marker = L.marker([lat, lon]).addTo(mymap);
+        marker = L.marker([latitud, longitud]).addTo(mymap);
     });
+
+    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de miembros
+        if ($('#txt_buscar').val()) {
+            let buscar = $('#txt_buscar').val().toUpperCase();
+            let plantilla = '';
+            $.ajax({
+                url: '/MRFIglesiaBermejo/AccesoDatos/Celula/BuscarCelula.php',
+                type: 'POST',
+                data: { buscar },
+                success: function (response) {
+                    if (response != "no encontrado") {
+                        let cel = JSON.parse(response);
+
+                        cel.forEach(cel => {
+                            plantilla = MostrarTabla(plantilla, cel);
+                        });
+                        $('#tb_celula').html(plantilla);
+                    }
+                    else {
+                        $('#tb_celula').html(plantilla);
+                        let mensaje = `<div class="alert alert-dismissible alert-warning">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>La Celula ${buscar} no se encuentra registrado en la base de datos</strong></div>`;
+                        $('#mensaje').html(mensaje);
+                        $('#mensaje').show();
+                    }
+                },
+                error: function (xhr, status) {
+                    alert('error al buscar miembro');
+                }
+            });
+        }
+        else {
+            $('#mensaje').hide();
+            ListarCelula();
+        }
+    });
+
 
     $('#btn_guardar').click(function (e){
         GuardarCelula();
+        Limpiar();
+    });
+
+    $(document).on('click', '.modificar-celula', function () {//modifica usuario
+        $('#lista').hide();
+        $('#formulario').show();
+        //habilitarFormulario();
+        let elemento = $(this)[0].parentElement.parentElement;
+        let pacodcel = $(elemento).attr('UserDocu');
+        $.post('/MRFIglesiaBermejo/AccesoDatos/Celula/SingleCelula.php',
+            { pacodcel }, function (responce) {
+                const celula = JSON.parse(responce);
+                celula.forEach(cel => {
+                    codCelula = cel.pacodcel,
+                    codBarrio = cel.facodbar,
+                    codCalle  = cel.facodcal,
+                    latitud = cel.calatcel,
+                    longitud = cel.calogcel,
+                    $('#txt_nomCelula').val(cel.canomcel),
+                    $('#txt_numCelula').val(cel.canumcel),
+                    $('#cbx_barrio').val(cel.pacodbar),
+                    $('#cbx_calle').val(cel.pacodcal)
+                    });
+                //contex.hide();
+                if (marker != undefined) {
+                    mymap.removeLayer(marker);
+                };
+                marker = L.marker([latitud, longitud]).addTo(mymap);
+                document.getElementById("txt_nomCelula").focus();
+                edit = true;
+            });
+    });
+
+    $(document).on('click', '.baja-celula', function () {//elimina usuario
+        if (confirm("Seguro que desea dar de baja esta celula")) {
+            let elemento = $(this)[0].parentElement.parentElement;
+            let pacodcel = $(elemento).attr('UserDocu');
+            $.post('/MRFIglesiaBermejo/AccesoDatos/Celula/DarBaja.php',
+                { pacodcel }, function (responce) {
+                    if (responce == 'baja') {
+                        ListarCelula();
+                        MostrarMensaje("Celula dado de baja", "warning");
+                    }
+
+                });
+        }
     });
 
     $('#cbx_barrio').change(function (e) {//asignar codigo de cuidad
@@ -80,16 +165,46 @@ $(document).ready(function () {
         document.getElementById("txt_nomCelula").focus();
     });
 
-    $('#btn_guardar').click(function (e) {
-        Limpiar();
-    });
-
     $('#btn_cancelar').click(function (e) {
         Limpiar();
 
     });
 
     //Funciones//////
+    function ListarCelula() {//listar Celula
+        $.ajax({
+            url: '/MRFIglesiaBermejo/AccesoDatos/Celula/ListarCelula.php',
+            type: 'GET',
+            success: function (response) {
+                let celula = JSON.parse(response);
+                let plantilla = '';
+                celula.forEach(usu => {
+                    plantilla = MostrarTabla(plantilla, usu);
+                });
+                $('#tb_celula').html(plantilla);
+            }
+        });
+    }
+
+    function MostrarTabla(plantilla, usu) {//////Mostrar Tabla///////////
+        plantilla +=
+            `<tr UserDocu="${usu.pacodcel}" class="table-light">
+                <td>${usu.canomcel}</td>
+                <td>${usu.canumcel}</td>
+                <td>B/${usu.canombar} C/${usu.canomcal}</td>
+                <td>
+                    <button class="baja-celula btn btn-danger">
+                    <i class="fas fa-trash-alt"></i></button>
+                </>
+                <td style="width:15%">
+                    <button class="modificar-celula btn btn-secondary">
+                    <i class="far fa-edit"></i></button>
+                </td>
+            </tr>`
+        return plantilla;
+    }
+
+
     function ObtenerNumeroCorrelativo(numero, num) {//sirve para obtener numero correlativo
         switch (numero.length) {
             case 1:

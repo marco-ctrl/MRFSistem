@@ -26,21 +26,22 @@
             <div id="mensaje">
             </div>
             <h5 for="">Lista de Celulas</h5>
-            <div class="table-responsive"></div>
-            <table class="table table-hover table-sm">
-                <thead class="bg-primary text-white">
-                    <tr>
-                        <td>NOMBRE</td>
-                        <td>NUMERO</td>
-                        <td>DIRECCION</td>
-                        <td>Baja</td>
-                        <td>Modificar</td>
-                    </tr>
-                </thead>
-                <tbody id="tb_celula">
+            <div class="table-responsive" id="tb_buscar">
+                <table class="table table-hover table-sm">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <td>NOMBRE</td>
+                            <td>NUMERO</td>
+                            <td>DIRECCION</td>
+                            <td>Baja</td>
+                            <td>Modificar</td>
+                        </tr>
+                    </thead>
+                    <tbody id="tb_celula">
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
 
         </div>
     </div>
