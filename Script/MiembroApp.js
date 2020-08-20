@@ -7,6 +7,7 @@ $(document).ready(function () {
     var canvas = document.getElementById('canvas');
     const snap = document.getElementById("snap");
     const errorMsgElement = document.querySelector('span#errorMsg');
+    var imagen = document.getElementById('imagen');
 
     const constraints = {
         audio: false,
@@ -72,6 +73,8 @@ $(document).ready(function () {
     snap.addEventListener("click", function () {
         let context = canvas.getContext('2d');
         context.drawImage(video, 0, 0, 140, 120);
+        imagen.setAttribute('src', canvas.toDataURL('image/jpeg', 1.0));
+        //console.log(imagen.src);
     });
 
 
@@ -139,12 +142,15 @@ $(document).ready(function () {
             url: '/MRFIglesiaBermejo/AccesoDatos/Miembro/ListarMiembro.php',
             type: 'GET',
             success: function (response) {
-                let miembros = JSON.parse(response);
-                let plantilla = '';
-                miembros.forEach(miembros => {
+                if(response!='false'){
+                    let miembros = JSON.parse(response);
+                    let plantilla = '';
+                    miembros.forEach(miembros => {
                     plantilla = MostrarTabla(plantilla, miembros);
-                });
-                $('#tb_miembro').html(plantilla);
+                    });
+                    $('#tb_miembro').html(plantilla);
+                }
+                
             }
         });
     }
@@ -216,7 +222,8 @@ $(document).ready(function () {
                         codCiudad = miembro.facodciu,
                         $('#cbx_profesion').val(miembro.pacodpro),
                         $('#cbx_ciudad').val(miembro.pacodciu),
-                        foto = decodeURIComponent(miembro.cafotmie),
+                        //foto = decodeURIComponent(miembro.cafotmie),
+                        foto=miembro.caurlfot,
                         $('#dat_fecbau').val(miembro.cafecbau),
                         $('#dat_feccon').val(miembro.cafeccon),
                         $('#dat_fecenc').val(miembro.cafecenc),
@@ -225,8 +232,9 @@ $(document).ready(function () {
                 });
                 const canvas = document.getElementById('canvas');
                 let contex = canvas.getContext('2d');
-                imagenes = document.getElementById('imagen');
-                imagenes.setAttribute('src', "data:image/jpeg;base64," + foto);
+                imagen = document.getElementById('imagen');
+                //imagenes.setAttribute('src', "data:image/jpeg;base64," + foto);
+                imagen.setAttribute('src', foto);
                 contex.drawImage(imagenes, 0, 0, 140, 120);
                 //contex.hide();
                 edit = true;
@@ -290,7 +298,7 @@ $(document).ready(function () {
 
     function GuardarMiembro() {
         const canvas = document.getElementById('canvas');
-        var foto = canvas.toDataURL('image/jpeg', 1.0);
+        let foto = imagen.src;
         const postData = {
             pacodmie: codMiembro,
             cacidmie: $('#txt_ci').val(),

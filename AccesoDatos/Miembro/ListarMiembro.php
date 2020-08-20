@@ -10,7 +10,7 @@ cadirmie,
 caestmie, 
 caestciv, 
 cafecnac, 
-cafotmie, 
+caurlfot, 
 canommie, 
 pacodmie, 
 facodciu, 
@@ -26,6 +26,8 @@ and m.facodciu=c.pacodciu
 order by pacodmie desc LIMIT 15";
 $resultado = pg_query($conexion, $consulta);
 
+$json=array();
+
 while ($row = pg_fetch_array($resultado)) {
     $json[] = array('camatmie' => $row['camatmie'],
                     'capatmie' => $row['capatmie'],
@@ -35,7 +37,7 @@ while ($row = pg_fetch_array($resultado)) {
                     'caestmie' => $row['caestmie'],
                     'caestciv' => $row['caestciv'],
                     'cafecnac' => $row['cafecnac'],
-                    'cafotmie' => $row['cafotmie'],
+                    'caurlfot' => $row['caurlfot'],
                     'canommie' => $row['canommie'],
                     'pacodmie' => $row['pacodmie'],
                     'facodciu' => $row['facodciu'],
@@ -45,6 +47,12 @@ while ($row = pg_fetch_array($resultado)) {
                     'pacodciu' => $row['pacodciu'],
                     'canomciu' => $row['canomciu']);
 }
+if ($json==null){
+    echo 'false';
+}
+else{
+    echo json_encode($json);
+}
 pg_close($conexion);
-echo json_encode($json);
+
 ?>

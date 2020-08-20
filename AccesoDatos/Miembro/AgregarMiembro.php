@@ -24,14 +24,14 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
 
 $path = "Imagenes/$pacodmie$canommie.jpg";
 
-//$url = "http://localhost/EjemploBD/$path";
+$url = "http://localhost/MRFIglesiaBermejo/AccesoDatos/Miembro/$path";
 //$url = "Imagenes/"$pacodmie$canommie.".jpg";
 
 file_put_contents($path, base64_decode($cafotmie));
 $bytesArchivo = file_get_contents($path);
 $bytesArchivo = pg_escape_bytea($bytesArchivo);
     //$imagen = $_POST['imagen'];
-    //echo ' '.$documento.' '.$nombre.' '.$profesion;
+    //echo ' '.$documento.' '.$nombre.' '.$profesion; '{$bytesArchivo}', 
     $sql = "INSERT INTO amiebro(
         camatmie, 
         capatmie, 
@@ -41,7 +41,7 @@ $bytesArchivo = pg_escape_bytea($bytesArchivo);
         caestmie, 
         caestciv, 
         cafecnac, 
-        cafotmie, 
+        caurlfot, 
         canommie, 
         pacodmie, 
         facodciu, 
@@ -55,7 +55,7 @@ $bytesArchivo = pg_escape_bytea($bytesArchivo);
         '{$caestmie}', 
         '{$caestciv}', 
         '{$cafecnac}', 
-        '{$bytesArchivo}', 
+        '{$url}',
         '{$canommie}', 
         '{$pacodmie}', 
         '{$facodciu}', 

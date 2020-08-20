@@ -108,47 +108,59 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-4 p-3">
-            <div class="row">
-                <div class="col-md-6">
-                    <form>
-                        <button type="button" id="apagar" class="btn-secondary btn-block
-                            text-center"><i class="fas fa-video-slash"></i> Apagar</button>
-                    </form>
 
-                </div>
-                <div class="col-md-6">
+        <div class="col-md-4 p-3">
+            <div class="d-block d-sm-block d-md-none">
+                <button class="btn btn-secondary btn-block" onclick="document.getElementById('file-upload').click();">
+                    <i class="fas fa-camera"></i> Tomar Foto</button>
+            </div>
+
+            <br>
+            <div class="row ">
+                <div class="col-md-6 d-none d-sm-none d-md-block">
                     <form>
-                        <button type="button" id="encender" class="btn-secondary btn-block
+                        <button type="button" id="encender" class="btn btn-secondary btn-block
                             text-center"><i class="fas fa-video"></i> Encender</button>
                     </form>
                 </div>
+                <div class="col-md-6 d-none d-sm-none d-md-block">
+                    <form>
+                        <button type="button" id="apagar" class="btn btn-secondary btn-block
+                            text-center"><i class="fas fa-video-slash"></i> Apagar</button>
+                    </form>
+                </div>
             </div>
+            <div class="row">
+                <div class="col-md-6 p-2 d-none d-sm-none d-md-block">
+                    <div class="video-wrap">
+                        <video id="video" width="140" height="120" poster="/MRFIglesiaBermejo/img/photo.svg"> </video>
+                        <!--<canvas id="canvas" width="140" height="120"></canvas>-->
+                    </div>
 
-            <div class="video-wrap">
-                <video id="video" width="140" height="120" poster="/MRFIglesiaBermejo/img/photo.svg" > </video>
-                <!--<canvas id="canvas" width="140" height="120"></canvas>-->
+                </div>
+                <div class="col-md-6 p-2">
+                    <img id="imagen" width="140" height="120">
+                </div>
             </div>
             <br>
-            <!-- Trigger canvas web API -->
-            <div class="controller ">
-                <button id="snap" class="btn-secondary btn-block
-                            text-center"><i class="fas fa-camera"></i> Tomar Foto</button>
-            </div>
-
-            <form id="form3">
-                <div class="p-3">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td><canvas id="canvas" width="140" height="120"></canvas></td>
-                                <td><img id="imagen"  width="140" height="120"></img></td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <div class="row">
+                <div class="col-md-6 p-2 d-none d-sm-none d-md-block">
+                    <!-- Trigger canvas web API -->
+                    <div class="controller ">
+                        <button id="snap" class="btn btn-secondary btn-block
+                            text-center"><i class="fas fa-camera"></i> Capturar</button>
+                    </div>
                 </div>
-            </form>
-
+                <div class="col-md-6 p-2 d-none d-sm-none d-md-block">
+                    <div class="controller">
+                        <button class="btn btn-secondary btn-block"
+                            onclick="document.getElementById('file-upload').click();">
+                            <i class="fas fa-search-plus"></i> Buscar Foto</button>
+                        <input type="file" style="display:none;" id="file-upload" aria-describedby="fileHelp">
+                    </div>
+                </div>
+            </div>
+            <canvas id="canvas" width="140" height="120" style="display: none;"></canvas></td>
         </div>
     </div>
     <div class="row">
@@ -172,4 +184,24 @@
         </div>
     </div>
 </div>
+<script>
+function readFile(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            let imagen = document.getElementById('imagen');
+            imagen.src = e.target.result
+            //console.log(e.target.result);
+
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+var fileUpload = document.getElementById('file-upload');
+fileUpload.onchange = function(e) {
+    readFile(e.srcElement);
+}
+</script>
 <script src="/MRFIglesiaBermejo/Script/CrecimientoApp.js"></script>

@@ -14,7 +14,7 @@ cadirmie,
 caestmie, 
 caestciv, 
 cafecnac, 
-cafotmie, 
+caurlfot, 
 canommie, 
 pacodmie, 
 facodciu, 
@@ -37,7 +37,9 @@ and m.facodciu=c.pacodciu
 and a.pacodcre=m.pacodmie
 and m.pacodmie='{$pacodmie}'";
 $resultado = pg_query($conexion, $consulta);
-//if ($resultado) {
+//if ($resultado) {'cafotmie' => urlencode(base64_encode(
+    //pg_unescape_bytea($row['cafotmie']))),
+    
     $json=array();
     while ($row = pg_fetch_array($resultado)) {
         $json[] = array('camatmie' => $row['camatmie'],
@@ -48,8 +50,7 @@ $resultado = pg_query($conexion, $consulta);
                         'caestmie' => $row['caestmie'],
                         'caestciv' => $row['caestciv'],
                         'cafecnac' => $row['cafecnac'],
-                        'cafotmie' => urlencode(base64_encode(
-                            pg_unescape_bytea($row['cafotmie']))),
+                        'caurlfot' => $row['caurlfot'],
                         'canommie' => $row['canommie'],
                         'pacodmie' => $row['pacodmie'],
                         'facodciu' => $row['facodciu'],
