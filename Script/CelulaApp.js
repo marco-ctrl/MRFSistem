@@ -194,11 +194,11 @@ $(document).ready(function () {
                 <td>B/${usu.canombar} C/${usu.canomcal}</td>
                 <td>
                     <button class="baja-celula btn btn-danger">
-                    <i class="fas fa-trash-alt"></i></button>
+                    <i class="fas fa-trash-alt gi-2x"></i></button>
                 </>
                 <td style="width:15%">
                     <button class="modificar-celula btn btn-secondary">
-                    <i class="far fa-edit"></i></button>
+                    <i class="far fa-edit gi-2x"></i></button>
                 </td>
             </tr>`
         return plantilla;
@@ -231,12 +231,13 @@ $(document).ready(function () {
         return num;
     }
 
+    //$('#btn_guardar').click(function (e){
     function GuardarCelula() {
         const postData = {
             facodbar: codBarrio,
             facodcal: codCalle,
             pacodcel: codCelula,
-            canomcel: $('#txt_nomCelula').val(),
+            canomcel: $('#txt_nomCelula').val().toUpperCase(),
             canumcel: $('#txt_numCelula').val(),
             caestcel: true,
             calatcel: latitud,
@@ -258,10 +259,11 @@ $(document).ready(function () {
                 MostrarMensaje("datos de Celula modificados correctamente", "success")
             }
             edit = false;
-            //ListarCelula();
+           
             $('#formulario').hide();
             $('#lista').show();
         });
+        ListarCelula();
     }
 
     function MostrarMensaje(cadena, clase) {
@@ -306,6 +308,7 @@ $(document).ready(function () {
     function Limpiar() {//limpiar formulario
         $('#form1').trigger('reset');
         $('#form2').trigger('reset');
+        $("#btn_nuevo").attr("disabled", false);
         $('#formulario').hide();
         $('#lista').show();
     }

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     //Declaracion de Variables///
     var edit = false;
     var codProfesion, codCiudad;
@@ -16,7 +17,7 @@ $(document).ready(function () {
         }
     };
 
-    
+
 
     $('#mensaje').hide();
     $('#profile').hide();
@@ -142,15 +143,15 @@ $(document).ready(function () {
             url: '/MRFIglesiaBermejo/AccesoDatos/Miembro/ListarMiembro.php',
             type: 'GET',
             success: function (response) {
-                if(response!='false'){
+                if (response != 'false') {
                     let miembros = JSON.parse(response);
                     let plantilla = '';
                     miembros.forEach(miembros => {
-                    plantilla = MostrarTabla(plantilla, miembros);
+                        plantilla = MostrarTabla(plantilla, miembros);
                     });
                     $('#tb_miembro').html(plantilla);
                 }
-                
+
             }
         });
     }
@@ -168,12 +169,12 @@ $(document).ready(function () {
                 <td>${miembros.cadirmie}</td>
                 <td>
                     <button class="baja-miembro btn btn-danger">
-                        <i class="fas fa-trash-alt"></i>
+                        <i class="fas fa-trash-alt gi-2x"></i>
                     </button>
                 </td>
                 <td>
                     <button class="modificar-miembro btn btn-secondary">
-                        <i class="far fa-edit"></i>
+                        <i class="far fa-edit gi-2x"></i>
                     </button>
                 </td>
             </tr>`
@@ -204,7 +205,8 @@ $(document).ready(function () {
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodmie = $(elemento).attr('UserDocu');
         $.post('/MRFIglesiaBermejo/AccesoDatos/Miembro/SingleMiembro.php',
-            { pacodmie }, function (responce) {
+            { pacodmie },
+            function (responce) {
                 const miembro = JSON.parse(responce);
                 //console.log(responce);
                 let foto;
@@ -223,7 +225,7 @@ $(document).ready(function () {
                         $('#cbx_profesion').val(miembro.pacodpro),
                         $('#cbx_ciudad').val(miembro.pacodciu),
                         //foto = decodeURIComponent(miembro.cafotmie),
-                        foto=miembro.caurlfot,
+                        foto = miembro.caurlfot,
                         $('#dat_fecbau').val(miembro.cafecbau),
                         $('#dat_feccon').val(miembro.cafeccon),
                         $('#dat_fecenc').val(miembro.cafecenc),
@@ -232,7 +234,7 @@ $(document).ready(function () {
                 });
                 const canvas = document.getElementById('canvas');
                 let contex = canvas.getContext('2d');
-                imagen = document.getElementById('imagen');
+                //imagen = document.getElementById('imagen');
                 //imagenes.setAttribute('src', "data:image/jpeg;base64," + foto);
                 imagen.setAttribute('src', foto);
                 contex.drawImage(imagenes, 0, 0, 140, 120);
@@ -297,6 +299,7 @@ $(document).ready(function () {
     }
 
     function GuardarMiembro() {
+        $.ajaxSetup({ cache: false });
         const canvas = document.getElementById('canvas');
         let foto = imagen.src;
         const postData = {
@@ -324,18 +327,22 @@ $(document).ready(function () {
             '/MRFIglesiaBermejo/AccesoDatos/Miembro/AgregarMiembro.php' :
             '/MRFIglesiaBermejo/AccesoDatos/Miembro/ModificarMiembro.php';
 
-        $.post(url, postData, function (response) {
-            console.log(response);
-            if (!edit && response == 'registra') {
-                actualizarSecuencia("MBR");
-                MostrarMensaje("Datos de Miembro guardado correctamente", "success");
-            }
-            if (edit && response == 'modificado') {
-                MostrarMensaje("Datos de Miembro modificados correctamente", "success");
+        $.post(
+            url,
+            postData,
+            function (response) {
+                console.log(response);
+                if (!edit && response == 'registra') {
+                    actualizarSecuencia("MBR");
+                    MostrarMensaje("Datos de Miembro guardado correctamente", "success");
+                }
+                if (edit && response == 'modificado') {
+                    MostrarMensaje("Datos de Miembro modificados correctamente", "success");
 
-            }
-            edit = false;
-        });
+                }
+                edit = false;
+                ListarMiembro();
+            });
 
     }
 
@@ -372,7 +379,7 @@ $(document).ready(function () {
         habilitarFormulario();
         let num = "";
         verificarSecuencia("MBR");
-        if (getBan()!="true") {
+        if (getBan() != "true") {
             setCodigo("MBR");
             setCorrelativo(1);
         }
@@ -381,13 +388,13 @@ $(document).ready(function () {
             obtenerCorrelativo("MBR");
             setCorrelativo(obtenerSiguinete("MBR"));
         }
-        num=ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
+        num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codMiembro = getCodigo() + '-' + num;
         console.log(codMiembro);
 
     });
 
-    function ObtenerNumeroCorrelativo(numero, num){//sirve para obtener numero correlativo
+    function ObtenerNumeroCorrelativo(numero, num) {//sirve para obtener numero correlativo
         switch (numero.length) {
             case 1:
                 num = "00000" + numero;
@@ -412,7 +419,7 @@ $(document).ready(function () {
         }
         return num;
     }
-    
+
 
     //DesabilitarFormulario
     function habilitarFormulario() {

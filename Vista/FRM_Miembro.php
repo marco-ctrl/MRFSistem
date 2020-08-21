@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
     <a href="#" class="navbar-brand">Miembro</a>
     <!--<ul class="navbar-nav ml-auto">-->
-    <form class="form-inline my-2 my-lg-0">
+    <form class="form-inline my-2 my-sm-0">
         <input type="search" id="txt_buscar" class="form-control mr-ms-2" placeholder="Buscar Miembro">
-        <button class="btn btn-success my-2 my-sm-0 d-none d-sm-none d-md-block" type="submit">
-            <i class="fas fa-search"></i> Buscar
+        <button class="btn btn-success my-2 my-sm-0 " type="submit">
+            <i class="fas fa-search gi-2x"></i>
         </button>
 
     </form>

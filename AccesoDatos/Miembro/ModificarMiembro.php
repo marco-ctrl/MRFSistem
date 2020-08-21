@@ -22,16 +22,18 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
     $facodciu = $_POST['facodciu'];
     $cafotmie = $imagenCodificadaLimpia;
 
-$path = "Imagenes/$pacodmie$canommie.jpg";
+    $date=date('jmyhis');
+    //echo ''.$date ;
+    $path = "Imagenes/$pacodmie$canommie$date.jpg";
 
-//$url = "http://localhost/EjemploBD/$path";
+$url = "http://localhost/MRFIglesiaBermejo/AccesoDatos/Miembro/$path";
 //$url = "Imagenes/"$pacodmie$canommie.".jpg";
 
 file_put_contents($path, base64_decode($cafotmie));
 $bytesArchivo = file_get_contents($path);
 $bytesArchivo = pg_escape_bytea($bytesArchivo);
     //$imagen = $_POST['imagen'];
-    //echo ' '.$documento.' '.$nombre.' '.$profesion;
+    //echo ' '.$documento.' '.$nombre.' '.$profesion; cafotmie='{$bytesArchivo}', 
     $sql = "UPDATE  amiebro SET
         camatmie='{$camatmie}', 
         capatmie='{$capatmie}', 
@@ -41,7 +43,7 @@ $bytesArchivo = pg_escape_bytea($bytesArchivo);
         caestmie='{$caestmie}', 
         caestciv='{$caestciv}', 
         cafecnac='{$cafecnac}', 
-        cafotmie='{$bytesArchivo}', 
+        caurlfot='{$url}',
         canommie='{$canommie}', 
         facodciu='{$facodciu}', 
         facodpro='{$facodpro}'

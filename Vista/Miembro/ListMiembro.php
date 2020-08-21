@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 table-responsive">
-            <label for="">Lista de Miembos</label>
+            <h5 >Lista de Miembos</h5>
             <table class="table table-hover table-sm table-striped">
                 <thead class="bg-primary text-white">
                     <tr>

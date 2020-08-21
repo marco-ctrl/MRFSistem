@@ -51,8 +51,7 @@
                 <form id="form1" clas="p-2">
                     <div class="form-group">
                         <label>Nombre de Celula</label>
-                        <input type="text" id="txt_nomCelula" placeholder="Nombre" class="form-control" value=""
-                            onkeyUp="javascript:this.value=this.value.toUpperCase();"></input>
+                        <input type="text" id="txt_nomCelula" placeholder="Nombre" class="form-control"></input>
                     </div>
                     <div class="form-group">
                         <label>Numero de Celula</label>
@@ -78,35 +77,26 @@
             </div>
         </div>
         <div class="row">
-            <div class="p-2">
-                <div class="table-responsive">
-                    <div id="map" class="mapas">
+            <div class="col-md-8">
+                <div id="map" class="mapas">
 
-                    </div>
                 </div>
-
             </div>
-
         </div>
-        <div class="row">
-            <div class="col-md-4 p-2">
-                <div>
-                    <button type="button" id="btn_guardar" class="btn btn-primary btn-block
-                        text-center"><i class="far fa-save"></i>
-                        Guardar Celula
-                    </button>
-                </div>
-            </div>
-            <div class="col-md-4 p-2">
-                <div>
-                    <button type="button" id="btn_cancelar" class="btn btn-warning btn-block
-                        text-center"><i class="far fa-window-close"></i>
-                        Cancelar
-                    </button>
-                </div>
-            </div>
+        <br>
+        <div class="modal-footer col-md-8">
+            <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
+                                    text-center">
+                <i class="far fa-save gi-2x"></i>
+                Guardar
+            </button>
+            <button type="button" id="btn_cancelar" class="btn btn-danger btn-lg
+                        text-center"><i class="far fa-window-close gi-2x"></i>
+                Cancelar
+            </button>
         </div>
     </div>
+
 </div>
 <script src="/MRFIglesiaBermejo/Script/CodigoApp.js"></script>
 <script src="/MRFIglesiaBermejo/Script/CelulaApp.js"></script>

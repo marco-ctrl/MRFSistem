@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     ListarMiembro();
     ListarUsuario();
-    
+
     let edit = false;
 
     let codUsuario;
@@ -29,8 +29,8 @@ $(document).ready(function () {
                         let miembros = JSON.parse(response);
 
                         miembros.forEach(miembros => {
-                            plantilla+=
-                            `<tr codMbr="${miembros.pacodmie}" class="table-light">
+                            plantilla +=
+                                `<tr codMbr="${miembros.pacodmie}" class="table-light">
                             <td>${miembros.canommie}</td> 
                             <td>${miembros.capatmie} ${miembros.camatmie}</td>
                             <td style="width:15%"><button class="agregar-miembro btn btn-primary">
@@ -100,15 +100,15 @@ $(document).ready(function () {
     //////////Guardar Usuario
     $('#btn_guardar').click(function (e) {//permiete guardar Usuario
         GuardarUsuario();
-        
+
         $('#form1').trigger('reset');
         $('#form2').trigger('reset');
         DeshabilitarFormulario();
-
+        ListarUsuario();
     });
 
     //////Modificar Usuario///////////
-    $(document).on('click', '.modificar-miembro', function () {//modifica usuario
+    $(document).on('click', '.modificar-usuario', function () {//modifica usuario
         $('#lista').hide();
         $('#formulario').show();
         habilitarFormulario();
@@ -119,20 +119,20 @@ $(document).ready(function () {
                 const miembro = JSON.parse(responce);
                 miembro.forEach(miembro => {
                     codMiembro = miembro.facodmie,
-                    codUsuario = miembro.pacodusu,
-                    $('#lbl_codigo').val(miembro.facodmie),
-                    $('#cbx_tipo').val(miembro.catipusu),
-                    $('#txt_usuario').val(miembro.canomusu),
-                    $('#txt_contrasena').val(miembro.caconusu),
-                    $('#lbl_miembro').val(miembro.canommie+' '+miembro.capatmie+' '+miembro.camatmie)
-                    });
+                        codUsuario = miembro.pacodusu,
+                        $('#txt_codigo').val(miembro.facodmie),
+                        $('#cbx_tipo').val(miembro.catipusu),
+                        $('#txt_usuario').val(miembro.canomusu),
+                        $('#txt_contrasena').val(miembro.caconusu),
+                        $('#txt_miembro').val(miembro.canommie + ' ' + miembro.capatmie + ' ' + miembro.camatmie)
+                });
                 //contex.hide();
                 edit = true;
             });
     });
 
     /////////Dar de Baja Usuario//////////
-    $(document).on('click', '.baja-miembro', function () {//elimina usuario
+    $(document).on('click', '.baja-usuario', function () {//elimina usuario
         if (confirm("Seguro que desea dar de baja este Usuario")) {
             let elemento = $(this)[0].parentElement.parentElement;
             let pacodusu = $(elemento).attr('UserDocu');
@@ -156,15 +156,16 @@ $(document).ready(function () {
                 const miembro = JSON.parse(responce);
                 miembro.forEach(miembro => {
                     codMiembro = miembro.pacodmie,
-                    $('#lbl_codigo').val(miembro.pacodmie),
-                    $('#lbl_miembro').val(miembro.canommie+' '+miembro.capatmie+' '+miembro.camatmie)
-                    });
-                
+                        $('#txt_codigo').val(miembro.pacodmie),
+                        $('#txt_miembro').val(miembro.canommie + ' ' + miembro.capatmie + ' ' + miembro.camatmie)
+                });
+                document.getElementById("cbx_tipo").focus();
             });
+
     });
 
     /////////Cancelar Registro de Usuario//////////////
-    $('#btn_cancelar').click(function (event){
+    $('#btn_cancelar').click(function (event) {
         console.log('cancelando..');
         $('#form1').trigger('reset');
         $('#form2').trigger('reset');
@@ -181,7 +182,7 @@ $(document).ready(function () {
         habilitarFormulario();
         let num = "";
         verificarSecuencia("USU");
-        if (getBan()!="true") {
+        if (getBan() != "true") {
             setCodigo("USU");
             setCorrelativo(1);
         }
@@ -190,7 +191,7 @@ $(document).ready(function () {
             obtenerCorrelativo("USU");
             setCorrelativo(obtenerSiguinete("USU"));
         }
-        num=ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
+        num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codUsuario = getCodigo() + '-' + num;
         console.log(codUsuario);
 
@@ -206,7 +207,7 @@ $(document).ready(function () {
         $('#mensaje').show();
     }
 
-    function ObtenerNumeroCorrelativo(numero, num){//sirve para obtener numero correlativo
+    function ObtenerNumeroCorrelativo(numero, num) {//sirve para obtener numero correlativo
         switch (numero.length) {
             case 1:
                 num = "00000" + numero;
@@ -231,7 +232,7 @@ $(document).ready(function () {
         }
         return num;
     }
-    
+
     ////////Listar Usuario////////
     function ListarMiembro() {//lista usuarios
         $.ajax({
@@ -241,19 +242,20 @@ $(document).ready(function () {
                 let miembros = JSON.parse(response);
                 let plantilla = '';
                 miembros.forEach(miembros => {
-                    plantilla += 
-                    `<tr codMbr="${miembros.pacodmie}" class="table-light">
+                    plantilla +=
+                        `<tr codMbr="${miembros.pacodmie}" class="table-light">
                         <td>${miembros.canommie}</td> 
                         <td>${miembros.capatmie} ${miembros.camatmie}</td>
-                        <td style="width:15%"><button class="agregar-miembro btn btn-primary">
-                        <i class="fas fa-user-plus"></i></button></tr>`;
+                        <td style="width:15%"><button class="agregar-miembro btn btn-primary" data-dismiss="modal">
+                        <i class="fas fa-user-plus gi-2x"></i></button></td>
+                        </tr>`;
                 });
                 $('#tb_miembro').html(plantilla);
             }
         });
     }
 
-    //////Mostrar Tabla///////////
+    //////Mostrar Tabla de Usuario///////////
     function MostrarTabla(plantilla, usu) {
         plantilla +=
             `<tr UserDocu="${usu.pacodusu}" class="table-light">
@@ -262,12 +264,12 @@ $(document).ready(function () {
                 <td>${usu.canomusu}</td>
                 <td>${usu.caconusu}</td>
                 <td>
-                    <button class="baja-miembro btn btn-danger">
-                    <i class="fas fa-user-minus"></i></button>
+                    <button class="baja-usuario btn btn-danger">
+                    <i class="fas fa-user-minus gi-2x"></i></button>
                 </td>
                 <td style="width:15%">
-                    <button class="modificar-miembro btn btn-secondary">
-                    <i class="fas fa-user-edit"></i></button>
+                    <button class="modificar-usuario btn btn-secondary">
+                    <i class="fas fa-user-edit gi-2x"></i></button>
                 </td>
             </tr>`
         return plantilla;
@@ -279,13 +281,16 @@ $(document).ready(function () {
             url: '/MRFIglesiaBermejo/AccesoDatos/Usuario/ListarUsuario.php',
             type: 'GET',
             success: function (response) {
-                let usuario = JSON.parse(response);
-                let plantilla = '';
-                usuario.forEach(usu => {
-                    //console.log(usu.canommie);
-                    plantilla = MostrarTabla(plantilla, usu);
-                });
-                $('#tb_usuario').html(plantilla);
+                if (response != 'false') {
+                    let usuario = JSON.parse(response);
+                    let plantilla = '';
+                    usuario.forEach(usu => {
+                        //console.log(usu.canommie);
+                        plantilla = MostrarTabla(plantilla, usu);
+                    });
+                    $('#tb_usuario').html(plantilla);
+                }
+
             }
         });
     }
@@ -320,7 +325,7 @@ $(document).ready(function () {
         });
     }
 
-    
+
 
     //HabilitarFormulario
     function habilitarFormulario() {
@@ -330,7 +335,7 @@ $(document).ready(function () {
         $("#txt_buscarMiembro").attr("disabled", false);
         $("#btn_guardar").attr("disabled", false);
         $("#btn_nuevo").attr("disabled", true);
-        document.getElementById("cbx_tipo").focus();
+        document.getElementById("btn_miembro").focus();
     }
 
     ////////////DesHabilitar Formulario/////////////

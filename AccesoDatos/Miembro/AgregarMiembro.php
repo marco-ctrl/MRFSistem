@@ -20,9 +20,11 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
     $caestmie = $_POST['caestmie'];
     $facodpro = $_POST['facodpro'];
     $facodciu = $_POST['facodciu'];
-    $cafotmie = $imagenCodificadaLimpia;
+    $cafotmie = $imagenCodificadaLimpia;*/
 
-$path = "Imagenes/$pacodmie$canommie.jpg";
+$date=date('jmyhis');
+//echo ''.$date ;
+$path = "Imagenes/$pacodmie$canommie$date.jpg";
 
 $url = "http://localhost/MRFIglesiaBermejo/AccesoDatos/Miembro/$path";
 //$url = "Imagenes/"$pacodmie$canommie.".jpg";

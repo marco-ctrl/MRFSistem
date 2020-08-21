@@ -17,6 +17,8 @@
         and usu.caestusu='true'";
 $resultado = pg_query($conexion, $consulta);
 
+$json=array();
+
 while ($row = pg_fetch_array($resultado)) {
     $json[] = array('caconusu' => $row['caconusu'],
                     'catipusu' => $row['catipusu'],
@@ -28,7 +30,15 @@ while ($row = pg_fetch_array($resultado)) {
                     'capatmie' => $row['capatmie'],
                     'camatmie' => $row['camatmie'],);
 }
+
+if ($json==null){
+    echo 'false';
+}
+else{
+    echo json_encode($json);
+}
+
 pg_close($conexion);
-echo json_encode($json);
+//echo json_encode($json);
 
 ?>
