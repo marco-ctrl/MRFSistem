@@ -208,7 +208,6 @@ $(document).ready(function () {
             { pacodmie },
             function (responce) {
                 const miembro = JSON.parse(responce);
-                //console.log(responce);
                 let foto;
                 miembro.forEach(miembro => {
                     codMiembro = miembro.pacodmie,
@@ -232,13 +231,13 @@ $(document).ready(function () {
                         $('#dat_fecigl').val(miembro.cafecigl),
                         setPacodcre(miembro.pacodcre)
                 });
-                const canvas = document.getElementById('canvas');
-                let contex = canvas.getContext('2d');
-                //imagen = document.getElementById('imagen');
-                //imagenes.setAttribute('src', "data:image/jpeg;base64," + foto);
+                //canvas = document.getElementById('canvas');
+                let context = canvas.getContext('2d');
                 imagen.setAttribute('src', foto);
-                contex.drawImage(imagenes, 0, 0, 140, 120);
-                //contex.hide();
+                imagen.onload=function(){
+                    context.drawImage(imagen, 0, 0, 140, 120);
+                }
+                
                 edit = true;
             });
     });
@@ -253,7 +252,7 @@ $(document).ready(function () {
     }
 
     function ImagenCanvas() {
-        const canvas = document.getElementById('canvas');
+        //const canvas = document.getElementById('canvas');
         let contex = canvas.getContext('2d');
         imagenes = document.getElementById('imagen');
         imagenes.setAttribute('src', "/MRFIglesiaBermejo/img/user.svg");
@@ -300,8 +299,9 @@ $(document).ready(function () {
 
     function GuardarMiembro() {
         $.ajaxSetup({ cache: false });
-        const canvas = document.getElementById('canvas');
-        let foto = imagen.src;
+        //const canvas = document.getElementById('canvas');
+        let foto = canvas.toDataURL('image/jpeg', 1.0);
+        console.log(foto);
         const postData = {
             pacodmie: codMiembro,
             cacidmie: $('#txt_ci').val(),

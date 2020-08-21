@@ -161,7 +161,7 @@
                     </div>
                 </div>
             </div>
-            <canvas id="canvas" width="140" height="120" style="display: none;"></canvas></td>
+            <canvas id="canvas" width="140" height="120" style="display: none;"></canvas>
         </div>
     </div>
     <div class="modal-footer">
@@ -180,14 +180,17 @@
 function readFile(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
-
+        var imagen = document.getElementById('imagen');
+        const canvas = document.getElementById('canvas');
+        let context = canvas.getContext('2d');
         reader.onload = function(e) {
-            let imagen = document.getElementById('imagen');
             imagen.src = e.target.result
-            //console.log(e.target.result);
-
+            imagen.onload=function(){
+            context.drawImage(imagen, 0, 0, 140, 120);
+        }
         }
         reader.readAsDataURL(input.files[0]);
+        
     }
 }
 
