@@ -26,10 +26,10 @@ function getBan(){
     return ban;
 }
 
-function guardarSecuencia(){
+function guardarSecuencia(codigo, corre){
     const postData = {
-        codigo: getCodigo(),
-        correlativo: getCorrelativo()
+        codigo: codigo,
+        correlativo: corre
     };
     $.post('/MRFIglesiaBermejo/AccesoDatos/Codigo/GuardarSecuencia.php', 
         postData, function (response) {
@@ -37,10 +37,10 @@ function guardarSecuencia(){
     });
 }
 
-function modificarSecuencia(){
+function modificarSecuencia(codigo, corre){
     const postData = {
-        codigo: getCodigo(),
-        correlativo: getCorrelativo()
+        codigo: codigo,
+        correlativo: corre
     };
     console.log(postData);
     $.post('/MRFIglesiaBermejo/AccesoDatos/Codigo/ModificarSecuencia.php', 
@@ -57,7 +57,7 @@ function verificarSecuencia(codigo){
         data: {codigo},
         success: function (response) {
             setBan(response);
-            console.log(getBan());
+            //console.log(getBan());
         }
     });
 }
@@ -84,12 +84,12 @@ function obtenerSiguinete(codigo){
     return dato;
 }
 
-function actualizarSecuencia(codigo){
+function actualizarSecuencia(codigo, corre){
     verificarSecuencia(codigo);
     if(getBan()=='true'){
-        modificarSecuencia(codigo);
+        modificarSecuencia(codigo, corre);
     }
     else{
-        guardarSecuencia(codigo);
+        guardarSecuencia(codigo, corre);
     }
 }

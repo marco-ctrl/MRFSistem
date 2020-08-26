@@ -26,7 +26,7 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
     //echo ''.$date ;
     $path = "Imagenes/$pacodmie$canommie$date.jpg";
 
-$url = "http://localhost/MRFIglesiaBermejo/AccesoDatos/Miembro/$path";
+$url = "/MRFIglesiaBermejo/AccesoDatos/Miembro/$path";
 //$url = "Imagenes/"$pacodmie$canommie.".jpg";
 
 file_put_contents($path, base64_decode($cafotmie));

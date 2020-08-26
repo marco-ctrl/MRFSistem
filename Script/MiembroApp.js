@@ -2,8 +2,11 @@ $(document).ready(function () {
 
     //Declaracion de Variables///
     var edit = false;
-    var codProfesion, codCiudad;
+    var codProfesion, codCiudad, codCelula, codMieCel;
     var codMiembro;
+    var funMiembro;
+    var corre1;
+    var corre2;
     var video = document.getElementById('video');
     var canvas = document.getElementById('canvas');
     const snap = document.getElementById("snap");
@@ -25,6 +28,7 @@ $(document).ready(function () {
     ListarMiembro();
     ListarProfesion();
     ListarCiudad();
+    ListarCelula();
 
     ImagenCanvas();
 
@@ -122,7 +126,9 @@ $(document).ready(function () {
     $('#btn_guardar').click(function (e) {//permiete guardar Usuario
         CapturarCrecimiento();
         GuardarMiembro();
+        //GuardarMiembroCelula(GuardarMiembro());
         limpiar();
+        Apagar();
         ListarMiembro();
     });
 
@@ -181,7 +187,7 @@ $(document).ready(function () {
         return plantilla;
     }
 
-    $(document).on('click', '.baja-miembro', function () {//elimina usuario
+    $(document).on('click', '.baja-miembro', function () {//elimina miembros
 
         if (confirm("Seguro que desea dar de baja este Miembro de la iglesia")) {
             let elemento = $(this)[0].parentElement.parentElement;
@@ -198,7 +204,7 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on('click', '.modificar-miembro', function () {//modifica usuario
+    $(document).on('click', '.modificar-miembro', function () {//modifica miembros
         $('#home').hide();
         $('#profile').show();
         habilitarFormulario();
@@ -282,6 +288,29 @@ $(document).ready(function () {
 
     });
 
+    function ListarCelula() {//listar celula
+        $.ajax({
+            url: '/MRFIglesiaBermejo/AccesoDatos/Celula/ListarCelula.php',
+            type: 'GET',
+            success: function (response) {
+                let celula = JSON.parse(response);
+                let plantilla = '<option value=0>Eligir Celula</option>';
+                celula.forEach(cel => {
+                    plantilla += `<option value="${cel.pacodcel}" class="cod-profesion">${cel.canomcel}</option>`;
+                });
+                $('#cbx_celula').html(plantilla);
+            }
+        });
+
+    }
+
+    $('#cbx_celula').change(function (e) {//asigar codigo profesion
+        codCelula = $('#cbx_celula').val();
+        console.log("codigo celula: " + codCelula);
+        e.preventDefault();
+
+    });
+
     function ListarCiudad() {//listar ciudad
         $.ajax({
             url: '/MRFIglesiaBermejo/AccesoDatos/Ciudad/ListarCiudad.php',
@@ -297,11 +326,36 @@ $(document).ready(function () {
         });
     }
 
+    function GuardarMiembroCelula()
+    {
+        const postData={
+            pacodmcl: codMieCel,
+            cafunmie: funMiembro,
+            caestmcl: true,
+            facodcel: codCelula,
+            facodmie: codMiembro
+        };
+
+        let url='/MRFIglesiaBermejo/AccesoDatos/MieCel/AgregarMieCel.php';
+        $.post(url,postData,function (response) {
+            console.log(response);
+            if (!edit && response == 'registra') {
+                actualizarSecuencia("MCL", corre2);
+            }
+            if (edit && response == 'modificado') {
+            
+            }
+            edit = false;
+            //ListarMiembro();
+        });
+        console.log('completado..');
+    }
+
     function GuardarMiembro() {
-        $.ajaxSetup({ cache: false });
+       
         //const canvas = document.getElementById('canvas');
         let foto = canvas.toDataURL('image/jpeg', 1.0);
-        console.log(foto);
+        //console.log(foto);
         const postData = {
             pacodmie: codMiembro,
             cacidmie: $('#txt_ci').val(),
@@ -327,13 +381,11 @@ $(document).ready(function () {
             '/MRFIglesiaBermejo/AccesoDatos/Miembro/AgregarMiembro.php' :
             '/MRFIglesiaBermejo/AccesoDatos/Miembro/ModificarMiembro.php';
 
-        $.post(
-            url,
-            postData,
-            function (response) {
+        $.post(url,postData,function (response) {
                 console.log(response);
                 if (!edit && response == 'registra') {
-                    actualizarSecuencia("MBR");
+                    actualizarSecuencia("MBR", corre1);
+                    GuardarMiembroCelula();
                     MostrarMensaje("Datos de Miembro guardado correctamente", "success");
                 }
                 if (edit && response == 'modificado') {
@@ -342,8 +394,9 @@ $(document).ready(function () {
                 }
                 edit = false;
                 ListarMiembro();
+                
             });
-
+        
     }
 
     function CapturarCrecimiento() {
@@ -352,14 +405,19 @@ $(document).ready(function () {
         setCafecenc($('#dat_fecenc').val());
         setCafecigl($('#dat_fecigl').val());
         setPacodcre(codMiembro);
-        console.log(getCafeccon() + ' ' + getCafecenc() + ' ' +
-            getCafecenc() + ' ' + getCafecigl() + ' ' +
-            getPacodcre());
     }
 
     $('#cbx_ciudad').change(function (e) {//asignar codigo de cuidad
         codCiudad = $('#cbx_ciudad').val();
         console.log("codigo ciudad " + codCiudad);
+        e.preventDefault();
+
+    });
+
+    $('#cbx_funcion').change(function (e) {//asignar codigo de cuidad
+        funMiembro = $('#cbx_funcion').val();
+        console.log("funcion " + funMiembro);
+
         e.preventDefault();
 
     });
@@ -388,10 +446,25 @@ $(document).ready(function () {
             obtenerCorrelativo("MBR");
             setCorrelativo(obtenerSiguinete("MBR"));
         }
+        corre1=getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codMiembro = getCodigo() + '-' + num;
-        console.log(codMiembro);
-
+        console.log(codMiembro+' correlativo '+corre1);
+        let num1 = "";
+        verificarSecuencia("MCL");
+        if (getBan() != "true") {
+            setCodigo("MCL");
+            setCorrelativo(1);
+        }
+        else {
+            setCodigo("MCL");
+            obtenerCorrelativo("MCL");
+            setCorrelativo(obtenerSiguinete("MCL"));
+        }
+        corre2=getCorrelativo();
+        num1 = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num1);
+        codMieCel = getCodigo() + '-' + num1;
+        console.log(codMieCel+' correlativo '+corre2);
     });
 
     function ObtenerNumeroCorrelativo(numero, num) {//sirve para obtener numero correlativo
