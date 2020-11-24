@@ -12,19 +12,12 @@ if(empty($_SESSION['active'])){
     <title>MRFIglesiaBermejo</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="/MRFIglesiaBermejo/CSS/bootstrap.min.css">
-    <link rel="stylesheet" href="/MRFIglesiaBermejo/CSS/all.min.css">
-    <link rel="stylesheet" href="/MRFIglesiaBermejo/CSS/EstilosPersonalisados.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-        crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-        crossorigin=""></script>
-    <script src="/MRFIglesiaBermejo/Script/jquery-3.5.1.min.js"></script>
-    <script src="/MRFIglesiaBermejo/js/popper.min.js"></script>
-    <script src="/MRFIglesiaBermejo//Script/bootstrap.min.js"></script>
-    <script src="/MRFIglesiaBermejo/Script/App.js"></script>
+    <?php 
+        include 'Estilos.php';
+    ?>
+    <?php 
+        include 'Scripts.php';
+    ?>
 </head>
 
 <body>
@@ -50,7 +43,8 @@ if(empty($_SESSION['active'])){
                         <a id="mn_celula" class="dropdown-item" href="#"><i class="fas fa-home"></i> Celula</a>
                         <a id="mn_aportes" class="dropdown-item" href="#"><i class="fas fa-file-invoice-dollar"></i>
                             Aportes</a>
-                        <a id="mn_alumnos" class="dropdown-item" href="#"><i class="fas fa-school"></i> Escuela de
+                        
+                        <a id="mn_alumnos" class="dropdown-item" href="FRM_EscLideres.php"><i class="fas fa-school"></i> Escuela de
                             Lideres</a>
 
                     </div>
@@ -77,7 +71,9 @@ if(empty($_SESSION['active'])){
                         <a class="dropdown-item" href="#"><i class="fas fa-database"></i> Restaurar BD</a>
                     </div>
                 </li>
+
             </ul>
+
             <form class="form-inline my-2 my-sm-0">
                 <a href="Salir.php" class="navbar-brand">Cerrar Sesion <i class="fas fa-sign-out-alt"></i></a>
 

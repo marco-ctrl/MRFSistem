@@ -8,6 +8,8 @@ $(document).ready(function () {
     let codUsuario;
     let codMiembro;
 
+    var corre;
+
     DeshabilitarFormulario();
 
     $('#mensaje').hide();
@@ -191,6 +193,7 @@ $(document).ready(function () {
             obtenerCorrelativo("USU");
             setCorrelativo(obtenerSiguinete("USU"));
         }
+        corre=getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codUsuario = getCodigo() + '-' + num;
         console.log(codUsuario);
@@ -312,7 +315,7 @@ $(document).ready(function () {
 
         $.post(url, postData, function (response) {
             if (!edit && response == 'registra') {
-                actualizarSecuencia("USU");
+                actualizarSecuencia("USU", corre);
                 MostrarMensaje("Datos de usuario guardados correctamente", "success");
             }
             if (edit && response == 'modificado') {

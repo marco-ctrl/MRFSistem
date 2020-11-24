@@ -22,5 +22,10 @@ $(document).ready(function() {
 
     });
 
+    $("#mn_contenido").click(function(event) {
+        
+        $("#trabajoEscuela").load('FRM_Contenido.php');
+
+    });
     
 });
