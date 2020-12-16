@@ -2,11 +2,10 @@
 
 include '../Conexion/Conexion.php';
 
-$pacodmie = $_POST['pacodmie'];
-//$pacodmie = "MBR-9";
+$buscar = $_POST['buscar'];
+//$buscar = "B";
 
-$consulta = "SELECT 
-camatmie, 
+$consulta = "SELECT camatmie, 
 capatmie, 
 cacelmie, 
 cacidmie, 
@@ -14,7 +13,7 @@ cadirmie,
 caestmie, 
 caestciv, 
 cafecnac, 
-caurlfot, 
+cafotmie, 
 canommie, 
 pacodmie, 
 facodciu, 
@@ -22,30 +21,16 @@ facodpro,
 pacodpro,
 canompro,
 pacodciu,
-canomciu,
-cafeccon,
-cafecbau,
-cafecenc,
-cafecigl,
-pacodcre,
-pacodcel,
-cafunmie
-FROM amiebro m, 
-	 aproion p, 
-	 aciudad c,
-	 acreesp a,
-     acelula, 
-     amiecel
-where m.facodpro=p.pacodpro 
+canomciu
+FROM amiebro m, aproion p, aciudad c 
+where m.facodpro=p.pacodpro
+and m.caestmie=true 
 and m.facodciu=c.pacodciu
-and a.pacodcre=m.pacodmie
-and pacodcel=facodcel
-and facodmie=pacodmie
-and m.pacodmie='{$pacodmie}'";
+and m.cabanmae='false'
+and canommie like'%{$buscar}%'
+order by pacodmie desc LIMIT 15";
 $resultado = pg_query($conexion, $consulta);
-//if ($resultado) {'cafotmie' => urlencode(base64_encode(
-    //pg_unescape_bytea($row['cafotmie']))),
-    
+//if ($resultado) {
     $json=array();
     while ($row = pg_fetch_array($resultado)) {
         $json[] = array('camatmie' => $row['camatmie'],
@@ -56,7 +41,7 @@ $resultado = pg_query($conexion, $consulta);
                         'caestmie' => $row['caestmie'],
                         'caestciv' => $row['caestciv'],
                         'cafecnac' => $row['cafecnac'],
-                        'caurlfot' => $row['caurlfot'],
+                        'cafotmie' => $row['cafotmie'],
                         'canommie' => $row['canommie'],
                         'pacodmie' => $row['pacodmie'],
                         'facodciu' => $row['facodciu'],
@@ -64,14 +49,7 @@ $resultado = pg_query($conexion, $consulta);
                         'pacodpro' => $row['pacodpro'],
                         'canompro' => $row['canompro'],
                         'pacodciu' => $row['pacodciu'],
-                        'canomciu' => $row['canomciu'],
-                        'cafeccon' => $row['cafeccon'] ,
-                        'cafecbau' => $row['cafecbau'],
-                        'cafecenc' => $row['cafecenc'],
-                        'cafecigl' => $row['cafecigl'],
-                        'pacodcre' => $row['pacodcre'],
-                        'pacodcel' => $row['pacodcel'],
-                        'cafunmie' => $row['cafunmie']);
+                        'canomciu' => $row['canomciu']);
     }
     if($json!=null){
         echo json_encode($json);

@@ -4,6 +4,7 @@ session_start();
 if(empty($_SESSION['active'])){
   header('location: ../');
 }
+//echo $_SESSION['pacodusu'];
 ?>
 
 <html>
@@ -43,8 +44,9 @@ if(empty($_SESSION['active'])){
                         <a id="mn_celula" class="dropdown-item" href="#"><i class="fas fa-home"></i> Celula</a>
                         <a id="mn_aportes" class="dropdown-item" href="#"><i class="fas fa-file-invoice-dollar"></i>
                             Aportes</a>
-                        
-                        <a id="mn_alumnos" class="dropdown-item" href="FRM_EscLideres.php"><i class="fas fa-school"></i> Escuela de
+
+                        <a id="mn_alumnos" class="dropdown-item" href="FRM_EscLideres.php"><i class="fas fa-school"></i>
+                            Escuela de
                             Lideres</a>
 
                     </div>
@@ -74,10 +76,11 @@ if(empty($_SESSION['active'])){
 
             </ul>
 
-            <form class="form-inline my-2 my-sm-0">
-                <a href="Salir.php" class="navbar-brand">Cerrar Sesion <i class="fas fa-sign-out-alt"></i></a>
+            <form class="form-inline my-2 my-lg-0">
+            <a href="Salir.php" class="navbar-brand">Cerrar Sesion <i class="fas fa-sign-out-alt"></i></a>
 
             </form>
+            
         </div>
 
 

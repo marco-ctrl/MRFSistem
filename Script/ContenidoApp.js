@@ -8,6 +8,43 @@ $(document).ready(function () {
 
     $('#formulario').hide();//ocultar formulario
 
+    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de miembros
+        if ($('#txt_buscar').val()) {
+            let buscar = $('#txt_buscar').val().toUpperCase();
+            let plantilla = '';
+            $.ajax({
+                url: '/MRFIglesiaBermejo/AccesoDatos/Contenido/BuscarContenido.php',
+                type: 'POST',
+                data: { buscar },
+                success: function (response) {
+                    if (response != "no encontrado") {
+                        let cel = JSON.parse(response);
+
+                        cel.forEach(cel => {
+                            plantilla = MostrarTabla(plantilla, cel);
+                        });
+                        $('#tb_contenido').html(plantilla);
+                    }
+                    else {
+                        $('#tb_contenido').html(plantilla);
+                        let mensaje = `<div class="alert alert-dismissible alert-warning">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>La Materia ${buscar} no se encuentra registrado en la base de datos</strong></div>`;
+                        $('#mensaje').html(mensaje);
+                        $('#mensaje').show();
+                    }
+                },
+                error: function (xhr, status) {
+                    alert('error al buscar miembro');
+                }
+            });
+        }
+        else {
+            $('#mensaje').hide();
+            ListarContenido();
+        }
+    });
+
     function ListarContenido() {//listar Contenido
         $.ajax({
             url: '/MRFIglesiaBermejo/AccesoDatos/Contenido/ListarContenido.php',
@@ -60,6 +97,21 @@ $(document).ready(function () {
                 document.getElementById("txt_contenido").focus();
                 edit = true;
             });
+    });
+
+    $(document).on('click', '.baja-contenido', function () {//elimina usuario
+        if (confirm("Seguro que desea dar de baja esta materia")) {
+            let elemento = $(this)[0].parentElement.parentElement;
+            let pacodcon = $(elemento).attr('UserDocu');
+            $.post('/MRFIglesiaBermejo/AccesoDatos/Contenido/DarBaja.php',
+                { pacodcon }, function (responce) {
+                    if (responce == 'baja') {
+                        ListarContenido();
+                        MostrarMensaje("Contenido dado de baja", "warning");
+                    }
+
+                });
+        }
     });
 
     $('#btn_nuevo').click(function (e) {//nuevo registro de Contenido

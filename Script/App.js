@@ -27,5 +27,29 @@ $(document).ready(function() {
         $("#trabajoEscuela").load('FRM_Contenido.php');
 
     });
+
+    $("#mn_maestro").click(function(event) {
+        
+        $("#trabajoEscuela").load('FRM_Maestro.php');
+
+    });
+
+    $("#mn_curso").click(function(event) {
+        
+        $("#trabajoEscuela").load('FRM_Curso.php');
+
+    });
+
+    $("#mn_alumno").click(function(event) {
+        
+        $("#trabajoEscuela").load('FRM_Alumno.php');
+
+    });
+
+    $("#mn_matriculacion").click(function(event) {
+        
+        $("#trabajoEscuela").load('FRM_Matriculacion.php');
+
+    });
     
 });

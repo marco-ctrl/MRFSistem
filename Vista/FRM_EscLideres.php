@@ -45,7 +45,7 @@ if(empty($_SESSION['active'])){
                     <a class="nav-link" href="#" id="mn_contenido"><i class="fas fa-book"></i> Materia</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="mn_matriculacion"><i class="fas fa-chalkboard"></i> Curso</a>
+                    <a class="nav-link" href="#" id="mn_curso"><i class="fas fa-chalkboard"></i> Curso</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="mn_matriculacion"><i class="fas fa-server text-white"></i> Matriculacion</a>

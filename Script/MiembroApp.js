@@ -32,7 +32,7 @@ $(document).ready(function () {
 
     ImagenCanvas();
 
-    DeshabilitarFormulario();
+    //DeshabilitarFormulario();
 
     // Access webcam
     async function init() {
@@ -139,7 +139,7 @@ $(document).ready(function () {
         const context = canvas.getContext('2d');
         context.clearRect(0, 0, canvas.width, canvas.height);
         ImagenCanvas();
-        DeshabilitarFormulario();
+        //DeshabilitarFormulario();
         $('#profile').hide();
         $('#home').show();
     }
@@ -207,7 +207,8 @@ $(document).ready(function () {
     $(document).on('click', '.modificar-miembro', function () {//modifica miembros
         $('#home').hide();
         $('#profile').show();
-        habilitarFormulario();
+        document.getElementById("txt_ci").focus();
+        //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodmie = $(elemento).attr('UserDocu');
         $.post('/MRFIglesiaBermejo/AccesoDatos/Miembro/SingleMiembro.php',
@@ -229,6 +230,8 @@ $(document).ready(function () {
                         codCiudad = miembro.facodciu,
                         $('#cbx_profesion').val(miembro.pacodpro),
                         $('#cbx_ciudad').val(miembro.pacodciu),
+                        $('#cbx_celula').val(miembro.pacodcel),
+                        $('#cbx_funcion').val(miembro.cafunmie),
                         //foto = decodeURIComponent(miembro.cafotmie),
                         foto = miembro.caurlfot,
                         $('#dat_fecbau').val(miembro.cafecbau),
@@ -434,7 +437,8 @@ $(document).ready(function () {
         $('#profile').show();
         //limpiar();
         ImagenCanvas();
-        habilitarFormulario();
+        //habilitarFormulario();
+        document.getElementById("txt_ci").focus();
         let num = "";
         verificarSecuencia("MBR");
         if (getBan() != "true") {
@@ -449,7 +453,7 @@ $(document).ready(function () {
         corre1=getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codMiembro = getCodigo() + '-' + num;
-        console.log(codMiembro+' correlativo '+corre1);
+        //console.log(codMiembro+' correlativo '+corre1);
         let num1 = "";
         verificarSecuencia("MCL");
         if (getBan() != "true") {
@@ -494,7 +498,7 @@ $(document).ready(function () {
     }
 
 
-    //DesabilitarFormulario
+    //habilitarFormulario
     function habilitarFormulario() {
         $("#txt_nombre").attr("disabled", false);
         $("#txt_codMiembro").attr("disabled", false);

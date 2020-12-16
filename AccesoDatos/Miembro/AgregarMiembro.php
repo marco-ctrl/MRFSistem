@@ -47,7 +47,9 @@ $bytesArchivo = pg_escape_bytea($bytesArchivo);
         canommie, 
         pacodmie, 
         facodciu, 
-        facodpro)
+        facodpro,
+        cabanmae,
+        cabanalu)
         VALUES (
         '{$camatmie}', 
         '{$capatmie}', 
@@ -61,7 +63,9 @@ $bytesArchivo = pg_escape_bytea($bytesArchivo);
         '{$canommie}', 
         '{$pacodmie}', 
         '{$facodciu}', 
-        '{$facodpro}');";
+        '{$facodpro}',
+        'false',
+        'false');";
     $stm = pg_query($conexion, $sql);
 }
 

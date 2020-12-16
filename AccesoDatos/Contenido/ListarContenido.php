@@ -8,7 +8,8 @@ $consulta = "SELECT
             canommat, 
             pacodcon
             FROM 
-            public.aconido;";
+            public.aconido
+            WHERE caestcon='true'";
 $resultado = pg_query($conexion, $consulta);
 
 while ($row = pg_fetch_array($resultado)) {

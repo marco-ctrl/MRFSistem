@@ -42,6 +42,7 @@
         //print_r($data);
         //session_start();
         $_SESSION['active']=true;
+        $_SESSION['pacodusu']=$data['pacodusu'];
         $_SESSION['canommie']=$data['canommie'];
         $_SESSION['capatmie']=$data['capatmie'];
         $_SESSION['camatmie']=$data['camatmie'];

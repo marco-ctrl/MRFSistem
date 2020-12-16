@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">Curso</a>
+    <a href="#" class="navbar-brand">Matriculacion</a>
     <ul class="navbar-nav ml-auto">
         <form class="form-inline my-2 my-lg-0">
-            <input type="search" id="txt_buscar" class="form-control mr-ms-2" placeholder="Buscar Curso">
+            <input type="search" id="txt_buscar" class="form-control mr-ms-2" placeholder="Buscar Alumno">
             <button class="btn btn-success my-2 my-sm-0" type="submit">
                 Buscar
             </button>
@@ -16,7 +16,7 @@
         <div class="col-md-4 p-3">
             <button type="button" id="btn_nuevo" class="btn btn-primary btn-block
                 text-center"><i class="fas fa-plus-circle"></i>
-                Registrar Curso
+                Registrar Matricula
             </button>
         </div>
 

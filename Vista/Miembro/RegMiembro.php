@@ -101,7 +101,7 @@
                     <label for="">Funcion en la Celula</label>
                     <select id="cbx_funcion" class="form-control btn-primary">
                         <option value="0">Funcion en la celula</option>
-                        <option value="DICIPULO/A">DICIPULO/A</option>
+                        <option value="DISCIPULO/A">DISCIPULO/A</option>
                         <option value="ASISTENTE">ASISTENTE</option>
                         <option value="ANFITRION">ANFITRION</option>
                         <option value="LIDER">LIDER</option>
