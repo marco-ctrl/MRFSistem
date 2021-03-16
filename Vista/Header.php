@@ -31,7 +31,7 @@ if(empty($_SESSION['active'])){
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="navbar-brand" href="FRM_principal.php">Inicio</a>
+                    <a class="navbar-brand" href="FRM_principal.php"><i class="fas fa-home"></i> Inicio</a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -39,10 +39,10 @@ if(empty($_SESSION['active'])){
                         aria-haspopup="true" aria-expanded="false"><i class="fas fa-archive text-white"></i>
                         Archivos</a>
                     <div class="dropdown-menu" style="">
-                        <a id="mn_miembro" class="dropdown-item" href="#"><i class="fas fa-users"></i> Miembros</a>
-                        <a id="mn_usuario" class="dropdown-item" href="#"><i class="fas fa-user"></i> Usuario</a>
-                        <a id="mn_celula" class="dropdown-item" href="#"><i class="fas fa-home"></i> Celula</a>
-                        <a id="mn_aportes" class="dropdown-item" href="#"><i class="fas fa-file-invoice-dollar"></i>
+                        <a id="mn_miembro" class="dropdown-item" href="FRM_Miembro.php"><i class="fas fa-users"></i> Miembros</a>
+                        <a id="mn_usuario" class="dropdown-item" href="FRM_Usuario.php"><i class="fas fa-user"></i> Usuario</a>
+                        <a id="mn_celula" class="dropdown-item" href="FRM_Celula.php"><i class="fas fa-home"></i> Celula</a>
+                        <a id="mn_aportes" class="dropdown-item" href="FRM_Aportes.php"><i class="fas fa-file-invoice-dollar"></i>
                             Aportes</a>
 
                         <a id="mn_alumnos" class="dropdown-item" href="FRM_EscLideres.php"><i class="fas fa-school"></i>

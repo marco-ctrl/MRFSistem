@@ -47,8 +47,16 @@
         $_SESSION['capatmie']=$data['capatmie'];
         $_SESSION['camatmie']=$data['camatmie'];
         $_SESSION['catipusu']=$data['catipusu'];
-
-        header('location: Vista/FRM_principal.php');
+        if($_SESSION['catipusu']=='ADMINISTRADOR'){
+          header('location: Vista/FRM_principal.php');
+        }
+        if($_SESSION['catipusu']=='SECRETARIO'){
+          header('location: Vista/FRM_EscLideres.php');
+        }
+        if($_SESSION['catipusu']=='TESORERO'){
+          header('location: Vista/FRM_Aportes.php');
+        }
+        
       }
       else{
         $alert='usuario y/o contraseña incorrectos';

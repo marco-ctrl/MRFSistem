@@ -6,49 +6,55 @@ $(document).ready(function() {
     
     $("#mn_miembro").click(function(event) {
         
-        $("#trabajo").load('FRM_Miembro.php');
+        //$("#trabajo").load('FRM_Miembro.php');
 
     });
 
     $("#mn_celula").click(function(event) {
         
-        $("#trabajo").load('FRM_Celula.php');
+        //$("#trabajo").load('FRM_Celula.php');
 
     });
 
     $("#mn_usuario").click(function(event) {
         
-        $("#trabajo").load('FRM_Usuario.php');
+        //$("#trabajo").load('FRM_Usuario.php');
 
     });
 
     $("#mn_contenido").click(function(event) {
         
-        $("#trabajoEscuela").load('FRM_Contenido.php');
+        //$("#trabajoEscuela").load('FRM_Contenido.php');
 
     });
 
     $("#mn_maestro").click(function(event) {
         
-        $("#trabajoEscuela").load('FRM_Maestro.php');
+        //$("#trabajoEscuela").load('FRM_Maestro.php');
 
     });
 
     $("#mn_curso").click(function(event) {
         
-        $("#trabajoEscuela").load('FRM_Curso.php');
+        //$("#trabajoEscuela").load('FRM_Curso.php');
 
     });
 
     $("#mn_alumno").click(function(event) {
         
-        $("#trabajoEscuela").load('FRM_Alumno.php');
+        //$("#trabajoEscuela").load('FRM_Alumno.php');
 
     });
 
     $("#mn_matriculacion").click(function(event) {
         
-        $("#trabajoEscuela").load('FRM_Matriculacion.php');
+        //$("#trabajoEscuela").load('FRM_Matriculacion.php');
+
+    });
+
+    $("#mn_economico").click(function(event) {
+        
+        //$("#trabajoAportes").load('FRM_AporteEconomico.php');
 
     });
     

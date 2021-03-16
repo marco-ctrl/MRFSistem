@@ -23,7 +23,7 @@ if(empty($_SESSION['active'])){
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">ESCUELA DE LIDEREZ</a>
+    <a class="navbar-brand" href="#">APORTES</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
             aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -31,26 +31,18 @@ if(empty($_SESSION['active'])){
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="navbar-brand" href="FRM_principal.php"><i class="fas fa-home"></i>Inicio</a>
+                    <a class="navbar-brand" href="FRM_principal.php"><i class="fas fa-home"></i> Inicio</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="mn_maestro"><i class="fas fa-chalkboard-teacher"></i>
-                        Maestro</a>
+                    <a class="nav-link" href="#" id="mn_economico"><i class="fas fa-money-bill-wave"></i>
+                        Aportes Economicos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="mn_alumno"><i class="fas fa-user-graduate"></i>
-                        Alumnos</a>
+                    <a class="nav-link" href="#" id="mn_objetos"><i class="fas fa-toolbox"></i>
+                        Aportes Objetos</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="mn_contenido"><i class="fas fa-book"></i> Materia</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="mn_curso"><i class="fas fa-chalkboard"></i> Curso</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="mn_matriculacion"><i class="fas fa-server text-white"></i> Matriculacion</a>
-                </li>
+                
 
             </ul>
 
@@ -63,7 +55,7 @@ if(empty($_SESSION['active'])){
 
     </nav>
 
-    <div id="trabajoEscuela">
+    <div id="trabajoAportes">
            <!--<img id="imagen" alt="" src="http://localhost/MRFIglesiaBermejo/AccesoDatos/Miembro/Imagenes/MBR-000017ANTONIO250820071327.jpg">1</img>
            <img id="imagen" alt="" src="/MRFIglesiaBermejo/AccesoDatos/Miembro/Imagenes/MBR-000017ANTONIO250820071327.jpg">2</img>-->
         
