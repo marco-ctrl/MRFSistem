@@ -8,7 +8,7 @@ if(empty($_SESSION['active'])){
     
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-primary bg-dark">
     <a href="#" class="navbar-brand">Materia</a>
     <ul class="navbar-nav ml-auto">
         <form class="form-inline my-2 my-lg-0">

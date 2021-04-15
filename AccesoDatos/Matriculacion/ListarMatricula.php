@@ -24,6 +24,8 @@ $consulta = "SELECT caestmat,
             and d.facodmae=c.pacodmae
             and b.facodmie=e.pacodmie
             and d.facodcon=f.pacodcon
+			and e.pacodmie=b.facodmie
+			and d.pacodcur=a.facodcur
             and a.caestmat='true'
             order by a.pacodmat desc
             limit 15;";

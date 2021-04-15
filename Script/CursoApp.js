@@ -271,8 +271,9 @@ $(document).ready(function () {
 
             $('#formulario').hide();
             $('#lista').show();
+            ListarCurso();
         });
-        ListarCurso();
+        
     }
 
     function MostrarMensaje(cadena, clase) {

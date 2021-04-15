@@ -35,21 +35,21 @@ if(empty($_SESSION['active'])){
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="mn_maestro"><i class="fas fa-chalkboard-teacher"></i>
+                    <a class="nav-link" href="FRM_Maestro.php" id="mn_maestro"><i class="fas fa-chalkboard-teacher"></i>
                         Maestro</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="mn_alumno"><i class="fas fa-user-graduate"></i>
+                    <a class="nav-link" href="FRM_Alumno.php" id="mn_alumno"><i class="fas fa-user-graduate"></i>
                         Alumnos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="mn_contenido"><i class="fas fa-book"></i> Materia</a>
+                    <a class="nav-link" href="FRM_Contenido.php" id="mn_contenido"><i class="fas fa-book"></i> Materia</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="mn_curso"><i class="fas fa-chalkboard"></i> Curso</a>
+                    <a class="nav-link" href="FRM_Curso.php" id="mn_curso"><i class="fas fa-chalkboard"></i> Curso</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="mn_matriculacion"><i class="fas fa-server text-white"></i> Matriculacion</a>
+                    <a class="nav-link" href="FRM_Matriculacion.php" id="mn_matriculacion"><i class="fas fa-server text-white"></i> Matriculacion</a>
                 </li>
 
             </ul>

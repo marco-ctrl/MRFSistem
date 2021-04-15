@@ -257,8 +257,9 @@ $(document).ready(function () {
 
             $('#formulario').hide();
             $('#lista').show();
+            listarMatriculacion();
         });
-        ListarCurso();
+        
     }
 
     function MostrarMensaje(cadena, clase) {
