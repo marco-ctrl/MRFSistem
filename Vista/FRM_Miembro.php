@@ -17,7 +17,7 @@ if(empty($_SESSION['active'])){
         include 'Scripts.php';
     ?>
 </head>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary justify-content-between">
     <a href="#" class="navbar-brand">Miembro</a>
     <!--<ul class="navbar-nav ml-auto">-->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"

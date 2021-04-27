@@ -1,61 +1,60 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     //imagenes = document.getElementById('imagen');
     //imagenes.setAttribute('src', "http://localhost/MRFIglesiaBermejo/AccesoDatos/Miembro/Imagenes/MBR-2Oscar.jpg");
     //$('#imagen').setAtribute('src', "http://localhost/MRFIglesiaBermejo/AccesoDatos/Miembro/Imagenes/MBR-2Oscar.jpg");
-    
-    $("#mn_miembro").click(function(event) {
-        
-        //$("#trabajo").load('FRM_Miembro.php');
+    $("#div_archivos").hide();
+    var ban1 = true
+
+    $("#div_reportes").hide();
+    var ban2 = true
+
+    $("#div_sistema").hide();
+    var ban3 = true
+
+    $("#mn_archivos").click(function (event) {
+        if (ban1) {
+            $("#div_archivos").show();
+            ban1 = false;
+        }
+        else {
+            $("#div_archivos").hide();
+            ban1 = true
+        }
+
 
     });
 
-    $("#mn_celula").click(function(event) {
-        
-        //$("#trabajo").load('FRM_Celula.php');
+    $("#mn_reportes").click(function (event) {
+        if (ban2) {
+            $("#div_reportes").show();
+            ban2 = false;
+        }
+        else {
+            $("#div_reportes").hide();
+            ban2 = true
+        }
+
 
     });
 
-    $("#mn_usuario").click(function(event) {
-        
-        //$("#trabajo").load('FRM_Usuario.php');
+    $("#mn_sistema").click(function (event) {
+        if (ban3) {
+            $("#div_sistema").show();
+            ban3 = false;
+        }
+        else {
+            $("#div_sistema").hide();
+            ban3 = true
+        }
+
 
     });
 
-    $("#mn_contenido").click(function(event) {
-        
-        //$("#trabajoEscuela").load('FRM_Contenido.php');
 
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
     });
 
-    $("#mn_maestro").click(function(event) {
-        
-        //$("#trabajoEscuela").load('FRM_Maestro.php');
-
-    });
-
-    $("#mn_curso").click(function(event) {
-        
-        //$("#trabajoEscuela").load('FRM_Curso.php');
-
-    });
-
-    $("#mn_alumno").click(function(event) {
-        
-        //$("#trabajoEscuela").load('FRM_Alumno.php');
-
-    });
-
-    $("#mn_matriculacion").click(function(event) {
-        
-        //$("#trabajoEscuela").load('FRM_Matriculacion.php');
-
-    });
-
-    $("#mn_economico").click(function(event) {
-        
-        //$("#trabajoAportes").load('FRM_AporteEconomico.php');
-
-    });
-    
 });
