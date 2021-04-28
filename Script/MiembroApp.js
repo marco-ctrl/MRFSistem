@@ -32,7 +32,7 @@ $(document).ready(function () {
 
     ImagenCanvas();
 
-    //DeshabilitarFormulario();
+    DeshabilitarFormulario();
 
     // Access webcam
     async function init() {
@@ -130,6 +130,7 @@ $(document).ready(function () {
         limpiar();
         Apagar();
         ListarMiembro();
+        DeshabilitarFormulario();
     });
 
     function limpiar() {
@@ -208,7 +209,7 @@ $(document).ready(function () {
         $('#home').hide();
         $('#profile').show();
         document.getElementById("txt_ci").focus();
-        //habilitarFormulario();
+        habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodmie = $(elemento).attr('UserDocu');
         $.post('/MRFIglesiaBermejo/AccesoDatos/Miembro/SingleMiembro.php',
@@ -430,6 +431,7 @@ $(document).ready(function () {
         $('#profile').hide();
         $('#home').show();
         limpiar();
+        DeshabilitarFormulario();
     });
 
     $("#btn_nuevo").click(function (event) {
@@ -437,7 +439,7 @@ $(document).ready(function () {
         $('#profile').show();
         //limpiar();
         ImagenCanvas();
-        //habilitarFormulario();
+        habilitarFormulario();
         document.getElementById("txt_ci").focus();
         let num = "";
         verificarSecuencia("MBR");

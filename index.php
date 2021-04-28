@@ -26,7 +26,8 @@
                           usu.caestusu,
                           mbr.canommie,
                           mbr.capatmie,
-                          mbr.camatmie
+                          mbr.camatmie,
+                          mbr.caurlfot
                     FROM  ausurio usu, 
                           amiebro mbr 
                     WHERE 
@@ -47,6 +48,8 @@
         $_SESSION['capatmie']=$data['capatmie'];
         $_SESSION['camatmie']=$data['camatmie'];
         $_SESSION['catipusu']=$data['catipusu'];
+        $_SESSION['canomusu']=$data['canomusu'];
+        $_SESSION['caurlfot']=$data['caurlfot'];
         if($_SESSION['catipusu']=='ADMINISTRADOR'){
           header('location: Vista/FRM_principal.php');
         }

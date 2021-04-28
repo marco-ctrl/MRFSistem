@@ -1,0 +1,38 @@
+Looking for git in: git
+Using git 2.25.1 from git
+> git rev-parse --git-dir
+Open repository: /var/www/html/MRFIglesiaBermejo
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git for-each-ref --format=%(refname)%00%(upstream:short)%00%(upstream:track)%00%(objectname) refs/heads/master refs/remotes/master
+> git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname)
+> git remote --verbose
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show --textconv :Vista/Session.php
+> git ls-files --stage -- /var/www/html/MRFIglesiaBermejo/Vista/Session.php
+> git cat-file -s 9d111c9c171a1964884d9e321c1ead54b29e01a8
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git for-each-ref --format=%(refname)%00%(upstream:short)%00%(upstream:track)%00%(objectname) refs/heads/master refs/remotes/master
+> git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname)
+> git remote --verbose
+> git config --get commit.template
+> git show --textconv :Vista/FRM_principal.php
+> git ls-files --stage -- /var/www/html/MRFIglesiaBermejo/Vista/FRM_principal.php
+> git cat-file -s 35219874e981b894c147f82d674dbb38640bf330
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git for-each-ref --format=%(refname)%00%(upstream:short)%00%(upstream:track)%00%(objectname) refs/heads/master refs/remotes/master
+> git for-each-ref --sort -committerdate --format %(refname) %(objectname) %(*objectname)
+> git remote --verbose
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git show --textconv :Vista/FRM_principal.php
+> git ls-files --stage -- /var/www/html/MRFIglesiaBermejo/Vista/FRM_principal.php
+> git cat-file -s 35219874e981b894c147f82d674dbb38640bf330
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin

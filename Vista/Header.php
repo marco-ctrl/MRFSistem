@@ -4,7 +4,7 @@ session_start();
 if(empty($_SESSION['active'])){
   header('location: ../');
 }
-//echo $_SESSION['pacodusu'];
+//echo $_SESSION['canomusu'];
 ?>
 
 <html>

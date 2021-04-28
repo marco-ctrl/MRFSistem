@@ -1,10 +1,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 table-responsive">
-            <h5 >Lista de Miembos</h5>
+            <h5 >Lista de Miembros</h5>
             <table class="table table-hover table-sm table-striped">
-                <thead class="bg-primary text-white">
-                    <tr>
+                <thead class="bg-dark text-white">
+                    <tr class="sticky-top">
                         <td>CARNET IDENTIDAD</td>
                         <td>NOMBRE</td>
                         <td>APELLIDO</td>

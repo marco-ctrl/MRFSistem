@@ -6,6 +6,7 @@ if(empty($_SESSION['active'])){
 }
 
 ?>
+
 <head>
     <title>MRFIglesiaBermejo</title>
     <meta charset="UTF-8">
@@ -17,50 +18,45 @@ if(empty($_SESSION['active'])){
         include 'Scripts.php';
     ?>
 </head>
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary justify-content-between">
-    <a href="#" class="navbar-brand">Miembro</a>
-    <!--<ul class="navbar-nav ml-auto">-->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="navbar-brand" href="FRM_principal.php"><i class="fas fa-home"></i> Inicio</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-sm-0">
-            <input type="search" id="txt_buscar" class="form-control mr-ms-2" placeholder="Buscar Miembro">
+<?php include 'NavBar.php' ?>
 
-        </form>
-    </div>
+<div class="d-flex toggled" id="wrapper">
 
-    <!--</ul>-->
-</nav>
+    <!-- Sidebar -->
+    <?php include 'SideBar.php' ?>
+    <!-- /#sidebar-wrapper -->
 
-<div class=" p-2 container">
-    <div class="col-md-4 p-2">
-        <div>
-            <button type="button" id="btn_nuevo" class="btn btn-primary btn-block
+    <!-- Page Content -->
+    <div id="page-content-wrapper" class="">
+        <div class="p-2 container container-fluid">
+            <div class="col-md-4 p-2">
+                <div>
+                    <button type="button" id="btn_nuevo" class="btn btn-primary btn-block
                                     text-center"><i class="fas fa-plus-circle"></i> Agregar Miembro
-            </button>
+                    </button>
+                </div>
+            </div>
+            <div id="App" class="row">
+                <div class="col-md-12">
+                    <div id="mensaje">
+
+                    </div>
+                    <div class="" id="home">
+                        <?php include 'Miembro/ListMiembro.php' ?>
+                    </div>
+                    <div class="" id="profile">
+                        <?php include 'Miembro/RegMiembro.php' ?>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
-    <div id="App" class="row">
-        <div class="col-md-12">
-            <div id="mensaje">
+    <!-- /#page-content-wrapper -->
 
-            </div>
-            <div class="" id="home">
-                <?php include 'Miembro/ListMiembro.php' ?>
-            </div>
-            <div class="" id="profile">
-                <?php include 'Miembro/RegMiembro.php' ?>
-            </div>
+</div>
+<div class=" p-2 container">
 
-        </div>
-    </div>
 </div>
 
 <br>
