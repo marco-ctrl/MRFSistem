@@ -5,4 +5,7 @@
     </div>
 </footer>-->
 </body>
+<?php 
+        include 'Scripts.php';
+    ?>
 </html>

@@ -16,9 +16,7 @@ if(empty($_SESSION['active'])){
     <?php 
         include 'Estilos.php';
     ?>
-    <?php 
-        include 'Scripts.php';
-    ?>
+    
 </head>
 
 <body>

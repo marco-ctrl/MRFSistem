@@ -176,12 +176,12 @@ $(document).ready(function () {
                 <td>${miembros.cadirmie}</td>
                 <td>
                     <button class="baja-miembro btn btn-danger">
-                        <i class="fas fa-trash-alt gi-2x"></i>
+                        <i class="fas fa-trash-alt "></i>
                     </button>
                 </td>
                 <td>
                     <button class="modificar-miembro btn btn-secondary">
-                        <i class="far fa-edit gi-2x"></i>
+                        <i class="far fa-edit "></i>
                     </button>
                 </td>
             </tr>`

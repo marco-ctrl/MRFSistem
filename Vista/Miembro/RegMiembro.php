@@ -121,13 +121,13 @@
                 <div class="col-md-6 d-none d-sm-none d-md-block">
                     <form>
                         <button type="button" id="encender" class="btn btn-secondary btn-block
-                            text-center"><i class="fas fa-video gi-2x"></i> Encender</button>
+                            text-center"><i class="fas fa-video "></i> Encender</button>
                     </form>
                 </div>
                 <div class="col-md-6 d-none d-sm-none d-md-block">
                     <form>
                         <button type="button" id="apagar" class="btn btn-secondary btn-block
-                            text-center"><i class="fas fa-video-slash gi-2x"></i> Apagar</button>
+                            text-center"><i class="fas fa-video-slash "></i> Apagar</button>
                     </form>
                 </div>
             </div>
@@ -149,14 +149,14 @@
                     <!-- Trigger canvas web API -->
                     <div class="controller ">
                         <button id="snap" class="btn btn-secondary btn-block
-                            text-center"><i class="fas fa-camera gi-2x"></i> Capturar</button>
+                            text-center"><i class="fas fa-camera "></i> Capturar</button>
                     </div>
                 </div>
                 <div class="col-md-6 p-2 d-none d-sm-none d-md-block">
                     <div class="controller">
                         <button class="btn btn-secondary btn-block"
                             onclick="document.getElementById('file-upload').click();">
-                            <i class="fas fa-search-plus gi-2x"></i> Buscar Foto</button>
+                            <i class="fas fa-search-plus "></i> Buscar Foto</button>
                         <input type="file" style="display:none;" id="file-upload" aria-describedby="fileHelp">
                     </div>
                 </div>
@@ -167,11 +167,11 @@
     <div class="modal-footer">
         <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
                                     text-center">
-            <i class="far fa-save gi-2x"></i>
+            <i class="far fa-save "></i>
             Guardar
         </button>
         <button type="button" id="btn_cancelar" class="btn btn-danger btn-lg
-                        text-center"><i class="far fa-window-close gi-2x"></i>
+                        text-center"><i class="far fa-window-close "></i>
             Cancelar
         </button>
     </div>
