@@ -1,3 +1,5 @@
+USE `mrfbermejobd`;
+
 SET FOREIGN_KEY_CHECKS=0 
 ;
 
@@ -171,22 +173,21 @@ CREATE TABLE `acreesp`
 	`cafecbau` DATE NULL,
 	`cafeccon` DATE NULL,
 	`cafecigl` DATE NULL,
-	`pecodcre` varchar(10) NOT NULL,
-	CONSTRAINT `PK_CrecimientoEspiritual` PRIMARY KEY (`pecodcre` ASC)
+	`pacodcre` varchar(10) NOT NULL,
+	CONSTRAINT `PK_CrecimientoEspiritual` PRIMARY KEY (`pacodcre` ASC)
 )
 
 ;
 
-CREATE TABLE `acursom`
-(
-	`cadescur` varchar(15) NOT NULL,
-	`caestcur` BOOL NOT NULL,
-	`cafecini` DATE NOT NULL,
-	`cagescur` varchar(4) NOT NULL,
-	`facodcon` varchar(10) NOT NULL,
-	`facodmae` varchar(10) NOT NULL,
-	`pacodcur` varchar(0) NOT NULL,
-	CONSTRAINT `PK_Curso` PRIMARY KEY (`pacodcur` ASC)
+CREATE TABLE `acursom` (
+    `cadescur` VARCHAR(15) NOT NULL,
+    `caestcur` BOOL NOT NULL,
+    `cafecini` DATE NOT NULL,
+    `cagescur` VARCHAR(4) NOT NULL,
+    `facodcon` VARCHAR(10) NOT NULL,
+    `facodmae` VARCHAR(10) NOT NULL,
+    `pacodcur` VARCHAR(10) NOT NULL,
+    CONSTRAINT `PK_Curso` PRIMARY KEY (`pacodcur` ASC)
 )
 
 ;
@@ -214,7 +215,7 @@ CREATE TABLE `aiteinf`
 CREATE TABLE `amaetro`
 (
 	`facodmie` varchar(10) NOT NULL,
-	`pacodmae` varchar(0) NOT NULL,
+	`pacodmae` varchar(10) NOT NULL,
 	CONSTRAINT `PK_Maestro` PRIMARY KEY (`pacodmae` ASC)
 )
 
@@ -248,7 +249,7 @@ CREATE TABLE `amiebro`
 	`canommie` varchar(30) NOT NULL,
 	`facodciu` VARCHAR(10) NOT NULL,
 	`facodpro` VARCHAR(10) NOT NULL,
-	`pacodmie` varchar(0) NOT NULL,
+	`pacodmie` varchar(10) NOT NULL,
 	`caurlfot` VARCHAR(90) NOT NULL,
 	CONSTRAINT `PK_Miembro` PRIMARY KEY (`pacodmie` ASC)
 )
@@ -342,7 +343,7 @@ ALTER TABLE `acelula`
 ;
 
 ALTER TABLE `acreesp` 
- ADD INDEX `IXFK_CrecimientoEspiritual_Miembro` (`pecodcre` ASC)
+ ADD INDEX `IXFK_CrecimientoEspiritual_Miembro` (`pacodcre` ASC)
 ;
 
 ALTER TABLE `acursom` 
@@ -450,7 +451,7 @@ ALTER TABLE `acelula`
 
 ALTER TABLE `acreesp` 
  ADD CONSTRAINT `FK_CrecimientoEspiritual_Miembro`
-	FOREIGN KEY (`pecodcre`) REFERENCES `amiebro` (`pacodmie`) ON DELETE Restrict ON UPDATE Restrict
+	FOREIGN KEY (`pacodcre`) REFERENCES `amiebro` (`pacodmie`) ON DELETE Restrict ON UPDATE Restrict
 ;
 
 ALTER TABLE `acreesp` 

@@ -1,7 +1,0 @@
-[2021-04-27 20:30:10.750] [sharedprocess] [info] Starting to clean up unused language packs.
-[2021-04-27 20:34:24.965] [sharedprocess] [info] Installing extension: rifi2k.format-html-in-php
-[2021-04-27 20:34:44.932] [sharedprocess] [info] Downloaded extension: rifi2k.format-html-in-php undefined
-[2021-04-27 20:34:45.327] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.9cd983b2-3956-436e-8e9a-9dd5a5108af5: rifi2k.format-html-in-php
-[2021-04-27 20:34:45.388] [sharedprocess] [info] Renamed to /root/.vscode/extensions/rifi2k.format-html-in-php-1.7.0
-[2021-04-27 20:34:45.390] [sharedprocess] [info] Installation completed. rifi2k.format-html-in-php
-[2021-04-27 20:34:45.411] [sharedprocess] [info] Extensions installed successfully: rifi2k.format-html-in-php

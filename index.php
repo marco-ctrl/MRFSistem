@@ -18,28 +18,28 @@
       $canomusu=$_POST['txt_usuario'];
       $caconusu=$_POST['txt_pass'];
 
-      $consulta = "SELECT usu.caconusu, 
-                          usu.catipusu, 
-                          usu.canomusu, 
-                          usu.pacodusu, 
-                          usu.facodmie, 
-                          usu.caestusu,
-                          mbr.canommie,
-                          mbr.capatmie,
-                          mbr.camatmie,
-                          mbr.caurlfot
+      $consulta = "SELECT caconusu, 
+                          catipusu, 
+                          canomusu, 
+                          pacodusu, 
+                          facodmie, 
+                          caestusu,
+                          canommie,
+                          capatmie,
+                          camatmie,
+                          caurlfot
                     FROM  ausurio usu, 
                           amiebro mbr 
                     WHERE 
-                          mbr.pacodmie=usu.facodmie
-                    and   usu.caestusu='true'
-                    and   usu.caconusu='{$caconusu}'      
-                    and   usu.canomusu='{$canomusu}'";
+                          pacodmie=facodmie
+                    and   caestusu=TRUE
+                    and   caconusu='{$caconusu}'      
+                    and   canomusu='{$canomusu}'";
       
-      $resultado = pg_query($conexion, $consulta);
+      $resultado = mysqli_query($conexion, $consulta);
 
-      if( pg_num_rows($resultado) > 0 ){
-        $data=pg_fetch_array($resultado);
+      if( mysqli_num_rows($resultado) > 0 ){
+        $data=mysqli_fetch_array($resultado);
         //print_r($data);
         //session_start();
         $_SESSION['active']=true;
@@ -76,9 +76,9 @@
     <title>MRFIglesiaBermejo</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/MRFIglesiaBermejo/CSS/bootstrap.min.css">
-    <link rel="stylesheet" href="/MRFIglesiaBermejo/CSS/all.min.css">
-    <link rel="stylesheet" href="/MRFIglesiaBermejo/CSS/EstilosPersonalisados.css">
+    <link rel="stylesheet" href="/MRFSistem/CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="/MRFSistem/CSS/all.min.css">
+    <link rel="stylesheet" href="/MRFSistem/CSS/EstilosPersonalisados.css">
     
 </head>
 
