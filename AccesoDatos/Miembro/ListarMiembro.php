@@ -8,7 +8,7 @@ cacelmie,
 cacidmie, 
 cadirmie, 
 caestmie, 
-caestciv, 
+ceestciv, 
 cafecnac, 
 caurlfot, 
 canommie, 
@@ -19,23 +19,23 @@ pacodpro,
 canompro,
 pacodciu,
 canomciu
-FROM amiebro m, aproion p, aciudad c 
-where m.facodpro=p.pacodpro 
-and m.caestmie=true
-and m.facodciu=c.pacodciu
+FROM amiebro, aproion, aciudad  
+where facodpro=pacodpro 
+and caestmie=true
+and facodciu=pacodciu
 order by pacodmie desc LIMIT 15";
-$resultado = pg_query($conexion, $consulta);
+$resultado = mysqli_query($conexion, $consulta);
 
 $json=array();
 
-while ($row = pg_fetch_array($resultado)) {
+while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('camatmie' => $row['camatmie'],
                     'capatmie' => $row['capatmie'],
                     'cacelmie' => $row['cacelmie'],
                     'cacidmie' => $row['cacidmie'],
                     'cadirmie' => $row['cadirmie'],
                     'caestmie' => $row['caestmie'],
-                    'caestciv' => $row['caestciv'],
+                    'caestciv' => $row['ceestciv'],
                     'cafecnac' => $row['cafecnac'],
                     'caurlfot' => $row['caurlfot'],
                     'canommie' => $row['canommie'],
@@ -53,6 +53,6 @@ if ($json==null){
 else{
     echo json_encode($json);
 }
-pg_close($conexion);
+mysqli_close($conexion);
 
 ?>

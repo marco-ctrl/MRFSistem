@@ -29,10 +29,10 @@ and m.facodciu=c.pacodciu
 and m.cabanmae='false'
 and canommie like'%{$buscar}%'
 order by pacodmie desc LIMIT 15";
-$resultado = pg_query($conexion, $consulta);
+$resultado = mysqli_query($conexion, $consulta);
 //if ($resultado) {
     $json=array();
-    while ($row = pg_fetch_array($resultado)) {
+    while ($row = mysqli_fetch_array($resultado)) {
         $json[] = array('camatmie' => $row['camatmie'],
                         'capatmie' => $row['capatmie'],
                         'cacelmie' => $row['cacelmie'],
@@ -57,7 +57,7 @@ $resultado = pg_query($conexion, $consulta);
     else {
         echo "no encontrado";
     }
-    pg_close($conexion);
+    mysqli_close($conexion);
     
 
 

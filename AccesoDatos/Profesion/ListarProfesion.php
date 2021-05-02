@@ -6,13 +6,13 @@ $consulta = "SELECT
 canompro, 
 pacodpro
 FROM aproion;";
-$resultado = pg_query($conexion, $consulta);
+$resultado = mysqli_query($conexion, $consulta);
 
-while ($row = pg_fetch_array($resultado)) {
+while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('pacodpro' => $row['pacodpro'],
                     'canompro' => $row['canompro']
                     );
 }
-pg_close($conexion);
+mysqli_close($conexion);
 echo json_encode($json);
 ?>

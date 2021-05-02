@@ -6,12 +6,12 @@ $codigo=$_POST['codigo'];
 
 $sql="select * from num_correlativo where codigo ='{$codigo}'";
 
-$stm= pg_query($conexion, $sql);
+$stm= mysqli_query($conexion, $sql);
  
-while($row=pg_fetch_array($stm)){
+while($row=mysqli_fetch_array($stm)){
     $json[]=array('correlativo'=>$row['correlativo']);
 }
 
-pg_close($conexion);
+mysqli_close($conexion);
 echo json_encode($json);
 ?>

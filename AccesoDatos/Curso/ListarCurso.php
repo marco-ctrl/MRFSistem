@@ -22,11 +22,11 @@ camatmie
 	and facodmae=pacodmae
     and facodmie=pacodmie
     and caestcur='true'";
-$resultado = pg_query($conexion, $consulta);
+$resultado = mysqli_query($conexion, $consulta);
 
 $json=array();
 
-while ($row = pg_fetch_array($resultado)) {
+while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('cagescur' => $row['cagescur'],
                     'cadescur' => $row['cadescur'],
                     'caestcur' => $row['caestcur'],

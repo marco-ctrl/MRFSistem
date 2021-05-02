@@ -25,7 +25,7 @@ include '../Conexion/Conexion.php';
         '{$pacodusu}', 
         '{$facodmie}',
         '{$caestusu}')";
-    $stm = pg_query($conexion, $sql);
+    $stm = mysqli_query($conexion, $sql);
 //}
 if ($stm) {
     echo "registra";
@@ -33,5 +33,5 @@ if ($stm) {
     echo "noRegistra";
 }
 
-pg_close($conexion);
+mysqli_close($conexion);
 ?>

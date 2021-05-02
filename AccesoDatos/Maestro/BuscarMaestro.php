@@ -23,11 +23,11 @@ and facodmie=pacodmie
 and canommie like '%{$buscar}%'
 order by pacodmae desc 
 limit 15;";
-$resultado = pg_query($conexion, $consulta);
+$resultado = mysqli_query($conexion, $consulta);
 
 $json=array();
 
-while ($row = pg_fetch_array($resultado)) {
+while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('caestmie' => $row['caestmie'],
                     'canommie' => $row['canommie'],
                     'capatmie' => $row['capatmie'],
@@ -46,6 +46,6 @@ if($json!=null){
 else {
     echo "no encontrado";
 }
-pg_close($conexion);
+mysqli_close($conexion);
 
 ?>

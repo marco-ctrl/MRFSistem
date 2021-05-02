@@ -42,12 +42,12 @@ and a.pacodcre=m.pacodmie
 and pacodcel=facodcel
 and facodmie=pacodmie
 and m.pacodmie='{$pacodmie}'";
-$resultado = pg_query($conexion, $consulta);
+$resultado = mysqli_query($conexion, $consulta);
 //if ($resultado) {'cafotmie' => urlencode(base64_encode(
-    //pg_unescape_bytea($row['cafotmie']))),
+    //mysqli_unescape_bytea($row['cafotmie']))),
     
     $json=array();
-    while ($row = pg_fetch_array($resultado)) {
+    while ($row = mysqli_fetch_array($resultado)) {
         $json[] = array('camatmie' => $row['camatmie'],
                         'capatmie' => $row['capatmie'],
                         'cacelmie' => $row['cacelmie'],
@@ -79,7 +79,7 @@ $resultado = pg_query($conexion, $consulta);
     else {
         echo "no encontrado";
     }
-    pg_close($conexion);
+    mysqli_close($conexion);
     
 
 

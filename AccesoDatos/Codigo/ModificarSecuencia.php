@@ -14,15 +14,15 @@
                 SET correlativo='{$correlativo}'
                 WHERE codigo='{$codigo}'";
         
-        $stm= pg_query($conexion, $sql);
+        $stm= mysqli_query($conexion, $sql);
 
         if ($stm) {
             echo "registra codigo";
         } else {
-            echo "noModifica codigo ". pg_result_error($conexion);
+            echo "noModifica codigo ". mysqli_result_error($conexion);
         }
 
-        pg_close($conexion);
+        mysqli_close($conexion);
     }
 
 ?>

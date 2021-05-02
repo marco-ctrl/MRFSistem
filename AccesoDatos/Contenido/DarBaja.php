@@ -7,7 +7,7 @@ include '../Conexion/Conexion.php';
     $sql = "UPDATE  aconido SET
         caestcon='false' 
         WHERE pacodcon='{$pacodcon}'";
-    $stm = pg_query($conexion, $sql);
+    $stm = mysqli_query($conexion, $sql);
     
     if ($stm) {
         echo 'baja';
@@ -17,6 +17,6 @@ include '../Conexion/Conexion.php';
 //}
 
 
-pg_close($conexion);
+mysqli_close($conexion);
 
 ?>

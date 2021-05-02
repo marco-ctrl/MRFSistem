@@ -21,9 +21,9 @@ $consulta = "SELECT
             and facodcal=pacodcal
             order by pacodcel desc 
             limit 15;";
-$resultado = pg_query($conexion, $consulta);
+$resultado = mysqli_query($conexion, $consulta);
 
-while ($row = pg_fetch_array($resultado)) {
+while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('caestcel' => $row['caestcel'],
                     'canomcel' => $row['canomcel'],
                     'canumcel' => $row['canumcel'],
@@ -38,6 +38,6 @@ while ($row = pg_fetch_array($resultado)) {
                     'pacodcal' => $row['pacodcal']
                     );
 }
-pg_close($conexion);
+mysqli_close($conexion);
 echo json_encode($json);
 ?>

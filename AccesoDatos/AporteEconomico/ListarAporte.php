@@ -16,9 +16,9 @@ $consulta = "SELECT caestapo,
             and facodusu=pacodusu
             and facodmie=pacodmie
             and caestapo='true'";
-$resultado = pg_query($conexion, $consulta);
+$resultado = mysqli_query($conexion, $consulta);
 
-while ($row = pg_fetch_array($resultado)) {
+while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('caestapo' => $row['caestapo'],
                     'cafecapo' => $row['cafecapo'],
                     'cahorapo' => $row['cahorapo'],
@@ -29,6 +29,6 @@ while ($row = pg_fetch_array($resultado)) {
                     'camatmie' => $row['camatmie']
                     );
 }
-pg_close($conexion);
+mysqli_close($conexion);
 echo json_encode($json);
 ?>

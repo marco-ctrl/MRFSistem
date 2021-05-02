@@ -25,11 +25,11 @@ and m.caestmie=true
 and m.facodciu=c.pacodciu
 and m.cabanmae='false'
 order by pacodmie desc LIMIT 15";
-$resultado = pg_query($conexion, $consulta);
+$resultado = mysqli_query($conexion, $consulta);
 
 $json=array();
 
-while ($row = pg_fetch_array($resultado)) {
+while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('camatmie' => $row['camatmie'],
                     'capatmie' => $row['capatmie'],
                     'cacelmie' => $row['cacelmie'],
@@ -54,6 +54,6 @@ if ($json==null){
 else{
     echo json_encode($json);
 }
-pg_close($conexion);
+mysqli_close($conexion);
 
 ?>

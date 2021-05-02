@@ -20,11 +20,11 @@ mbr.camatmie
         mbr.pacodmie=usu.facodmie
     and usu.caestusu='true' 
     and usu.pacodusu='{$pacodusu}'";
-$resultado = pg_query($conexion, $consulta);
+$resultado = mysqli_query($conexion, $consulta);
 
 $json=array();
 
-while ($row = pg_fetch_array($resultado)) {
+while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('caconusu' => $row['caconusu'],
                     'catipusu' => $row['catipusu'],
                     'canomusu' => $row['canomusu'],
@@ -42,6 +42,6 @@ if($json!=null){
 else {
     echo "no encontrado";
 }
-pg_close($conexion);
+mysqli_close($conexion);
 
 ?>

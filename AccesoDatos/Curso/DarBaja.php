@@ -8,7 +8,7 @@ include '../Conexion/Conexion.php';
     $sql = "UPDATE acursom
 	SET caestcur='false' 
 	WHERE pacodcur='{$pacodcur}'";
-    $stm = pg_query($conexion, $sql);
+    $stm = mysqli_query($conexion, $sql);
 //}
 if ($stm) {
     echo "baja";
@@ -16,5 +16,5 @@ if ($stm) {
     echo "noRegistra";
 }
 
-pg_close($conexion);
+mysqli_close($conexion);
 ?>

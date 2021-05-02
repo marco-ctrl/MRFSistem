@@ -9,15 +9,15 @@
             codigo, correlativo)
             VALUES ('{$codigo}', '{$correlativo}')";
         
-        $stm= pg_query($conexion, $sql);
+        $stm= mysqli_query($conexion, $sql);
 
         if ($stm) {
             echo "registra codigo";
         } else {
-            die ("noRegistra codigo ". pg_result_error($conexion));
+            die ("noRegistra codigo ". mysqli_result_error($conexion));
         }
 
-        pg_close($conexion);
+        mysqli_close($conexion);
     }
 
 ?>

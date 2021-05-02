@@ -16,11 +16,11 @@ $consulta = "SELECT
             and pacodcon='{$pacodcon}'
             order by pacodcon desc 
             limit 15;";
-$resultado = pg_query($conexion, $consulta);
+$resultado = mysqli_query($conexion, $consulta);
 
 $json=array();
 
-while ($row = pg_fetch_array($resultado)) {
+while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('caestcon' => $row['caestcon'],
                     'canommat' => $row['canommat'],
                     'cadescon' => $row['cadescon'],
@@ -34,6 +34,6 @@ if($json!=null){
 else {
     echo "no encontrado";
 }
-pg_close($conexion);
+mysqli_close($conexion);
 
 ?>

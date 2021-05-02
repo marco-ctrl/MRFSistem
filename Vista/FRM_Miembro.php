@@ -8,7 +8,7 @@ if(empty($_SESSION['active'])){
 ?>
 
 <head>
-    <title>MRFIglesiaBermejo</title>
+    <title>MRFSistem</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
     <?php 
@@ -60,8 +60,8 @@ if(empty($_SESSION['active'])){
 </div>
 
 <br>
-<script src="/MRFIglesiaBermejo/Script/CodigoApp.js"></script>
+<script src="/MRFSistem/Script/CodigoApp.js"></script>
 
-<script src="/MRFIglesiaBermejo/Script/MiembroApp.js"></script>
+<script src="/MRFSistem/Script/MiembroApp.js"></script>
 <br>
 <br>

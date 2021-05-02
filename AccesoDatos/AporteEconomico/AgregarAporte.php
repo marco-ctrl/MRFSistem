@@ -22,7 +22,7 @@ include '../Conexion/Conexion.php';
                 '{$cahorapo}', 
                 '{$pacodapo}', 
                 '{$facodusu}');";
-    $stm = pg_query($conexion, $sql);
+    $stm = mysqli_query($conexion, $sql);
 //}
 
 
@@ -33,7 +33,7 @@ if ($stm) {
         VALUES ('{$camontot}', 
                 '{$pacodapo}');";
 
-    $stm1=pg_query($conexion, $sql);
+    $stm1=mysqli_query($conexion, $sql);
     if($stm1){
         echo "registra";
     }
@@ -45,5 +45,5 @@ if ($stm) {
     echo "noRegistra";
 }
 
-pg_close($conexion);
+mysqli_close($conexion);
 ?>

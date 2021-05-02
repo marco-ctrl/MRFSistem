@@ -20,7 +20,7 @@ include '../Conexion/Conexion.php';
 		facodcon='{$facodcon}', 
 		facodmae='{$facodmae}'
 	WHERE pacodcur='{$pacodcur}'";
-    $stm = pg_query($conexion, $sql);
+    $stm = mysqli_query($conexion, $sql);
 //}
 if ($stm) {
     echo "modificado";
@@ -28,5 +28,5 @@ if ($stm) {
     echo "noRegistra";
 }
 
-pg_close($conexion);
+mysqli_close($conexion);
 ?>

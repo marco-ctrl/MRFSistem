@@ -16,7 +16,7 @@ include '../Conexion/Conexion.php';
         '{$facodmie}', 
         '{$pacodmae}', 
         '{$caestmae}');";
-    $stm = pg_query($conexion, $sql);
+    $stm = mysqli_query($conexion, $sql);
 //}
 
 
@@ -25,7 +25,7 @@ if ($stm) {
             SET cabanmae='true'
             WHERE pacodmie='{$facodmie}'";
 
-    $stm1=pg_query($conexion, $sql);
+    $stm1=mysqli_query($conexion, $sql);
     if($stm1){
         echo "registra";
     }
@@ -37,5 +37,5 @@ if ($stm) {
     echo "noRegistra";
 }
 
-pg_close($conexion);
+mysqli_close($conexion);
 ?>

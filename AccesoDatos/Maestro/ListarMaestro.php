@@ -19,9 +19,9 @@ $consulta = "SELECT
             and facodmie=pacodmie
             order by pacodmie desc 
             limit 15;";
-$resultado = pg_query($conexion, $consulta);
+$resultado = mysqli_query($conexion, $consulta);
 
-while ($row = pg_fetch_array($resultado)) {
+while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('caestmie' => $row['caestmie'],
                     'canommie' => $row['canommie'],
                     'capatmie' => $row['capatmie'],
@@ -33,6 +33,6 @@ while ($row = pg_fetch_array($resultado)) {
                     'facodmie' => $row['facodmie']
                     );
 }
-pg_close($conexion);
+mysqli_close($conexion);
 echo json_encode($json);
 ?>

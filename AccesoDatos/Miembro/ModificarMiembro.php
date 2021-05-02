@@ -24,14 +24,14 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
 
     $date=date('jmyhis');
     //echo ''.$date ;
-    $path = "Imagenes/$pacodmie$canommie$date.jpg";
+    $path = "Imagenes/$pacodmie$canommie$date.jmysqli";
 
 $url = "/MRFIglesiaBermejo/AccesoDatos/Miembro/$path";
-//$url = "Imagenes/"$pacodmie$canommie.".jpg";
+//$url = "Imagenes/"$pacodmie$canommie.".jmysqli";
 
 file_put_contents($path, base64_decode($cafotmie));
 $bytesArchivo = file_get_contents($path);
-$bytesArchivo = pg_escape_bytea($bytesArchivo);
+$bytesArchivo = mysqli_escape_bytea($bytesArchivo);
     //$imagen = $_POST['imagen'];
     //echo ' '.$documento.' '.$nombre.' '.$profesion; cafotmie='{$bytesArchivo}', 
     $sql = "UPDATE  amiebro SET
@@ -48,7 +48,7 @@ $bytesArchivo = pg_escape_bytea($bytesArchivo);
         facodciu='{$facodciu}', 
         facodpro='{$facodpro}'
         WHERE pacodmie='{$pacodmie}'";
-    $stm = pg_query($conexion, $sql);
+    $stm = mysqli_query($conexion, $sql);
 }
 if($stm){
     $cafecenc = $_POST['cafecenc'];
@@ -65,7 +65,7 @@ if($stm){
 	cafeccon='{$cafeccon}' 
 	WHERE pacodcre='{$pacodcre}';";
     
-    $stm1 = pg_query($conexion, $sql);
+    $stm1 = mysqli_query($conexion, $sql);
     
     if ($stm1) {
         echo "modificado";
@@ -77,6 +77,6 @@ else{
     echo "noRegistra";
 }
 
-pg_close($conexion);
+mysqli_close($conexion);
 
 ?>

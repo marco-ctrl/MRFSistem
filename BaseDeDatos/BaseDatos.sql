@@ -316,6 +316,13 @@ CREATE TABLE `avisita`
 
 ;
 
+CREATE TABLE num_correlativo
+(
+    codigo varchar(10) NOT NULL,
+    correlativo varchar(10)  NOT NULL,
+    CONSTRAINT num_correlativo_pkey PRIMARY KEY (codigo)
+);
+
 /* Create Primary Keys, Indexes, Uniques, Checks */
 
 ALTER TABLE `aalumno` 

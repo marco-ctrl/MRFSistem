@@ -24,11 +24,11 @@ $consulta = "SELECT
             and canomcel like '%{$buscar}%'
             order by pacodcel desc 
             limit 15;";
-$resultado = pg_query($conexion, $consulta);
+$resultado = mysqli_query($conexion, $consulta);
 
 $json=array();
 
-while ($row = pg_fetch_array($resultado)) {
+while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('caestcel' => $row['caestcel'],
                     'canomcel' => $row['canomcel'],
                     'canumcel' => $row['canumcel'],
@@ -49,5 +49,5 @@ if($json!=null){
 else {
     echo "no encontrado";
 }
-pg_close($conexion);
+mysqli_close($conexion);
 ?>

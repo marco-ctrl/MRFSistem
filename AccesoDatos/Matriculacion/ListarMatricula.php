@@ -30,11 +30,11 @@ $consulta = "SELECT caestmat,
             order by a.pacodmat desc
             limit 15;";
 
-$resultado = pg_query($conexion, $consulta);
+$resultado = mysqli_query($conexion, $consulta);
 
 $json=array();
 
-while ($row = pg_fetch_array($resultado)) {
+while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('cafecmat' => $row['cafecmat'],
                     'cahormat' => $row['cahormat'],
                     'pacodmat' => $row['pacodmat'],
