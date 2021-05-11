@@ -1,11 +1,7 @@
-<br>
-<!--<footer id="footer" class=" bg-primary text-center">
-    <div>
-        <label id="lbl-footer" class="lbl">Desarrollado por Marco Mamani</label>
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2021</span>
+        </div>
     </div>
-</footer>-->
-</body>
-<?php 
-        include 'Scripts.php';
-    ?>
-</html>
+</footer>

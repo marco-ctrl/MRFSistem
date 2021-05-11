@@ -1,22 +1,43 @@
 <?php include 'Header.php' ?>
-<?php include 'NavBar.php' ?>
 
-<div class="d-flex toggled" id="wrapper">
+<body id="page-top">
 
-    <!-- Sidebar -->
-    <?php include 'SideBar.php' ?>
-    <!-- /#sidebar-wrapper -->
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper" class="">
-        <div class="container-fluid">
-            <h1 class="mt-4">Ministerio Restauracion Familiar</h1>
-            <img src="/MRFIglesiaBermejo/iglesia.jpg" alt="" class="img-fluid mx-auto d-block">
+        <!-- Sidebar -->
+        <?php include 'SideBar.php' ?>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Top Bar -->
+                <?php include 'NavBar.php' ?>
+
+                <div class="container-fluid">
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Footer -->
+            <?php include 'Footer.php'?>
+
         </div>
     </div>
-    <!-- /#page-content-wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-</div>
+    <!-- Logout Modal-->
+    <?php include 'LogoutModal.php'?>
 
-
-<?php include 'Footer.php'?>
+    <?php include 'Scripts.php'?>
+</body>

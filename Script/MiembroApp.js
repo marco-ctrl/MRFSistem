@@ -21,7 +21,7 @@ $(document).ready(function () {
     };
 
 
-
+    $('#Table_Miembro').DataTable();
     $('#mensaje').hide();
     $('#profile').hide();
 

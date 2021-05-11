@@ -194,11 +194,11 @@ $(document).ready(function () {
                 <td>B/${usu.canombar} C/${usu.canomcal}</td>
                 <td>
                     <button class="baja-celula btn btn-danger">
-                    <i class="fas fa-trash-alt gi-2x"></i></button>
+                    <i class="fas fa-trash-alt "></i></button>
                 </>
                 <td style="width:15%">
                     <button class="modificar-celula btn btn-secondary">
-                    <i class="far fa-edit gi-2x"></i></button>
+                    <i class="far fa-edit "></i></button>
                 </td>
             </tr>`
         return plantilla;
