@@ -134,7 +134,7 @@
             <div class="row">
                 <div class="col-md-6 p-2 d-none d-sm-none d-md-block">
                     <div class="video-wrap">
-                        <video id="video" width="140" height="120" poster="/MRFIglesiaBermejo/img/photo.svg"> </video>
+                        <video id="video" width="140" height="120" poster="/MRFSistem/img/photo.svg"> </video>
                         <!--<canvas id="canvas" width="140" height="120"></canvas>-->
                     </div>
 
@@ -199,4 +199,4 @@ fileUpload.onchange = function(e) {
     readFile(e.srcElement);
 }
 </script>
-<script src="/MRFIglesiaBermejo/Script/CrecimientoApp.js"></script>
+<script src="/MRFSistem/Script/CrecimientoApp.js"></script>

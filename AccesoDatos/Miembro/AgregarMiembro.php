@@ -24,39 +24,40 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
 
 $date=date('jmyhis');
 //echo ''.$date ;
-$path = "Imagenes/$pacodmie$canommie$date.jmysqli";
+$path = "Imagenes/$pacodmie$canommie$date.jpg";
 
-$url = "/MRFIglesiaBermejo/AccesoDatos/Miembro/$path";
+$url = "/MRFSistem/AccesoDatos/Miembro/$path";
 //$url = "Imagenes/"$pacodmie$canommie.".jmysqli";
 
 file_put_contents($path, base64_decode($cafotmie));
 $bytesArchivo = file_get_contents($path);
-$bytesArchivo = mysqli_escape_bytea($bytesArchivo);
+//$bytesArchivo = mysqli_escape_bytea($bytesArchivo);
     //$imagen = $_POST['imagen'];
     //echo ' '.$documento.' '.$nombre.' '.$profesion; '{$bytesArchivo}', 
-    $sql = "INSERT INTO amiebro(
-        camatmie, 
-        capatmie, 
-        cacelmie, 
-        cacidmie, 
-        cadirmie, 
-        caestmie, 
-        caestciv, 
-        cafecnac, 
-        caurlfot, 
-        canommie, 
-        pacodmie, 
-        facodciu, 
-        facodpro,
-        cabanmae,
-        cabanalu)
+    $sql = "INSERT INTO `mrfbermejobd`.`amiebro`
+    (`camatmie`,
+    `capatmie`,
+    `cacelmie`,
+    `cacidmie`,
+    `cadirmie`,
+    `caestmie`,
+    `ceestciv`,
+    `cafecnac`,
+    `caurlfot`,
+    `canommie`,
+    `pacodmie`,
+    `facodciu`,
+    `facodpro`,
+    `cafotmie`,
+        `cabanmae`,
+        `cabanalu`)
         VALUES (
         '{$camatmie}', 
         '{$capatmie}', 
         '{$cacelmie}', 
         '{$cacidmie}', 
         '{$cadirmie}', 
-        '{$caestmie}', 
+        true, 
         '{$caestciv}', 
         '{$cafecnac}', 
         '{$url}',
@@ -64,8 +65,9 @@ $bytesArchivo = mysqli_escape_bytea($bytesArchivo);
         '{$pacodmie}', 
         '{$facodciu}', 
         '{$facodpro}',
-        'false',
-        'false');";
+        '',
+        false,
+        false);";
     $stm = mysqli_query($conexion, $sql);
 }
 
@@ -76,29 +78,31 @@ if($stm){
     $cafeccon = $_POST['cafeccon'];
     $pacodcre = $_POST['pacodcre'];
 
-    $sql = "INSERT INTO public.acreesp(
+    $sql = "INSERT INTO acreesp(
             cafecenc, 
             cafecbau, 
             cafecigl, 
             cafeccon, 
             pacodcre)
             VALUES (
-            '{$cafecenc}', 
-            '{$cafecbau}', 
-            '{$cafecigl}', 
-            '{$cafeccon}',
-            '{$pacodcre}')";
+            '$cafecenc', 
+            '$cafecbau', 
+            '$cafecigl', 
+            '$cafeccon',
+            '$pacodcre')";
     
     $stm1 = mysqli_query($conexion, $sql);
     
     if ($stm1) {
         echo "registra";
     } else {
-        echo "noRegistra";
+        //echo "noRegistra";
+        die (mysqli_error($conexion));
     }
 }
 else{
-    echo "noRegistra";
+    //echo "noRegistra";
+    die (mysqli_error($conexion));
 }
     
 

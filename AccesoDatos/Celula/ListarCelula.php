@@ -15,8 +15,8 @@ $consulta = "SELECT
             canomcal,
             pacodbar,
             pacodcal
-            FROM acelula, abardir, acaldir 
-            WHERE caestcel='true'
+            FROM `acelula`, abardir, acaldir 
+            WHERE caestcel=true
             and facodbar=pacodbar
             and facodcal=pacodcal
             order by pacodcel desc 

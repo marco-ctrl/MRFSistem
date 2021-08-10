@@ -31,7 +31,7 @@ function guardarSecuencia(codigo, corre){
         codigo: codigo,
         correlativo: corre
     };
-    $.post('/MRFIglesiaBermejo/AccesoDatos/Codigo/GuardarSecuencia.php', 
+    $.post('/MRFSistem/AccesoDatos/Codigo/GuardarSecuencia.php', 
         postData, function (response) {
         //console.log(response);
     });
@@ -43,7 +43,7 @@ function modificarSecuencia(codigo, corre){
         correlativo: corre
     };
     console.log(postData);
-    $.post('/MRFIglesiaBermejo/AccesoDatos/Codigo/ModificarSecuencia.php', 
+    $.post('/MRFSistem/AccesoDatos/Codigo/ModificarSecuencia.php', 
         postData, function (response) {
         //console.log(response);
     });
@@ -51,7 +51,7 @@ function modificarSecuencia(codigo, corre){
 
 function verificarSecuencia(codigo){
     $.ajax({
-        url: '/MRFIglesiaBermejo/AccesoDatos/Codigo/VerificarExistencia.php',
+        url: '/MRFSistem/AccesoDatos/Codigo/VerificarExistencia.php',
         type: 'POST',
         async: false,
         data: {codigo},
@@ -64,7 +64,7 @@ function verificarSecuencia(codigo){
 
 function obtenerCorrelativo(codigo){
     $.ajax({
-        url: '/MRFIglesiaBermejo/AccesoDatos/Codigo/ObtenerCorrelativo.php',
+        url: '/MRFSistem/AccesoDatos/Codigo/ObtenerCorrelativo.php',
         type: 'POST',
         data: {codigo},
         async: false,
