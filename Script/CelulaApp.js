@@ -8,6 +8,7 @@ $(document).ready(function () {
     var latitud;
     var longitud;
     var edit=false;
+    var corre1;
 
     const tilesProvider = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     var mymap = L.map('map').setView([-22.735938864584394, -64.34173274785282], 15);
@@ -47,7 +48,7 @@ $(document).ready(function () {
             let buscar = $('#txt_buscar').val().toUpperCase();
             let plantilla = '';
             $.ajax({
-                url: '/MRFIglesiaBermejo/AccesoDatos/Celula/BuscarCelula.php',
+                url: '/MRFSistem/AccesoDatos/Celula/BuscarCelula.php',
                 type: 'POST',
                 data: { buscar },
                 success: function (response) {
@@ -91,8 +92,9 @@ $(document).ready(function () {
         //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodcel = $(elemento).attr('UserDocu');
-        $.post('/MRFIglesiaBermejo/AccesoDatos/Celula/SingleCelula.php',
+        $.post('/MRFSistem/AccesoDatos/Celula/SingleCelula.php',
             { pacodcel }, function (responce) {
+                console.log(responce);
                 const celula = JSON.parse(responce);
                 celula.forEach(cel => {
                     codCelula = cel.pacodcel,
@@ -119,7 +121,7 @@ $(document).ready(function () {
         if (confirm("Seguro que desea dar de baja esta celula")) {
             let elemento = $(this)[0].parentElement.parentElement;
             let pacodcel = $(elemento).attr('UserDocu');
-            $.post('/MRFIglesiaBermejo/AccesoDatos/Celula/DarBaja.php',
+            $.post('/MRFSistem/AccesoDatos/Celula/DarBaja.php',
                 { pacodcel }, function (responce) {
                     if (responce == 'baja') {
                         ListarCelula();
@@ -158,6 +160,7 @@ $(document).ready(function () {
             obtenerCorrelativo("CEL");
             setCorrelativo(obtenerSiguinete("CEL"));
         }
+        corre1 = getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codCelula = getCodigo() + '-' + num;
         console.log(codCelula);
@@ -173,7 +176,7 @@ $(document).ready(function () {
     //Funciones//////
     function ListarCelula() {//listar Celula
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Celula/ListarCelula.php',
+            url: '/MRFSistem/AccesoDatos/Celula/ListarCelula.php',
             type: 'GET',
             success: function (response) {
                 let celula = JSON.parse(response);
@@ -245,25 +248,27 @@ $(document).ready(function () {
         };
         console.log(postData);
         let url = edit === false ?
-            '/MRFIglesiaBermejo/AccesoDatos/Celula/AgregarCelula.php' :
-            '/MRFIglesiaBermejo/AccesoDatos/Celula/ModificarCelula.php';
+            '/MRFSistem/AccesoDatos/Celula/AgregarCelula.php' :
+            '/MRFSistem/AccesoDatos/Celula/ModificarCelula.php';
 
         $.post(url, postData, function (response) {
             console.log(response);
             if (!edit && response == 'registra') {
-                actualizarSecuencia("CEL");
+                actualizarSecuencia("CEL", corre1);
                 MostrarMensaje("Datos de Celula guardados correctamente", "success");
-
+                ListarCelula();
             }
             if (edit && response == 'modificado') {
                 MostrarMensaje("datos de Celula modificados correctamente", "success")
+                ListarCelula();
             }
             edit = false;
            
             $('#formulario').hide();
             $('#lista').show();
+            
         });
-        ListarCelula();
+        
     }
 
     function MostrarMensaje(cadena, clase) {
@@ -277,7 +282,7 @@ $(document).ready(function () {
 
     function listarBarrio() {//listar Barrio
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Barrio/ListarBarrio.php',
+            url: '/MRFSistem/AccesoDatos/Barrio/ListarBarrio.php',
             type: 'GET',
             success: function (response) {
                 let barrio = JSON.parse(response);
@@ -292,7 +297,7 @@ $(document).ready(function () {
 
     function listarCalle() {//listar Calle
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Calle/ListarCalle.php',
+            url: '/MRFSistem/AccesoDatos/Calle/ListarCalle.php',
             type: 'GET',
             success: function (response) {
                 let calle = JSON.parse(response);

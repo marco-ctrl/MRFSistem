@@ -18,7 +18,7 @@ $consulta = "SELECT
             pacodbar,
             pacodcal
             FROM acelula, abardir, acaldir 
-            WHERE caestcel='true'
+            WHERE caestcel=true
             and facodbar=pacodbar
             and facodcal=pacodcal
             and canomcel like '%{$buscar}%'

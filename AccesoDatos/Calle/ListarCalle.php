@@ -6,7 +6,7 @@ $consulta = "SELECT
             caestcal, 
             canomcal, 
             pacodcal
-	        FROM public.acaldir;";
+	        FROM acaldir;";
 $resultado = mysqli_query($conexion, $consulta);
 
 while ($row = mysqli_fetch_array($resultado)) {

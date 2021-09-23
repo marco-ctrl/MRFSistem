@@ -6,7 +6,7 @@ $consulta = "SELECT
             caestbar, 
             canombar, 
             pacodbar
-            FROM public.abardir";
+            FROM abardir";
 $resultado = mysqli_query($conexion, $consulta);
 
 while ($row = mysqli_fetch_array($resultado)) {

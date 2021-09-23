@@ -18,7 +18,7 @@ mbr.camatmie
          amiebro mbr 
     WHERE 
         mbr.pacodmie=usu.facodmie
-    and usu.caestusu='true' 
+    and usu.caestusu=true 
     and usu.pacodusu='{$pacodusu}'";
 $resultado = mysqli_query($conexion, $consulta);
 

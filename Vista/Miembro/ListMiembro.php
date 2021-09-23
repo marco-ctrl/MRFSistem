@@ -4,7 +4,7 @@
         <h5>Lista de Miembros</h5>
         <table class="table table-hover table-sm table-striped">
             <thead class="bg-primary text-white">
-                <tr class="sticky-top">
+                <tr>
                     <td>CARNET IDENTIDAD</td>
                     <td>NOMBRE</td>
                     <td>APELLIDO</td>
@@ -23,7 +23,7 @@
 
     </div>
     
-    <!-- DataTales Example -->
+    <!-- DataTables Example -->
     
 </div>
 <!--</div>-->

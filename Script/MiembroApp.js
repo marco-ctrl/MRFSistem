@@ -216,6 +216,7 @@ $(document).ready(function () {
         $.post('/MRFSistem/AccesoDatos/Miembro/SingleMiembro.php',
             { pacodmie },
             function (responce) {
+                console.log(responce);
                 const miembro = JSON.parse(responce);
                 let foto;
                 miembro.forEach(miembro => {

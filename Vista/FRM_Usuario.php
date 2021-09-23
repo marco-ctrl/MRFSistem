@@ -173,7 +173,7 @@
     <?php include 'LogoutModal.php'?>
 
     <?php include 'Scripts.php'?>
-    <script src="/MRFIglesiaBermejo/Script/CodigoApp.js"></script>
-    <script src="/MRFIglesiaBermejo/Script/UsuarioApp.js"></script>
+    <script src="/MRFSistem/Script/CodigoApp.js"></script>
+    <script src="/MRFSistem/Script/UsuarioApp.js"></script>
 </body>
 

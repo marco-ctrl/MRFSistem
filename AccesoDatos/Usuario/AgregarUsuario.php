@@ -24,13 +24,14 @@ include '../Conexion/Conexion.php';
         '{$canomusu}', 
         '{$pacodusu}', 
         '{$facodmie}',
-        '{$caestusu}')";
+        true)";
     $stm = mysqli_query($conexion, $sql);
 //}
 if ($stm) {
     echo "registra";
 } else {
-    echo "noRegistra";
+    //echo "noRegistra";
+    die (mysqli_error($conexion));
 }
 
 mysqli_close($conexion);

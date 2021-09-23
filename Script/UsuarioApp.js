@@ -23,7 +23,7 @@ $(document).ready(function () {
             let buscar = $('#txt_buscarMiembro').val().toUpperCase();
             let plantilla = '';
             $.ajax({
-                url: '/MRFIglesiaBermejo/AccesoDatos/Miembro/BuscarMiembro.php',
+                url: '/MRFSistem/AccesoDatos/Miembro/BuscarMiembro.php',
                 type: 'POST',
                 data: { buscar },
                 success: function (response) {
@@ -66,7 +66,7 @@ $(document).ready(function () {
             let buscar = $('#txt_buscar').val().toUpperCase();
             let plantilla = '';
             $.ajax({
-                url: '/MRFIglesiaBermejo/AccesoDatos/Usuario/BuscarUsuario.php',
+                url: '/MRFSistem/AccesoDatos/Usuario/BuscarUsuario.php',
                 type: 'POST',
                 data: { buscar },
                 success: function (response) {
@@ -116,7 +116,7 @@ $(document).ready(function () {
         habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodusu = $(elemento).attr('UserDocu');
-        $.post('/MRFIglesiaBermejo/AccesoDatos/Usuario/SingleUsuario.php',
+        $.post('/MRFSistem/AccesoDatos/Usuario/SingleUsuario.php',
             { pacodusu }, function (responce) {
                 const miembro = JSON.parse(responce);
                 miembro.forEach(miembro => {
@@ -139,7 +139,7 @@ $(document).ready(function () {
             let elemento = $(this)[0].parentElement.parentElement;
             let pacodusu = $(elemento).attr('UserDocu');
             console.log('dando de baja...');
-            $.post('/MRFIglesiaBermejo/AccesoDatos/Usuario/DarBaja.php',
+            $.post('/MRFSistem/AccesoDatos/Usuario/DarBaja.php',
                 { pacodusu }, function (responce) {
                     if (responce == 'baja') {
                         ListarUsuario();
@@ -153,8 +153,9 @@ $(document).ready(function () {
     $(document).on('click', '.agregar-miembro', function () {
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodmie = $(elemento).attr('codMbr');
-        $.post('/MRFIglesiaBermejo/AccesoDatos/Miembro/SingleMiembro.php',
+        $.post('/MRFSistem/AccesoDatos/Miembro/SingleMiembro.php',
             { pacodmie }, function (responce) {
+                console.log(responce);
                 const miembro = JSON.parse(responce);
                 miembro.forEach(miembro => {
                     codMiembro = miembro.pacodmie,
@@ -239,7 +240,7 @@ $(document).ready(function () {
     ////////Listar Usuario////////
     function ListarMiembro() {//lista usuarios
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Miembro/ListarMiembro.php',
+            url: '/MRFSistem/AccesoDatos/Miembro/ListarMiembro.php',
             type: 'GET',
             success: function (response) {
                 let miembros = JSON.parse(response);
@@ -268,11 +269,11 @@ $(document).ready(function () {
                 <td>${usu.caconusu}</td>
                 <td>
                     <button class="baja-usuario btn btn-danger">
-                    <i class="fas fa-user-minus gi-2x"></i></button>
+                    <i class="fas fa-user-minus"></i></button>
                 </td>
                 <td style="width:15%">
                     <button class="modificar-usuario btn btn-secondary">
-                    <i class="fas fa-user-edit gi-2x"></i></button>
+                    <i class="fas fa-user-edit"></i></button>
                 </td>
             </tr>`
         return plantilla;
@@ -281,7 +282,7 @@ $(document).ready(function () {
     ////////////Listar Usuario////////////
     function ListarUsuario() {//listar Usuario
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Usuario/ListarUsuario.php',
+            url: '/MRFSistem/AccesoDatos/Usuario/ListarUsuario.php',
             type: 'GET',
             success: function (response) {
                 if (response != 'false') {
@@ -310,8 +311,8 @@ $(document).ready(function () {
         };
         console.log(postData);
         let url = edit === false ?
-            '/MRFIglesiaBermejo/AccesoDatos/Usuario/AgregarUsuario.php' :
-            '/MRFIglesiaBermejo/AccesoDatos/Usuario/ModificarUsuario.php';
+            '/MRFSistem/AccesoDatos/Usuario/AgregarUsuario.php' :
+            '/MRFSistem/AccesoDatos/Usuario/ModificarUsuario.php';
 
         $.post(url, postData, function (response) {
             if (!edit && response == 'registra') {

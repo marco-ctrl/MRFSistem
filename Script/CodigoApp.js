@@ -45,7 +45,7 @@ function modificarSecuencia(codigo, corre){
     console.log(postData);
     $.post('/MRFSistem/AccesoDatos/Codigo/ModificarSecuencia.php', 
         postData, function (response) {
-        //console.log(response);
+        console.log(response);
     });
 }
 

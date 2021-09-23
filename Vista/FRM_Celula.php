@@ -40,8 +40,8 @@
                                             <td>NOMBRE</td>
                                             <td>NUMERO</td>
                                             <td>DIRECCION</td>
-                                            <td>Baja</td>
-                                            <td>Modificar</td>
+                                            <td>BAJA</td>
+                                            <td>MODIFICAR</td>
                                         </tr>
                                     </thead>
                                     <tbody id="tb_celula">
@@ -126,7 +126,7 @@
     <?php include 'LogoutModal.php'?>
 
     <?php include 'Scripts.php'?>
-    <script src="/MRFIglesiaBermejo/Script/CodigoApp.js"></script>
-    <script src="/MRFIglesiaBermejo/Script/CelulaApp.js"></script>
+    <script src="/MRFSistem/Script/CodigoApp.js"></script>
+    <script src="/MRFSistem/Script/CelulaApp.js"></script>
 </body>
 

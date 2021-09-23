@@ -23,7 +23,7 @@ include '../Conexion/Conexion.php';
 		catipusu='{$catipusu}', 
 		canomusu='{$canomusu}', 
 		facodmie='{$facodmie}', 
-		caestusu='{$caestusu}'
+		caestusu=true
 	WHERE pacodusu='{$pacodusu}'";
     
     $stm = mysqli_query($conexion, $sql);

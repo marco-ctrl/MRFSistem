@@ -19,7 +19,7 @@ $consulta = "SELECT
             pacodbar,
             pacodcal
             FROM acelula, abardir, acaldir 
-            WHERE caestcel='true'
+            WHERE caestcel=true
             and facodbar=pacodbar
             and facodcal=pacodcal
             and pacodcel='{$pacodcel}'
@@ -45,11 +45,12 @@ while ($row = mysqli_fetch_array($resultado)) {
                     );
 }
 
+
 if($json!=null){
     echo json_encode($json);
 }
 else {
-    echo "no encontrado";
+    
 }
 mysqli_close($conexion);
 

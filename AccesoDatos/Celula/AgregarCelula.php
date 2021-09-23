@@ -36,7 +36,8 @@ include '../Conexion/Conexion.php';
 if ($stm) {
     echo "registra";
 } else {
-    echo "noRegistra";
+    //echo "noRegistra";
+    die (mysqli_error($conexion));
 }
 
 mysqli_close($conexion);
