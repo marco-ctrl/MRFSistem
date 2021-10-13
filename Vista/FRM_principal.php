@@ -17,7 +17,7 @@
                 <!-- Top Bar -->
                 <?php include 'NavBar.php' ?>
 
-                <div class="container-fluid">
+                <div class="container-fluid" id="trabajo">
 
 
                 </div>
@@ -40,4 +40,5 @@
     <?php include 'LogoutModal.php'?>
 
     <?php include 'Scripts.php'?>
+    <script src="/MRFSistem/Script/App.js"></script>
 </body>

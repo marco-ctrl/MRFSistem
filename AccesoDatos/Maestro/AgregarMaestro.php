@@ -15,14 +15,14 @@ include '../Conexion/Conexion.php';
         VALUES (
         '{$facodmie}', 
         '{$pacodmae}', 
-        '{$caestmae}');";
+        true);";
     $stm = mysqli_query($conexion, $sql);
 //}
 
 
 if ($stm) {
-    $sql="UPDATE public.amiebro
-            SET cabanmae='true'
+    $sql="UPDATE amiebro
+            SET cabanmae=true
             WHERE pacodmie='{$facodmie}'";
 
     $stm1=mysqli_query($conexion, $sql);

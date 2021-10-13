@@ -21,7 +21,7 @@ include '../Conexion/Conexion.php';
         '{$pacodmcl}',
         '{$facodcel}', 
         '{$facodmie}', 
-        '{$caestmcl}')";
+        TRUE)";
     $stm = mysqli_query($conexion, $sql);
 //}
 if ($stm) {

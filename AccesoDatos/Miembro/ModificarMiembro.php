@@ -31,7 +31,7 @@ $url = "/MRFSistem/AccesoDatos/Miembro/$path";
 
 file_put_contents($path, base64_decode($cafotmie));
 $bytesArchivo = file_get_contents($path);
-$bytesArchivo = mysqli_escape_bytea($bytesArchivo);
+//$bytesArchivo = mysqli_escape_bytea($bytesArchivo);
     //$imagen = $_POST['imagen'];
     //echo ' '.$documento.' '.$nombre.' '.$profesion; cafotmie='{$bytesArchivo}', 
     $sql = "UPDATE  amiebro SET
@@ -40,8 +40,8 @@ $bytesArchivo = mysqli_escape_bytea($bytesArchivo);
         cacelmie='{$cacelmie}', 
         cacidmie='{$cacidmie}', 
         cadirmie='{$cadirmie}', 
-        caestmie='{$caestmie}', 
-        caestciv='{$caestciv}', 
+        caestmie= true, 
+        ceestciv='{$caestciv}', 
         cafecnac='{$cafecnac}', 
         caurlfot='{$url}',
         canommie='{$canommie}', 
@@ -57,7 +57,7 @@ if($stm){
     $cafeccon = $_POST['cafeccon'];
     $pacodcre = $_POST['pacodcre'];
 
-    $sql = "UPDATE public.acreesp
+    $sql = "UPDATE acreesp
 	SET 
 	cafecenc='{$cafecenc}', 
 	cafecbau='{$cafecbau}', 

@@ -23,7 +23,7 @@ camatmie
 	where facodcon=pacodcon
 	and facodmae=pacodmae
     and facodmie=pacodmie
-    and caestcur='true'
+    and caestcur=true
     and canommat like '%{$buscar}%'
             order by pacodcon desc 
             limit 15;";

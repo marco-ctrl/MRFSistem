@@ -11,7 +11,7 @@ include '../Conexion/Conexion.php';
 
     $sql = "UPDATE aconido SET 
 	    cadescon='{$cadescon}', 
-        caestcon='{$caestcon}', 
+        caestcon= true, 
         canommat='{$canommat}'
     WHERE pacodcon='{$pacodcon}'";
     

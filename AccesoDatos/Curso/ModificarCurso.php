@@ -15,7 +15,7 @@ include '../Conexion/Conexion.php';
     $sql = "UPDATE acursom
 	SET cagescur='{$cagescur}', 
 		cadescur='{$cadescur}', 
-		caestcur='{$caestcur}', 
+		caestcur={$caestcur}, 
 		cafecini='{$cafecini}', 
 		facodcon='{$facodcon}', 
 		facodmae='{$facodmae}'

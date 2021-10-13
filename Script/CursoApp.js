@@ -16,7 +16,7 @@ $(document).ready(function () {
 
     function ListarMaestro() {//lista maestros
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Maestro/ListarMaestro.php',
+            url: '/MRFSistem/AccesoDatos/Maestro/ListarMaestro.php',
             type: 'GET',
             success: function (response) {
                 let miembros = JSON.parse(response);
@@ -28,7 +28,7 @@ $(document).ready(function () {
                         <td>${miembros.canommie}</td> 
                         <td>${miembros.capatmie} ${miembros.camatmie}</td>
                         <td style="width:15%"><button class="agregar-miembro btn btn-primary" data-dismiss="modal">
-                        <i class="fas fa-user-plus gi-2x"></i></button></td>
+                        <i class="fas fa-user-plus "></i></button></td>
                         </tr>`;
                 });
                 $('#tb_miembro').html(plantilla);
@@ -39,7 +39,7 @@ $(document).ready(function () {
     $(document).on('click', '.agregar-miembro', function () {
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodmae = $(elemento).attr('codMbr');
-        $.post('/MRFIglesiaBermejo/AccesoDatos/Maestro/SingleMaestro.php',
+        $.post('/MRFSistem/AccesoDatos/Maestro/SingleMaestro.php',
             { pacodmae }, function (responce) {
                 const miembro = JSON.parse(responce);
                 miembro.forEach(miembro => {
@@ -57,7 +57,7 @@ $(document).ready(function () {
             let buscar = $('#txt_buscar').val().toUpperCase();
             let plantilla = '';
             $.ajax({
-                url: '/MRFIglesiaBermejo/AccesoDatos/Curso/BuscarCurso.php',
+                url: '/MRFSistem/AccesoDatos/Curso/BuscarCurso.php',
                 type: 'POST',
                 data: { buscar },
                 success: function (response) {
@@ -101,7 +101,7 @@ $(document).ready(function () {
         //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodcur = $(elemento).attr('UserDocu');
-        $.post('/MRFIglesiaBermejo/AccesoDatos/Curso/SingleCurso.php',
+        $.post('/MRFSistem/AccesoDatos/Curso/SingleCurso.php',
             { pacodcur }, function (responce) {
                 const celula = JSON.parse(responce);
                 console.log(celula);
@@ -125,7 +125,7 @@ $(document).ready(function () {
         if (confirm("Seguro que desea dar de baja este curso")) {
             let elemento = $(this)[0].parentElement.parentElement;
             let pacodcur = $(elemento).attr('UserDocu');
-            $.post('/MRFIglesiaBermejo/AccesoDatos/Curso/DarBaja.php',
+            $.post('/MRFSistem/AccesoDatos/Curso/DarBaja.php',
                 { pacodcur }, function (responce) {
                     if (responce == 'baja') {
                         ListarCurso();
@@ -174,7 +174,7 @@ $(document).ready(function () {
     //Funciones//////
     function ListarCurso() {//listar Celula
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Curso/ListarCurso.php',
+            url: '/MRFSistem/AccesoDatos/Curso/ListarCurso.php',
             type: 'GET',
             success: function (response) {
                 let plantilla = '';
@@ -204,11 +204,11 @@ $(document).ready(function () {
                 <td>${cur.cadescur}</td>
                 <td>
                     <button class="baja-curso btn btn-danger">
-                    <i class="fas fa-trash-alt gi-2x"></i></button>
+                    <i class="fas fa-trash-alt "></i></button>
                 </>
                 <td style="width:15%">
                     <button class="modificar-curso btn btn-secondary">
-                    <i class="far fa-edit gi-2x"></i></button>
+                    <i class="far fa-edit "></i></button>
                 </td>
             </tr>`
         return plantilla;
@@ -254,8 +254,8 @@ $(document).ready(function () {
         };
         console.log(postData);
         let url = edit === false ?
-            '/MRFIglesiaBermejo/AccesoDatos/Curso/AgregarCurso.php' :
-            '/MRFIglesiaBermejo/AccesoDatos/Curso/ModificarCurso.php';
+            '/MRFSistem/AccesoDatos/Curso/AgregarCurso.php' :
+            '/MRFSistem/AccesoDatos/Curso/ModificarCurso.php';
 
         $.post(url, postData, function (response) {
             console.log(response);
@@ -287,7 +287,7 @@ $(document).ready(function () {
 
     function listarMateria() {//listar Materia
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Contenido/ListarContenido.php',
+            url: '/MRFSistem/AccesoDatos/Contenido/ListarContenido.php',
             type: 'GET',
             success: function (response) {
                 let con = JSON.parse(response);

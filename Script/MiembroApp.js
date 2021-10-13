@@ -150,7 +150,7 @@ $(document).ready(function () {
             url: '/MRFSistem/AccesoDatos/Miembro/ListarMiembro.php',
             type: 'GET',
             success: function (response) {
-                console.log(response);
+                //console.log(response);
                 if (response != 'false') {
                     let miembros = JSON.parse(response);
                     let plantilla = '';
@@ -430,6 +430,7 @@ $(document).ready(function () {
 
     $('#btn_cancelar').click(function (event) {
         Apagar();
+        edit=false;
         $('#profile').hide();
         $('#home').show();
         limpiar();

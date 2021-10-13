@@ -10,7 +10,7 @@ caestcon,
 canommat, 
 pacodcon
 FROM 
-public.aconido 
+aconido 
 where
 canommat like '%{$buscar}%'
             order by pacodcon desc 

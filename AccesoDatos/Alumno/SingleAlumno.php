@@ -10,7 +10,7 @@ cacelmie,
 cacidmie, 
 cadirmie, 
 caestmie, 
-caestciv, 
+ceestciv, 
 cafecnac, 
 caurlfot, 
 canommie, 
@@ -24,7 +24,7 @@ canomciu,
 canomcel,
 cafunmie,
 pacodalu
-FROM amiebro m, aproion p, aciudad c, acelula e, amiecel f, alumno a  
+FROM amiebro m, aproion p, aciudad c, acelula e, amiecel f, aalumno a  
 where m.facodpro=p.pacodpro 
 and m.caestmie=true
 and m.facodciu=c.pacodciu
@@ -44,7 +44,7 @@ while ($row = mysqli_fetch_array($resultado)) {
                     'cacidmie' => $row['cacidmie'],
                     'cadirmie' => $row['cadirmie'],
                     'caestmie' => $row['caestmie'],
-                    'caestciv' => $row['caestciv'],
+                    'caestciv' => $row['ceestciv'],
                     'cafecnac' => $row['cafecnac'],
                     'caurlfot' => $row['caurlfot'],
                     'canommie' => $row['canommie'],

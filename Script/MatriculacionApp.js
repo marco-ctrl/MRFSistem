@@ -25,7 +25,7 @@ $(document).ready(function () {
 
     function ListarAlumno() {//lista maestros
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Alumno/ListarAlumno.php',
+            url: '/MRFSistem/AccesoDatos/Alumno/ListarAlumno.php',
             type: 'GET',
             success: function (response) {
                 let miembros = JSON.parse(response);
@@ -39,7 +39,7 @@ $(document).ready(function () {
                         <td>${miembros.canomcel}</td>
                         <td>${miembros.cafunmie}</td>
                         <td style="width:15%"><button class="agregar-alumno btn btn-primary" data-dismiss="modal">
-                        <i class="fas fa-user-plus gi-2x"></i></button></td>
+                        <i class="fas fa-user-plus "></i></button></td>
                         </tr>`;
                 });
                 $('#tb_miembro').html(plantilla);
@@ -50,7 +50,7 @@ $(document).ready(function () {
     $(document).on('click', '.agregar-alumno', function () {
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodalu = $(elemento).attr('codMbr');
-        $.post('/MRFIglesiaBermejo/AccesoDatos/Alumno/SingleAlumno.php',
+        $.post('/MRFSistem/AccesoDatos/Alumno/SingleAlumno.php',
             { pacodalu }, function (responce) {
                 const miembro = JSON.parse(responce);
                 miembro.forEach(miembro => {
@@ -68,7 +68,7 @@ $(document).ready(function () {
             let buscar = $('#txt_buscar').val().toUpperCase();
             let plantilla = '';
             $.ajax({
-                url: '/MRFIglesiaBermejo/AccesoDatos/Matriculacion/BuscarMatricula.php',
+                url: '/MRFSistem/AccesoDatos/Matriculacion/BuscarMatricula.php',
                 type: 'POST',
                 data: { buscar },
                 success: function (response) {
@@ -113,7 +113,7 @@ $(document).ready(function () {
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodmat = $(elemento).attr('UserDocu');
         console.log(pacodmat);
-        $.post('/MRFIglesiaBermejo/AccesoDatos/Matriculacion/SingleMatricula.php',
+        $.post('/MRFSistem/AccesoDatos/Matriculacion/SingleMatricula.php',
             { pacodmat }, function (responce) {
                 const celula = JSON.parse(responce);
                 console.log(celula);
@@ -165,7 +165,7 @@ $(document).ready(function () {
     //Funciones//////
     function listarMatriculacion() {//listar Celula
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Matriculacion/ListarMatricula.php',
+            url: '/MRFSistem/AccesoDatos/Matriculacion/ListarMatricula.php',
             type: 'GET',
             success: function (response) {
                 let plantilla = '';
@@ -194,7 +194,7 @@ $(document).ready(function () {
                 <td>${cur.cafecmat} ${cur.cahormat}</td>
                 <td style="width:15%">
                     <button class="modificar-matricula btn btn-secondary">
-                    <i class="far fa-edit gi-2x"></i></button>
+                    <i class="far fa-edit "></i></button>
                 </td>
             </tr>`
         return plantilla;
@@ -240,8 +240,8 @@ $(document).ready(function () {
         };
         console.log(postData);
         let url = edit === false ?
-            '/MRFIglesiaBermejo/AccesoDatos/Matriculacion/AgregarMatricula.php' :
-            '/MRFIglesiaBermejo/AccesoDatos/Matriculacion/ModificarMatricula.php';
+            '/MRFSistem/AccesoDatos/Matriculacion/AgregarMatricula.php' :
+            '/MRFSistem/AccesoDatos/Matriculacion/ModificarMatricula.php';
 
         $.post(url, postData, function (response) {
             console.log(response);
@@ -273,7 +273,7 @@ $(document).ready(function () {
 
     function ListarCurso() {//listar Materia
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Curso/ListarCurso.php',
+            url: '/MRFSistem/AccesoDatos/Curso/ListarCurso.php',
             type: 'GET',
             success: function (response) {
                 let con = JSON.parse(response);
@@ -286,7 +286,7 @@ $(document).ready(function () {
                         <td>${miembros.cafecini}</td>
                         <td>${miembros.canommie} ${miembros.capatmie} ${miembros.camatmie}</td>
                         <td style="width:15%"><button class="agregar-curso btn btn-primary" data-dismiss="modal">
-                        <i class="fas fa-plus-square gi-2x"></i></button></td>
+                        <i class="fas fa-plus-square "></i></button></td>
                         </tr>`;
                 });
                 $('#tb_curso').html(plantilla);
@@ -297,13 +297,14 @@ $(document).ready(function () {
     $(document).on('click', '.agregar-curso', function () {
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodcur= $(elemento).attr('codMbr');
-        $.post('/MRFIglesiaBermejo/AccesoDatos/Curso/SingleCurso.php',
+        $.post('/MRFSistem/AccesoDatos/Curso/SingleCurso.php',
             { pacodcur }, function (responce) {
                 const miembro = JSON.parse(responce);
                 miembro.forEach(miembro => {
                     codCurso = miembro.pacodcur,
                     $('#txt_codCurso').val(miembro.pacodcur),
                     $('#txt_gestion').val(miembro.cagescur),
+                    $('#txt_materia').val(miembro.canommat),
                     $('#txt_maestro').val(miembro.canommie + ' ' + miembro.capatmie + ' ' + miembro.camatmie)
                     $('#dat_fecini').val(miembro.cafecini)
                 });

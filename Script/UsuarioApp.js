@@ -251,7 +251,7 @@ $(document).ready(function () {
                         <td>${miembros.canommie}</td> 
                         <td>${miembros.capatmie} ${miembros.camatmie}</td>
                         <td style="width:15%"><button class="agregar-miembro btn btn-primary" data-dismiss="modal">
-                        <i class="fas fa-user-plus gi-2x"></i></button></td>
+                        <i class="fas fa-user-plus "></i></button></td>
                         </tr>`;
                 });
                 $('#tb_miembro').html(plantilla);
@@ -315,6 +315,7 @@ $(document).ready(function () {
             '/MRFSistem/AccesoDatos/Usuario/ModificarUsuario.php';
 
         $.post(url, postData, function (response) {
+            console.log(response);
             if (!edit && response == 'registra') {
                 actualizarSecuencia("USU", corre);
                 MostrarMensaje("Datos de usuario guardados correctamente", "success");

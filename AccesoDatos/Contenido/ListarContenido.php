@@ -8,8 +8,8 @@ $consulta = "SELECT
             canommat, 
             pacodcon
             FROM 
-            public.aconido
-            WHERE caestcon='true'";
+            aconido
+            WHERE caestcon= true";
 $resultado = mysqli_query($conexion, $consulta);
 
 while ($row = mysqli_fetch_array($resultado)) {

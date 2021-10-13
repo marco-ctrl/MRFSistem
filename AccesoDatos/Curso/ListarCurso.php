@@ -21,7 +21,7 @@ camatmie
 	where facodcon=pacodcon
 	and facodmae=pacodmae
     and facodmie=pacodmie
-    and caestcur='true'";
+    and caestcur=true";
 $resultado = mysqli_query($conexion, $consulta);
 
 $json=array();

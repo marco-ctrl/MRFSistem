@@ -12,7 +12,7 @@ include '../Conexion/Conexion.php';
     $caestmat=$_POST['caestmat'];
     $facodusu=$_POST['facodusu'];
     
-    $sql = "INSERT INTO public.amatula(
+    $sql = "INSERT INTO amatula(
         caestmat, 
         cafecmat, 
         cahormat, 
@@ -21,7 +21,7 @@ include '../Conexion/Conexion.php';
         facodcur, 
         facodusu)
         VALUES (
-        '{$caestmat}', 
+        {$caestmat}, 
         '{$cafecmat}', 
         '{$cahormat}', 
         '{$pacodmat}', 
@@ -40,6 +40,7 @@ if ($stm) {
     
 } else {
     echo "noRegistra";
+    die (mysqli_error($conexion));
 }
 
 mysqli_close($conexion);

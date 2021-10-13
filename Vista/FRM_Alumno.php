@@ -1,48 +1,5 @@
-<?php
-session_start();
-  
-if(empty($_SESSION['active'])){
-  header('location: ../');
-}
 
-?>
-<head>
-    <title>MRFIglesiaBermejo</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
-    <?php 
-        include 'Estilos.php';
-    ?>
-    <?php 
-        include 'Scripts.php';
-    ?>
-</head>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
-    <a href="#" class="navbar-brand">Alumnos</a>
-    <!--<ul class="navbar-nav ml-auto">-->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="navbar-brand" href="FRM_principal.php"><i class="fas fa-home"></i> Inicio</a>
-            </li>
-            <li class="nav-item">
-                <a class="navbar-brand" href="FRM_EscLideres.php"><i class="fas fa-school"></i> Escuela Lideres</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-sm-0">
-            <input type="search" id="txt_buscar" class="form-control mr-ms-2" placeholder="Buscar Alumnos">
 
-        </form>
-    </div>
-
-    <!--</ul>-->
-</nav>
-
-<div class="container p-4">
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
@@ -181,20 +138,20 @@ if(empty($_SESSION['active'])){
                     <div class="col-md-6 d-none d-sm-none d-md-block">
                         <form>
                             <button type="button" id="encender" class="btn btn-secondary btn-block
-                            text-center"><i class="fas fa-video gi-2x"></i> Encender</button>
+                            text-center"><i class="fas fa-video"></i> Encender</button>
                         </form>
                     </div>
                     <div class="col-md-6 d-none d-sm-none d-md-block">
                         <form>
                             <button type="button" id="apagar" class="btn btn-secondary btn-block
-                            text-center"><i class="fas fa-video-slash gi-2x"></i> Apagar</button>
+                            text-center"><i class="fas fa-video-slash "></i> Apagar</button>
                         </form>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 p-2 d-none d-sm-none d-md-block">
                         <div class="video-wrap">
-                            <video id="video" width="140" height="120" poster="/MRFIglesiaBermejo/img/photo.svg">
+                            <video id="video" width="140" height="120" poster="/MRFSistem/img/photo.svg">
                             </video>
                             <!--<canvas id="canvas" width="140" height="120"></canvas>-->
                         </div>
@@ -210,14 +167,14 @@ if(empty($_SESSION['active'])){
                         <!-- Trigger canvas web API -->
                         <div class="controller ">
                             <button id="snap" class="btn btn-secondary btn-block
-                            text-center"><i class="fas fa-camera gi-2x"></i> Capturar</button>
+                            text-center"><i class="fas fa-camera"></i> Capturar</button>
                         </div>
                     </div>
                     <div class="col-md-6 p-2 d-none d-sm-none d-md-block">
                         <div class="controller">
                             <button class="btn btn-secondary btn-block" id="btn_buscar"
                                 onclick="document.getElementById('file-upload').click();">
-                                <i class="fas fa-search-plus gi-2x"></i> Buscar Foto</button>
+                                <i class="fas fa-search-plus "></i> Buscar Foto</button>
                             <input type="file" style="display:none;" id="file-upload" aria-describedby="fileHelp">
                         </div>
                     </div>
@@ -229,16 +186,16 @@ if(empty($_SESSION['active'])){
         
             <button type="button" id="btn_guardarAlu" class="btn btn-primary btn-lg
                                     text-center">
-                <i class="far fa-save gi-2x"></i>
+                <i class="far fa-save "></i>
                 Guardar
             </button>
             <button type="button" id="btn_modificarAlu" class="btn btn-secondary btn-lg
                                     text-center">
-                <i class="far fa-edit gi-2x"></i>
+                <i class="far fa-edit "></i>
                 Modificar
             </button>
             <button type="button" id="btn_cancelarAlu" class="btn btn-danger btn-lg
-                        text-center"><i class="far fa-window-close gi-2x"></i>
+                        text-center"><i class="far fa-window-close "></i>
                 Cancelar
             </button>
 
@@ -278,9 +235,9 @@ if(empty($_SESSION['active'])){
                     </div>
                     <div class="modal-footer">
                         <button id="btn_nuevo" type="button" class="btn btn-primary" data-dismiss="modal">
-                            <i class="fas fa-user-plus gi-2x"></i> Nuevo</button>
+                            <i class="fas fa-user-plus "></i> Nuevo</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">
-                            <i class="fas fa-window-close gi-2x"></i> Cerrar</button>
+                            <i class="fas fa-window-close "></i> Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -311,9 +268,9 @@ if(empty($_SESSION['active'])){
             </div>
         </div>
     </div>
-</div>
-<script src="/MRFIglesiaBermejo/Script/CodigoApp.js"></script>
-<script src="/MRFIglesiaBermejo/Script/AlumnoApp.js"></script>
+
+<script src="/MRFSistem/Script/CodigoApp.js"></script>
+<script src="/MRFSistem/Script/AlumnoApp.js"></script>
 
 <script>
 function readFile(input) {
@@ -338,4 +295,4 @@ fileUpload.onchange = function(e) {
     readFile(e.srcElement);
 }
 </script>
-<script src="/MRFIglesiaBermejo/Script/CrecimientoApp.js"></script>
+<script src="/MRFSistem/Script/CrecimientoApp.js"></script>

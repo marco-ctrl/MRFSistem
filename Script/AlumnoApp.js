@@ -72,7 +72,7 @@ $(document).ready(function () {
                 track.stop();
             });
             video.srcObject = null;
-            video.setAttribute('poster', "/MRFIglesiaBermejo/img/photo.svg");
+            video.setAttribute('poster', "/MRFSistem/img/photo.svg");
         }
     }
 
@@ -102,7 +102,7 @@ $(document).ready(function () {
             let buscar = $('#txt_buscarMiembro').val().toUpperCase();
             let plantilla = '';
             $.ajax({
-                url: '/MRFIglesiaBermejo/AccesoDatos/Alumno/BuscarMiembro.php',
+                url: '/MRFSistem/AccesoDatos/Alumno/BuscarMiembro.php',
                 type: 'POST',
                 data: { buscar },
                 success: function (response) {
@@ -117,7 +117,7 @@ $(document).ready(function () {
                             <td>${miembros.canomcel}</td>
                             <td>${miembros.cafunmie}</td>
                             <td style="width:15%"><button class="agregar-miembro btn btn-primary">
-                            <i class="fas fa-user-plus gi-2x"></i></button></tr>`;
+                            <i class="fas fa-user-plus "></i></button></tr>`;
                         });
                         $('#tb_miembro1').html(plantilla);
                     }
@@ -146,7 +146,7 @@ $(document).ready(function () {
     ////////Listar Usuario////////
     function ListarMiembro1() {//lista usuarios
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Alumno/ListarMiembro.php',
+            url: '/MRFSistem/AccesoDatos/Alumno/ListarMiembro.php',
             type: 'GET',
             success: function (response) {
                 let miembros = JSON.parse(response);
@@ -162,7 +162,7 @@ $(document).ready(function () {
                             <td>${miembros.canomcel}</td>
                             <td>${miembros.cafunmie}</td>
                             <td style="width:15%"><button class="agregar-miembro btn btn-primary" data-dismiss="modal">
-                            <i class="fas fa-user-plus gi-2x"></i></button></td>
+                            <i class="fas fa-user-plus "></i></button></td>
                             </tr>`;
                     });
                 }
@@ -178,7 +178,7 @@ $(document).ready(function () {
     $(document).on('click', '.agregar-miembro', function () {
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodmie = $(elemento).attr('codMbr');
-        $.post('/MRFIglesiaBermejo/AccesoDatos/Miembro/SingleMiembro.php',
+        $.post('/MRFSistem/AccesoDatos/Miembro/SingleMiembro.php',
             { pacodmie },
             function (responce) {
                 const miembro = JSON.parse(responce);
@@ -351,7 +351,7 @@ $(document).ready(function () {
             let buscar = $('#txt_buscar').val().toUpperCase();
             let plantilla = '';
             $.ajax({
-                url: '/MRFIglesiaBermejo/AccesoDatos/Alumno/BuscarAlumno.php',
+                url: '/MRFSistem/AccesoDatos/Alumno/BuscarAlumno.php',
                 type: 'POST',
                 data: { buscar },
                 success: function (response) {
@@ -408,16 +408,17 @@ $(document).ready(function () {
         const context = canvas.getContext('2d');
         context.clearRect(0, 0, canvas.width, canvas.height);
         ImagenCanvas();
-        //DeshabilitarFormulario();
+        DeshabilitarFormulario();
         $('#profile').hide();
         $('#home').show();
     }
 
     function ListarMiembro() {//lista usuarios
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Alumno/ListarAlumno.php',
+            url: '/MRFSistem/AccesoDatos/Alumno/ListarAlumno.php',
             type: 'GET',
             success: function (response) {
+                console.log(response);
                 if (response != 'false') {
                     let miembros = JSON.parse(response);
                     let plantilla = '';
@@ -443,8 +444,12 @@ $(document).ready(function () {
                 <td>${miembros.canomcel}</td>
                 <td>${miembros.cafunmie}</td>
                 <td>
+                    <button class="ver-alumno btn btn-primary">Ver
+                    </button>
+                </td>
+                <td>
                     <button class="baja-alumno btn btn-danger">
-                        <i class="fas fa-trash-alt gi-2x"></i>
+                        <i class="fas fa-trash-alt"></i>
                     </button>
                 </td>
             </tr>`
@@ -457,7 +462,7 @@ $(document).ready(function () {
             let elemento = $(this)[0].parentElement.parentElement;
             let pacodalu = $(elemento).attr('UserDocu');
             console.log('dando de baja...');
-            $.post('/MRFIglesiaBermejo/AccesoDatos/Alumno/DarBaja.php',
+            $.post('/MRFSistem/AccesoDatos/Alumno/DarBaja.php',
                 { pacodalu }, function (responce) {
                     console.log(responce);
                     if (responce == 'baja') {
@@ -484,13 +489,13 @@ $(document).ready(function () {
         //const canvas = document.getElementById('canvas');
         let contex = canvas.getContext('2d');
         imagenes = document.getElementById('imagen');
-        imagenes.setAttribute('src', "/MRFIglesiaBermejo/img/user.svg");
+        imagenes.setAttribute('src', "/MRFSistem/img/user.svg");
         contex.drawImage(imagenes, 0, 0, 120, 120);
     }
 
     function ListarProfesion() {//listar profesion
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Profesion/ListarProfesion.php',
+            url: '/MRFSistem/AccesoDatos/Profesion/ListarProfesion.php',
             type: 'GET',
             success: function (response) {
                 let profesion = JSON.parse(response);
@@ -513,7 +518,7 @@ $(document).ready(function () {
 
     function ListarCelula() {//listar celula
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Celula/ListarCelula.php',
+            url: '/MRFSistem/AccesoDatos/Celula/ListarCelula.php',
             type: 'GET',
             success: function (response) {
                 let celula = JSON.parse(response);
@@ -536,7 +541,7 @@ $(document).ready(function () {
 
     function ListarCiudad() {//listar ciudad
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Ciudad/ListarCiudad.php',
+            url: '/MRFSistem/AccesoDatos/Ciudad/ListarCiudad.php',
             type: 'GET',
             success: function (response) {
                 let ciudad = JSON.parse(response);
@@ -559,7 +564,7 @@ $(document).ready(function () {
             facodmie: codMiembro
         };
 
-        let url='/MRFIglesiaBermejo/AccesoDatos/MieCel/AgregarMieCel.php';
+        let url='/MRFSistem/AccesoDatos/MieCel/AgregarMieCel.php';
         $.post(url,postData,function (response) {
             console.log(response);
             if (!edit && response == 'registra') {
@@ -582,7 +587,7 @@ $(document).ready(function () {
             caestalu: true
         };
 
-        let url = '/MRFIglesiaBermejo/AccesoDatos/Alumno/AgregarAlumno.php'; 
+        let url = '/MRFSistem/AccesoDatos/Alumno/AgregarAlumno.php'; 
         $.post(url,postData,function (response) {
                 console.log(response);
                 if (!edit && response == 'registra') {
@@ -624,8 +629,8 @@ $(document).ready(function () {
         };
 
         let url = edit === false ?
-            '/MRFIglesiaBermejo/AccesoDatos/Miembro/AgregarMiembro.php' :
-            '/MRFIglesiaBermejo/AccesoDatos/Miembro/ModificarMiembro.php';
+            '/MRFSistem/AccesoDatos/Miembro/AgregarMiembro.php' :
+            '/MRFSistem/AccesoDatos/Miembro/ModificarMiembro.php';
 
         $.post(url,postData,function (response) {
                 console.log(response);

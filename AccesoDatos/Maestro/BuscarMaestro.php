@@ -18,7 +18,7 @@ caestmie
 FROM 
 amaetro, 
 amiebro
-WHERE caestmae='true'
+WHERE caestmae=true
 and facodmie=pacodmie
 and canommie like '%{$buscar}%'
 order by pacodmae desc 

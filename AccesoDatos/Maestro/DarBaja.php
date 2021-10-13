@@ -5,7 +5,7 @@ include '../Conexion/Conexion.php';
 //if (isset($_POST["pacodmie"])) {
     $pacodmae = $_POST['pacodmae'];
     $sql = "UPDATE public.amaetro
-	SET  caestmae='false'
+	SET  caestmae=false
 	WHERE pacodmae='{$pacodmae}';";
     $stm = mysqli_query($conexion, $sql);
     

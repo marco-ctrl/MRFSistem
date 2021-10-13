@@ -82,11 +82,11 @@
                         <div class="modal-footer col-md-8">
                             <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
                                     text-center">
-                                <i class="far fa-save gi-2x"></i>
+                                <i class="far fa-save"></i>
                                 Guardar
                             </button>
                             <button type="button" id="btn_cancelar" class="btn btn-danger btn-lg
-                        text-center"><i class="far fa-window-close gi-2x"></i>
+                        text-center"><i class="far fa-window-close"></i>
                                 Cancelar
                             </button>
 
@@ -124,7 +124,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                            <i class="fas fa-window-close gi-2x"></i> Cerrar</button>
+                                            <i class="fas fa-window-close "></i> Cerrar</button>
                                     </div>
                                 </div>
                             </div>

@@ -11,8 +11,8 @@ $consulta = "SELECT
             canommat, 
             pacodcon
             FROM 
-            public.aconido
-            WHERE caestcon='true'
+            aconido
+            WHERE caestcon=true
             and pacodcon='{$pacodcon}'
             order by pacodcon desc 
             limit 15;";

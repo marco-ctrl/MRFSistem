@@ -15,7 +15,7 @@ $consulta = "SELECT
             FROM 
 	        amaetro, 
 	        amiebro
-            WHERE caestmae='true'
+            WHERE caestmae=true
             and facodmie=pacodmie
             order by pacodmie desc 
             limit 15;";

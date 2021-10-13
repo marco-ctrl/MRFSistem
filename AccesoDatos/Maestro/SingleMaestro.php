@@ -17,7 +17,7 @@ $consulta = "SELECT
             FROM 
 	        amaetro, 
 	        amiebro
-            WHERE caestmae='true'
+            WHERE caestmae=true
             and facodmie=pacodmie
             and pacodmae='{$pacodmae}'
             order by pacodmie desc 

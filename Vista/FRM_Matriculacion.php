@@ -6,44 +6,7 @@ if(empty($_SESSION['active'])){
 }
 
 ?>
-<head>
-    <title>MRFIglesiaBermejo</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
-    <?php 
-        include 'Estilos.php';
-    ?>
-    <?php 
-        include 'Scripts.php';
-    ?>
-</head>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
-    <a href="#" class="navbar-brand">Matriculacion</a>
-    <!--<ul class="navbar-nav ml-auto">-->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="navbar-brand" href="FRM_principal.php"><i class="fas fa-home"></i> Inicio</a>
-            </li>
-            <li class="nav-item">
-                <a class="navbar-brand" href="FRM_EscLideres.php"><i class="fas fa-school"></i> Escuela Lideres</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-sm-0">
-            <input type="search" id="txt_buscar" class="form-control mr-ms-2" placeholder="Buscar Matriculacion">
-
-        </form>
-    </div>
-
-    <!--</ul>-->
-</nav>
-
-<div class="container p-4">
     <div class="row">
         <div class="col-md-4 p-3">
             <button type="button" id="btn_nuevo" class="btn btn-primary btn-block
@@ -145,7 +108,7 @@ if(empty($_SESSION['active'])){
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                    <i class="fas fa-window-close gi-2x"></i> Cerrar</button>
+                                    <i class="fas fa-window-close "></i> Cerrar</button>
                             </div>
                         </div>
                     </div>
@@ -185,7 +148,7 @@ if(empty($_SESSION['active'])){
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                    <i class="fas fa-window-close gi-2x"></i> Cerrar</button>
+                                    <i class="fas fa-window-close "></i> Cerrar</button>
                             </div>
                         </div>
                     </div>
@@ -232,17 +195,17 @@ if(empty($_SESSION['active'])){
         <div class="modal-footer col-md-10">
             <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
                                     text-center">
-                <i class="far fa-save gi-2x"></i>
+                <i class="far fa-save "></i>
                 Guardar
             </button>
             <button type="button" id="btn_cancelar" class="btn btn-danger btn-lg
-                        text-center"><i class="far fa-window-close gi-2x"></i>
+                        text-center"><i class="far fa-window-close "></i>
                 Cancelar
             </button>
         </div>
     </div>
 
-</div>
 
-<script src="/MRFIglesiaBermejo/Script/CodigoApp.js"></script>
-<script src="/MRFIglesiaBermejo/Script/MatriculacionApp.js"></script>
+
+<script src="/MRFSistem/Script/CodigoApp.js"></script>
+<script src="/MRFSistem/Script/MatriculacionApp.js"></script>

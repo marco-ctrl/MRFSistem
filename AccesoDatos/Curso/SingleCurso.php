@@ -23,7 +23,7 @@ camatmie
 	where facodcon=pacodcon
 	and facodmae=pacodmae
     and facodmie=pacodmie
-    and caestcur='true'
+    and caestcur=true
     and pacodcur='{$pacodcur}'";
 $resultado = mysqli_query($conexion, $consulta);
 

@@ -15,7 +15,7 @@ $consulta = "SELECT caestmat,
                     canommat,
                     cagescur
             FROM amatula a, 
-                 alumno b, 
+                 aalumno b, 
                  amaetro c, 
                  acursom d, 
                  amiebro e, 
@@ -26,7 +26,7 @@ $consulta = "SELECT caestmat,
             and d.facodcon=f.pacodcon
 			and e.pacodmie=b.facodmie
 			and d.pacodcur=a.facodcur
-            and a.caestmat='true'
+            and a.caestmat= true
             order by a.pacodmat desc
             limit 15;";
 

@@ -13,7 +13,7 @@ $(document).ready(function () {
             let buscar = $('#txt_buscar').val().toUpperCase();
             let plantilla = '';
             $.ajax({
-                url: '/MRFIglesiaBermejo/AccesoDatos/Contenido/BuscarContenido.php',
+                url: '/MRFSistem/AccesoDatos/Contenido/BuscarContenido.php',
                 type: 'POST',
                 data: { buscar },
                 success: function (response) {
@@ -47,7 +47,7 @@ $(document).ready(function () {
 
     function ListarContenido() {//listar Contenido
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/Contenido/ListarContenido.php',
+            url: '/MRFSistem/AccesoDatos/Contenido/ListarContenido.php',
             type: 'GET',
             success: function (response) {
                 let contenido = JSON.parse(response);
@@ -69,11 +69,11 @@ $(document).ready(function () {
                 <td>${usu.cadescon}</td>
                 <td>
                     <button class="baja-contenido btn btn-danger">
-                    <i class="fas fa-trash-alt gi-2x"></i></button>
+                    <i class="fas fa-trash-alt "></i></button>
                 </>
                 <td style="width:15%">
                     <button class="modificar-contenido btn btn-secondary">
-                    <i class="far fa-edit gi-2x"></i></button>
+                    <i class="far fa-edit "></i></button>
                 </td>
             </tr>`
         return plantilla;
@@ -85,7 +85,7 @@ $(document).ready(function () {
         //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodcon = $(elemento).attr('UserDocu');
-        $.post('/MRFIglesiaBermejo/AccesoDatos/Contenido/SingleContenido.php',
+        $.post('/MRFSistem/AccesoDatos/Contenido/SingleContenido.php',
             { pacodcon }, function (responce) {
                 const celula = JSON.parse(responce);
                 celula.forEach(con => {
@@ -103,7 +103,7 @@ $(document).ready(function () {
         if (confirm("Seguro que desea dar de baja esta materia")) {
             let elemento = $(this)[0].parentElement.parentElement;
             let pacodcon = $(elemento).attr('UserDocu');
-            $.post('/MRFIglesiaBermejo/AccesoDatos/Contenido/DarBaja.php',
+            $.post('/MRFSistem/AccesoDatos/Contenido/DarBaja.php',
                 { pacodcon }, function (responce) {
                     if (responce == 'baja') {
                         ListarContenido();
@@ -161,8 +161,8 @@ $(document).ready(function () {
         };
         console.log(postData);
         let url = edit === false ?
-            '/MRFIglesiaBermejo/AccesoDatos/Contenido/AgregarContenido.php' :
-            '/MRFIglesiaBermejo/AccesoDatos/Contenido/ModificarContenido.php';
+            '/MRFSistem/AccesoDatos/Contenido/AgregarContenido.php' :
+            '/MRFSistem/AccesoDatos/Contenido/ModificarContenido.php';
 
         $.post(url, postData, function (response) {
             console.log(response);

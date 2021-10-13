@@ -8,7 +8,7 @@ cacelmie,
 cacidmie, 
 cadirmie, 
 caestmie, 
-caestciv, 
+ceestciv, 
 cafecnac, 
 caurlfot, 
 canommie, 
@@ -27,7 +27,7 @@ and m.caestmie=true
 and m.facodciu=c.pacodciu
 and pacodmie=facodmie
 and pacodcel=facodcel
-and m.cabanalu='false'
+and m.cabanalu=false
 order by pacodmie desc LIMIT 15";
 $resultado = mysqli_query($conexion, $consulta);
 
@@ -40,7 +40,7 @@ while ($row = mysqli_fetch_array($resultado)) {
                     'cacidmie' => $row['cacidmie'],
                     'cadirmie' => $row['cadirmie'],
                     'caestmie' => $row['caestmie'],
-                    'caestciv' => $row['caestciv'],
+                    'caestciv' => $row['ceestciv'],
                     'cafecnac' => $row['cafecnac'],
                     'caurlfot' => $row['caurlfot'],
                     'canommie' => $row['canommie'],

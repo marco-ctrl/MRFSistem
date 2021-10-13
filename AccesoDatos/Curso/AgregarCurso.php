@@ -23,7 +23,7 @@ include '../Conexion/Conexion.php';
         VALUES (
         '{$cagescur}', 
         '{$cadescur}',
-        '{$caestcur}', 
+        {$caestcur}, 
         '{$cafecini}',
         '{$pacodcur}',
         '{$facodcon}',
@@ -33,7 +33,8 @@ include '../Conexion/Conexion.php';
 if ($stm) {
     echo "registra";
 } else {
-    echo "noRegistra";
+    //echo "noRegistra";
+    die (mysqli_error($conexion));
 }
 
 mysqli_close($conexion);

@@ -8,21 +8,21 @@ include '../Conexion/Conexion.php';
     $pacodalu = $_POST['pacodalu'];
     $facodmie = $_POST['facodmie'];
     
-    $sql = "INSERT INTO alumno(
+    $sql = "INSERT INTO aalumno(
         facodmie, 
         caestalu, 
         pacodalu)
         VALUES (
         '{$facodmie}',
-        '{$caestalu}',
+        true,
         '{$pacodalu}');";
     $stm = mysqli_query($conexion, $sql);
 //}
 
 
 if ($stm) {
-    $sql="UPDATE public.amiebro
-            SET cabanalu='true'
+    $sql="UPDATE amiebro
+            SET cabanalu=true
             WHERE pacodmie='{$facodmie}'";
 
     $stm1=mysqli_query($conexion, $sql);
