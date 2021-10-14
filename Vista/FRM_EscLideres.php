@@ -70,7 +70,7 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header"> Reportes:</h6>
-                <a class="collapse-item" href="InformacionAlumno.php"><i class="far fa-file-pdf"></i> Informacion Alumno</a>
+                <a class="collapse-item" id="mn_infAlumno" href="#"><i class="far fa-file-pdf"></i> Informacion Alumno</a>
                 <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Informacion de
                     Usuarios</a>
                 <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Reporte de

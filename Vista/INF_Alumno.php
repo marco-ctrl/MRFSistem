@@ -1,3 +1,4 @@
+<body>
 <div class="row" id="home">
         <div class="col-md-12">
             <label for="">Lista De Alumnos</label>
@@ -23,4 +24,6 @@
         </div>
     </div>
 
-    <script src="/MRFSistem/Script/Reportes/InformacionAlumno.js"></script>
+    <script src="/MRFSistem/ReportesPDF/Script/InformacionAlumno.js"></script>
+
+</body>

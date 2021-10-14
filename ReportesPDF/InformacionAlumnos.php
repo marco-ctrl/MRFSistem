@@ -2,11 +2,13 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-require_once "../../MRFIglesiaBermejo/AccesoDatos/Conexion/Conexion.php";
+require_once "../AccesoDatos/Conexion/Conexion.php";
 
 //include '../../MRFIglesiaBermejo/AccesoDatos/Alumno/ListarAlumno.php';
 
-//$pacodalu=$_POST['pacodalu'];
+$pacodalu=$_GET['pacodalu'];
+
+echo $pacodalu;
 
 $consulta = "SELECT camatmie, 
 capatmie, 
@@ -14,7 +16,7 @@ cacelmie,
 cacidmie, 
 cadirmie, 
 caestmie, 
-caestciv, 
+ceestciv, 
 cafecnac, 
 caurlfot, 
 canommie, 
@@ -35,17 +37,17 @@ cafecbau,
 cafecigl, 
 cafeccon,
 pacodcre
-FROM amiebro m, aproion p, aciudad c, acelula e, amiecel f, alumno a, acreesp b  
+FROM amiebro m, aproion p, aciudad c, acelula e, amiecel f, aalumno a, acreesp b  
 where m.facodpro=p.pacodpro 
 and a.caestalu=true
 and m.facodciu=c.pacodciu
 and m.pacodmie=f.facodmie
 and e.pacodcel=f.facodcel
 and a.facodmie=m.pacodmie
-and a.pacodalu='ALU-000004'
+and a.pacodalu='{$pacodalu}'
 and m.pacodmie=b.pacodcre
 order by pacodmie desc LIMIT 15";
-$resultado = pg_query($conexion, $consulta);
+$resultado = mysqli_query($conexion, $consulta);
 
 
 $mpdf = new \Mpdf\Mpdf();
@@ -54,7 +56,7 @@ $html = '<h3 style="text-align:center">ASAMBLEAS DE DIOS DE BOLIVIA</h3>
 <h3 style="text-align:center">ESCUELA DE LIDERES</h3>
 <h3 style="text-align:center"><u>FICHA DE DATOS DEL ALUMNO</u></h3>';
 
-$row = pg_fetch_array($resultado);
+$row = mysqli_fetch_array($resultado);
 $html.='<img width="140" height="120" src="'.$row['caurlfot'].'" align="right"><br><br>';
 $html.='<LABEL><u>DATOS PERSONALES</u></LABEL>
 <BR><br>';
@@ -62,11 +64,11 @@ $html.='<LABEL>Nombre Completo: '.$row['canommie'].' '.$row['capatmie'].' '.$row
 $html.='<label>Direccion: '.$row['cadirmie'].'</label><br>';
 $html.='<label>Telefonos de Contacto: '.$row['cacelmie'].'</label><br>';
 $html.='<label>Fecha y lugar de Nacimiento: '.$row['cafecnac'].'-'.$row['canomciu'].'</label><br>';
-$html.='<label>Estado Civil: '.$row['caestciv'].'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Carnet de Identidad N. '.$row['cacidmie'].'</label><br>';
+$html.='<label>Estado Civil: '.$row['ceestciv'].'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Carnet de Identidad N. '.$row['cacidmie'].'</label><br>';
 $html.='<label>Profesion: '.$row['canompro'].'</label><br><br>';
 
 $html.='<label><u>DATOS DE LA CELULA</u></label><br><br>';
-$html.='<label>Nombre de su Celula: '.$row['pacodcel'].' '.$row['canomcel'].'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N. '.$row['canumcel'].'</label><br>';
+$html.='<label>Nombre de su Celula: '.$row['canomcel'].'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N. '.$row['canumcel'].'</label><br>';
 
 $lid=$row['pacodcel'];
 //echo $lid;
@@ -88,9 +90,9 @@ AND facodcel='{$lid}'
 and pacodcel=facodcel
 and pacodmie=facodmie";
 
-$lider = pg_query($conexion, $sql);
+$lider = mysqli_query($conexion, $sql);
 
-$lid = pg_fetch_array($lider);
+$lid = mysqli_fetch_array($lider);
 
 $html.='<label>Nombre del/la Lider: '.$lid['canommie'].' '.$lid['capatmie'].' '.$lid['camatmie'].'</label><br>';
 $html.='<label>Funcion en la Celula: '.$row['cafunmie'].'</label><br><br>';
@@ -108,3 +110,5 @@ $html.='<label align="left">&nbsp;&nbsp;&nbsp;&nbsp;FIRMA DEL ALUMNO&nbsp;&nbsp;
 
 $mpdf->WriteHTML($html);
 $mpdf->Output();
+
+echo "imprime";

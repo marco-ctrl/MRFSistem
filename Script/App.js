@@ -20,6 +20,10 @@ $(document).ready(function () {
         $("#escuela").load('FRM_Matriculacion.php');
     });
 
+    $("#mn_infAlumno").click(function(event) {
+        $("#escuela").load('INF_Alumno.php');
+    });
+
     //imagenes = document.getElementById('imagen');
     //imagenes.setAttribute('src', "http://localhost/MRFIglesiaBermejo/AccesoDatos/Miembro/Imagenes/MBR-2Oscar.jpg");
     //$('#imagen').setAtribute('src', "http://localhost/MRFIglesiaBermejo/AccesoDatos/Miembro/Imagenes/MBR-2Oscar.jpg");

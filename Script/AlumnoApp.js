@@ -444,10 +444,6 @@ $(document).ready(function () {
                 <td>${miembros.canomcel}</td>
                 <td>${miembros.cafunmie}</td>
                 <td>
-                    <button class="ver-alumno btn btn-primary">Ver
-                    </button>
-                </td>
-                <td>
                     <button class="baja-alumno btn btn-danger">
                         <i class="fas fa-trash-alt"></i>
                     </button>
