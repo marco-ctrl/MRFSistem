@@ -8,8 +8,6 @@ require_once "../AccesoDatos/Conexion/Conexion.php";
 
 $pacodalu=$_GET['pacodalu'];
 
-echo $pacodalu;
-
 $consulta = "SELECT camatmie, 
 capatmie, 
 cacelmie, 
@@ -111,4 +109,3 @@ $html.='<label align="left">&nbsp;&nbsp;&nbsp;&nbsp;FIRMA DEL ALUMNO&nbsp;&nbsp;
 $mpdf->WriteHTML($html);
 $mpdf->Output();
 
-echo "imprime";

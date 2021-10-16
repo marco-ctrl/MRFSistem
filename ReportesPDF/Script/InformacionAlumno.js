@@ -2,9 +2,9 @@ $(document).ready(function () {
 
     //Declaracion de Variables///
     var codAlumno;
-    
+
     ListarAlumno();
-    
+
     $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de miembros
         $('#profile').hide();
         $('#home').show();
@@ -41,7 +41,7 @@ $(document).ready(function () {
         }
         else {
             $('#mensaje').hide();
-            ListarMiembro();
+            ListarAlumno();
         }
 
     });
@@ -50,7 +50,6 @@ $(document).ready(function () {
             url: '/MRFSistem/AccesoDatos/Alumno/ListarAlumno.php',
             type: 'GET',
             success: function (response) {
-                console.log(response);
                 if (response != 'false') {
                     let miembros = JSON.parse(response);
                     let plantilla = '';
@@ -85,39 +84,11 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.ver-alumno', function () {//elimina miembros
-        
-            let elemento = $(this)[0].parentElement.parentElement;
-            let pacodalu = $(elemento).attr('UserDocu');
-            console.log(pacodalu);
-            abrirNuevoTab('/MRFSistem/ReportesPDF/InformacionAlumnos.php?pacodalu='+pacodalu);
-      
-            /*$.ajax({
-                url: '/MRFSistem/ReportesPDF/InformacionAlumnos.php?',
-                type: 'GET',
-                success: function (response) {
-                    console.log(response);
-                    if (response != 'false') {
-                        let miembros = JSON.parse(response);
-                        let plantilla = '';
-                        miembros.forEach(miembros => {
-                            plantilla = MostrarTabla(plantilla, miembros);
-                        });
-                        $('#tb_alumnos').html(plantilla);
-                    }
-    
-                }
-            });
 
-            /*$.get('/MRFSistem/ReportesPDF/InformacionAlumnos.php',
-                { pacodalu }, function (responce) {
-                    abrirNuevoTab('/MRFSistem/ReportesPDF/InformacionAlumnos.php');
-                    console.log(responce);
-                    /*if (responce == 'baja') {
-                        ListarMiembro();
-                        //MostrarMensaje("Alumno dado de baja", 'warning');
-                    }
+        let elemento = $(this)[0].parentElement.parentElement;
+        let pacodalu = $(elemento).attr('UserDocu');
+        abrirNuevoTab('/MRFSistem/ReportesPDF/InformacionAlumnos.php?pacodalu=' + pacodalu);
 
-                });*/
     });
 
     function abrirNuevoTab(url) {
@@ -125,7 +96,7 @@ $(document).ready(function () {
         var win = window.open(url, '_blank');
         // Cambiar el foco al nuevo tab (punto opcional)
         win.focus();
-      }
+    }
 
     function MostrarMensaje(cadena, clase) {
         let mensaje = `<div class="alert alert-dismissible alert-${clase}">
@@ -136,7 +107,7 @@ $(document).ready(function () {
         $('#mensaje').show();
     }
 
-    
-    
+
+
 
 });

@@ -1,6 +1,8 @@
 <body>
 <div class="row" id="home">
         <div class="col-md-12">
+        <div id="mensaje">
+        </div>
             <label for="">Lista De Alumnos</label>
             <div class="table-responsive">
                 <table class="table table-hover table-sm">
@@ -14,7 +16,7 @@
                             <td>CELULA</td>
                             <td>FUNCION</td>
                             <td>INFORMACION</td>
-                            
+
                         </tr>
                     </thead>
                     <tbody id="tb_alumnos">
