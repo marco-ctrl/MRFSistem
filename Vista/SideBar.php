@@ -42,12 +42,12 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Archivos:</h6>
-                <a class="collapse-item" href="FRM_Miembro.php"><i class="fas fa-users"></i> Miembros</a>
-                <a class="collapse-item" href="FRM_Usuario.php"><i class="fas fa-user"></i> Usuarios</a>
-                <a class="collapse-item" href="FRM_Celula.php"><i class="fas fa-home"></i> Celula</a>
-                <a class="collapse-item" href="FRM_Aportes.php"><i class="fas fa-file-invoice-dollar"></i>
+                <a class="collapse-item" href="FRM_Miembro"><i class="fas fa-users"></i> Miembros</a>
+                <a class="collapse-item" href="FRM_Usuario"><i class="fas fa-user"></i> Usuarios</a>
+                <a class="collapse-item" href="FRM_Celula"><i class="fas fa-home"></i> Celula</a>
+                <a class="collapse-item" href="FRM_Aportes"><i class="fas fa-file-invoice-dollar"></i>
                     Aportes</a>
-                <a class="collapse-item" href="FRM_EscLideres.php"><i class="fas fa-school"></i> Escuela de
+                <a class="collapse-item" href="FRM_EscLideres"><i class="fas fa-school"></i> Escuela de
                     Lideres</a>
             </div>
         </div>

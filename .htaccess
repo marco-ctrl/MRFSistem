@@ -1,0 +1,15 @@
+Options -Indexes
+
+ErrorDocument 403 /MRFSistem/Vista/Error403.php
+ErrorDocument 500 /MRFSistem/Vista/Error403.php
+
+<IfModule mod_rewrite.c>
+# Activar RewriteEngine
+RewriteEngine on
+RewriteBase /MRFSistem/
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+ 
+RewriteRule ^(.*)$ $1.php
+
+</IfModule>

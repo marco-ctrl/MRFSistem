@@ -51,7 +51,7 @@
         $_SESSION['canomusu']=$data['canomusu'];
         $_SESSION['caurlfot']=$data['caurlfot'];
         if($_SESSION['catipusu']=='ADMINISTRADOR'){
-          header('location: Vista/FRM_principal.php');
+          header('location: Vista/FRM_principal');
         }
         if($_SESSION['catipusu']=='SECRETARIO'){
           header('location: Vista/FRM_EscLideres.php');
