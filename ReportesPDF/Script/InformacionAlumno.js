@@ -87,7 +87,7 @@ $(document).ready(function () {
 
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodalu = $(elemento).attr('UserDocu');
-        abrirNuevoTab('/MRFSistem/ReportesPDF/InformacionAlumnos.php?pacodalu=' + pacodalu);
+        abrirNuevoTab('/MRFSistem/ReportesPDF/PDF_InformacionAlumnos.php?pacodalu=' + pacodalu);
 
     });
 
