@@ -72,12 +72,8 @@
                 <h6 class="collapse-header"> Reportes:</h6>
                 <a class="collapse-item" id="mn_infAlumno" href="#"><i class="far fa-file-pdf"></i> Informacion Alumno</a>
                 <a class="collapse-item" id="mn_controlPago" href="#"><i class="far fa-file-pdf"></i> Control de Pago</a>
-                <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Reporte de
-                    Celulas</a>
-                <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Reporte de
-                    Aportes</a>
-                <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Escuela
-                    de Lideres</a>
+                <a class="collapse-item" id="mn_controlAsistencia" href="#"><i class="far fa-file-pdf"></i> Control de Asistencia</a>
+                
             </div>
         </div>
     </li>

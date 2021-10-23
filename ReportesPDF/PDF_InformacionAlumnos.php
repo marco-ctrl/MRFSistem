@@ -5,6 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once "../AccesoDatos/Conexion/Conexion.php";
 
 //include '../../MRFIglesiaBermejo/AccesoDatos/Alumno/ListarAlumno.php';
+$css = file_get_contents('CSS/Stylos.css');
 
 $pacodalu=$_GET['pacodalu'];
 
@@ -46,16 +47,18 @@ and a.pacodalu='{$pacodalu}'
 and m.pacodmie=b.pacodcre
 order by pacodmie desc LIMIT 15";
 $resultado = mysqli_query($conexion, $consulta);
-
+$row = mysqli_fetch_array($resultado);
 
 $mpdf = new \Mpdf\Mpdf();
-$html = '<h3 style="text-align:center">ASAMBLEAS DE DIOS DE BOLIVIA</h3>
-<h3 style="text-align:center">IGLESIA "BERMEJO"</h3>
-<h3 style="text-align:center">ESCUELA DE LIDERES</h3>
-<h3 style="text-align:center"><u>FICHA DE DATOS DEL ALUMNO</u></h3>';
+$html = '<div><img src="/MRFSistem/img/Asambleas.png" class="izquierdo"><side><h3>ASAMBLEAS DE DIOS DE BOLIVIA
+<img src="'.$row['caurlfot'].'" class="Alumno">
+<br>IGLESIA "BERMEJO"
+<br>ESCUELA DE LIDERES
+<br><u>FICHA DE DATOS DEL ALUMNO</u></h3></side>
+</div>';
 
-$row = mysqli_fetch_array($resultado);
-$html.='<img width="140" height="120" src="'.$row['caurlfot'].'" align="right"><br><br>';
+
+//$html.='';
 $html.='<LABEL><u>DATOS PERSONALES</u></LABEL>
 <BR><br>';
 $html.='<LABEL>Nombre Completo: '.$row['canommie'].' '.$row['capatmie'].' '.$row['camatmie'].'</label><br>';
@@ -106,6 +109,7 @@ $html.='<label align="left">&nbsp;&nbsp;&nbsp;&nbsp;FIRMA DEL ALUMNO&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FIRMA DEL LIDER</label>';
 
+$mpdf->WriteHTML($css,\Mpdf\HTMLParserMode::HEADER_CSS);
 $mpdf->WriteHTML($html);
 $mpdf->Output();
 

@@ -5,6 +5,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once "../AccesoDatos/Conexion/Conexion.php";
 
 //include '../../MRFIglesiaBermejo/AccesoDatos/Alumno/ListarAlumno.php';
+$css = file_get_contents('CSS/Stylos.css');
+
 
 $pacodcur = $_GET['pacodcur'];
 
@@ -35,10 +37,11 @@ $curso = mysqli_fetch_array($resultado);
 
 
 $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L']);
-$html = '<h3 style="text-align:center">ASAMBLEAS DE DIOS DE BOLIVIA</h3>
-<h3 style="text-align:center">IGLESIA "BERMEJO"</h3>
-<h3 style="text-align:center">ESCUELA DE LIDERES</h3>
-<h3 style="text-align:center"><u>CONTROL PAGO DE MENSUALIDADES</u></h3>
+$html = '<div><img src="/MRFSistem/img/Asambleas.png" class="izquierdo">
+<aside><h3>ASAMBLEAS DE DIOS DE BOLIVIA <br>
+            IGLESIA "BERMEJO"<br>
+            ESCUELA DE LIDERES<br>
+<u>CONTROL PAGO DE MENSUALIDADES</u></h3></aside></div>
 <br><br>';
 
 $html.='<p><b>NOMBRE DEL MAESTRO</b>: '.$curso['canommie'].' '.$curso['capatmie'].' '.$curso['camatmie'].'<br>';
@@ -75,9 +78,9 @@ $resultado = mysqli_query($conexion, $consulta);
 
 
 
-$html .= '<table border="1" style="margin: 0 auto;">
+$html .= '<table>
             <tr>
-                <td> </td>
+                <td>N°</td>
                 <td><b>NOMBRES</b></td>
                 <td>ENERO</td>
                 <td>FEBRE</td>
@@ -122,5 +125,7 @@ $html.='<p>EL PAGO DE LA MENSUALIDAD DEBE REALIZARSE AL INICIO DE CADA MES.
         <BR>
         LA NO CANCELACION IMPEDIRA SU PASO AL SIGUIENTE MODULO.</P><br>';
 $html.='<P align="center"><b>"Y TODO LO QUE HAGAIS, HACEDLO COMO PARA EL SEÑOR"</b></P>';
+
+$mpdf->WriteHTML($css,\Mpdf\HTMLParserMode::HEADER_CSS);
 $mpdf->WriteHTML($html);
 $mpdf->Output();

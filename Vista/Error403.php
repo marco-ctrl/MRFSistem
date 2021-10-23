@@ -40,7 +40,7 @@
                         <p class="lead text-gray-800 mb-5">Usted no tiene permiso para acceder al
                             directorio solicitado. No existe un documento índice,
                             o el directorio está protegido contra lectura.</p>
-                        <p class="text-gray-500 mb-0">Error 403</p>
+                        <p class="text-gray-500 mb-0">¡Acceso Prohibido!</p>
                         <a href="/MRFSistem/Vista/FRM_principal">&larr; volver al inicio</a>
                     </div>
 
