@@ -30,8 +30,8 @@
                 </div>
                 <div class="form-group">
                     <label>Fecha de Nacimiento</label>
-                    <input type="date" id="txt_fecnac" min="1920-01-01" max="2020-01-01"
-                        placeholder="Fecha de Nacimiento" class="form-control"></input>
+                    <input type="date" id="txt_fecnac" min="1920-01-01" max="<?php echo date('Y-m-d'); ?>"
+                        value="<?php echo date('Y-m-d'); ?>" class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label>Lugar de Nacimiento</label>
@@ -51,9 +51,9 @@
                 </div>
                 <div class="form-group">
                     <label>Profesion</label>
-                    <select id="cbx_profesion" class="form-control">
-
-                    </select>
+                    <input type="text" id="inp_profesion" list="dat_profesion" class="form-control"/>
+                    <datalist id="dat_profesion">
+                    </datalist>
                 </div>
 
             </form>
@@ -70,22 +70,22 @@
                 </div>
                 <div class="form-group">
                     <label>Fecha de Conversion</label>
-                    <input type="date" id="dat_feccon" min="1994-01-01" max="2020-01-01" placeholder=""
+                    <input type="date" id="dat_feccon" min="1950-01-01" max="<?php echo date('Y-m-d'); ?>" placeholder=""
                         class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label>Fecha de Bautismo</label>
-                    <input type="date" id="dat_fecbau" min="1994-01-01" max="2020-01-01" placeholder=""
+                    <input type="date" id="dat_fecbau" min="1950-01-01" max="<?php echo date('Y-m-d'); ?>" placeholder=""
                         class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label>Entrada a la Iglesia</label>
-                    <input type="date" id="dat_fecigl" min="1994-01-01" max="2020-01-01" placeholder=""
+                    <input type="date" id="dat_fecigl" min="1994-01-01" max="<?php echo date('Y-m-d'); ?>" placeholder=""
                         class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label>Encuentro Con Dios</label>
-                    <input type="date" id="dat_fecenc" min="1994-01-01" max="2020-01-01" placeholder=""
+                    <input type="date" id="dat_fecenc" min="1994-01-01" max="<?php echo date('Y-m-d'); ?>" placeholder=""
                         class="form-control"></input>
                 </div>
                 <div class="form-group text-center">
@@ -190,7 +190,7 @@ function readFile(input) {
         }
         }
         reader.readAsDataURL(input.files[0]);
-        
+
     }
 }
 

@@ -5,7 +5,8 @@ include '../Conexion/Conexion.php';
 $consulta = "SELECT 
 canompro, 
 pacodpro
-FROM aproion;";
+FROM aproion 
+order by canompro asc;";
 $resultado = mysqli_query($conexion, $consulta);
 
 while ($row = mysqli_fetch_array($resultado)) {

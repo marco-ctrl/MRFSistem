@@ -7,6 +7,19 @@ $(document).ready(function () {
     var funMiembro;
     var corre1;
     var corre2;
+
+    //fecha actual
+    var hoy = new Date().format('Y-m-d');
+    Fecha();
+
+    function Fecha() {
+        $('#dat_fecbau').val(hoy);
+        $('#dat_feccon').val(hoy);
+        $('#dat_fecenc').val(hoy);
+        $('#dat_fecigl').val(hoy);
+    }
+
+
     var video = document.getElementById('video');
     var canvas = document.getElementById('canvas');
     const snap = document.getElementById("snap");
@@ -167,24 +180,34 @@ $(document).ready(function () {
 
     $('#btn_guardar').click(function (e) {//permiete guardar Usuario
         CapturarCrecimiento();
-        GuardarMiembro();
+        if (banPro) {
+            agregarProfesion();
+        }
+        else {
+            GuardarMiembro();
+        }
+
         //GuardarMiembroCelula(GuardarMiembro());
-        limpiar();
+        //limpiar();
         Apagar();
         ListarMiembro();
         DeshabilitarFormulario();
+        $('#profile').hide();
+        $('#home').show();
+        banPro = false;
     });
 
     function limpiar() {
         $('#form1').trigger('reset');
         $('#form2').trigger('reset');
         $('#form3').trigger('reset');
+        Fecha();
         const context = canvas.getContext('2d');
         context.clearRect(0, 0, canvas.width, canvas.height);
         ImagenCanvas();
         //DeshabilitarFormulario();
-        $('#profile').hide();
-        $('#home').show();
+        //$('#profile').hide();
+        //$('#home').show();
     }
 
     function ListarMiembro() {//lista usuarios
@@ -258,7 +281,7 @@ $(document).ready(function () {
         $.post('/MRFSistem/AccesoDatos/Miembro/SingleMiembro.php',
             { pacodmie },
             function (responce) {
-                console.log(responce);
+                //console.log(responce);
                 const miembro = JSON.parse(responce);
                 let foto;
                 miembro.forEach(miembro => {
@@ -273,7 +296,7 @@ $(document).ready(function () {
                         $('#txt_direccion').val(miembro.cadirmie),
                         codProfesion = miembro.facodpro,
                         codCiudad = miembro.facodciu,
-                        $('#cbx_profesion').val(miembro.pacodpro),
+                        $('#inp_profesion').val(miembro.canompro),
                         $('#cbx_ciudad').val(miembro.pacodciu),
                         $('#cbx_celula').val(miembro.pacodcel),
                         $('#cbx_funcion').val(miembro.cafunmie),
@@ -288,10 +311,10 @@ $(document).ready(function () {
                 //canvas = document.getElementById('canvas');
                 let context = canvas.getContext('2d');
                 imagen.setAttribute('src', foto);
-                imagen.onload=function(){
+                imagen.onload = function () {
                     context.drawImage(imagen, 0, 0, 140, 120);
                 }
-                
+
                 edit = true;
             });
     });
@@ -319,22 +342,54 @@ $(document).ready(function () {
             type: 'GET',
             success: function (response) {
                 let profesion = JSON.parse(response);
-                let plantilla = '<option value=0>Eligir Profesion</option>';
+                let i = 0;
+                plantilla = '';
                 profesion.forEach(profesion => {
-                    plantilla += `<option value="${profesion.pacodpro}" class="cod-profesion">${profesion.canompro}</option>`;
+                    plantilla += `<option data-codigo="${profesion.pacodpro}" data-nombre="${profesion.canompro}" value="${profesion.canompro}"></option>`;
                 });
-                $('#cbx_profesion').html(plantilla);
+                $('#dat_profesion').html(plantilla);
             }
         });
 
+
     }
 
-    $('#cbx_profesion').change(function (e) {//asigar codigo profesion
-        codProfesion = $('#cbx_profesion').val();
-        console.log("codigo profesion " + codProfesion);
-        e.preventDefault();
+    var banPro = false; //boolean para agregar nueva profesion
+    var nomPro = '';
 
+    $('#inp_profesion').on('input', function () {//asigar codigo profesion
+        var val = $('#inp_profesion').val().toUpperCase();
+        var ejemplo = $('#dat_profesion').find('option[value="' + val + '"]').data('codigo');
+        var ejemplo1 = $('#dat_profesion').find('option[value="' + val + '"]').data('nombre');
+
+        if (ejemplo === undefined) {
+            console.log("EmpName no está definido");
+            banPro = true;
+            nuevaProfesion();
+            nomPro = val;
+        } else {
+            codProfesion = ejemplo;
+            nomPro = ejemplo1;
+            banPro = false;
+            console.log("EmpName está definido");
+        }
     });
+
+    function agregarProfesion() {
+        const postData = {
+            pacodpro: codProfesion,
+            canompro: nomPro
+        }
+        let url = '/MRFSistem/AccesoDatos/Profesion/AgregarProfesion.php';
+
+        console.log(codProfesion, $('#inp_profesion').val().toUpperCase());
+        $.post(url, postData, function (response) {
+            if (response == "AgregaProfesion") {
+                GuardarMiembro();
+                actualizarSecuencia("PRO", correPro);
+            }
+        });
+    }
 
     function ListarCelula() {//listar celula
         $.ajax({
@@ -374,9 +429,8 @@ $(document).ready(function () {
         });
     }
 
-    function GuardarMiembroCelula()
-    {
-        const postData={
+    function GuardarMiembroCelula() {
+        const postData = {
             pacodmcl: codMieCel,
             cafunmie: funMiembro,
             caestmcl: true,
@@ -384,14 +438,14 @@ $(document).ready(function () {
             facodmie: codMiembro
         };
 
-        let url='/MRFSistem/AccesoDatos/MieCel/AgregarMieCel.php';
-        $.post(url,postData,function (response) {
+        let url = '/MRFSistem/AccesoDatos/MieCel/AgregarMieCel.php';
+        $.post(url, postData, function (response) {
             console.log(response);
             if (!edit && response == 'registra') {
                 actualizarSecuencia("MCL", corre2);
             }
             if (edit && response == 'modificado') {
-            
+
             }
             edit = false;
             //ListarMiembro();
@@ -400,7 +454,7 @@ $(document).ready(function () {
     }
 
     function GuardarMiembro() {
-       
+
         //const canvas = document.getElementById('canvas');
         let foto = canvas.toDataURL('image/jpeg', 1.0);
         //console.log(foto);
@@ -424,27 +478,27 @@ $(document).ready(function () {
             cafecenc: getCafecenc(),
             pacodcre: codMiembro
         };
-
+        console.log(postData);
         let url = edit === false ?
             '/MRFSistem/AccesoDatos/Miembro/AgregarMiembro.php' :
             '/MRFSistem/AccesoDatos/Miembro/ModificarMiembro.php';
 
-        $.post(url,postData,function (response) {
-                console.log(response);
-                if (!edit && response == 'registra') {
-                    actualizarSecuencia("MBR", corre1);
-                    GuardarMiembroCelula();
-                    MostrarMensaje("Datos de Miembro guardado correctamente", "success");
-                }
-                if (edit && response == 'modificado') {
-                    MostrarMensaje("Datos de Miembro modificados correctamente", "success");
+        $.post(url, postData, function (response) {
+            console.log(response);
+            if (!edit && response == 'registra') {
+                actualizarSecuencia("MBR", corre1);
+                GuardarMiembroCelula();
+                MostrarMensaje("Datos de Miembro guardado correctamente", "success");
+            }
+            if (edit && response == 'modificado') {
+                MostrarMensaje("Datos de Miembro modificados correctamente", "success");
 
-                }
-                edit = false;
-                ListarMiembro();
-                
-            });
-        
+            }
+            edit = false;
+            ListarMiembro();
+
+        });
+
     }
 
     function CapturarCrecimiento() {
@@ -472,7 +526,7 @@ $(document).ready(function () {
 
     $('#btn_cancelar').click(function (event) {
         Apagar();
-        edit=false;
+        edit = false;
         $('#profile').hide();
         $('#home').show();
         limpiar();
@@ -482,7 +536,7 @@ $(document).ready(function () {
     $("#btn_nuevo").click(function (event) {
         $('#home').hide();
         $('#profile').show();
-        //limpiar();
+        limpiar();
         ImagenCanvas();
         habilitarFormulario();
         document.getElementById("txt_ci").focus();
@@ -497,7 +551,7 @@ $(document).ready(function () {
             obtenerCorrelativo("MBR");
             setCorrelativo(obtenerSiguinete("MBR"));
         }
-        corre1=getCorrelativo();
+        corre1 = getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codMiembro = getCodigo() + '-' + num;
         //console.log(codMiembro+' correlativo '+corre1);
@@ -512,10 +566,10 @@ $(document).ready(function () {
             obtenerCorrelativo("MCL");
             setCorrelativo(obtenerSiguinete("MCL"));
         }
-        corre2=getCorrelativo();
+        corre2 = getCorrelativo();
         num1 = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num1);
         codMieCel = getCodigo() + '-' + num1;
-        console.log(codMieCel+' correlativo '+corre2);
+        console.log(codMieCel + ' correlativo ' + corre2);
     });
 
     function ObtenerNumeroCorrelativo(numero, num) {//sirve para obtener numero correlativo
@@ -592,5 +646,28 @@ $(document).ready(function () {
         $("#cbx_funcion").attr("disabled", true);
         $("#btn_nuevo").attr("disabled", false);
     }
+
+    //funcion para crear nueva profesion
+    var correPro;
+
+    function nuevaProfesion() {
+        let num = "";
+        verificarSecuencia("PRO");
+        if (getBan() != "true") {
+            setCodigo("PRO");
+            setCorrelativo(1);
+        }
+        else {
+            setCodigo("PRO");
+            obtenerCorrelativo("PRO");
+            setCorrelativo(obtenerSiguinete("PRO"));
+        }
+        correPro = getCorrelativo();
+        num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
+        codProfesion = getCodigo() + '-' + num;
+        console.log(codProfesion);
+
+    }
+
 
 });

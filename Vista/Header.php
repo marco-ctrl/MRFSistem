@@ -4,7 +4,10 @@ session_start();
 if(empty($_SESSION['active'])){
   header('location: ../');
 }
-//echo $_SESSION['canomusu'];
+
+//establecier zona horaria
+date_default_timezone_set('UTC');
+date_default_timezone_set('America/Lima'); 
 ?>
 
 <html>
@@ -18,7 +21,7 @@ if(empty($_SESSION['active'])){
     <meta name="author" content="">
 
     <title>MRFSistem</title>
-
+    <link rel="shortcut icon" href="/MRFSistem/img/iglesia.png">
     <!-- Custom fonts for this template-->
     <link href="/MRFSistem/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link

@@ -7,6 +7,10 @@ $(document).ready(function () {
     var edit = false;
     var corre;
 
+    //fechaActual
+    var hoy=new Date().format('Y-m-d');
+    $('#dat_matriculacion').val(hoy),
+
     //Listar Datos//
     listarMatriculacion();
     ListarAlumno();

@@ -1,4 +1,14 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+
+<?php include 'Header.php' ?>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
@@ -42,13 +52,9 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Archivos:</h6>
-                <a class="collapse-item" href="FRM_Miembro"><i class="fas fa-users"></i> Miembros</a>
-                <a class="collapse-item" href="FRM_Usuario"><i class="fas fa-user"></i> Usuarios</a>
-                <a class="collapse-item" href="FRM_Celula"><i class="fas fa-home"></i> Celula</a>
-                <a class="collapse-item" href="FRM_Finanzas"><i class="fas fa-file-invoice-dollar"></i>
-                    Control de Finazas</a>
-                <a class="collapse-item" href="FRM_EscLideres"><i class="fas fa-school"></i> Escuela de
-                    Lideres</a>
+                <a class="collapse-item" href="#" id="mn_ingresos"><i class="fas fa-donate"></i> Ingresos</a>
+                <a class="collapse-item" href="#" id="mn_egresos"><i class="fas fa-hand-holding-usd"></i> Egresos</a>
+                
             </div>
         </div>
     </li>
@@ -63,16 +69,10 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header"> Reportes:</h6>
-                <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Informacion de
-                    Miembro</a>
-                <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Informacion de
-                    Usuarios</a>
-                <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Reporte de
-                    Celulas</a>
-                <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Reporte de
-                    Aportes</a>
-                <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Escuela
-                    de Lideres</a>
+                <a class="collapse-item" id="mn_infAlumno" href="#"><i class="far fa-file-pdf"></i> Informacion Alumno</a>
+                <a class="collapse-item" id="mn_controlPago" href="#"><i class="far fa-file-pdf"></i> Control de Pago</a>
+                <a class="collapse-item" id="mn_controlAsistencia" href="#"><i class="far fa-file-pdf"></i> Control de Asistencia</a>
+                
             </div>
         </div>
     </li>
@@ -95,7 +95,7 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Base de Datos</h6>
-                <a class="collapse-item" href="Respaldo.php"><i class="fas fa-server"></i> Respaldar BD</a>
+                <a class="collapse-item" href="login.html"><i class="fas fa-server"></i> Respaldar BD</a>
                 <a class="collapse-item" href="register.html"><i class="fas fa-server"></i> Restaurar BD</a>
             </div>
         </div>
@@ -115,3 +115,41 @@
     </div>
 
 </ul>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Top Bar -->
+                <?php include 'NavBar.php' ?>
+
+                <div class="container-fluid" id="finanzas">
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Footer -->
+            <?php include 'Footer.php'?>
+
+        </div>
+    </div>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <?php include 'LogoutModal.php'?>
+
+    <?php include 'Scripts.php'?>
+    <script src="/MRFSistem/Script/App.js"></script>
+
+
+</body>
+

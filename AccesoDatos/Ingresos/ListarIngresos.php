@@ -3,30 +3,36 @@
 include '../Conexion/Conexion.php';
 
 $consulta = "SELECT caestapo, 
-                    cafecapo, 
-                    cahorapo, 
-                    pacodapo, 
-                    facodusu, 
-                    camontot, 
-                    canommie, 
-                    capatmie, 
-                    camatmie
-            FROM public.aapotes, aapoeco, ausurio, amiebro
-            where pacodapo=pacodeco
-            and facodusu=pacodusu
-            and facodmie=pacodmie
-            and caestapo='true'";
+catiping,
+cafecapo, 
+cahorapo, 
+pacodapo, 
+facodusu, 
+format(camoning, 2), 
+canommie, 
+capatmie, 
+camatmie,
+cafecing
+FROM aconfin, aconing, ausurio, amiebro
+where pacodapo=pacodeco
+and facodusu=pacodusu
+and facodmie=pacodmie
+and caestapo=true
+order by pacodapo desc";
+
 $resultado = mysqli_query($conexion, $consulta);
 
 while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('caestapo' => $row['caestapo'],
+                    'catiping' => $row['catiping'],
                     'cafecapo' => $row['cafecapo'],
                     'cahorapo' => $row['cahorapo'],
                     'pacodapo' => $row['pacodapo'],
-                    'camontot' => $row['camontot'],
+                    'camoning' => $row['format(camoning, 2)'],
                     'canommie' => $row['canommie'],
                     'capatmie' => $row['capatmie'],
-                    'camatmie' => $row['camatmie']
+                    'camatmie' => $row['camatmie'],
+                    'cafecing' => $row['cafecing']
                     );
 }
 mysqli_close($conexion);

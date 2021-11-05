@@ -171,8 +171,7 @@ if(empty($_SESSION['active'])){
                 </div>
                 <div class="form-group">
                     <label>Fecha de Matriculacion</label>
-                    <input type="datetime" class="form-control" id="dat_matriculacion"
-                        value="<?php echo date("d/m/y");?>" disabled></input>
+                    <input type="datetime" class="form-control" id="dat_matriculacion" disabled></input>
                 </div>
                 <div class="form-group">
                     <label>Hora de Matriculacion</label>

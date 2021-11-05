@@ -57,7 +57,7 @@
           header('location: Vista/FRM_EscLideres.php');
         }
         if($_SESSION['catipusu']=='TESORERO'){
-          header('location: Vista/FRM_Aportes.php');
+          header('location: Vista/FRM_Finanzas.php');
         }
         
       }
@@ -82,7 +82,7 @@
     <meta name="author" content="">
 
     <title>MRFSistem - Login</title>
-
+    <link rel="shortcut icon" href="img/iglesia.png">
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link

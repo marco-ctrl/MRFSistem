@@ -7,6 +7,10 @@ $(document).ready(function () {
     var edit = false;
     var corre;
 
+    //Fecha Actual
+    var hoy=new Date().format('Y-m-d');
+    $('#dat_fecini').val(hoy),
+
     //Listar Datos//
     listarMateria();
     ListarMaestro();

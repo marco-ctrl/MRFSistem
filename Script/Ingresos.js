@@ -5,7 +5,14 @@ $(document).ready(function () {
     var corre;
     var edit=false;
 
-    ListarAporte();
+    
+    //Fecha Actual
+    var hoy=new Date().format('Y-m-d');
+    $('#dat_maximo').val(hoy);
+    $('#dat_ingreso').val(hoy);
+    $('#dat_aporte').val(hoy);
+    
+    ListarIngresos();
 
     $('#formulario').hide();//ocultar formulario
 
@@ -23,7 +30,7 @@ $(document).ready(function () {
             let buscar = $('#txt_buscar').val().toUpperCase();
             let plantilla = '';
             $.ajax({
-                url: '/MRFIglesiaBermejo/AccesoDatos/Contenido/BuscarContenido.php',
+                url: '/MRFSistem/AccesoDatos/Ingresos/BuscarIngresos.php',
                 type: 'POST',
                 data: { buscar },
                 success: function (response) {
@@ -33,10 +40,10 @@ $(document).ready(function () {
                         cel.forEach(cel => {
                             plantilla = MostrarTabla(plantilla, cel);
                         });
-                        $('#tb_contenido').html(plantilla);
+                        $('#tb_Ingresos').html(plantilla);
                     }
                     else {
-                        $('#tb_contenido').html(plantilla);
+                        $('#tb_Ingresos').html(plantilla);
                         let mensaje = `<div class="alert alert-dismissible alert-warning">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <strong>La Materia ${buscar} no se encuentra registrado en la base de datos</strong></div>`;
@@ -51,19 +58,56 @@ $(document).ready(function () {
         }
         else {
             $('#mensaje').hide();
-            ListarAporte();
+            ListarIngresos();
         }
     });
 
-    function ListarAporte() {//listar Contenido
+
+    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de miembros
+        if ($('#txt_buscar').val()) {
+            let buscar = $('#txt_buscar').val().toUpperCase();
+            let plantilla = '';
+            $.ajax({
+                url: '/MRFSistem/AccesoDatos/Ingresos/BuscarIngresos.php',
+                type: 'POST',
+                data: { buscar },
+                success: function (response) {
+                    if (response != "no encontrado") {
+                        let cel = JSON.parse(response);
+
+                        cel.forEach(cel => {
+                            plantilla = MostrarTabla(plantilla, cel);
+                        });
+                        $('#tb_Ingresos').html(plantilla);
+                    }
+                    else {
+                        $('#tb_Ingresos').html(plantilla);
+                        let mensaje = `<div class="alert alert-dismissible alert-warning">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>La Materia ${buscar} no se encuentra registrado en la base de datos</strong></div>`;
+                        $('#mensaje').html(mensaje);
+                        $('#mensaje').show();
+                    }
+                },
+                error: function (xhr, status) {
+                    alert('error al buscar miembro');
+                }
+            });
+        }
+        else {
+            $('#mensaje').hide();
+            ListarIngresos();
+        }
+    });
+
+    function ListarIngresos() {//listar Ingresos
         $.ajax({
-            url: '/MRFIglesiaBermejo/AccesoDatos/AporteEconomico/ListarAporte.php',
+            url: '/MRFSistem/AccesoDatos/Ingresos/ListarIngresos.php',
             type: 'GET',
             success: function (response) {
-                let contenido = JSON.parse(response);
+                let Ingresos = JSON.parse(response);
                 let plantilla = '';
-                console.log(contenido);
-                contenido.forEach(con => {
+                Ingresos.forEach(con => {
                     plantilla = MostrarTabla(plantilla, con);
                 });
                 $('#tb_economico').html(plantilla);
@@ -74,87 +118,88 @@ $(document).ready(function () {
     function MostrarTabla(plantilla, usu) {//////Mostrar Tabla///////////
         plantilla +=
             `<tr UserDocu="${usu.pacodapo}" class="table-light">
-                <td>${usu.pacodapo}</td>
-                <td>${usu.camontot}</td>
-                <td>${usu.cafecapo} ${usu.cahorapo} </td>
+                <td>${usu.catiping}</td>
+                <td>${usu.camoning}</td>
+                <td>${usu.cafecing}</td>
                 <td>${usu.canommie} ${usu.capatmie} ${usu.camatmie} </td>
+                <!--<td>
+                    <a class="baja-aporte btn btn-danger">
+                    <i class="fas fa-trash-alt"></i></a>
+                </>-->
                 <td>
-                    <button class="baja-aporte btn btn-danger">
-                    <i class="fas fa-trash-alt gi-2x"></i></button>
-                </>
-                <td style="width:15%">
-                    <button class="modificar-aporte btn btn-secondary">
-                    <i class="far fa-edit gi-2x"></i></button>
+                    <a class="modificar-aporte btn btn-secondary">
+                    <i class="far fa-edit"></i></a>
                 </td>
             </tr>`
         return plantilla;
     }
 
-    $(document).on('click', '.modificar-contenido', function () {//modifica usuario
+    $(document).on('click', '.modificar-aporte', function () {//modifica usuario
         $('#lista').hide();
         $('#formulario').show();
         //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
-        let pacodcon = $(elemento).attr('UserDocu');
-        $.post('/MRFIglesiaBermejo/AccesoDatos/Contenido/SingleContenido.php',
-            { pacodcon }, function (responce) {
+        let pacodapo = $(elemento).attr('UserDocu');
+        $.post('/MRFSistem/AccesoDatos/Ingresos/SingleIngresos.php',
+            { pacodapo }, function (responce) {
                 const celula = JSON.parse(responce);
                 celula.forEach(con => {
-                    codContenido = con.pacodcon,
-                    $('#txt_contenido').val(con.canommat),
-                    $('#txt_descripcion').val(con.cadescon)
+                    codEconomico = con.pacodapo,
+                    $('#dat_ingreso').val(con.cafecing),
+                    $('#txt_cantidad').val(con.camoning),
+                    $('#cbx_tipIng').val(con.catiping)
                     });
                 //contex.hide();
-                document.getElementById("txt_contenido").focus();
+                document.getElementById("cbx_tipIng").focus();
                 edit = true;
             });
     });
 
-    $(document).on('click', '.baja-contenido', function () {//elimina usuario
+    $(document).on('click', '.baja-Ingresos', function () {//elimina usuario
         if (confirm("Seguro que desea dar de baja esta materia")) {
             let elemento = $(this)[0].parentElement.parentElement;
-            let pacodcon = $(elemento).attr('UserDocu');
-            $.post('/MRFIglesiaBermejo/AccesoDatos/Contenido/DarBaja.php',
-                { pacodcon }, function (responce) {
+            let pacodapo = $(elemento).attr('UserDocu');
+            $.post('/MRFSistem/AccesoDatos/Ingresos/DarBaja.php',
+                { pacodapo }, function (responce) {
                     if (responce == 'baja') {
-                        ListarContenido();
-                        MostrarMensaje("Contenido dado de baja", "warning");
+                        ListarIngresos();
+                        MostrarMensaje("Ingresos dado de baja", "warning");
                     }
 
                 });
         }
     });
 
-    $('#btn_nuevo').click(function (e) {//nuevo registro de Contenido
+    $('#btn_nuevo').click(function (e) {//nuevo registro de Ingresos
         $('#lista').hide();
         $('#formulario').show();
         let num = "";
-        verificarSecuencia("APE");
+        verificarSecuencia("ING");
         if (getBan() != "true") {
-            setCodigo("APE");
+            setCodigo("ING");
             setCorrelativo(1);
         }
         else {
-            setCodigo("APE");
-            obtenerCorrelativo("APE");
-            setCorrelativo(obtenerSiguinete("APE"));
+            setCodigo("ING");
+            obtenerCorrelativo("ING");
+            setCorrelativo(obtenerSiguinete("ING"));
         }
         corre=getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codEconomico = getCodigo() + '-' + num;
         console.log(codEconomico);
         $("#btn_nuevo").attr("disabled", true);
-        document.getElementById("txt_cantidad").focus();
+        document.getElementById('cbx_tipIng').focus();
     });
 
     $('#btn_cancelar').click(function (e) {
         Limpiar();
-
+        edit=false;
     });
 
     $('#btn_guardar').click(function (e){
-        GuardarAporteEco();
-        Limpiar();
+        GuardarIngresos();
+        //Limpiar();
     });
 
     function Limpiar() {//limpiar formulario
@@ -165,35 +210,38 @@ $(document).ready(function () {
         $('#lista').show();
     }
 
-    function GuardarAporteEco() {//guardar contenido
+    function GuardarIngresos() {//guardar Ingresos
         const postData = {
             pacodapo: codEconomico,
+            cafecing: $('#dat_ingreso').val(),
             cafecapo: $('#dat_aporte').val(),
             cahorapo: $('#hor_aporte').val(),
             facodusu: $('#txt_codUsuario').val(),
-            camontot: $('#txt_cantidad').val(),
+            camoning: $('#txt_cantidad').val(),
+            catiping: $('#cbx_tipIng').val(),
             pacodeco: codEconomico
         };
         console.log(postData);
         let url = edit === false ?
-            '/MRFIglesiaBermejo/AccesoDatos/AporteEconomico/AgregarAporte.php' :
-            '/MRFIglesiaBermejo/AccesoDatos/AporteEconomico/ModificarAporte.php';
+            '/MRFSistem/AccesoDatos/Ingresos/AgregarIngresos.php' :
+            '/MRFSistem/AccesoDatos/Ingresos/ModificarIngresos.php';
 
         $.post(url, postData, function (response) {
             console.log(response);
             if (!edit && response == 'registra') {
-                actualizarSecuencia("APE", corre);
-                MostrarMensaje("Datos de Materia guardados correctamente", "success");
+                actualizarSecuencia("ING", corre);
+                MostrarMensaje("Datos de Ingreso guardados correctamente", "success");
 
             }
             if (edit && response == 'modificado') {
-                MostrarMensaje("datos de Materia modificados correctamente", "success")
+                MostrarMensaje("datos de Ingreso modificados correctamente", "success")
             }
             edit = false;
            
             $('#formulario').hide();
             $('#lista').show();
-            ListarAporte();
+            ListarIngresos();
+            Limpiar();
         });
         
     }
