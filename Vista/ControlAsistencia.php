@@ -7,8 +7,8 @@
                 <table class="table table-hover table-sm">
                     <thead class="bg-primary text-white">
                         <tr>
-                            <td>CODIGO</td>
                             <td>MATERIA</td>
+                            <td>PARALELO</td>
                             <td>GESTION</td>
                             <td>MAESTRO</td>
                             <td>FECHA DE INICIO</td>

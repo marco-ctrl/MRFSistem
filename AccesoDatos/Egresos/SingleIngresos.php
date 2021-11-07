@@ -2,6 +2,8 @@
 
 include '../Conexion/Conexion.php';
 
+$pacodapo = $_POST['pacodapo'];
+
 $consulta = "SELECT caestapo, 
 catiping,
 cafecapo, 
@@ -18,7 +20,8 @@ where pacodapo=pacodeco
 and facodusu=pacodusu
 and facodmie=pacodmie
 and caestapo=true
-order by cafecapo desc";
+and pacodapo='{$pacodapo}'
+order by pacodapo desc";
 
 $resultado = mysqli_query($conexion, $consulta);
 

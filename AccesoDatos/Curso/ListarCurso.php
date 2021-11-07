@@ -13,7 +13,8 @@ facodmae,
 canommat,
 canommie,
 capatmie,
-camatmie
+camatmie,
+caparcur
 	FROM acursom, 
 		aconido, 
 		amiebro,
@@ -37,7 +38,8 @@ while ($row = mysqli_fetch_array($resultado)) {
                     'canommat' => $row['canommat'],
                     'canommie' => $row['canommie'],
                     'capatmie' => $row['capatmie'],
-                    'camatmie' => $row['camatmie']
+                    'camatmie' => $row['camatmie'],
+                    'caparcur' => $row['caparcur']
                     );
 }
 if($json!=null){

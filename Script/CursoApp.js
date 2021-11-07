@@ -68,7 +68,7 @@ $(document).ready(function () {
                     if (response != "no encontrado") {
                         let cel = JSON.parse(response);
 
-                        cel.forEach(cel => {
+                        cur.forEach(cur => {
                             plantilla = MostrarTabla(plantilla, cel);
                         });
                         $('#tb_curso').html(plantilla);
@@ -107,17 +107,18 @@ $(document).ready(function () {
         let pacodcur = $(elemento).attr('UserDocu');
         $.post('/MRFSistem/AccesoDatos/Curso/SingleCurso.php',
             { pacodcur }, function (responce) {
-                const celula = JSON.parse(responce);
-                console.log(celula);
-                celula.forEach(cel => {
-                    codCurso = cel.pacodcur,
-                        codMaestro = cel.facodmae,
-                        codMateria = cel.facodcon,
-                        $('#txt_gestion').val(cel.cagescur),
-                        $('#txt_descripcion').val(cel.cadescur),
-                        $('#cbx_materia').val(cel.facodcon),
-                        $('#dat_fecini').val(cel.cafecini),
-                        $('#txt_maestro').val(cel.canommie + " " + cel.capatmie + " " + cel.camatmie)
+                const curso = JSON.parse(responce);
+                console.log(curso);
+                curso.forEach(cur => {
+                    codCurso = cur.pacodcur,
+                        codMaestro = cur.facodmae,
+                        codMateria = cur.facodcon,
+                        $('#txt_gestion').val(cur.cagescur),
+                        $('#txt_descripcion').val(cur.cadescur),
+                        $('#cbx_materia').val(cur.facodcon),
+                        $('#dat_fecini').val(cur.cafecini),
+                        $('#txt_maestro').val(cur.canommie + " " + cur.capatmie + " " + cur.camatmie),
+                        $('#cbx_paralelo').val(cur.caparcur)
                 });
                 //contex.hide();
                 document.getElementById("cbx_materia").focus();
@@ -148,7 +149,7 @@ $(document).ready(function () {
     });
 
 
-    $('#btn_nuevo').click(function (e) {//nuevo registro de Celula 
+    $('#btn_nuevo').click(function (e) {//nuevo registro de curso 
         $('#lista').hide();
         $('#formulario').show();
         let num = "";
@@ -176,16 +177,16 @@ $(document).ready(function () {
     });
 
     //Funciones//////
-    function ListarCurso() {//listar Celula
+    function ListarCurso() {//listar curso
         $.ajax({
             url: '/MRFSistem/AccesoDatos/Curso/ListarCurso.php',
             type: 'GET',
             success: function (response) {
                 let plantilla = '';
                 if (response != "no encontrado") {
-                    let celula = JSON.parse(response);
+                    let curso = JSON.parse(response);
                     
-                    celula.forEach(usu => {
+                    curso.forEach(usu => {
                         plantilla = MostrarTabla(plantilla, usu);
                     });
                     $('#tb_curso').html(plantilla);
@@ -202,6 +203,7 @@ $(document).ready(function () {
             `<tr UserDocu="${cur.pacodcur}" class="table-light">
                 <td>${cur.pacodcur}</td>
                 <td>${cur.canommat}</td>
+                <td>${cur.caparcur}</td>
                 <td>${cur.cagescur}</td>
                 <td>${cur.canommie} ${cur.capatmie} ${cur.camatmie}</td>
                 <td>${cur.cafecini}</td>
@@ -254,7 +256,8 @@ $(document).ready(function () {
             cagescur: $('#txt_gestion').val(),
             cafecini: $('#dat_fecini').val(),
             caestcur: true,
-            cadescur: $('#txt_descripcion').val()
+            cadescur: $('#txt_descripcion').val(),
+            caparcur: $('#cbx_paralelo').val()
         };
         console.log(postData);
         let url = edit === false ?
@@ -309,6 +312,7 @@ $(document).ready(function () {
     function Limpiar() {//limpiar formulario
         $('#form1').trigger('reset');
         $('#form2').trigger('reset');
+        $('#dat_fecini').val(hoy),
         $("#btn_nuevo").attr("disabled", false);
         $('#formulario').hide();
         $('#lista').show();

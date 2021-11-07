@@ -85,7 +85,8 @@
                                     <tr>
                                         <td>NOMBRE</td>
                                         <td>APELLIDO</td>
-                                        <td style="width:15%">SELECCIONAR</td>
+                                        <td>FUNCION</td>
+                                        <td>SELECCIONAR</td>
                                     </tr>
                                 </thead>
                                 <tbody id="tb_miembro">

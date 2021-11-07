@@ -1,5 +1,4 @@
-
-    <?php
+<?php
 session_start();
 
 if (empty($_SESSION['active'])) {
@@ -15,7 +14,7 @@ if (empty($_SESSION['active'])) {
         <div class="col-md-4 p-3">
             <button type="button" id="btn_nuevo" class="btn btn-primary btn-block
                 text-center"><i class="fas fa-plus-circle"></i>
-                Nuevo Ingreso
+                Nuevo Egreso
             </button>
         </div>
 
@@ -26,7 +25,7 @@ if (empty($_SESSION['active'])) {
             </div>
              <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h5 class="m-0 font-weight-bold text-primary">Lista de Ingreso Economicos</h5>
+                            <h5 class="m-0 font-weight-bold text-primary">Lista de Egreso Economicos</h5>
                         </div>
                         <div class="card-body">
                         <form action=# class="row justify-content-center p-1 text-center">
@@ -84,25 +83,19 @@ if (empty($_SESSION['active'])) {
             <div class="col-md-5">
                 <form id="form1" clas="p-2">
                     <div class="form-group">
-                        <label>Item</label>
-                        <select id="cbx_tipIng" class="form-control">
-                            <option value="0">Seleccionar Item</option>
-                            <option value="DIEZMOS">DIEZMOS</option>
-                            <option value="OFRENDAS">OFRENDAS</option>
-                            <option value="OFRENDA DE CELULAS">OFRENDA DE CELULAS</option>
-                            <option value="OFRENDA DE JOVENES">OFRENDA DE JOVENES</option>
-                            <option value="OFRENDA AYUNO">OFRENDA AYUNO</option>
-                            <option value="OTROS INGRESOS">OTROS INGRESOS</option>
-                        </select>
+                        <label>Descripcion</label>
+                        <textarea id="txt_descripcion" class="form-control">
+                            
+                        </textarea>
                     </div>
                     <div class="form-group">
-                        <label>Cantidad de Ingreso</label>
+                        <label>Cantidad de Egreso</label>
                         <input type="number" id="txt_cantidad" min="0" placeholder="Cantidad en BS."
                             class="form-control"></input>
                     </div>
                     <div class="form-group">
-                        <label>Fecha de Ingreso</label>
-                        <input type="date" class="form-control" id="dat_ingreso"></input>
+                        <label>Fecha de Egreso</label>
+                        <input type="date" class="form-control" id="dat_Egreso"></input>
                     </div>
                     <div class="form-group">
                         <label>Fecha de Registro</label>
@@ -139,11 +132,11 @@ if (empty($_SESSION['active'])) {
             <div class="modal-footer col-md-10">
                 <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
                                     text-center">
-                    <i class="far fa-save ListarIngresos"></i>
+                    <i class="far fa-save ListarEgresos"></i>
                     Guardar
                 </button>
                 <button type="button" id="btn_cancelar" class="btn btn-danger btn-lg
-                        text-center"><i class="far fa-window-close ListarIngresos"></i>
+                        text-center"><i class="far fa-window-close ListarEgresos"></i>
                     Cancelar
                 </button>
             </div>
@@ -157,4 +150,4 @@ if (empty($_SESSION['active'])) {
 <!-- Page level custom scripts
 <script src="/MRFSistem/js/demo/datatables-demo.js"></script>-->
 <script src="/MRFSistem/Script/CodigoApp.js"></script>
-<script src="/MRFSistem/Script/Ingresos.js"></script>
+<script src="/MRFSistem/Script/Egresos.js"></script>

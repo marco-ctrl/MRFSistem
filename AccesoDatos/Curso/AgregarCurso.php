@@ -11,6 +11,7 @@ include '../Conexion/Conexion.php';
     $cafecini = $_POST['cafecini'];
     $caestcur = $_POST['caestcur'];
     $cadescur = $_POST['cadescur'];
+    $caparcur = $_POST['caparcur'];
     
     $sql = "INSERT INTO acursom(
         cagescur, 
@@ -19,7 +20,8 @@ include '../Conexion/Conexion.php';
         cafecini, 
         pacodcur, 
         facodcon, 
-        facodmae)    
+        facodmae,
+        caparcur)    
         VALUES (
         '{$cagescur}', 
         '{$cadescur}',
@@ -27,7 +29,8 @@ include '../Conexion/Conexion.php';
         '{$cafecini}',
         '{$pacodcur}',
         '{$facodcon}',
-        '{$facodmae}');";
+        '{$facodmae}',
+        '{$caparcur}');";
     $stm = mysqli_query($conexion, $sql);
 //}
 if ($stm) {

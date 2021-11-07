@@ -21,7 +21,8 @@ facodmae,
 canommat,
 canommie,
 capatmie,
-camatmie
+camatmie,
+caparcur
 	FROM acursom, 
 		aconido, 
 		amiebro,
@@ -41,7 +42,7 @@ $html = '<h3>ESCUELA DE LIDERES - IGLESIA "BERMEJO"</h3>
         <H4>Bermejo - Bolivia</H4>';
 $html .= '<table>
         <tr>
-            <td colspan="2">'.$curso['canommat'].'<br>Gestion: '.$curso['cagescur'].'</td>
+            <td colspan="2">'.$curso['canommat'].''.$curso['caparcur'].'<br>Gestion: '.$curso['cagescur'].'</td>
             <td colspan="8">Docente: '.$curso['canommie'].' '.$curso['capatmie'].' '.$curso['camatmie'].'</td>
             <td colspan="7">Fecha: '.$curso['cafecini'].'</td>
             <td colspan="5" align="center">Nota de Examenes</td>

@@ -22,8 +22,9 @@ $(document).ready(function () {
         if ($('#txt_buscarMiembro').val()) {
             let buscar = $('#txt_buscarMiembro').val().toUpperCase();
             let plantilla = '';
+            //let funMie='and cafunmie="LIDER"';
             $.ajax({
-                url: '/MRFSistem/AccesoDatos/Miembro/BuscarMiembro.php',
+                url: '/MRFSistem/AccesoDatos/Maestro/BuscarMiembro.php',
                 type: 'POST',
                 data: { buscar },
                 success: function (response) {
@@ -35,6 +36,7 @@ $(document).ready(function () {
                                 `<tr codMbr="${miembros.pacodmie}" class="table-light">
                             <td>${miembros.canommie}</td> 
                             <td>${miembros.capatmie} ${miembros.camatmie}</td>
+                            <td>${miembros.cafunmie}</td>
                             <td style="width:15%"><button class="agregar-miembro btn btn-primary">
                             <i class="fas fa-user-plus"></i></button></tr>`;
                         });
@@ -44,7 +46,7 @@ $(document).ready(function () {
                         $('#tb_miembro').html(plantilla);
                         let mensaje = `<div class="alert alert-dismissible alert-warning">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Miembro ${buscar} no se encuentra registrado en la base de datos</strong></div>`;
+                        <strong>Miembro ${buscar} no se encuentra registrado en la base de datos o no es Lider de Celula</strong></div>`;
                         $('#mensaje1').html(mensaje);
                         $('#mensaje1').show();
                     }
@@ -222,18 +224,23 @@ $(document).ready(function () {
             url: '/MRFSistem/AccesoDatos/Maestro/ListarMiembro.php',
             type: 'GET',
             success: function (response) {
-                let miembros = JSON.parse(response);
+                console.log(response);
+                if(response!='false'){
+                    let miembros = JSON.parse(response);
                 let plantilla = '';
                 miembros.forEach(miembros => {
                     plantilla +=
                         `<tr codMbr="${miembros.pacodmie}" class="table-light">
                         <td>${miembros.canommie}</td> 
                         <td>${miembros.capatmie} ${miembros.camatmie}</td>
+                        <td>${miembros.cafunmie}</td>
                         <td style="width:15%"><button class="agregar-miembro btn btn-primary" data-dismiss="modal">
                         <i class="fas fa-user-plus "></i></button></td>
                         </tr>`;
                 });
                 $('#tb_miembro').html(plantilla);
+                }
+                
             }
         });
     }

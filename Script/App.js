@@ -28,8 +28,16 @@ $(document).ready(function () {
         $("#escuela").load('ControlPago.php');
     });
 
+    $("#mn_controlAsistencia").click(function(event) {
+        $("#escuela").load('ControlAsistencia.php');
+    });
+
     $("#mn_ingresos").click(function(event) {
         $("#finanzas").load('FRM_Ingresos.php');
+    });
+
+    $("#mn_egresos").click(function(event) {
+        $("#finanzas").load('FRM_Egresos.php');
     });
 
     //imagenes = document.getElementById('imagen');

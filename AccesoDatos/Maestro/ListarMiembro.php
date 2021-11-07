@@ -18,12 +18,15 @@ facodpro,
 pacodpro,
 canompro,
 pacodciu,
-canomciu
-FROM amiebro m, aproion p, aciudad c 
+canomciu,
+cafunmie
+FROM amiebro m, aproion p, aciudad c, amiecel a
 where m.facodpro=p.pacodpro 
 and m.caestmie=true
 and m.facodciu=c.pacodciu
-and m.cabanmae='false'
+and m.pacodmie=a.facodmie
+and a.cafunmie='LIDER'
+and m.cabanmae=false
 order by pacodmie desc LIMIT 15";
 $resultado = mysqli_query($conexion, $consulta);
 
@@ -46,7 +49,8 @@ while ($row = mysqli_fetch_array($resultado)) {
                     'pacodpro' => $row['pacodpro'],
                     'canompro' => $row['canompro'],
                     'pacodciu' => $row['pacodciu'],
-                    'canomciu' => $row['canomciu']);
+                    'canomciu' => $row['canomciu'],
+                    'cafunmie' => $row['cafunmie']);
 }
 if ($json==null){
     echo 'false';

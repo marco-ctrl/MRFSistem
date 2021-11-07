@@ -20,6 +20,7 @@
                         <tr>
                             <td>CODIGO</td>
                             <td>MATERIA</td>
+                            <td>PARALELO</td>
                             <td>GESTION</td>
                             <td>MAESTRO</td>
                             <td>FECHA DE INICIO</td>
@@ -46,9 +47,31 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label>Paralelo</label>
+                    <select id="cbx_paralelo" class="form-control">
+                        <option value="0">Paralelo</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Gestion</label>
+                    <select id="txt_gestion" class="form-control">
+                        <?php 
+                            $gestion=Date('Y');
+                            for ($i=0; $i < 5 ; $i++) { 
+                                echo '<option value="'.$gestion.'">'.$gestion.'</option>';
+                                $gestion=$gestion-1;
+                            }
+                        ?>
+                    </select>
+                </div>
+                <!--<div class="form-group">
                     <label>Gestion</label>
                     <input type="number" id="txt_gestion" placeholder="Gestion" class="form-control" value=""></input>
-                </div>
+                </div>-->
                 <div class="form-group">
                     <label>Fecha de Inicio</label>
                     <input type="date" id="dat_fecini" min="2020-01-01" placeholder="" class="form-control"></input>

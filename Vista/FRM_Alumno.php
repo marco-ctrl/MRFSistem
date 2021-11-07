@@ -121,7 +121,6 @@
                             <option value="DISCIPULO/A">DISCIPULO/A</option>
                             <option value="ASISTENTE">ASISTENTE</option>
                             <option value="ANFITRION">ANFITRION</option>
-                            <option value="LIDER">LIDER</option>
                         </select>
                     </div>
                 </form>

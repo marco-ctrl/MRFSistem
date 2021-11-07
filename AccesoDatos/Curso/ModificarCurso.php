@@ -11,6 +11,7 @@ include '../Conexion/Conexion.php';
     $cafecini = $_POST['cafecini'];
     $caestcur = $_POST['caestcur'];
     $cadescur = $_POST['cadescur'];
+    $caparcur = $_POST['caparcur'];
     
     $sql = "UPDATE acursom
 	SET cagescur='{$cagescur}', 
@@ -18,7 +19,8 @@ include '../Conexion/Conexion.php';
 		caestcur={$caestcur}, 
 		cafecini='{$cafecini}', 
 		facodcon='{$facodcon}', 
-		facodmae='{$facodmae}'
+		facodmae='{$facodmae}',
+        caparcur='{$caparcur}'
 	WHERE pacodcur='{$pacodcur}'";
     $stm = mysqli_query($conexion, $sql);
 //}

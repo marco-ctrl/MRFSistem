@@ -13,7 +13,7 @@ cadirmie,
 caestmie, 
 ceestciv, 
 cafecnac, 
-cafotmie, 
+caurlfot, 
 canommie, 
 pacodmie, 
 facodciu, 
@@ -21,12 +21,15 @@ facodpro,
 pacodpro,
 canompro,
 pacodciu,
-canomciu
-FROM amiebro m, aproion p, aciudad c 
-where m.facodpro=p.pacodpro
-and m.caestmie=true 
+canomciu,
+cafunmie
+FROM amiebro m, aproion p, aciudad c, amiecel a
+where m.facodpro=p.pacodpro 
+and m.caestmie=true
 and m.facodciu=c.pacodciu
-and m.cabanmae='false'
+and m.pacodmie=a.facodmie
+and a.cafunmie='LIDER'
+and m.cabanmae=false
 and canommie like'%{$buscar}%'
 order by pacodmie desc LIMIT 15";
 $resultado = mysqli_query($conexion, $consulta);
@@ -41,7 +44,6 @@ $resultado = mysqli_query($conexion, $consulta);
                         'caestmie' => $row['caestmie'],
                         'caestciv' => $row['ceestciv'],
                         'cafecnac' => $row['cafecnac'],
-                        'cafotmie' => $row['cafotmie'],
                         'canommie' => $row['canommie'],
                         'pacodmie' => $row['pacodmie'],
                         'facodciu' => $row['facodciu'],
@@ -49,7 +51,8 @@ $resultado = mysqli_query($conexion, $consulta);
                         'pacodpro' => $row['pacodpro'],
                         'canompro' => $row['canompro'],
                         'pacodciu' => $row['pacodciu'],
-                        'canomciu' => $row['canomciu']);
+                        'canomciu' => $row['canomciu'],
+                        'cafunmie' => $row['cafunmie']);
     }
     if($json!=null){
         echo json_encode($json);

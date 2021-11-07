@@ -2,6 +2,9 @@
 
 include '../Conexion/Conexion.php';
 
+$cafecmin=$_POST['cafecmin'];
+$cafecmax=$_POST['cafecmax'];
+
 $consulta = "SELECT caestapo, 
 catiping,
 cafecapo, 
@@ -18,9 +21,13 @@ where pacodapo=pacodeco
 and facodusu=pacodusu
 and facodmie=pacodmie
 and caestapo=true
-order by cafecapo desc";
+and cafecing>='{$cafecmin}'
+and cafecing<='{$cafecmax}'
+order by pacodapo desc";
 
 $resultado = mysqli_query($conexion, $consulta);
+
+$json=array();
 
 while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('caestapo' => $row['caestapo'],
@@ -35,6 +42,14 @@ while ($row = mysqli_fetch_array($resultado)) {
                     'cafecing' => $row['cafecing']
                     );
 }
+
+if($json!=null){
+    echo json_encode($json);
+}
+else {
+    echo "no encontrado";
+}
+
 mysqli_close($conexion);
-echo json_encode($json);
+//echo json_encode($json);
 ?>

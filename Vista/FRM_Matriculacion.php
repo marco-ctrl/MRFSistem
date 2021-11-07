@@ -25,9 +25,8 @@ if(empty($_SESSION['active'])){
                 <table class="table table-hover table-sm">
                     <thead class="bg-primary text-white">
                         <tr>
-                            <td>CODIGO</td>
                             <td>ALUMNO</td>
-                            <td>MATERIA</td>
+                            <td>CURSO</td>
                             <td>GESTION</td>
                             <td>FECHA Y HORA DE REGISTRO</td>
                             <td>MODIFICAR</td>
@@ -98,7 +97,7 @@ if(empty($_SESSION['active'])){
                                                 <td>APELLIDO</td>
                                                 <td>CELULA</td>
                                                 <td>FUNCION</td>
-                                                <td style="width:15%">SELECCIONAR</td>
+                                                <td>SELECCIONAR</td>
                                             </tr>
                                         </thead>
                                         <tbody id="tb_miembro">
@@ -135,10 +134,10 @@ if(empty($_SESSION['active'])){
                                         <thead class="bg-primary text-white">
                                             <tr>
                                                 <td>MATERIA</td>
+                                                <td>PARALELO</td>
                                                 <td>GESTION</td>
-                                                <td>FECHA DE INICIO</td>
                                                 <td>MAESTRO</td>
-                                                <td style="width:15%">SELECCIONAR</td>
+                                                <td>SELECCIONAR</td>
                                             </tr>
                                         </thead>
                                         <tbody id="tb_curso">

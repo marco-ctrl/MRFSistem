@@ -21,7 +21,8 @@ facodmae,
 canommat,
 canommie,
 capatmie,
-camatmie
+camatmie,
+caparcur
 	FROM acursom, 
 		aconido, 
 		amiebro,
@@ -37,15 +38,15 @@ $curso = mysqli_fetch_array($resultado);
 
 
 $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L']);
-$html = '<div><img src="/MRFSistem/img/Asambleas.png" class="izquierdo">
+$html = '<div><img src="/MRFSistem/img/Asambleas.png" class="derecho">
 <aside><h3>ASAMBLEAS DE DIOS DE BOLIVIA <br>
             IGLESIA "BERMEJO"<br>
-            ESCUELA DE LIDERES<br>
-<u>CONTROL PAGO DE MENSUALIDADES</u></h3></aside></div>
+            <u>ESCUELA DE LIDERES</u><br>
+<u>CONTROL PAGO DE MENSUALIDADES</u> (gestión '.$curso['cagescur'].' )</h3></aside></div>
 <br><br>';
 
 $html.='<p><b>NOMBRE DEL MAESTRO</b>: '.$curso['canommie'].' '.$curso['capatmie'].' '.$curso['camatmie'].'<br>';
-$html.='<b>'.$curso['canommat'].'</b></p>';
+$html.='<b>'.$curso['canommat'].' '.$curso['caparcur'].'</b></p>';
 
 $consulta = "SELECT caestmat,
 cafecmat,

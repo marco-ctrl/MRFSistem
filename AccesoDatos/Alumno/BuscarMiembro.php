@@ -11,7 +11,7 @@ cacelmie,
 cacidmie, 
 cadirmie, 
 caestmie, 
-caestciv, 
+ceestciv, 
 cafecnac, 
 cafotmie, 
 canommie, 
@@ -28,11 +28,12 @@ FROM amiebro m, aproion p, aciudad c, acelula, amiecel
 where m.facodpro=p.pacodpro
 and m.caestmie=true 
 and m.facodciu=c.pacodciu
-and m.cabanalu='false'
+and m.cabanalu=false
 and pacodmie=facodmie
 and pacodcel=facodcel
 and canommie like'%{$buscar}%'
 order by pacodmie desc LIMIT 15";
+
 $resultado = mysqli_query($conexion, $consulta);
 //if ($resultado) {
     $json=array();

@@ -13,7 +13,8 @@ $consulta = "SELECT caestmat,
                     capatmie, 
                     camatmie, 
                     canommat,
-                    cagescur
+                    cagescur,
+                    caparcur
             FROM amatula a, 
                  aalumno b, 
                  amaetro c, 
@@ -45,7 +46,8 @@ while ($row = mysqli_fetch_array($resultado)) {
                     'canommie' => $row['canommie'],
                     'capatmie' => $row['capatmie'],
                     'camatmie' => $row['camatmie'],
-                    'cagescur' => $row['cagescur']
+                    'cagescur' => $row['cagescur'],
+                    'caparcur' => $row['caparcur']
                     );
 }
 if($json!=null){

@@ -128,7 +128,7 @@ $(document).ready(function () {
                         <strong>Miembro ${buscar} no se encuentra registrado en la base de datos</strong></div>`;
                         $('#mensaje1').html(mensaje);
                         $('#mensaje1').show();
-                        $('#btn_nuevo').show();
+                        //$('#btn_nuevo').show();
                     }
                 },
                 error: function (xhr, status) {
@@ -138,7 +138,7 @@ $(document).ready(function () {
         }
         else {
             $('#mensaje1').hide();
-            $('#btn_nuevo').hide();
+            //$('#btn_nuevo').hide();
             ListarMiembro1();
         }
     });
@@ -153,7 +153,7 @@ $(document).ready(function () {
                 console.log(miembros);
                 let plantilla = '';
                 if (miembros!=false){
-                    $('#btn_nuevo').hide();
+                    //$('#btn_nuevo').hide();
                     miembros.forEach(miembros => {
                         plantilla +=
                             `<tr codMbr="${miembros.pacodmie}" class="table-light">
@@ -167,7 +167,7 @@ $(document).ready(function () {
                     });
                 }
                 else if (miembros==false) {
-                    $('#btn_nuevo').show();
+                    //$('#btn_nuevo').show();
                 }
                 
                 $('#tb_miembro1').html(plantilla);
@@ -679,6 +679,7 @@ $(document).ready(function () {
     });
     
     $("#btn_nuevo").click(function (event) {
+        document.getElementById("txt_ci").focus();
         $('#home').hide();
         $('#profile').show();
         Nuevo=true;

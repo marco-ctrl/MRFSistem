@@ -191,9 +191,8 @@ $(document).ready(function () {
     function MostrarTabla(plantilla, cur) {//////Mostrar Tabla///////////
         plantilla +=
             `<tr UserDocu="${cur.pacodmat}" class="table-light">
-                <td>${cur.pacodmat}</td>
                 <td>${cur.canommie} ${cur.capatmie} ${cur.camatmie}</td>
-                <td>${cur.canommat}</td>
+                <td>${cur.canommat} ${cur.caparcur}</td>
                 <td>${cur.cagescur}</td>
                 <td>${cur.cafecmat} ${cur.cahormat}</td>
                 <td style="width:15%">
@@ -286,8 +285,8 @@ $(document).ready(function () {
                     plantilla +=
                         `<tr codMbr="${miembros.pacodcur}" class="table-light">
                         <td>${miembros.canommat}</td> 
+                        <td>${miembros.caparcur}</td>
                         <td>${miembros.cagescur}</td>
-                        <td>${miembros.cafecini}</td>
                         <td>${miembros.canommie} ${miembros.capatmie} ${miembros.camatmie}</td>
                         <td style="width:15%"><button class="agregar-curso btn btn-primary" data-dismiss="modal">
                         <i class="fas fa-plus-square "></i></button></td>

@@ -65,20 +65,20 @@ $(document).ready(function () {
     function MostrarTabla(plantilla, cur) {//////Mostrar Tabla///////////
         plantilla +=
             `<tr UserDocu="${cur.pacodcur}" class="table-light">
-                <td>${cur.pacodcur}</td>
                 <td>${cur.canommat}</td>
+                <td>${cur.caparcur}</td>
                 <td>${cur.cagescur}</td>
                 <td>${cur.canommie} ${cur.capatmie} ${cur.camatmie}</td>
                 <td>${cur.cafecini}</td>
                 <td>${cur.cadescur}</td>
                 <td>
-                    <button class="generar btn btn-primary">
+                    <button class="generarAsistencia btn btn-primary">
                     <i class="fas fa-clipboard-list"></i></button>
                 </>
             </tr>`
         return plantilla;
     }
-    $(document).on('click', '.generar', function () {//elimina miembros
+    $(document).on('click', '.generarAsistencia', function () {//elimina miembros
 
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodcur = $(elemento).attr('UserDocu');
