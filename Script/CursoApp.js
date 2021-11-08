@@ -56,9 +56,9 @@ $(document).ready(function () {
 
     });
 
-    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de miembros
-        if ($('#txt_buscar').val()) {
-            let buscar = $('#txt_buscar').val().toUpperCase();
+    $('#txt_buscarCurso').keyup(function (e) {//permite hacer busqueda de miembros
+        if ($('#txt_buscarCurso').val()) {
+            let buscar = $('#txt_buscarCurso').val().toUpperCase();
             let plantilla = '';
             $.ajax({
                 url: '/MRFSistem/AccesoDatos/Curso/BuscarCurso.php',

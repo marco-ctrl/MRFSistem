@@ -8,9 +8,9 @@ $(document).ready(function () {
 
     $('#formulario').hide();//ocultar formulario
 
-    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de miembros
-        if ($('#txt_buscar').val()) {
-            let buscar = $('#txt_buscar').val().toUpperCase();
+    $('#txt_buscarMat').keyup(function (e) {//permite hacer busqueda de miembros
+        if ($('#txt_buscarMat').val()) {
+            let buscar = $('#txt_buscarMat').val().toUpperCase();
             let plantilla = '';
             $.ajax({
                 url: '/MRFSistem/AccesoDatos/Contenido/BuscarContenido.php',

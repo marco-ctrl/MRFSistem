@@ -47,7 +47,7 @@ $(document).ready(function () {
                         $('#tb_economico').html(plantilla);
                         let mensaje = `<div class="alert alert-dismissible alert-warning">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>La Materia ${buscar} no se encuentra registrado en la base de datos</strong></div>`;
+                        <strong>NO se encuentran Ingresos registrados en la base de datos</strong></div>`;
                         $('#mensaje').html(mensaje);
                         $('#mensaje').show();
                     }

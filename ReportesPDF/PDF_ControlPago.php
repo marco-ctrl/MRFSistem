@@ -46,7 +46,8 @@ $html = '<div><img src="/MRFSistem/img/Asambleas.png" class="derecho">
 <br><br>';
 
 $html.='<p><b>NOMBRE DEL MAESTRO</b>: '.$curso['canommie'].' '.$curso['capatmie'].' '.$curso['camatmie'].'<br>';
-$html.='<b>'.$curso['canommat'].' '.$curso['caparcur'].'</b></p>';
+$html.='<b>'.$curso['canommat'].' '.$curso['caparcur'].'</b><br>';
+$html.='<b>Fecha de Inicio: </b>'.$curso['cafecini'].'</p>';
 
 $consulta = "SELECT caestmat,
 cafecmat,

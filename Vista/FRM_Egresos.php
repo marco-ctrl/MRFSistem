@@ -67,7 +67,7 @@ if (empty($_SESSION['active'])) {
                                             <th>MODIFICAR</th>
                                         </tr>
                                     </tfoot>
-                                    <tbody id="tb_economico">
+                                    <tbody id="tb_egresos">
 
                                     </tbody>
                                 </table>

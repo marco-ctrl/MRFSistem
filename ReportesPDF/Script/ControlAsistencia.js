@@ -3,9 +3,9 @@ $(document).ready(function () {
     ListarCurso();
 
     //Declaracion de Variables///
-    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de cursos
-        if ($('#txt_buscar').val()) {
-            let buscar = $('#txt_buscar').val().toUpperCase();
+    $('#txt_buscarAsistencia').keyup(function (e) {//permite hacer busqueda de cursos
+        if ($('#txt_buscarAsistencia').val()) {
+            let buscar = $('#txt_buscarAsistencia').val().toUpperCase();
             let plantilla = '';
             $.ajax({
                 url: '/MRFSistem/AccesoDatos/Curso/BuscarCurso.php',
@@ -18,10 +18,10 @@ $(document).ready(function () {
                         cel.forEach(cel => {
                             plantilla = MostrarTabla(plantilla, cel);
                         });
-                        $('#tb_curso').html(plantilla);
+                        $('#tb_asistencia').html(plantilla);
                     }
                     else {
-                        $('#tb_curso').html(plantilla);
+                        $('#tb_asistencia').html(plantilla);
                         let mensaje = `<div class="alert alert-dismissible alert-warning">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <strong>El curso ${buscar} no se encuentra registrado en la base de datos</strong></div>`;
@@ -53,10 +53,10 @@ $(document).ready(function () {
                     celula.forEach(usu => {
                         plantilla = MostrarTabla(plantilla, usu);
                     });
-                    $('#tb_curso').html(plantilla);
+                    $('#tb_asistencia').html(plantilla);
                 }
                 else {
-                    $('#tb_curso').html(plantilla);
+                    $('#tb_asistencia').html(plantilla);
                 }
             }
         });

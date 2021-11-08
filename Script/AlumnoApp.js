@@ -344,11 +344,11 @@ $(document).ready(function () {
 
     
 
-    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de miembros
+    $('#txt_buscarAlumno').keyup(function (e) {//permite hacer busqueda de Alumno
         $('#profile').hide();
         $('#home').show();
-        if ($('#txt_buscar').val()) {
-            let buscar = $('#txt_buscar').val().toUpperCase();
+        if ($('#txt_buscarAlumno').val()) {
+            let buscar = $('#txt_buscarAlumno').val().toUpperCase();
             let plantilla = '';
             $.ajax({
                 url: '/MRFSistem/AccesoDatos/Alumno/BuscarAlumno.php',
@@ -384,6 +384,7 @@ $(document).ready(function () {
         }
 
     });
+
     $('#btn_guardarAlu').click(function (e) {//permiete guardar Usuario
         //
         //GuardarMiembroCelula(GuardarMiembro());
@@ -418,7 +419,7 @@ $(document).ready(function () {
             url: '/MRFSistem/AccesoDatos/Alumno/ListarAlumno.php',
             type: 'GET',
             success: function (response) {
-                console.log(response);
+                //console.log(response);
                 if (response != 'false') {
                     let miembros = JSON.parse(response);
                     let plantilla = '';

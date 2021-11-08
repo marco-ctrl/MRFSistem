@@ -5,11 +5,10 @@ $(document).ready(function () {
 
     ListarAlumno();
 
-    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de miembros
-        $('#profile').hide();
-        $('#home').show();
-        if ($('#txt_buscar').val()) {
-            let buscar = $('#txt_buscar').val().toUpperCase();
+    $('#txt_buscarAlumno').keyup(function (e) {//permite hacer busqueda de Alumno
+        console.log($('#txt_buscarAlumno').val())
+        if ($('#txt_buscarAlumno').val()) {
+            let buscar = $('#txt_buscarAlumno').val().toUpperCase();
             let plantilla = '';
             $.ajax({
                 url: '/MRFSistem/AccesoDatos/Alumno/BuscarAlumno.php',
@@ -45,6 +44,7 @@ $(document).ready(function () {
         }
 
     });
+
     function ListarAlumno() {//lista Alumnos
         $.ajax({
             url: '/MRFSistem/AccesoDatos/Alumno/ListarAlumno.php',

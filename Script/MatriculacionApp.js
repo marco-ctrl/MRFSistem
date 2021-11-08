@@ -67,9 +67,9 @@ $(document).ready(function () {
 
     });
 
-    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de miembros
-        if ($('#txt_buscar').val()) {
-            let buscar = $('#txt_buscar').val().toUpperCase();
+    $('#txt_buscarMatricula').keyup(function (e) {//permite hacer busqueda de miembros
+        if ($('#txt_buscarMatricula').val()) {
+            let buscar = $('#txt_buscarMatricula').val().toUpperCase();
             let plantilla = '';
             $.ajax({
                 url: '/MRFSistem/AccesoDatos/Matriculacion/BuscarMatricula.php',

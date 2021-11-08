@@ -63,9 +63,9 @@ $(document).ready(function () {
     });
 
     /////Buscar Maestro///////////
-    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de maestro
-        if ($('#txt_buscar').val()) {
-            let buscar = $('#txt_buscar').val().toUpperCase();
+    $('#txt_buscarMaestro').keyup(function (e) {//permite hacer busqueda de maestro
+        if ($('#txt_buscarMaestro').val()) {
+            let buscar = $('#txt_buscarMaestro').val().toUpperCase();
             let plantilla = '';
             $.ajax({
                 url: '/MRFSistem/AccesoDatos/Maestro/BuscarMaestro.php',
@@ -117,9 +117,10 @@ $(document).ready(function () {
         if (confirm("Seguro que desea dar de baja este Maestro")) {
             let elemento = $(this)[0].parentElement.parentElement;
             let pacodmae = $(elemento).attr('UserDocu');
-            console.log('dando de baja...');
+            //console.log('dando de baja...');
             $.post('/MRFSistem/AccesoDatos/Maestro/DarBaja.php',
                 { pacodmae }, function (responce) {
+                    console.log(responce);
                     if (responce == 'baja') {
                         ListarMaestro();
                         MostrarMensaje("Maestro dado de baja", "warning");
@@ -224,7 +225,7 @@ $(document).ready(function () {
             url: '/MRFSistem/AccesoDatos/Maestro/ListarMiembro.php',
             type: 'GET',
             success: function (response) {
-                console.log(response);
+                //console.log(response);
                 if(response!='false'){
                     let miembros = JSON.parse(response);
                 let plantilla = '';

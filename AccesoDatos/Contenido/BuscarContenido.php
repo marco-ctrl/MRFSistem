@@ -12,7 +12,8 @@ pacodcon
 FROM 
 aconido 
 where
-canommat like '%{$buscar}%'
+caestcon=true
+and canommat like '%{$buscar}%'
             order by pacodcon desc 
             limit 15;";
 $resultado = mysqli_query($conexion, $consulta);
