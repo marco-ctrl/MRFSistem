@@ -97,3 +97,7 @@ where facodpro=pacodpro
 and caestmie=true
 and facodciu=pacodciu
 order by pacodmie desc LIMIT 15
+
+SELECT SUM(`camoning`) as total, DATE_FORMAT(cafecing, '%m') as mes
+FROM aconing
+GROUP by DATE_FORMAT(cafecing, '%M')
