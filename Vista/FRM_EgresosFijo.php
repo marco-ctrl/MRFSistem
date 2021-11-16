@@ -53,7 +53,7 @@
                         <a class="collapse-item" href="FRM_Ingresos"><i class="fas fa-donate"></i>
                             Ingresos</a>
                         <a class="collapse-item" href="FRM_Egresos"><i class="fas fa-hand-holding-usd"></i> Egresos</a>
-                        <a class="collapse-item" href="FRM_EgresosFijo"><i class="fas fa-columns"></i></i> Items de
+                        <a class="collapse-item" href="FRM_EgresosFijo"><i class="fas fa-columns"></i> Items de
                             Egresos</a>
 
                     </div>
@@ -132,7 +132,7 @@
                         <div class="col-md-4 p-3">
                             <button type="button" id="btn_nuevo" class="btn btn-primary btn-block
                 text-center"><i class="fas fa-plus-circle"></i>
-                                Nuevo Egreso
+                                Nuevo Item
                             </button>
                         </div>
 
@@ -143,51 +143,41 @@
                             </div>
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h5 class="m-0 font-weight-bold text-primary">Lista de Egreso Economicos</h5>
+                                    <h5 class="m-0 font-weight-bold text-primary">Lista de Items de Egresos</h5>
                                 </div>
                                 <div class="card-body">
-                                    <form action=# class="row justify-content-center p-1 text-center">
-                                        <div class="form-group p-1">
-                                            <label>Buscar Desde </label>
-                                        </div>
-                                        <div class="form-group p-1">
-                                            <input type="date" class="form-control" id="dat_inicio"
-                                                value="2010-12-12"></input>
-                                        </div>
-                                        <div class="form-group p-1">
-                                            <label>Hasta</label>
-                                        </div>
-                                        <div class="form-group p-1">
-                                            <input type="date" class="form-control" id="dat_maximo"></input>
-                                            <!--value="<?php //echo date('Y-m-d');?>"-->
-                                        </div>
-                                        <div class="form-group p-1">
-                                            <button class="form-control btn-primary" id="btn_busFec"><i
+                                    <form action=# class="row text-center">
+                                        <div class="input-group mb-3 col-6">
+                                            <input type="text" class="form-control" id="buscarItem" placeholder="Buscar.."></input>
+                                            <button class="btn btn-primary" id="btn_busFec"><i
                                                     class="fas fa-search"></i></button>
                                         </div>
+                                       
                                     </form>
 
                                     <div class="table-responsive">
                                         <table class="table table-light" id="dataTable" width="100%" cellspacing="0">
                                             <thead class="bg-primary text-white">
                                                 <tr>
-                                                    <th>ITEMS</th>
-                                                    <th>CONT. BS</th>
-                                                    <th>FECHA</th>
-                                                    <th>USUARIO</th>
+                                                    <th>CODIGO</th>
+                                                    <th>DESCRIPCION</th>
+                                                    <th>CANTIDA Bs.</th>
+                                                    <th>TIPO</th>
+                                                    <th>BAJA</th>
                                                     <th>MODIFICAR</th>
                                                 </tr>
                                             </thead>
                                             <tfoot class="bg-primary text-white">
                                                 <tr>
-                                                    <th>ITEMS</th>
-                                                    <th>CONT. BS</th>
-                                                    <th>FECHA</th>
-                                                    <th>USUARIO</th>
+                                                    <th>CODIGO</th>
+                                                    <th>DESCRIPCION</th>
+                                                    <th>CANTIDA Bs.</th>
+                                                    <th>TIPO</th>
+                                                    <th>BAJA</th>
                                                     <th>MODIFICAR</th>
                                                 </tr>
                                             </tfoot>
-                                            <tbody id="tb_egresos">
+                                            <tbody id="tb_items">
 
                                             </tbody>
                                         </table>
@@ -203,48 +193,31 @@
                             <div class="col-md-5">
                                 <form id="form1" clas="p-2">
                                     <div class="form-group">
+                                        <label>Tipo de Item</label>
+                                        <select id="cbx_tipItem" class="form-control">
+                                            <option value="0">Seleccionar Tipo de Item</option>
+                                            <option value="EFECTIVO">EFECTIVO</option>
+                                            <option value="PORCENTUAL">PORCENTUAL</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Cantidad</label>
+                                        <div class="input-group">
+                                            <input type="number" id="txt_cantidad" min="0" class="form-control"
+                                                aria-label="Dollar amount (with dot and two decimal places)">
+                                            <span class="input-group-text">Bs.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label>Descripcion</label>
-                                        <textarea id="txt_descripcion" class="form-control">
-
-                        </textarea>
+                                        <textarea type="text" class="form-control" id="txt_descripcion"></textarea>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Cantidad de Egreso</label>
-                                        <input type="number" id="txt_cantidad" min="0" placeholder="Cantidad en BS."
-                                            class="form-control"></input>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Fecha de Egreso</label>
-                                        <input type="date" class="form-control" id="dat_Egreso"></input>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Fecha de Registro</label>
-                                        <input type="date" class="form-control" id="dat_aporte" disabled></input>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Hora de Registro</label>
-                                        <input type="datetime" class="form-control" id="hor_aporte" disabled></input>
-                                    </div>
-
                                     <br>
 
                                 </form>
                             </div>
-                            <div class="col-md-5">
-                                <form id="form2" clas="p-2">
-                                    <div class="form-group">
-                                        <label>Codigo Usuario</label>
-                                        <input type="text" class="form-control" id="txt_codUsuario"
-                                            value="<?php echo $_SESSION['pacodusu']; ?>" disabled></input>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Usuario</label>
-                                        <input type="text" class="form-control" id="txt_usuario"
-                                            value="<?php echo $_SESSION['canommie'] . " " . $_SESSION['capatmie'] . " " . $_SESSION['camatmie']; ?>"
-                                            disabled></input>
-                                    </div>
-                                </form>
-                            </div>
+                            
 
 
                         </div>
@@ -252,11 +225,11 @@
                         <div class="modal-footer col-md-10">
                             <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
                                     text-center">
-                                <i class="far fa-save ListarEgresos"></i>
+                                <i class="far fa-save"></i>
                                 Guardar
                             </button>
                             <button type="button" id="btn_cancelar" class="btn btn-danger btn-lg
-                        text-center"><i class="far fa-window-close ListarEgresos"></i>
+                        text-center"><i class="far fa-window-close"></i>
                                 Cancelar
                             </button>
                         </div>
@@ -267,9 +240,6 @@
                 </div>
 
             </div>
-
-
-
             <!-- Footer -->
             <?php include 'Footer.php'?>
 
@@ -285,11 +255,9 @@
 
     <?php include 'Scripts.php'?>
     <script src="/MRFSistem/Script/App.js"></script>
-    <!-- Page level custom scripts
-<script src="/MRFSistem/js/demo/datatables-demo.js"></script>-->
-    <script src="/MRFSistem/Script/CodigoApp.js"></script>
-    <script src="/MRFSistem/Script/Egresos.js"></script>
 
+    <script src="/MRFSistem/Script/CodigoApp.js"></script>
+    <script src="/MRFSistem/Script/EgresosFijos.js"></script>
 
 
 </body>

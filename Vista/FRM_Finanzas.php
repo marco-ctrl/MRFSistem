@@ -1,5 +1,3 @@
-
-
 <?php include 'Header.php' ?>
 
 <body id="page-top">
@@ -10,111 +8,114 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">MRFSistem</div>
-    </a>
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">MRFSistem</div>
+            </a>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
 
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="FRM_principal.php">
-            <i class="fas fa-home"></i>
-            <span>Inicio</span></a>
-    </li>
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="FRM_principal.php">
+                    <i class="fas fa-home"></i>
+                    <span>Inicio</span></a>
+            </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-user"></i>
-            <span>Perfil</span></a>
-    </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-user"></i>
+                    <span>Perfil</span></a>
+            </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Interface
-    </div>
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-            aria-controls="collapseTwo">
-            <i class="fas fa-archive"></i>
-            <span>Archivos</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Archivos:</h6>
-                <a class="collapse-item" href="#" id="mn_ingresos"><i class="fas fa-donate"></i> Ingresos</a>
-                <a class="collapse-item" href="#" id="mn_egresos"><i class="fas fa-hand-holding-usd"></i> Egresos</a>
-                
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
             </div>
-        </div>
-    </li>
 
-    <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="far fa-file-pdf"></i>
-            <span>Reportes</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header"> Reportes:</h6>
-                <a class="collapse-item" id="mn_infAlumno" href="#"><i class="far fa-file-pdf"></i> Informacion Alumno</a>
-                <a class="collapse-item" id="mn_controlPago" href="#"><i class="far fa-file-pdf"></i> Control de Pago</a>
-                <a class="collapse-item" id="mn_controlAsistencia" href="#"><i class="far fa-file-pdf"></i> Control de Asistencia</a>
-                
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-archive"></i>
+                    <span>Archivos</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Archivos:</h6>
+                        <a class="collapse-item" href="FRM_Ingresos"><i class="fas fa-donate"></i>
+                            Ingresos</a>
+                        <a class="collapse-item" href="FRM_Egresos"><i class="fas fa-hand-holding-usd"></i> Egresos</a>
+                        <a class="collapse-item" href="FRM_EgresosFijo"><i class="fas fa-columns"></i> Items de Egresos</a>
+
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="far fa-file-pdf"></i>
+                    <span>Reportes</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header"> Reportes:</h6>
+                        <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Informacion Alumno</a>
+                        <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Control de Pago</a>
+                        <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Control de Asistencia</a>
+
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Sistema
             </div>
-        </div>
-    </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-server"></i>
+                    <span>Base de Datos</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Base de Datos</h6>
+                        <a class="collapse-item" href="login.html"><i class="fas fa-server"></i> Respaldar BD</a>
+                        <a class="collapse-item" href="register.html"><i class="fas fa-server"></i> Restaurar BD</a>
+                    </div>
+                </div>
+            </li>
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Sistema
-    </div>
+            <!-- Nav Item - Charts -->
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-            aria-controls="collapsePages">
-            <i class="fas fa-server"></i>
-            <span>Base de Datos</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Base de Datos</h6>
-                <a class="collapse-item" href="login.html"><i class="fas fa-server"></i> Respaldar BD</a>
-                <a class="collapse-item" href="register.html"><i class="fas fa-server"></i> Restaurar BD</a>
+            <!-- Nav Item - Tables -->
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <!--<div class="text-center d-none d-md-inline">-->
+            <div class="text-center d-sm-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-        </div>
-    </li>
 
-    <!-- Nav Item - Charts -->
-
-    <!-- Nav Item - Tables -->
-
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-
-    <!-- Sidebar Toggler (Sidebar) -->
-    <!--<div class="text-center d-none d-md-inline">-->
-    <div class="text-center d-sm-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
-
-</ul>
+        </ul>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -152,4 +153,3 @@
 
 
 </body>
-
