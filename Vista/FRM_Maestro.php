@@ -1,6 +1,8 @@
 <?php include 'Header.php' ?>
 
 <body id="page-top">
+     <!-- Div cargando -->
+     <?php include 'Cargando.php' ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -323,7 +325,6 @@
     <?php include 'LogoutModal.php'?>
 
     <?php include 'Scripts.php'?>
-    <script src="/MRFSistem/Script/App.js"></script>
     <script src="/MRFSistem/Script/CodigoApp.js"></script>
     <script src="/MRFSistem/Script/MaestroApp.js"></script>
 

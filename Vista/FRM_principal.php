@@ -10,6 +10,8 @@
 
 <body id="page-top">
 
+      <!-- Div cargando -->
+    <?php include 'Cargando.php' ?>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -48,5 +50,5 @@
     <?php include 'LogoutModal.php'?>
 
     <?php include 'Scripts.php'?>
-    <script src="/MRFSistem/Script/App.js"></script>
+    
 </body>

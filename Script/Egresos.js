@@ -3,109 +3,104 @@ $(document).ready(function () {
     var codEconomico;
     var codUsu;
     var corre;
-    var edit=false;
+    var edit = false;
 
-    
+    ListarItems();
+
     //Fecha Actual
-    var hoy=new Date().format('Y-m-d');
-    $('#dat_maximo').val(hoy);
-    $('#dat_Egreso').val(hoy);
-    $('#dat_aporte').val(hoy);
-    
+    var hoy = new Date().format('Y-m-d');
+    fechaActual();
+    function fechaActual() {
+        $('#dat_maximo').val(hoy);
+        $('#dat_Egreso').val(hoy);
+        $('#dat_aporte').val(hoy);
+        myFunc();
+        setInterval(myFunc, 1000);
+    }
+
     ListarEgresos();
 
     $('#formulario').hide();//ocultar formulario
 
-    function myFunc()  {
+    function myFunc() {
         var now = new Date();
         var time = now.getHours() + ":" + now.getMinutes();
         //document.getElementById('hor_aporte').innerHTML= time;
         $('#hor_aporte').val(time);
     }
-    myFunc();
-    setInterval(myFunc, 1000);
+
 
     $('#btn_busFec').click(function (e) {//permite hacer busqueda de miembros
         //if ($('#btn_busFec').val()) {
-            let cafecmin = $('#dat_inicio').val();
-            let cafecmax = $('#dat_maximo').val();
-            let plantilla = '';
-            $.ajax({
-                url: '/MRFSistem/AccesoDatos/Egresos/BuscarEgresoFecha.php',
-                type: 'POST',
-                data: { cafecmin, cafecmax },
-                success: function (response) {
-                    if (response != "no encontrado") {
-                        let cel = JSON.parse(response);
+        let cafecmin = $('#dat_inicio').val();
+        let cafecmax = $('#dat_maximo').val();
+        let plantilla = '';
+        $.ajax({
+            url: '/MRFSistem/AccesoDatos/Egresos/BuscarEgresoFecha.php',
+            type: 'POST',
+            data: { cafecmin, cafecmax },
+            success: function (response) {
+                if (response != "no encontrado") {
+                    let cel = JSON.parse(response);
 
-                        cel.forEach(cel => {
-                            plantilla = MostrarTabla(plantilla, cel);
-                        });
-                        $('#tb_egresos').html(plantilla);
-                    }
-                    else {
-                        $('#tb_egresos').html(plantilla);
-                        let mensaje = `<div class="alert alert-dismissible alert-warning">
+                    cel.forEach(cel => {
+                        plantilla = MostrarTabla(plantilla, cel);
+                    });
+                    $('#tb_egresos').html(plantilla);
+                }
+                else {
+                    $('#tb_egresos').html(plantilla);
+                    let mensaje = `<div class="alert alert-dismissible alert-warning">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <strong>La Materia ${buscar} no se encuentra registrado en la base de datos</strong></div>`;
-                        $('#mensaje').html(mensaje);
-                        $('#mensaje').show();
-                    }
-                },
-                error: function (xhr, status) {
-                    alert('error al buscar miembro');
+                    $('#mensaje').html(mensaje);
+                    $('#mensaje').show();
                 }
-            });
+            },
+            error: function (xhr, status) {
+                alert('error al buscar miembro');
+            }
+        });
         //}
-       /* else {
-            $('#mensaje').hide();
-            ListarEgresos();
-        }*/
+        /* else {
+             $('#mensaje').hide();
+             ListarEgresos();
+         }*/
     });
 
+    function ListarItems() {//listar Items
+        $.ajax({
+            url: '/MRFSistem/AccesoDatos/EgresosFijos/ListarEfectivo.php',
+            type: 'GET',
+            success: function (response) {
+                console.log(response);
+                let EgresosFijos = JSON.parse(response);
+                let i = 0;
+                plantilla = '';
+                EgresosFijos.forEach(EgresosFijos => {
+                    plantilla += `<option data-cantidad="${EgresosFijos.cacanefe}" data-codigo="${EgresosFijos.pacodefe}" data-descripcion="${EgresosFijos.cadesefe}" value="${EgresosFijos.cadesefe}"></option>`;
+                });
+                $('#dat_items').html(plantilla);
+            }
+        });
 
-    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de miembros
-        if ($('#txt_buscar').val()) {
-            let buscar = $('#txt_buscar').val().toUpperCase();
-            let plantilla = '';
-            $.ajax({
-                url: '/MRFSistem/AccesoDatos/Egresos/BuscarEgresos.php',
-                type: 'POST',
-                data: { buscar },
-                success: function (response) {
-                    if (response != "no encontrado") {
-                        let cel = JSON.parse(response);
 
-                        cel.forEach(cel => {
-                            plantilla = MostrarTabla(plantilla, cel);
-                        });
-                        $('#tb_egresos').html(plantilla);
-                    }
-                    else {
-                        $('#tb_egresos').html(plantilla);
-                        let mensaje = `<div class="alert alert-dismissible alert-warning">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>La Materia ${buscar} no se encuentra registrado en la base de datos</strong></div>`;
-                        $('#mensaje').html(mensaje);
-                        $('#mensaje').show();
-                    }
-                },
-                error: function (xhr, status) {
-                    alert('error al buscar miembro');
-                }
-            });
-        }
-        else {
-            $('#mensaje').hide();
-            ListarEgresos();
-        }
+    }
+
+    $('#txt_items').on('input', function () {//asigar codigo profesion
+        var val = $('#txt_items').val().toUpperCase();
+        $('#txt_descripcion').val($('#dat_items').find('option[value="' + val + '"]').data('descripcion'));
+        $('#txt_cantidad').val($('#dat_items').find('option[value="' + val + '"]').data('cantidad'));
+        
     });
+
 
     function ListarEgresos() {//listar Egresos
         $.ajax({
             url: '/MRFSistem/AccesoDatos/Egresos/ListarEgresos.php',
             type: 'GET',
             success: function (response) {
+                console.log(response);
                 let Egresos = JSON.parse(response);
                 let plantilla = '';
                 Egresos.forEach(con => {
@@ -115,13 +110,13 @@ $(document).ready(function () {
             }
         });
     }
-    
+
     function MostrarTabla(plantilla, usu) {//////Mostrar Tabla///////////
         plantilla +=
             `<tr UserDocu="${usu.pacodapo}" class="table-light">
-                <td>${usu.catiping}</td>
-                <td>${usu.camoning}</td>
-                <td>${usu.cafecing}</td>
+                <td>${usu.cadesegr}</td>
+                <td>${usu.camonegr}</td>
+                <td>${usu.cafecegr}</td>
                 <td>${usu.canommie} ${usu.capatmie} ${usu.camatmie} </td>
                 <!--<td>
                     <a class="baja-aporte btn btn-danger">
@@ -136,20 +131,21 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.modificar-aporte', function () {//modifica usuario
-        $('#lista').hide();
-        $('#formulario').show();
+
         //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodapo = $(elemento).attr('UserDocu');
         $.post('/MRFSistem/AccesoDatos/Egresos/SingleEgresos.php',
             { pacodapo }, function (responce) {
+                $('#lista').hide();
+                $('#formulario').show();
                 const celula = JSON.parse(responce);
                 celula.forEach(con => {
                     codEconomico = con.pacodapo,
-                    $('#dat_Egreso').val(con.cafecing),
-                    $('#txt_cantidad').val(con.camoning),
-                    $('#cbx_tipIng').val(con.catiping)
-                    });
+                        $('#dat_Egreso').val(con.cafecing),
+                        $('#txt_cantidad').val(con.camoning),
+                        $('#cbx_tipIng').val(con.catiping)
+                });
                 //contex.hide();
                 document.getElementById("cbx_tipIng").focus();
                 edit = true;
@@ -175,17 +171,17 @@ $(document).ready(function () {
         $('#lista').hide();
         $('#formulario').show();
         let num = "";
-        verificarSecuencia("EGR");
+        verificarSecuencia("EGE");
         if (getBan() != "true") {
-            setCodigo("EGR");
+            setCodigo("EGE");
             setCorrelativo(1);
         }
         else {
-            setCodigo("EGR");
-            obtenerCorrelativo("EGR");
-            setCorrelativo(obtenerSiguinete("EGR"));
+            setCodigo("EGE");
+            obtenerCorrelativo("EGE");
+            setCorrelativo(obtenerSiguinete("EGE"));
         }
-        corre=getCorrelativo();
+        corre = getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codEconomico = getCodigo() + '-' + num;
         console.log(codEconomico);
@@ -195,10 +191,10 @@ $(document).ready(function () {
 
     $('#btn_cancelar').click(function (e) {
         Limpiar();
-        edit=false;
+        edit = false;
     });
 
-    $('#btn_guardar').click(function (e){
+    $('#btn_guardar').click(function (e) {
         GuardarEgresos();
         //Limpiar();
     });
@@ -229,7 +225,7 @@ $(document).ready(function () {
 
         $.post(url, postData, function (response) {
             if (!edit && response == 'registra') {
-                actualizarSecuencia("EGR", corre);
+                actualizarSecuencia("EGE", corre);
                 MostrarMensaje("Datos de Egreso guardados correctamente", "success");
 
             }
@@ -237,13 +233,13 @@ $(document).ready(function () {
                 MostrarMensaje("datos de Egreso modificados correctamente", "success")
             }
             edit = false;
-           
+
             $('#formulario').hide();
             $('#lista').show();
             ListarEgresos();
             Limpiar();
         });
-        
+
     }
 
     function MostrarMensaje(cadena, clase) {

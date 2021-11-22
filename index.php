@@ -91,11 +91,12 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/EstilosPersonalisados.css" rel="stylesheet">
 
 </head>
 
 <body class="bg-gradient-primary">
-
+    <?php include "Vista/Cargando.php" ?>
     <div class="container">
 
         <!-- Outer Row -->
@@ -115,8 +116,7 @@
                                     </div>
                                     <form class="user" action="" method="post">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                name="txt_usuario" 
+                                            <input type="text" class="form-control form-control-user" name="txt_usuario"
                                                 placeholder="Usuario">
                                         </div>
                                         <div class="form-group">
@@ -155,8 +155,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="Script/App.js"></script>
 
 </body>
 
 </html>
-

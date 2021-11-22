@@ -1,6 +1,8 @@
 <?php include 'Header.php' ?>
 
 <body id="page-top">
+    <!-- Div cargando -->
+    <?php include 'Cargando.php' ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -128,6 +130,12 @@
                 <?php include 'NavBar.php' ?>
 
                 <div class="container-fluid" id="finanzas">
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">GESTIONAR EGRESOS</h1>
+                        <a href="FRM_Finanzas" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-desktop fa-sm text-white-50"></i> Volver Escritorio</a>
+                    </div>
                     <div class="row">
                         <div class="col-md-4 p-3">
                             <button type="button" id="btn_nuevo" class="btn btn-primary btn-block
@@ -203,10 +211,17 @@
                             <div class="col-md-5">
                                 <form id="form1" clas="p-2">
                                     <div class="form-group">
+                                        <label>Items</label>
+                                        <input type="text" id="txt_items" list="dat_items"
+                                            class="form-control" />
+                                        <datalist id="dat_items">
+                                        </datalist>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Descripcion</label>
-                                        <textarea id="txt_descripcion" class="form-control">
+                                        <textarea id="txt_descripcion" class="form-control" disabled>
 
-                        </textarea>
+                                        </textarea>
                                     </div>
                                     <div class="form-group">
                                         <label>Cantidad de Egreso</label>
@@ -217,6 +232,12 @@
                                         <label>Fecha de Egreso</label>
                                         <input type="date" class="form-control" id="dat_Egreso"></input>
                                     </div>
+
+
+                                </form>
+                            </div>
+                            <div class="col-md-5">
+                                <form id="form2" clas="p-2">
                                     <div class="form-group">
                                         <label>Fecha de Registro</label>
                                         <input type="date" class="form-control" id="dat_aporte" disabled></input>
@@ -225,13 +246,6 @@
                                         <label>Hora de Registro</label>
                                         <input type="datetime" class="form-control" id="hor_aporte" disabled></input>
                                     </div>
-
-                                    <br>
-
-                                </form>
-                            </div>
-                            <div class="col-md-5">
-                                <form id="form2" clas="p-2">
                                     <div class="form-group">
                                         <label>Codigo Usuario</label>
                                         <input type="text" class="form-control" id="txt_codUsuario"
@@ -284,7 +298,6 @@
     <?php include 'LogoutModal.php'?>
 
     <?php include 'Scripts.php'?>
-    <script src="/MRFSistem/Script/App.js"></script>
     <!-- Page level custom scripts
 <script src="/MRFSistem/js/demo/datatables-demo.js"></script>-->
     <script src="/MRFSistem/Script/CodigoApp.js"></script>

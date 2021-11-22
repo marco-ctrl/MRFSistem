@@ -1,3 +1,5 @@
+
+
 $(document).ready(function () {
 
     ListarMiembro();
@@ -61,9 +63,9 @@ $(document).ready(function () {
     });
 
     /////Buscar Usuarios///////////
-    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de miembros
-        if ($('#txt_buscar').val()) {
-            let buscar = $('#txt_buscar').val().toUpperCase();
+    $('#buscarUsuario').keyup(function (e) {//permite hacer busqueda de miembros
+        if ($('#buscarUsuario').val()) {
+            let buscar = $('#buscarUsuario').val().toUpperCase();
             let plantilla = '';
             $.ajax({
                 url: '/MRFSistem/AccesoDatos/Usuario/BuscarUsuario.php',
@@ -111,13 +113,14 @@ $(document).ready(function () {
 
     //////Modificar Usuario///////////
     $(document).on('click', '.modificar-usuario', function () {//modifica usuario
-        $('#lista').hide();
-        $('#formulario').show();
+
         habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodusu = $(elemento).attr('UserDocu');
         $.post('/MRFSistem/AccesoDatos/Usuario/SingleUsuario.php',
             { pacodusu }, function (responce) {
+                $('#lista').hide();
+                $('#formulario').show();
                 const miembro = JSON.parse(responce);
                 miembro.forEach(miembro => {
                     codMiembro = miembro.facodmie,
@@ -194,7 +197,7 @@ $(document).ready(function () {
             obtenerCorrelativo("USU");
             setCorrelativo(obtenerSiguinete("USU"));
         }
-        corre=getCorrelativo();
+        corre = getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codUsuario = getCodigo() + '-' + num;
         console.log(codUsuario);
@@ -309,24 +312,38 @@ $(document).ready(function () {
             caconusu: $('#txt_contrasena').val(),
             caestusu: true
         };
-        console.log(postData);
-        let url = edit === false ?
+        //console.log(postData);
+        let URL = edit === false ?
             '/MRFSistem/AccesoDatos/Usuario/AgregarUsuario.php' :
             '/MRFSistem/AccesoDatos/Usuario/ModificarUsuario.php';
 
-        $.post(url, postData, function (response) {
-            console.log(response);
-            if (!edit && response == 'registra') {
-                actualizarSecuencia("USU", corre);
-                MostrarMensaje("Datos de usuario guardados correctamente", "success");
+        $.ajax({
+            url: URL,
+            type: 'POST',
+            data: postData,
+            beforeSend: function () {
+                $("#btn_guardar").text("Guardando...");
+                $("#btn_guardar").attr("disabled", true);
+            },
+            complete: function () {
+                $("#btn_guardar").text("Guardar");
+                $("#btn_guardar").attr("disabled", false);
+            },
+            success: function (response) {
+                console.log(response);
+                if (!edit && response == 'registra') {
+                    actualizarSecuencia("USU", corre);
+                    MostrarMensaje("Datos de usuario guardados correctamente", "success");
+                }
+                if (edit && response == 'modificado') {
+                    MostrarMensaje("Datos de usuario modificados correctamente", "success");
+                }
+                edit = false;
+                ListarUsuario();
+                $('#formulario').hide();
+                $('#lista').show();
             }
-            if (edit && response == 'modificado') {
-                MostrarMensaje("Datos de usuario modificados correctamente", "success");
-            }
-            edit = false;
-            ListarUsuario();
-            $('#formulario').hide();
-            $('#lista').show();
+
         });
     }
 

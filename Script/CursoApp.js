@@ -8,11 +8,11 @@ $(document).ready(function () {
     var corre;
 
     //Fecha Actual
-    var hoy=new Date().format('Y-m-d');
+    var hoy = new Date().format('Y-m-d');
     $('#dat_fecini').val(hoy),
 
-    //Listar Datos//
-    listarMateria();
+        //Listar Datos//
+        listarMateria();
     ListarMaestro();
     ListarCurso();
 
@@ -100,13 +100,14 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.modificar-curso', function () {//modifica curso
-        $('#lista').hide();
-        $('#formulario').show();
+
         //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodcur = $(elemento).attr('UserDocu');
         $.post('/MRFSistem/AccesoDatos/Curso/SingleCurso.php',
             { pacodcur }, function (responce) {
+                $('#lista').hide();
+                $('#formulario').show();
                 const curso = JSON.parse(responce);
                 console.log(curso);
                 curso.forEach(cur => {
@@ -136,7 +137,7 @@ $(document).ready(function () {
                         ListarCurso();
                         MostrarMensaje("Curso dado de baja", "warning");
                     }
-                    
+
                 });
         }
     });
@@ -185,7 +186,7 @@ $(document).ready(function () {
                 let plantilla = '';
                 if (response != "no encontrado") {
                     let curso = JSON.parse(response);
-                    
+
                     curso.forEach(usu => {
                         plantilla = MostrarTabla(plantilla, usu);
                     });
@@ -280,7 +281,7 @@ $(document).ready(function () {
             $('#lista').show();
             ListarCurso();
         });
-        
+
     }
 
     function MostrarMensaje(cadena, clase) {
@@ -313,7 +314,7 @@ $(document).ready(function () {
         $('#form1').trigger('reset');
         $('#form2').trigger('reset');
         $('#dat_fecini').val(hoy),
-        $("#btn_nuevo").attr("disabled", false);
+            $("#btn_nuevo").attr("disabled", false);
         $('#formulario').hide();
         $('#lista').show();
     }

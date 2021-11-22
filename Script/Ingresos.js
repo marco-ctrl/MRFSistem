@@ -136,13 +136,14 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.modificar-aporte', function () {//modifica usuario
-        $('#lista').hide();
-        $('#formulario').show();
+        
         //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodapo = $(elemento).attr('UserDocu');
         $.post('/MRFSistem/AccesoDatos/Ingresos/SingleIngresos.php',
             { pacodapo }, function (responce) {
+                $('#lista').hide();
+        $('#formulario').show();
                 const celula = JSON.parse(responce);
                 celula.forEach(con => {
                     codEconomico = con.pacodapo,

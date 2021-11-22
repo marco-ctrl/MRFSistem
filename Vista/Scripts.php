@@ -12,5 +12,14 @@
 <!-- Custom scripts for all pages-->
 <script src="/MRFSistem/js/sb-admin-2.min.js"></script>
 
+<!-- Page level plugins -->
+<script src="/MRFSistem/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/MRFSistem/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+
 <!--Fecha Actual-->
 <script src="/MRFSistem/Script/FechaActual.js"></script>
+
+<!-- Script personalizados -->
+<script src="/MRFSistem/Script/App.js"></script>
+<script src="/MRFSistem/Script/Idioma.js"></script>

@@ -1,6 +1,8 @@
 <?php include 'Header.php' ?>
 
 <body id="page-top">
+    <!-- Div cargando -->
+    <?php include 'Cargando.php' ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -133,23 +135,52 @@
 
                     <div class="row" id="lista">
                         <div class="col-md-12">
-                            <label for="">Lista De Usuarios</label>
-                            <div class="table-responsive">
-                                <table class="table table-hover table-sm">
-                                    <thead class="bg-primary text-white">
-                                        <tr>
-                                            <td>MIEMBRO</td>
-                                            <td>FUNCION</td>
-                                            <td>USUARIO</td>
-                                            <td>CONTRASEÑA</td>
-                                            <td>BAJA</td>
-                                            <td style="width:15%">MODIFICAR</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tb_usuario">
-                                    </tbody>
-                                </table>
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h5 class="m-0 font-weight-bold text-primary">Lista de Usuarios</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form action=# class="row text-center">
+                                        <div class="input-group mb-3 col-6">
+                                            <input type="text" class="form-control" id="buscarUsuario"
+                                                placeholder="Buscar.."></input>
+                                            <button class="btn btn-primary" id="btn_busFec"><i
+                                                    class="fas fa-search"></i></button>
+                                        </div>
+
+                                    </form>
+
+                                    <div class="table-responsive">
+                                        <table class="table table-light" id="dataTable" width="100%" cellspacing="0">
+                                            <thead class="bg-primary text-white">
+                                                <tr>
+                                                    <th>MIEMBRO</th>
+                                                    <th>FUNCION</th>
+                                                    <th>USUARIO</th>
+                                                    <th>CONTRASEÑA</th>
+                                                    <th>BAJA</th>
+                                                    <th style="width:15%">MODIFICAR</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot class="bg-primary text-white">
+                                                <tr>
+                                                    <th>MIEMBRO</th>
+                                                    <th>FUNCION</th>
+                                                    <th>USUARIO</th>
+                                                    <th>CONTRASEÑA</th>
+                                                    <th>BAJA</th>
+                                                    <th style="width:15%">MODIFICAR</th>
+                                                </tr>
+                                            </tfoot>
+
+                                            <tbody id="tb_usuario">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
 
@@ -176,4 +207,3 @@
     <script src="/MRFSistem/Script/CodigoApp.js"></script>
     <script src="/MRFSistem/Script/UsuarioApp.js"></script>
 </body>
-

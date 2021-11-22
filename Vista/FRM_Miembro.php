@@ -1,6 +1,8 @@
 <?php include 'Header.php' ?>
 
 <body id="page-top">
+     <!-- Div cargando -->
+     <?php include 'Cargando.php' ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -56,12 +58,8 @@
     <?php include 'LogoutModal.php'?>
 
     <?php include 'Scripts.php'?>
-    <!-- Page level plugins -->
-    <script src="/MRFSistem/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/MRFSistem/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
+    
     <!-- Page level custom scripts -->
-    <script src="/MRFSistem/js/demo/datatables-demo.js"></script>
     <script src="/MRFSistem/Script/CodigoApp.js"></script>
     <script src="/MRFSistem/Script/MiembroApp.js"></script>
 </body>

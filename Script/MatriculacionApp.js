@@ -8,15 +8,15 @@ $(document).ready(function () {
     var corre;
 
     //fechaActual
-    var hoy=new Date().format('Y-m-d');
+    var hoy = new Date().format('Y-m-d');
     $('#dat_matriculacion').val(hoy),
 
-    //Listar Datos//
-    listarMatriculacion();
+        //Listar Datos//
+        listarMatriculacion();
     ListarAlumno();
     ListarCurso();
 
-    function myFunc()  {
+    function myFunc() {
         var now = new Date();
         var time = now.getHours() + ":" + now.getMinutes();
         //document.getElementById('hor_aporte').innerHTML= time;
@@ -111,27 +111,28 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.modificar-matricula', function () {//modifica curso
-        $('#lista').hide();
-        $('#formulario').show();
+
         //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodmat = $(elemento).attr('UserDocu');
         console.log(pacodmat);
         $.post('/MRFSistem/AccesoDatos/Matriculacion/SingleMatricula.php',
             { pacodmat }, function (responce) {
+                $('#lista').hide();
+                $('#formulario').show();
                 const celula = JSON.parse(responce);
                 console.log(celula);
                 celula.forEach(cel => {
                     codCurso = cel.facodcur,
-                    codAlumno = cel.facodalu,
-                    codMatricula = cel.pacodmat,
-                    $('#txt_codCurso').val(cel.facodcur),
-                    $('#txt_materia').val(cel.canommat),
-                    $('#txt_gestion').val(cel.cagescur),
-                    $('#dat_matriculacion').val(cel.cafecmat),
-                    $('#hor_matriculacion').val(cel.cahormat),
-                    $('#dat_fecini').val(cel.cafecini),
-                    $('#txt_alumno').val(cel.canommie + " " + cel.capatmie + " " + cel.camatmie)
+                        codAlumno = cel.facodalu,
+                        codMatricula = cel.pacodmat,
+                        $('#txt_codCurso').val(cel.facodcur),
+                        $('#txt_materia').val(cel.canommat),
+                        $('#txt_gestion').val(cel.cagescur),
+                        $('#dat_matriculacion').val(cel.cafecmat),
+                        $('#hor_matriculacion').val(cel.cahormat),
+                        $('#dat_fecini').val(cel.cafecini),
+                        $('#txt_alumno').val(cel.canommie + " " + cel.capatmie + " " + cel.camatmie)
                 });
                 //contex.hide();
                 document.getElementById("btn_curso").focus();
@@ -175,7 +176,7 @@ $(document).ready(function () {
                 let plantilla = '';
                 if (response != "no encontrado") {
                     let celula = JSON.parse(response);
-                    
+
                     celula.forEach(usu => {
                         plantilla = MostrarTabla(plantilla, usu);
                     });
@@ -242,27 +243,40 @@ $(document).ready(function () {
             facodusu: $('#txt_codUsuario').val()
         };
         console.log(postData);
-        let url = edit === false ?
+        let URL = edit === false ?
             '/MRFSistem/AccesoDatos/Matriculacion/AgregarMatricula.php' :
             '/MRFSistem/AccesoDatos/Matriculacion/ModificarMatricula.php';
 
-        $.post(url, postData, function (response) {
-            console.log(response);
-            if (!edit && response == 'registra') {
-                actualizarSecuencia("MAT", corre);
-                MostrarMensaje("Datos de Matriculacion guardados correctamente", "success");
+        $.ajax({
+            url: URL,
+            type: 'POST',
+            data: postData,
+            beforeSend: function () {
+                $("#btn_guardar").text("Guardando...");
+                $("#btn_guardar").attr("disabled", true);
+            },
+            complete: function () {
+                $("#btn_guardar").text("Guardar");
+                $("#btn_guardar").attr("disabled", false);
+            },
+            success: function (response) {
+                console.log(response);
+                if (!edit && response == 'registra') {
+                    actualizarSecuencia("MAT", corre);
+                    MostrarMensaje("Datos de Matriculacion guardados correctamente", "success");
 
-            }
-            if (edit && response == 'modificado') {
-                MostrarMensaje("datos de Curso modificados correctamente", "success")
-            }
-            edit = false;
+                }
+                if (edit && response == 'modificado') {
+                    MostrarMensaje("datos de Curso modificados correctamente", "success")
+                }
+                edit = false;
 
-            $('#formulario').hide();
-            $('#lista').show();
-            listarMatriculacion();
+                $('#formulario').hide();
+                $('#lista').show();
+                listarMatriculacion();
+            }
         });
-        
+
     }
 
     function MostrarMensaje(cadena, clase) {
@@ -299,16 +313,16 @@ $(document).ready(function () {
 
     $(document).on('click', '.agregar-curso', function () {
         let elemento = $(this)[0].parentElement.parentElement;
-        let pacodcur= $(elemento).attr('codMbr');
+        let pacodcur = $(elemento).attr('codMbr');
         $.post('/MRFSistem/AccesoDatos/Curso/SingleCurso.php',
             { pacodcur }, function (responce) {
                 const miembro = JSON.parse(responce);
                 miembro.forEach(miembro => {
                     codCurso = miembro.pacodcur,
-                    $('#txt_codCurso').val(miembro.pacodcur),
-                    $('#txt_gestion').val(miembro.cagescur),
-                    $('#txt_materia').val(miembro.canommat),
-                    $('#txt_maestro').val(miembro.canommie + ' ' + miembro.capatmie + ' ' + miembro.camatmie)
+                        $('#txt_codCurso').val(miembro.pacodcur),
+                        $('#txt_gestion').val(miembro.cagescur),
+                        $('#txt_materia').val(miembro.canommat),
+                        $('#txt_maestro').val(miembro.canommie + ' ' + miembro.capatmie + ' ' + miembro.camatmie)
                     $('#dat_fecini').val(miembro.cafecini)
                 });
                 console.log(codCurso);

@@ -30,6 +30,7 @@ date_default_timezone_set('America/Lima');
 
     <!-- Custom styles for this template-->
     <link href="/MRFSistem/CSS/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/MRFSistem/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
         integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
         crossorigin="" />

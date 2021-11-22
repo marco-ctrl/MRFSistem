@@ -2,37 +2,37 @@
 
 include '../Conexion/Conexion.php';
 
-$consulta = "SELECT caestapo, 
-catiping,
-cafecapo, 
-cahorapo, 
-pacodapo, 
-facodusu, 
-format(camoning, 2), 
+$consulta = "SELECT format(camonegr, 2), 
+cadesegr, 
+pacodegr, 
+cafecegr,
 canommie, 
 capatmie, 
 camatmie,
-cafecing
-FROM aconfin, aconing, ausurio, amiebro
-where pacodapo=pacodeco
+cafecapo, 
+cahorapo, 
+pacodapo,
+caestapo, 
+facodusu FROM aconegr, ausurio, amiebro, aconfin 
+WHERE pacodapo=pacodegr
 and facodusu=pacodusu
 and facodmie=pacodmie
 and caestapo=true
-order by cafecapo desc";
+order by pacodegr desc";
 
 $resultado = mysqli_query($conexion, $consulta);
 
 while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('caestapo' => $row['caestapo'],
-                    'catiping' => $row['catiping'],
+                    'cadesegr' => $row['cadesegr'],
                     'cafecapo' => $row['cafecapo'],
                     'cahorapo' => $row['cahorapo'],
                     'pacodapo' => $row['pacodapo'],
-                    'camoning' => $row['format(camoning, 2)'],
+                    'camonegr' => $row['format(camonegr, 2)'],
                     'canommie' => $row['canommie'],
                     'capatmie' => $row['capatmie'],
                     'camatmie' => $row['camatmie'],
-                    'cafecing' => $row['cafecing']
+                    'cafecegr' => $row['cafecegr']
                     );
 }
 mysqli_close($conexion);

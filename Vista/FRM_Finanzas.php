@@ -2,6 +2,9 @@
 
 <body id="page-top">
 
+    <!-- Div cargando -->
+    <?php include 'Cargando.php' ?>
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -53,7 +56,8 @@
                         <a class="collapse-item" href="FRM_Ingresos"><i class="fas fa-donate"></i>
                             Ingresos</a>
                         <a class="collapse-item" href="FRM_Egresos"><i class="fas fa-hand-holding-usd"></i> Egresos</a>
-                        <a class="collapse-item" href="FRM_EgresosFijo"><i class="fas fa-columns"></i> Items de Egresos</a>
+                        <a class="collapse-item" href="FRM_EgresosFijo"><i class="fas fa-columns"></i> Items de
+                            Egresos</a>
 
                     </div>
                 </div>
@@ -128,6 +132,57 @@
 
                 <div class="container-fluid" id="finanzas">
 
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">CONTROL DE FINANZAS</h1>
+                        <a href="FRM_principal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-home fa-sm text-white-50"></i> Volver Inicio</a>
+                    </div>
+
+                    <!--row content-->
+                    <div class="row">
+                        <!--  Acceso directo a las Actividades -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <a href="FRM_Ingresos" class="collapse-item" style="text-decoration:none">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Archivos:</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">INGRESOS</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-donate fa-2x text-gray-700"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <a href="FRM_Egresos" class="collapse-item" style="text-decoration:none">
+                                <div class="card border-left-danger shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Archivos:</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">EGRESOS</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-hand-holding-usd fa-2x text-gray-700"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+
+                    </div>
+
 
                 </div>
 
@@ -149,7 +204,5 @@
     <?php include 'LogoutModal.php'?>
 
     <?php include 'Scripts.php'?>
-    <script src="/MRFSistem/Script/App.js"></script>
-
 
 </body>

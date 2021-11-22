@@ -1,7 +1,8 @@
 <?php include 'Header.php' ?>
 
 <body id="page-top">
-
+     <!-- Div cargando -->
+     <?php include 'Cargando.php' ?>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -133,14 +134,7 @@
                 <?php include 'NavBar.php' ?>
 
                 <div class="container-fluid" id="escuela">
-                    <?php
-//session_start();
-  
-//if(empty($_SESSION['active'])){
-  //header('location: ../');
-//}
-
-?>
+                    
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">GESTIONAR MATRICULACION DE ALUMNOS</h1>
@@ -396,7 +390,6 @@
     <?php include 'LogoutModal.php'?>
 
     <?php include 'Scripts.php'?>
-    <script src="/MRFSistem/Script/App.js"></script>
     <script src="/MRFSistem/Script/CodigoApp.js"></script>
     <script src="/MRFSistem/Script/MatriculacionApp.js"></script>
 

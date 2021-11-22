@@ -14,7 +14,8 @@
              amiebro mbr 
         WHERE 
             mbr.pacodmie=usu.facodmie
-        and usu.caestusu=true";
+        and usu.caestusu=true
+        order by usu.pacodusu desc";
 $resultado = mysqli_query($conexion, $consulta);
 
 $json=array();

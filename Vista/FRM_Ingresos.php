@@ -1,6 +1,8 @@
 <?php include 'Header.php' ?>
 
 <body id="page-top">
+     <!-- Div cargando -->
+     <?php include 'Cargando.php' ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -127,6 +129,12 @@
                 <?php include 'NavBar.php' ?>
 
                 <div class="container-fluid" id="finanzas">
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">GESTIONAR INGRESOS</h1>
+                        <a href="FRM_Finanzas" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-desktop fa-sm text-white-50"></i> Volver Escritorio</a>
+                    </div>
                     <div class="row">
                         <div class="col-md-4 p-3">
                             <button type="button" id="btn_nuevo" class="btn btn-primary btn-block
@@ -290,8 +298,6 @@
     <?php include 'LogoutModal.php'?>
 
     <?php include 'Scripts.php'?>
-    <script src="/MRFSistem/Script/App.js"></script>
-
     <script src="/MRFSistem/Script/CodigoApp.js"></script>
     <script src="/MRFSistem/Script/Ingresos.js"></script>
 

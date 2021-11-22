@@ -1,5 +1,7 @@
+
 $(document).ready(function () {
 
+    var contenedor = document.getElementById('contenedor_carga');
     //Declaracion de Variables///
     var edit = false;
     var codProfesion, codCiudad, codCelula, codMieCel;
@@ -33,8 +35,6 @@ $(document).ready(function () {
         }
     };
 
-
-    $('#Table_Miembro').DataTable();
     $('#mensaje').hide();
     $('#profile').hide();
 
@@ -95,11 +95,11 @@ $(document).ready(function () {
         //console.log(imagen.src);
     });
 
-    $('#txt_buscar1').keyup(function (e) {//permite hacer busqueda de miembros
+    $('#buscarMiembro').keyup(function (e) {//permite hacer busqueda de miembros
         $('#profile').hide();
         $('#home').show();
-        if ($('#txt_buscar1').val()) {
-            let buscar = $('#txt_buscar1').val().toUpperCase();
+        if ($('#buscarMiembro').val()) {
+            let buscar = $('#buscarMiembro').val().toUpperCase();
             let plantilla = '';
             $.ajax({
                 url: '/MRFSistem/AccesoDatos/Miembro/BuscarMiembro.php',
@@ -136,49 +136,7 @@ $(document).ready(function () {
 
     });
 
-
-    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de miembros
-        $('#profile').hide();
-        $('#home').show();
-        if ($('#txt_buscar').val()) {
-            let buscar = $('#txt_buscar').val().toUpperCase();
-            let plantilla = '';
-            $.ajax({
-                url: '/MRFSistem/AccesoDatos/Miembro/BuscarMiembro.php',
-                type: 'POST',
-                data: { buscar },
-                success: function (response) {
-                    if (response != "no encontrado") {
-                        let usuario = JSON.parse(response);
-
-                        usuario.forEach(usuario => {
-                            plantilla = MostrarTabla(plantilla, usuario);
-                        });
-                        $('#tb_miembro').html(plantilla);
-                    }
-                    else {
-                        $('#tb_miembro').html(plantilla);
-                        let mensaje = `<div class="alert alert-dismissible alert-danger">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Miembro ${buscar} no se encuentra registrado en la base de datos</strong></div>`;
-                        $('#mensaje').html(mensaje);
-                        $('#mensaje').show();
-                    }
-                },
-                error: function (xhr, status) {
-                    alert('error al buscar miembro');
-                }
-
-            });
-        }
-        else {
-            $('#mensaje').hide();
-            ListarMiembro();
-        }
-
-    });
-
-    $('#btn_guardar').click(function (e) {//permiete guardar Usuario
+    $('#btn_guardarMiembro').click(function (e) {//permiete guardar Usuario
         CapturarCrecimiento();
         if (banPro) {
             agregarProfesion();
@@ -272,16 +230,25 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.modificar-miembro', function () {//modifica miembros
-        $('#home').hide();
-        $('#profile').show();
+
         document.getElementById("txt_ci").focus();
         habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodmie = $(elemento).attr('UserDocu');
-        $.post('/MRFSistem/AccesoDatos/Miembro/SingleMiembro.php',
-            { pacodmie },
-            function (responce) {
+        $.ajax({
+            url: '/MRFSistem/AccesoDatos/Miembro/SingleMiembro.php',
+            type: 'POST',
+            data: { pacodmie },
+            beforeSend: function () {
+                
+            },
+            complete: function () {
+                
+            },
+            success: function (responce) {
                 //console.log(responce);
+                $('#home').hide();
+                $('#profile').show();
                 const miembro = JSON.parse(responce);
                 let foto;
                 miembro.forEach(miembro => {
@@ -316,9 +283,9 @@ $(document).ready(function () {
                 }
 
                 edit = true;
-            });
+            }
+        });
     });
-
     function MostrarMensaje(cadena, clase) {
         let mensaje = `<div class="alert alert-dismissible alert-${clase}">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -479,23 +446,36 @@ $(document).ready(function () {
             pacodcre: codMiembro
         };
         console.log(postData);
-        let url = edit === false ?
+        let URL = edit === false ?
             '/MRFSistem/AccesoDatos/Miembro/AgregarMiembro.php' :
             '/MRFSistem/AccesoDatos/Miembro/ModificarMiembro.php';
 
-        $.post(url, postData, function (response) {
-            console.log(response);
-            if (!edit && response == 'registra') {
-                actualizarSecuencia("MBR", corre1);
-                GuardarMiembroCelula();
-                MostrarMensaje("Datos de Miembro guardado correctamente", "success");
-            }
-            if (edit && response == 'modificado') {
-                MostrarMensaje("Datos de Miembro modificados correctamente", "success");
+        $.ajax({
+            url: URL,
+            type: 'POST',
+            data: postData,
+            beforeSend: function () {
+                $("#btn_guardarMiembro").text("Guardando...");
+                $("#btn_guardarMiembro").attr("disabled", true);
+            },
+            complete: function () {
+                $("#btn_guardarMiembro").text("Guardar");
+                $("#btn_guardarMiembro").attr("disabled", false);
+            },
+            success: function (response) {
+                console.log(response);
+                if (!edit && response == 'registra') {
+                    actualizarSecuencia("MBR", corre1);
+                    GuardarMiembroCelula();
+                    MostrarMensaje("Datos de Miembro guardado correctamente", "success");
+                }
+                if (edit && response == 'modificado') {
+                    MostrarMensaje("Datos de Miembro modificados correctamente", "success");
 
+                }
+                edit = false;
+                ListarMiembro();
             }
-            edit = false;
-            ListarMiembro();
 
         });
 
@@ -619,7 +599,7 @@ $(document).ready(function () {
         $("#dat_fecenc").attr("disabled", false);
         $("#cbx_celula").attr("disabled", false);
         $("#cbx_funcion").attr("disabled", false);
-        $("#btn_guardar").attr("disabled", false);
+        $("#btn_guardarMiembro").attr("disabled", false);
         $("#btn_nuevo").attr("disabled", true);
         document.getElementById("txt_ci").focus();
     }
@@ -641,7 +621,7 @@ $(document).ready(function () {
         $("#dat_fecbau").attr("disabled", true);
         $("#dat_fecigl").attr("disabled", true);
         $("#dat_fecenc").attr("disabled", true);
-        $("#btn_guardar").attr("disabled", true);
+        $("#btn_guardarMiembro").attr("disabled", true);
         $("#cbx_celula").attr("disabled", true);
         $("#cbx_funcion").attr("disabled", true);
         $("#btn_nuevo").attr("disabled", false);

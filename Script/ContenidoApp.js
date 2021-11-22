@@ -80,13 +80,14 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.modificar-contenido', function () {//modifica usuario
-        $('#lista').hide();
-        $('#formulario').show();
+       
         //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodcon = $(elemento).attr('UserDocu');
         $.post('/MRFSistem/AccesoDatos/Contenido/SingleContenido.php',
             { pacodcon }, function (responce) {
+                $('#lista').hide();
+                $('#formulario').show();
                 const celula = JSON.parse(responce);
                 celula.forEach(con => {
                     codContenido = con.pacodcon,

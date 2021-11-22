@@ -43,9 +43,9 @@ $(document).ready(function () {
         marker = L.marker([latitud, longitud]).addTo(mymap);
     });
 
-    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de miembros
-        if ($('#txt_buscar').val()) {
-            let buscar = $('#txt_buscar').val().toUpperCase();
+    $('#buscarCelula').keyup(function (e) {//permite hacer busqueda de miembros
+        if ($('#buscarCelula').val()) {
+            let buscar = $('#buscarCelula').val().toUpperCase();
             let plantilla = '';
             $.ajax({
                 url: '/MRFSistem/AccesoDatos/Celula/BuscarCelula.php',
@@ -87,14 +87,14 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.modificar-celula', function () {//modifica usuario
-        $('#lista').hide();
-        $('#formulario').show();
+       
         //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodcel = $(elemento).attr('UserDocu');
         $.post('/MRFSistem/AccesoDatos/Celula/SingleCelula.php',
             { pacodcel }, function (responce) {
-                console.log(responce);
+                $('#lista').hide();
+                $('#formulario').show();
                 const celula = JSON.parse(responce);
                 celula.forEach(cel => {
                     codCelula = cel.pacodcel,

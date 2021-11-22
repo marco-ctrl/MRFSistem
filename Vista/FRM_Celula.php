@@ -1,7 +1,8 @@
 <?php include 'Header.php' ?>
 
 <body id="page-top">
-
+    <!-- Div cargando -->
+    <?php include 'Cargando.php' ?>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -29,25 +30,51 @@
 
                     </div>
                     <div id="lista" class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <div id="mensaje">
                             </div>
-                            <h5 for="">Lista de Celulas</h5>
-                            <div class="table-responsive" id="tb_buscar">
-                                <table class="table table-hover table-sm">
-                                    <thead class="bg-primary text-white">
-                                        <tr>
-                                            <td>NOMBRE</td>
-                                            <td>NUMERO</td>
-                                            <td>DIRECCION</td>
-                                            <td>BAJA</td>
-                                            <td>MODIFICAR</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tb_celula">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h5 class="m-0 font-weight-bold text-primary">Lista de Celulas</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form action=# class="row text-center">
+                                        <div class="input-group mb-3 col-6">
+                                            <input type="text" class="form-control" id="buscarCelula"
+                                                placeholder="Buscar.."></input>
+                                            <button class="btn btn-primary" id="btn_busFec"><i
+                                                    class="fas fa-search"></i></button>
+                                        </div>
 
-                                    </tbody>
-                                </table>
+                                    </form>
+
+                                    <div class="table-responsive">
+                                        <table class="table table-light" id="dataTable" width="100%" cellspacing="0">
+                                            <thead class="bg-primary text-white">
+                                                <tr>
+                                                    <th>NOMBRE</th>
+                                                    <th>NUMERO</th>
+                                                    <th>DIRECCION</th>
+                                                    <th>BAJA</th>
+                                                    <th>MODIFICAR</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot class="bg-primary text-white">
+                                                <tr>
+                                                    <th>NOMBRE</th>
+                                                    <th>NUMERO</th>
+                                                    <th>DIRECCION</th>
+                                                    <th>BAJA</th>
+                                                    <th>MODIFICAR</th>
+                                                </tr>
+                                            </tfoot>
+
+                                            <tbody id="tb_celula">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
@@ -129,4 +156,3 @@
     <script src="/MRFSistem/Script/CodigoApp.js"></script>
     <script src="/MRFSistem/Script/CelulaApp.js"></script>
 </body>
-

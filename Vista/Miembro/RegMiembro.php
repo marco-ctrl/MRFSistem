@@ -165,7 +165,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
+        <button type="button" id="btn_guardarMiembro" class="btn btn-primary btn-lg
                                     text-center">
             <i class="far fa-save "></i>
             Guardar
