@@ -12,20 +12,23 @@ include '../Conexion/Conexion.php';
     $camoning = $_POST['camoning'];
     $catiping = $_POST['catiping'];
     $cafecing = $_POST['cafecing'];
+    $facodcaj = $_POST['facodcaj'];
     
     $sql = "INSERT INTO `aconfin`(
         `caestapo`,
         `cafecapo`,
         `cahorapo`,
         `pacodapo`,
-        `facodusu`
+        `facodusu`,
+        `facodcaj`
     )
     VALUES(
         true,
         '{$cafecapo}',
         '{$cahorapo}',
         '{$pacodapo}',
-        '{$facodusu}'
+        '{$facodusu}',
+        '{$facodcaj}'
     )";
     $stm = mysqli_query($conexion, $sql);
 //}

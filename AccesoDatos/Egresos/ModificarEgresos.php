@@ -9,15 +9,17 @@ include '../Conexion/Conexion.php';
     $cahorapo = $_POST['cahorapo'];
     $pacodapo = $_POST['pacodapo'];
     $facodusu = $_POST['facodusu'];
-    $camoning = $_POST['camoning'];
-    $catiping = $_POST['catiping'];
-    $cafecing = $_POST['cafecing'];
+    $camonegr = $_POST['camonegr'];
+    $cadesegr = $_POST['cadesegr'];
+    $cafecegr = $_POST['cafecegr'];
+    $facodcaj = $_POST['facodcaj'];
     
     $sql = "UPDATE `aconfin` SET
         `caestapo`=true,
         `cafecapo`='{$cafecapo}',
         `cahorapo`='{$cahorapo}',
-        `facodusu`='{$facodusu}'
+        `facodusu`='{$facodusu}',
+        `facodcaj`='{$facodcaj}'
         WHERE `pacodapo`='{$pacodapo}'";
 
     $stm = mysqli_query($conexion, $sql);
@@ -25,22 +27,25 @@ include '../Conexion/Conexion.php';
 
 
 if ($stm) {
-    $sql="UPDATE `aconing` SET 
-            `camoning`='{$camoning}', 
-            `catiping`='{$catiping}', 
-            `cafecing`='{$cafecing}'
-            WHERE `pacodeco`='{$pacodapo}'";
+    $sql="UPDATE `aconegr` SET 
+            `camonegr`='{$camonegr}', 
+            `cadesegr`='{$cadesegr}', 
+            `cafecegr`='{$cafecegr}'
+            WHERE `pacodegr`='{$pacodapo}'";
 
     $stm1=mysqli_query($conexion, $sql);
     if($stm1){
         echo "modificado";
+        
     }
     else{
-        echo "noRegistra";
+        //echo "noRegistra";
+        die(mysqli_error($conexion));
     }
     
 } else {
-    echo "noRegistra";
+    //echo "noRegistra";
+    die(mysqli_error($conexion));
 }
 
 mysqli_close($conexion);

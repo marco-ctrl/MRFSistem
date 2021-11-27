@@ -1,8 +1,26 @@
 <?php include 'Header.php' ?>
 
+<?php 
+    require_once "../AccesoDatos/Conexion/Conexion.php";
+    $caja = "";
+    $consulta = "SELECT *
+    FROM `aarqcaj`
+    where caestcaj=true";
+    
+    $resultado = mysqli_query($conexion, $consulta);
+
+    if( mysqli_num_rows($resultado) > 0 ){
+        $data=mysqli_fetch_array($resultado);
+        
+        $caja=$data['pacodcaj'];
+    }
+    //echo $caja;
+?>
+
+
 <body id="page-top">
-     <!-- Div cargando -->
-     <?php include 'Cargando.php' ?>
+    <!-- Div cargando -->
+    <?php include 'Cargando.php' ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -52,10 +70,13 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Archivos:</h6>
+                        <a class="collapse-item" href="FRM_Caja"><i class="fas fa-cash-register"></i>
+                            Caja</a>
                         <a class="collapse-item" href="FRM_Ingresos"><i class="fas fa-donate"></i>
                             Ingresos</a>
                         <a class="collapse-item" href="FRM_Egresos"><i class="fas fa-hand-holding-usd"></i> Egresos</a>
-                        <a class="collapse-item" href="FRM_EgresosFijo"><i class="fas fa-columns"></i> Items de Egresos</a>
+                        <a class="collapse-item" href="FRM_EgresosFijo"><i class="fas fa-columns"></i> Items de
+                            Egresos</a>
 
                     </div>
                 </div>
@@ -146,8 +167,16 @@
                     </div>
                     <div id="lista" class="row">
                         <div class="col-md-12">
-                            <div id="mensaje">
+                            <div id="dialog" style="display: none;" title="Mensaje">
+                                <div style="width: 460px; height: 190px;" id="int_dialog">
+                                    <div style="text-align: justify; font-size: 13px; width: 450px;">
+                                        <div id="mensaje">
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
+
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h5 class="m-0 font-weight-bold text-primary">Lista de Ingreso Economicos</h5>
@@ -238,17 +267,15 @@
                                         <label>Fecha de Registro</label>
                                         <input type="date" class="form-control" id="dat_aporte" disabled></input>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Hora de Registro</label>
-                                        <input type="datetime" class="form-control" id="hor_aporte" disabled></input>
-                                    </div>
-
-                                    <br>
 
                                 </form>
                             </div>
                             <div class="col-md-5">
                                 <form id="form2" clas="p-2">
+                                    <div class="form-group">
+                                        <label>Hora de Registro</label>
+                                        <input type="datetime" class="form-control" id="hor_aporte" disabled></input>
+                                    </div>
                                     <div class="form-group">
                                         <label>Codigo Usuario</label>
                                         <input type="text" class="form-control" id="txt_codUsuario"
@@ -259,6 +286,11 @@
                                         <input type="text" class="form-control" id="txt_usuario"
                                             value="<?php echo $_SESSION['canommie'] . " " . $_SESSION['capatmie'] . " " . $_SESSION['camatmie']; ?>"
                                             disabled></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Codigo Caja</label>
+                                        <input type="text" class="form-control" id="txt_codCaja"
+                                            value="<?php echo $caja; ?>" disabled></input>
                                     </div>
                                 </form>
                             </div>

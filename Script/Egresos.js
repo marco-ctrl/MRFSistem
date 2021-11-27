@@ -73,7 +73,6 @@ $(document).ready(function () {
             url: '/MRFSistem/AccesoDatos/EgresosFijos/ListarEfectivo.php',
             type: 'GET',
             success: function (response) {
-                console.log(response);
                 let EgresosFijos = JSON.parse(response);
                 let i = 0;
                 plantilla = '';
@@ -91,7 +90,7 @@ $(document).ready(function () {
         var val = $('#txt_items').val().toUpperCase();
         $('#txt_descripcion').val($('#dat_items').find('option[value="' + val + '"]').data('descripcion'));
         $('#txt_cantidad').val($('#dat_items').find('option[value="' + val + '"]').data('cantidad'));
-        
+
     });
 
 
@@ -99,14 +98,22 @@ $(document).ready(function () {
         $.ajax({
             url: '/MRFSistem/AccesoDatos/Egresos/ListarEgresos.php',
             type: 'GET',
+            beforeSend: function () {
+                var contenedor = document.getElementById('contenedor_carga');
+                contenedor.style.visibility = 'visible';
+                contenedor.style.opacity = '200'
+            },
             success: function (response) {
-                console.log(response);
-                let Egresos = JSON.parse(response);
-                let plantilla = '';
-                Egresos.forEach(con => {
-                    plantilla = MostrarTabla(plantilla, con);
-                });
-                $('#tb_egresos').html(plantilla);
+                //console.log(response);
+                if (response != "false") {
+                    let Egresos = JSON.parse(response);
+                    let plantilla = '';
+                    Egresos.forEach(con => {
+                        plantilla = MostrarTabla(plantilla, con);
+                    });
+                    $('#tb_egresos').html(plantilla);
+                }
+
             }
         });
     }
@@ -135,6 +142,7 @@ $(document).ready(function () {
         //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodapo = $(elemento).attr('UserDocu');
+        fechaActual();
         $.post('/MRFSistem/AccesoDatos/Egresos/SingleEgresos.php',
             { pacodapo }, function (responce) {
                 $('#lista').hide();
@@ -142,12 +150,13 @@ $(document).ready(function () {
                 const celula = JSON.parse(responce);
                 celula.forEach(con => {
                     codEconomico = con.pacodapo,
-                        $('#dat_Egreso').val(con.cafecing),
-                        $('#txt_cantidad').val(con.camoning),
-                        $('#cbx_tipIng').val(con.catiping)
+                        $('#dat_Egreso').val(con.cafecegr),
+                        $('#txt_cantidad').val(con.camonegr),
+                        $('#txt_items').val(con.cadesegr),
+                        $('#txt_codCaja').val(con.facodcaj)
                 });
                 //contex.hide();
-                document.getElementById("cbx_tipIng").focus();
+                //document.getElementById("txt_items").focus();
                 edit = true;
             });
     });
@@ -168,33 +177,35 @@ $(document).ready(function () {
     });
 
     $('#btn_nuevo').click(function (e) {//nuevo registro de Egresos
+        edit = false;
         $('#lista').hide();
         $('#formulario').show();
+        fechaActual();
         let num = "";
-        verificarSecuencia("EGE");
+        verificarSecuencia("EGR");
         if (getBan() != "true") {
-            setCodigo("EGE");
+            setCodigo("EGR");
             setCorrelativo(1);
         }
         else {
-            setCodigo("EGE");
-            obtenerCorrelativo("EGE");
-            setCorrelativo(obtenerSiguinete("EGE"));
+            setCodigo("EGR");
+            obtenerCorrelativo("EGR");
+            setCorrelativo(obtenerSiguinete("EGR"));
         }
         corre = getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codEconomico = getCodigo() + '-' + num;
         console.log(codEconomico);
         $("#btn_nuevo").attr("disabled", true);
-        document.getElementById('txt_descripcion').focus();
+        //document.getElementById('txt_items').focus();
     });
 
     $('#btn_cancelar').click(function (e) {
         Limpiar();
-        edit = false;
+
     });
 
-    $('#btn_guardar').click(function (e) {
+    $('#btn_guardarEgreso').click(function (e) {
         GuardarEgresos();
         //Limpiar();
     });
@@ -208,34 +219,35 @@ $(document).ready(function () {
     }
 
     function GuardarEgresos() {//guardar Egresos
+
         const postData = {
             pacodapo: codEconomico,
-            cafecing: $('#dat_Egreso').val(),
+            cafecegr: $('#dat_Egreso').val(),
             cafecapo: $('#dat_aporte').val(),
             cahorapo: $('#hor_aporte').val(),
             facodusu: $('#txt_codUsuario').val(),
-            camoning: $('#txt_cantidad').val(),
-            catiping: $('#cbx_tipIng').val(),
-            pacodeco: codEconomico
+            camonegr: $('#txt_cantidad').val(),
+            cadesegr: $('#txt_items').val().toUpperCase(),
+            facodcaj: $('#txt_codCaja').val()
         };
-        console.log(postData);
         let url = edit === false ?
             '/MRFSistem/AccesoDatos/Egresos/AgregarEgresos.php' :
             '/MRFSistem/AccesoDatos/Egresos/ModificarEgresos.php';
 
         $.post(url, postData, function (response) {
             if (!edit && response == 'registra') {
-                actualizarSecuencia("EGE", corre);
-                MostrarMensaje("Datos de Egreso guardados correctamente", "success");
+                actualizarSecuencia("EGR", corre);
+                alertify.alert('Mensaje', 'Datos de Egreso guardados correctamente', function () { alertify.success('Se guardó correctamente'); });
 
             }
             if (edit && response == 'modificado') {
-                MostrarMensaje("datos de Egreso modificados correctamente", "success")
+                alertify.alert('Mensaje', 'Datos de Egreso modificados correctamente', function () { alertify.success('Se modificó correctamente'); });
+
             }
             edit = false;
-
             $('#formulario').hide();
             $('#lista').show();
+
             ListarEgresos();
             Limpiar();
         });

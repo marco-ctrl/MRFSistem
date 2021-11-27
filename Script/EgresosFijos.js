@@ -53,6 +53,12 @@ $(document).ready(function () {
         $.ajax({
             url: '/MRFSistem/AccesoDatos/EgresosFijos/ListarEgresosFijos.php',
             type: 'GET',
+            beforeSend: function(){
+                var contenedor = document.getElementById('contenedor_carga');
+                contenedor.style.visibility = 'visible';
+                contenedor.style.opacity = '200'
+                console.log("cargando..");
+            },
             success: function (response) {
                 let EgresosFijos = JSON.parse(response);
                 let plantilla = '';
@@ -167,7 +173,6 @@ $(document).ready(function () {
             cacanefe: $('#txt_cantidad').val(),
             catipcan: $('#cbx_tipItem').val(),
         };
-        console.log(postData);
         let url = edit === false ?
             '/MRFSistem/AccesoDatos/EgresosFijos/AgregarEgresosFijos.php' :
             '/MRFSistem/AccesoDatos/EgresosFijos/ModificarEgresosFijos.php';

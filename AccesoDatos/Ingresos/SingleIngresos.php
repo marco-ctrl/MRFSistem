@@ -14,7 +14,8 @@ format(camoning, 2),
 canommie, 
 capatmie, 
 camatmie,
-cafecing
+cafecing,
+facodcaj
 FROM aconfin, aconing, ausurio, amiebro
 where pacodapo=pacodeco
 and facodusu=pacodusu
@@ -35,7 +36,8 @@ while ($row = mysqli_fetch_array($resultado)) {
                     'canommie' => $row['canommie'],
                     'capatmie' => $row['capatmie'],
                     'camatmie' => $row['camatmie'],
-                    'cafecing' => $row['cafecing']
+                    'cafecing' => $row['cafecing'],
+                    'facodcaj' => $row['facodcaj']
                     );
 }
 mysqli_close($conexion);

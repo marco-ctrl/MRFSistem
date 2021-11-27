@@ -12,12 +12,14 @@ include '../Conexion/Conexion.php';
     $camoning = $_POST['camoning'];
     $catiping = $_POST['catiping'];
     $cafecing = $_POST['cafecing'];
+    $facodcaj = $_POST['facodcaj'];
     
     $sql = "UPDATE `aconfin` SET
         `caestapo`=true,
         `cafecapo`='{$cafecapo}',
         `cahorapo`='{$cahorapo}',
-        `facodusu`='{$facodusu}'
+        `facodusu`='{$facodusu}',
+        `facodcaj`='{$facodcaj}'
         WHERE `pacodapo`='{$pacodapo}'";
 
     $stm = mysqli_query($conexion, $sql);

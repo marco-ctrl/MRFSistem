@@ -53,6 +53,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Archivos:</h6>
+                        <a class="collapse-item" href="FRM_Caja"><i class="fas fa-cash-register"></i>
+                            Caja</a>
                         <a class="collapse-item" href="FRM_Ingresos"><i class="fas fa-donate"></i>
                             Ingresos</a>
                         <a class="collapse-item" href="FRM_Egresos"><i class="fas fa-hand-holding-usd"></i> Egresos</a>

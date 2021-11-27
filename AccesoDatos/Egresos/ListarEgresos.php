@@ -22,6 +22,8 @@ order by pacodegr desc";
 
 $resultado = mysqli_query($conexion, $consulta);
 
+$json=array();
+
 while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('caestapo' => $row['caestapo'],
                     'cadesegr' => $row['cadesegr'],
@@ -35,6 +37,11 @@ while ($row = mysqli_fetch_array($resultado)) {
                     'cafecegr' => $row['cafecegr']
                     );
 }
+if ($json==null){
+    echo 'false';
+}
+else{
+    echo json_encode($json);
+}
 mysqli_close($conexion);
-echo json_encode($json);
 ?>

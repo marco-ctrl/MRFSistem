@@ -1,5 +1,22 @@
 <?php include 'Header.php' ?>
 
+<?php 
+    require_once "../AccesoDatos/Conexion/Conexion.php";
+    $caja = "";
+    $consulta = "SELECT *
+    FROM `aarqcaj`
+    where caestcaj=true";
+    
+    $resultado = mysqli_query($conexion, $consulta);
+
+    if( mysqli_num_rows($resultado) > 0 ){
+        $data=mysqli_fetch_array($resultado);
+        
+        $caja=$data['pacodcaj'];
+    }
+    //echo $caja;
+?>
+
 <body id="page-top">
     <!-- Div cargando -->
     <?php include 'Cargando.php' ?>
@@ -52,6 +69,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Archivos:</h6>
+                        <a class="collapse-item" href="FRM_Caja"><i class="fas fa-cash-register"></i>
+                            Caja</a>
                         <a class="collapse-item" href="FRM_Ingresos"><i class="fas fa-donate"></i>
                             Ingresos</a>
                         <a class="collapse-item" href="FRM_Egresos"><i class="fas fa-hand-holding-usd"></i> Egresos</a>
@@ -218,12 +237,6 @@
                                         </datalist>
                                     </div>
                                     <div class="form-group">
-                                        <label>Descripcion</label>
-                                        <textarea id="txt_descripcion" class="form-control" disabled>
-
-                                        </textarea>
-                                    </div>
-                                    <div class="form-group">
                                         <label>Cantidad de Egreso</label>
                                         <input type="number" id="txt_cantidad" min="0" placeholder="Cantidad en BS."
                                             class="form-control"></input>
@@ -232,16 +245,16 @@
                                         <label>Fecha de Egreso</label>
                                         <input type="date" class="form-control" id="dat_Egreso"></input>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label>Fecha de Registro</label>
+                                        <input type="date" class="form-control" id="dat_aporte" disabled></input>
+                                    </div>
 
                                 </form>
                             </div>
                             <div class="col-md-5">
                                 <form id="form2" clas="p-2">
-                                    <div class="form-group">
-                                        <label>Fecha de Registro</label>
-                                        <input type="date" class="form-control" id="dat_aporte" disabled></input>
-                                    </div>
+                                    
                                     <div class="form-group">
                                         <label>Hora de Registro</label>
                                         <input type="datetime" class="form-control" id="hor_aporte" disabled></input>
@@ -257,6 +270,11 @@
                                             value="<?php echo $_SESSION['canommie'] . " " . $_SESSION['capatmie'] . " " . $_SESSION['camatmie']; ?>"
                                             disabled></input>
                                     </div>
+                                    <div class="form-group">
+                                        <label>Codigo Caja</label>
+                                        <input type="text" class="form-control" id="txt_codCaja"
+                                            value="<?php echo $caja ?>" disabled></input>
+                                    </div>
                                 </form>
                             </div>
 
@@ -264,13 +282,13 @@
                         </div>
 
                         <div class="modal-footer col-md-10">
-                            <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
+                            <button type="button" id="btn_guardarEgreso" class="btn btn-primary btn-lg
                                     text-center">
-                                <i class="far fa-save ListarEgresos"></i>
+                                <i class="far fa-save"></i>
                                 Guardar
                             </button>
                             <button type="button" id="btn_cancelar" class="btn btn-danger btn-lg
-                        text-center"><i class="far fa-window-close ListarEgresos"></i>
+                        text-center"><i class="far fa-window-close"></i>
                                 Cancelar
                             </button>
                         </div>

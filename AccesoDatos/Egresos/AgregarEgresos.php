@@ -9,31 +9,27 @@ include '../Conexion/Conexion.php';
     $cahorapo = $_POST['cahorapo'];
     $pacodapo = $_POST['pacodapo'];
     $facodusu = $_POST['facodusu'];
-    $camoning = $_POST['camoning'];
-    $catiping = $_POST['catiping'];
-    $cafecing = $_POST['cafecing'];
+    $camonegr = $_POST['camonegr'];
+    $cadesegr = $_POST['cadesegr'];
+    $cafecegr = $_POST['cafecegr'];
+    $facodcaj = $_POST['facodcaj'];
     
-    $sql = "INSERT INTO `aconfin`(
-        `caestapo`,
-        `cafecapo`,
-        `cahorapo`,
-        `pacodapo`,
-        `facodusu`
-    )
+    $sql = "INSERT INTO `aconfin`(`caestapo`, `cafecapo`, `cahorapo`, `pacodapo`, `facodusu`, `facodcaj`)
     VALUES(
         true,
         '{$cafecapo}',
         '{$cahorapo}',
         '{$pacodapo}',
-        '{$facodusu}'
+        '{$facodusu}',
+        '{$facodcaj}'
     )";
     $stm = mysqli_query($conexion, $sql);
 //}
 
 
 if ($stm) {
-    $sql="INSERT INTO `aconing`(`camoning`, `pacodeco`, `catiping`, `cafecing`)
-    VALUES('{$camoning}','{$pacodapo}','{$catiping}', '{$cafecing}')";
+    $sql="INSERT INTO `aconegr`(`camonegr`, `cadesegr`, `pacodegr`, `cafecegr`)
+    VALUES('{$camonegr}','{$cadesegr}','{$pacodapo}', '{$cafecegr}')";
 
     $stm1=mysqli_query($conexion, $sql);
     if($stm1){

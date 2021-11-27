@@ -3,20 +3,23 @@ $(document).ready(function () {
     var codEconomico;
     var codUsu;
     var corre;
-    var edit=false;
+    var edit = false;
+    fechaActual();
 
-    
     //Fecha Actual
-    var hoy=new Date().format('Y-m-d');
-    $('#dat_maximo').val(hoy);
-    $('#dat_ingreso').val(hoy);
-    $('#dat_aporte').val(hoy);
-    
+    function fechaActual() {
+        var hoy = new Date().format('Y-m-d');
+        $('#dat_maximo').val(hoy);
+        $('#dat_ingreso').val(hoy);
+        $('#dat_aporte').val(hoy);
+
+    }
+
     ListarIngresos();
 
     $('#formulario').hide();//ocultar formulario
 
-    function myFunc()  {
+    function myFunc() {
         var now = new Date();
         var time = now.getHours() + ":" + now.getMinutes();
         //document.getElementById('hor_aporte').innerHTML= time;
@@ -27,95 +30,67 @@ $(document).ready(function () {
 
     $('#btn_busFec').click(function (e) {//permite hacer busqueda de miembros
         //if ($('#btn_busFec').val()) {
-            let cafecmin = $('#dat_inicio').val();
-            let cafecmax = $('#dat_maximo').val();
-            let plantilla = '';
-            $.ajax({
-                url: '/MRFSistem/AccesoDatos/Ingresos/BuscarIngresoFecha.php',
-                type: 'POST',
-                data: { cafecmin, cafecmax },
-                success: function (response) {
-                    if (response != "no encontrado") {
-                        let cel = JSON.parse(response);
+        let cafecmin = $('#dat_inicio').val();
+        let cafecmax = $('#dat_maximo').val();
+        let plantilla = '';
+        $.ajax({
+            url: '/MRFSistem/AccesoDatos/Ingresos/BuscarIngresoFecha.php',
+            type: 'POST',
+            data: { cafecmin, cafecmax },
+            success: function (response) {
+                if (response != "no encontrado") {
+                    let cel = JSON.parse(response);
 
-                        cel.forEach(cel => {
-                            plantilla = MostrarTabla(plantilla, cel);
-                        });
-                        $('#tb_economico').html(plantilla);
-                    }
-                    else {
-                        $('#tb_economico').html(plantilla);
-                        let mensaje = `<div class="alert alert-dismissible alert-warning">
+                    cel.forEach(cel => {
+                        plantilla = MostrarTabla(plantilla, cel);
+                    });
+                    $('#tb_economico').html(plantilla);
+                }
+                else {
+                    $('#tb_economico').html(plantilla);
+                    let mensaje = `<div class="alert alert-dismissible alert-warning">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <strong>NO se encuentran Ingresos registrados en la base de datos</strong></div>`;
-                        $('#mensaje').html(mensaje);
-                        $('#mensaje').show();
-                    }
-                },
-                error: function (xhr, status) {
-                    alert('error al buscar miembro');
+                    $('#mensaje').html(mensaje);
+                    $('#mensaje').show();
                 }
-            });
+            },
+            error: function (xhr, status) {
+                alert('error al buscar miembro');
+            }
+        });
         //}
-       /* else {
-            $('#mensaje').hide();
-            ListarIngresos();
-        }*/
+        /* else {
+             $('#mensaje').hide();
+             ListarIngresos();
+         }*/
     });
 
 
-    $('#txt_buscar').keyup(function (e) {//permite hacer busqueda de miembros
-        if ($('#txt_buscar').val()) {
-            let buscar = $('#txt_buscar').val().toUpperCase();
-            let plantilla = '';
-            $.ajax({
-                url: '/MRFSistem/AccesoDatos/Ingresos/BuscarIngresos.php',
-                type: 'POST',
-                data: { buscar },
-                success: function (response) {
-                    if (response != "no encontrado") {
-                        let cel = JSON.parse(response);
-
-                        cel.forEach(cel => {
-                            plantilla = MostrarTabla(plantilla, cel);
-                        });
-                        $('#tb_economico').html(plantilla);
-                    }
-                    else {
-                        $('#tb_economico').html(plantilla);
-                        let mensaje = `<div class="alert alert-dismissible alert-warning">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>La Materia ${buscar} no se encuentra registrado en la base de datos</strong></div>`;
-                        $('#mensaje').html(mensaje);
-                        $('#mensaje').show();
-                    }
-                },
-                error: function (xhr, status) {
-                    alert('error al buscar miembro');
-                }
-            });
-        }
-        else {
-            $('#mensaje').hide();
-            ListarIngresos();
-        }
-    });
-
+    
     function ListarIngresos() {//listar Ingresos
         $.ajax({
             url: '/MRFSistem/AccesoDatos/Ingresos/ListarIngresos.php',
             type: 'GET',
+            beforeSend: function () {
+                var contenedor = document.getElementById('contenedor_carga');
+                contenedor.style.visibility = 'visible';
+                contenedor.style.opacity = '200'
+            },
             success: function (response) {
-                let Ingresos = JSON.parse(response);
-                let plantilla = '';
-                Ingresos.forEach(con => {
-                    plantilla = MostrarTabla(plantilla, con);
-                });
-                $('#tb_economico').html(plantilla);
+                if (response != "false") {
+                    let Ingresos = JSON.parse(response);
+                    let plantilla = '';
+                    Ingresos.forEach(con => {
+                        plantilla = MostrarTabla(plantilla, con);
+                    });
+                    $('#tb_economico').html(plantilla);
+                }
+
             }
         });
     }
-    
+
     function MostrarTabla(plantilla, usu) {//////Mostrar Tabla///////////
         plantilla +=
             `<tr UserDocu="${usu.pacodapo}" class="table-light">
@@ -136,21 +111,22 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.modificar-aporte', function () {//modifica usuario
-        
+
         //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodapo = $(elemento).attr('UserDocu');
         $.post('/MRFSistem/AccesoDatos/Ingresos/SingleIngresos.php',
             { pacodapo }, function (responce) {
+                fechaActual();
                 $('#lista').hide();
-        $('#formulario').show();
+                $('#formulario').show();
                 const celula = JSON.parse(responce);
                 celula.forEach(con => {
                     codEconomico = con.pacodapo,
-                    $('#dat_ingreso').val(con.cafecing),
-                    $('#txt_cantidad').val(con.camoning),
-                    $('#cbx_tipIng').val(con.catiping)
-                    });
+                        $('#dat_ingreso').val(con.cafecing),
+                        $('#txt_cantidad').val(con.camoning),
+                        $('#cbx_tipIng').val(con.catiping)
+                });
                 //contex.hide();
                 document.getElementById("cbx_tipIng").focus();
                 edit = true;
@@ -175,7 +151,9 @@ $(document).ready(function () {
     $('#btn_nuevo').click(function (e) {//nuevo registro de Ingresos
         $('#lista').hide();
         $('#formulario').show();
+        fechaActual();
         let num = "";
+        edit = false;
         verificarSecuencia("ING");
         if (getBan() != "true") {
             setCodigo("ING");
@@ -186,7 +164,7 @@ $(document).ready(function () {
             obtenerCorrelativo("ING");
             setCorrelativo(obtenerSiguinete("ING"));
         }
-        corre=getCorrelativo();
+        corre = getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codEconomico = getCodigo() + '-' + num;
         console.log(codEconomico);
@@ -196,10 +174,12 @@ $(document).ready(function () {
 
     $('#btn_cancelar').click(function (e) {
         Limpiar();
-        edit=false;
+        edit = false;
     });
 
-    $('#btn_guardar').click(function (e){
+
+
+    $('#btn_guardar').click(function (e) {
         GuardarIngresos();
         //Limpiar();
     });
@@ -221,9 +201,8 @@ $(document).ready(function () {
             facodusu: $('#txt_codUsuario').val(),
             camoning: $('#txt_cantidad').val(),
             catiping: $('#cbx_tipIng').val(),
-            pacodeco: codEconomico
+            facodcaj: $('#txt_codCaja').val()
         };
-        console.log(postData);
         let url = edit === false ?
             '/MRFSistem/AccesoDatos/Ingresos/AgregarIngresos.php' :
             '/MRFSistem/AccesoDatos/Ingresos/ModificarIngresos.php';
@@ -231,20 +210,21 @@ $(document).ready(function () {
         $.post(url, postData, function (response) {
             if (!edit && response == 'registra') {
                 actualizarSecuencia("ING", corre);
-                MostrarMensaje("Datos de Ingreso guardados correctamente", "success");
+                alertify.alert('Mensaje', 'Datos de Ingresos guardados correctamente', function () { alertify.success('Se guardó correctamente'); });
 
             }
             if (edit && response == 'modificado') {
-                MostrarMensaje("datos de Ingreso modificados correctamente", "success")
+                alertify.alert('Mensaje', 'Datos de Ingresos modificados correctamente', function () { alertify.success('Se modifico correctamente'); });
+
             }
             edit = false;
-           
+
             $('#formulario').hide();
             $('#lista').show();
             ListarIngresos();
             Limpiar();
         });
-        
+
     }
 
     function MostrarMensaje(cadena, clase) {

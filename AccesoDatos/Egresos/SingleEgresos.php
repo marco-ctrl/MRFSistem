@@ -2,54 +2,45 @@
 
 include '../Conexion/Conexion.php';
 
-$cafecmin=$_POST['cafecmin'];
-$cafecmax=$_POST['cafecmax'];
+$pacodapo = $_POST['pacodapo'];
 
-$consulta = "SELECT caestapo, 
-catiping,
-cafecapo, 
-cahorapo, 
-pacodapo, 
-facodusu, 
-format(camoning, 2), 
+$consulta = "SELECT format(camonegr, 2), 
+cadesegr, 
+pacodegr, 
+cafecegr,
 canommie, 
 capatmie, 
 camatmie,
-cafecing
-FROM aconfin, aconing, ausurio, amiebro
-where pacodapo=pacodeco
+cafecapo, 
+cahorapo, 
+pacodapo,
+caestapo,
+facodcaj, 
+facodusu 
+FROM aconegr, ausurio, amiebro, aconfin 
+WHERE pacodapo=pacodegr
 and facodusu=pacodusu
 and facodmie=pacodmie
 and caestapo=true
-and cafecing>='{$cafecmin}'
-and cafecing<='{$cafecmax}'
-order by pacodapo desc";
+and pacodapo='{$pacodapo}'
+order by pacodegr desc";
 
 $resultado = mysqli_query($conexion, $consulta);
 
-$json=array();
-
 while ($row = mysqli_fetch_array($resultado)) {
     $json[] = array('caestapo' => $row['caestapo'],
-                    'catiping' => $row['catiping'],
+                    'cadesegr' => $row['cadesegr'],
                     'cafecapo' => $row['cafecapo'],
                     'cahorapo' => $row['cahorapo'],
                     'pacodapo' => $row['pacodapo'],
-                    'camoning' => $row['format(camoning, 2)'],
+                    'camonegr' => $row['format(camonegr, 2)'],
                     'canommie' => $row['canommie'],
                     'capatmie' => $row['capatmie'],
                     'camatmie' => $row['camatmie'],
-                    'cafecing' => $row['cafecing']
+                    'cafecegr' => $row['cafecegr'],
+                    'facodcaj' => $row['facodcaj']
                     );
 }
-
-if($json!=null){
-    echo json_encode($json);
-}
-else {
-    echo "no encontrado";
-}
-
 mysqli_close($conexion);
-//echo json_encode($json);
+echo json_encode($json);
 ?>

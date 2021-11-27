@@ -40,8 +40,7 @@
 
       if( mysqli_num_rows($resultado) > 0 ){
         $data=mysqli_fetch_array($resultado);
-        //print_r($data);
-        //session_start();
+        
         $_SESSION['active']=true;
         $_SESSION['pacodusu']=$data['pacodusu'];
         $_SESSION['canommie']=$data['canommie'];
@@ -71,7 +70,7 @@
 }
 ?>
 
-<html lang="en">
+<html lang="es">
 
 <head>
 

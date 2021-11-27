@@ -1,9 +1,10 @@
-<?php include 'Header.php' ?>
+<?php include 'Header.php'?>
 
 <body id="page-top">
 
-     <!-- Div cargando -->
-     <?php include 'Cargando.php' ?>
+    <!-- Div cargando -->
+    <?php include 'Cargando.php'?>
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -129,15 +130,55 @@
             <div id="content">
 
                 <!-- Top Bar -->
-                <?php include 'NavBar.php' ?>
+                <?php include 'NavBar.php'?>
 
                 <div class="container-fluid" id="finanzas">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">ARQUEO DE CAJA</h1>
+                        <a href="FRM_Finanzas" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-home fa-sm text-white-50"></i> Volver Escritorio</a>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Aperturar Caja</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Fecha de Apertura</label>
+                                        <input type="date" class="form-control" id="dat_caja"
+                                            value="<?php echo date('Y-m-d'); ?>" disabled></input>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Monto Inicial</label>
+                                        <input type="number" id="txt_monini" min="0" placeholder="Monto Inicial en BS."
+                                            class="form-control"></input>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="btn_aperturar" class="btn btn-primary">Aperturar</button>
+                                    <button type="button" id="btn_cancelarApe" class="btn btn-danger"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--row content-->
                     <div class="row">
                         <div class="col-md-4 p-3">
-                            <button type="button" id="btn_nuevo" class="btn btn-primary btn-block
-                text-center"><i class="fas fa-plus-circle"></i>
-                                Nuevo Item
+                            <button type="button" id="btn_nuevo" class="btn btn-primary text-center btn-block"><i
+                                    class="fas fa-plus-circle"></i>
+                                Aperturar Caja
                             </button>
+                            <!-- Button trigger modal -->
+
                         </div>
 
                     </div>
@@ -147,16 +188,28 @@
                             </div>
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h5 class="m-0 font-weight-bold text-primary">Lista de Items de Egresos</h5>
+                                    <h5 class="m-0 font-weight-bold text-primary">Lista Arqueo de Caja</h5>
                                 </div>
                                 <div class="card-body">
-                                    <form action=# class="row text-center">
-                                        <div class="input-group mb-3 col-6">
-                                            <input type="text" class="form-control" id="buscarItem" placeholder="Buscar.."></input>
-                                            <button class="btn btn-primary" id="btn_busFec"><i
+                                    <form action=# class="row justify-content-center p-1 text-center">
+                                        <div class="form-group p-1">
+                                            <label>Buscar Desde </label>
+                                        </div>
+                                        <div class="form-group p-1">
+                                            <input type="date" class="form-control" id="dat_inicio"
+                                                value="2010-12-12"></input>
+                                        </div>
+                                        <div class="form-group p-1">
+                                            <label>Hasta</label>
+                                        </div>
+                                        <div class="form-group p-1">
+                                            <input type="date" class="form-control" id="dat_maximo"></input>
+                                            <!--value="<?php //echo date('Y-m-d');?>"-->
+                                        </div>
+                                        <div class="form-group p-1">
+                                            <button class="form-control btn-primary" id="btn_busFec"><i
                                                     class="fas fa-search"></i></button>
                                         </div>
-                                       
                                     </form>
 
                                     <div class="table-responsive">
@@ -164,24 +217,30 @@
                                             <thead class="bg-primary text-white">
                                                 <tr>
                                                     <th>CODIGO</th>
-                                                    <th>DESCRIPCION</th>
-                                                    <th>CANTIDA Bs.</th>
-                                                    <th>TIPO</th>
-                                                    <th>BAJA</th>
-                                                    <th>MODIFICAR</th>
+                                                    <th>FEC. APERTURA</th>
+                                                    <th>MON. INICIAL</th>
+                                                    <th>TOT. INGRESOS</th>
+                                                    <th>TOT. EGRESOS</th>
+                                                    <th>FEC. CIERRE</th>
+                                                    <th>MON. FINAL</th>
+                                                    <th>ESTADO</th>
+                                                    <th>CERRAR</th>
                                                 </tr>
                                             </thead>
                                             <tfoot class="bg-primary text-white">
                                                 <tr>
                                                     <th>CODIGO</th>
-                                                    <th>DESCRIPCION</th>
-                                                    <th>CANTIDA Bs.</th>
-                                                    <th>TIPO</th>
-                                                    <th>BAJA</th>
-                                                    <th>MODIFICAR</th>
+                                                    <th>FEC. APERTURA</th>
+                                                    <th>MON. INICIAL</th>
+                                                    <th>TOT. INGRESOS</th>
+                                                    <th>TOT. EGRESOS</th>
+                                                    <th>FEC. CIERRE</th>
+                                                    <th>MON. FINAL</th>
+                                                    <th>ESTADO</th>
+                                                    <th>CERRAR</th>
                                                 </tr>
                                             </tfoot>
-                                            <tbody id="tb_items">
+                                            <tbody id="tb_caja">
 
                                             </tbody>
                                         </table>
@@ -196,70 +255,55 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <form id="form1" clas="p-2">
+
                                     <div class="form-group">
-                                        <label>Tipo de Item</label>
-                                        <select id="cbx_tipItem" class="form-control">
-                                            <option value="0">Seleccionar Tipo de Item</option>
-                                            <option value="EFECTIVO">EFECTIVO</option>
-                                            <option value="PORCENTUAL">PORCENTUAL</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Cantidad</label>
-                                        <div class="input-group">
-                                            <input type="number" id="txt_cantidad" min="0" class="form-control"
-                                                aria-label="Dollar amount (with dot and two decimal places)">
-                                            <span class="input-group-text">Bs.</span>
-                                        </div>
+                                        <label>Fecha de Apertura</label>
+                                        <input type="date" class="form-control" id="dat_inicaja" disabled></input>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Descripcion</label>
-                                        <textarea type="text" class="form-control" id="txt_descripcion"></textarea>
+                                        <label>Monto Inicial</label>
+                                        <input type="number" id="txt_moninicial" min="0" placeholder="Monto Inicial en BS."
+                                            class="form-control" disabled></input>
                                     </div>
-                                    <br>
+
 
                                 </form>
                             </div>
-                            
-
-
-                        </div>
-
-                        <div class="modal-footer col-md-10">
-                            <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
+                            <div class="modal-footer col-md-10">
+                                <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
                                     text-center">
-                                <i class="far fa-save"></i>
-                                Guardar
-                            </button>
-                            <button type="button" id="btn_cancelar" class="btn btn-danger btn-lg
-                        text-center"><i class="far fa-window-close"></i>
-                                Cancelar
-                            </button>
+                                    <i class="far fa-save ListarEgresos"></i>
+                                    Guardar
+                                </button>
+                                <button type="button" id="btn_cancelar" class="btn btn-danger btn-lg
+                        text-center"><i class="far fa-window-close ListarEgresos"></i>
+                                    Cancelar
+                                </button>
+                            </div>
+
                         </div>
-
-
                     </div>
 
                 </div>
 
+
+
+                <!-- Footer -->
+                <?php include 'Footer.php'?>
+
             </div>
-            <!-- Footer -->
-            <?php include 'Footer.php'?>
-
         </div>
-    </div>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Logout Modal-->
-    <?php include 'LogoutModal.php'?>
+        <!-- Logout Modal-->
+        <?php include 'LogoutModal.php'?>
 
-    <?php include 'Scripts.php'?>
-    <script src="/MRFSistem/Script/CodigoApp.js"></script>
-    <script src="/MRFSistem/Script/EgresosFijos.js"></script>
-
+        <?php include 'Scripts.php'?>
+        <script src="/MRFSistem/Script/CodigoApp.js"></script>
+        <script src="/MRFSistem/Script/Caja.js"></script>
 
 </body>
