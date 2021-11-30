@@ -1,9 +1,13 @@
 $(document).ready(function () {
 
     var codCaja;
-    var codUsu;
     var corre;
     var edit = false;
+
+    var monInicial = 0
+    var totIngresos = 0;
+    var totEgresos = 0;
+    var monFinal = 0;
 
     //ListarItems();
 
@@ -19,6 +23,7 @@ $(document).ready(function () {
     }
 
     ListarCaja();
+    //ListarDetalleIngresos();
 
     $('#formulario').hide();//ocultar formulario
 
@@ -94,6 +99,67 @@ $(document).ready(function () {
         });
     }
 
+    function ListarDetalleIngresos() {//listar tabla detalle de ingresos
+        let plantilla;
+        $.ajax({
+            url: '/MRFSistem/AccesoDatos/Caja/ListarTotalIngresos.php',
+            type: 'POST',
+            data: { codCaja },
+            success: function (response) {
+                if (response != "no encontrado") {
+                    //console.log(response);
+                    let cel = JSON.parse(response);
+
+                    cel.forEach(cel => {
+                        plantilla += `<tr><td>${cel.catiping}</td>
+                                    <td align="right">${cel.catoting}</td></tr>`;
+                        totIngresos += parseFloat(cel.catoting);
+                    });
+                    //console.log(suma);
+                    plantilla += `<tr>
+                                    <td>TOTAL</td>
+                                    <td align="right">${totIngresos}</td>
+                                  </tr>`
+                    $('#tb_detIngresos').html(plantilla);
+                    $('#txt_toting').val(totIngresos);
+                    ListarDetalleEgresos();
+                   
+                }
+            },
+        });
+    }
+
+    function ListarDetalleEgresos() {//listar tabla detalle de egresos
+        let plantilla;
+        $.ajax({
+            url: '/MRFSistem/AccesoDatos/Caja/ListarTotalEgresos.php',
+            type: 'POST',
+            data: { codCaja },
+            success: function (response) {
+                if (response != "no encontrado") {
+                    //console.log(response);
+                    let cel = JSON.parse(response);
+
+                    cel.forEach(cel => {
+                        plantilla += `<tr><td>${cel.cadesegr}</td>
+                                    <td align="right">${cel.catotegr}</td></tr>`;
+                        totEgresos += parseFloat(cel.catotegr);
+                    });
+                    //console.log(suma);
+                    plantilla += `<tr>
+                                    <td>TOTAL</td>
+                                    <td align="right">${totEgresos}</td>
+                                  </tr>`
+                    $('#tb_detEgresos').html(plantilla);
+                    $('#txt_totegr').val(totEgresos);
+                    monFinal = (monInicial + totIngresos) - totEgresos;
+                    $('#txt_monfin').val(round(monFinal));
+                    //console.log(round(monFinal));
+                }
+            },
+        });
+    }
+
     function MostrarTabla(plantilla, usu) {//////Mostrar Tabla///////////
         let estado
         if (usu.caestcaj == 1) {
@@ -120,10 +186,6 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.cerrar-caja', function () {//modifica usuario
-        //$('#lista').hide();
-        //$('#formulario').show();
-        //$("#btn_nuevo").attr("disabled", true);
-        //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodcaj = $(elemento).attr('UserDocu');
         fechaActual();
@@ -132,33 +194,22 @@ $(document).ready(function () {
                 console.log(responce);
                 $('#lista').hide();
                 $('#formulario').show();
+                $("#btn_nuevo").attr("disabled", true);
                 const celula = JSON.parse(responce);
                 celula.forEach(con => {
                     codCaja = con.pacodcaj,
                         $('#dat_inicaja').val(con.cainicaj),
                         $('#txt_moninicial').val(con.camonini)
                 });
-                console.log(codCaja);
+                monInicial = parseFloat($('#txt_moninicial').val());
+                ListarDetalleIngresos();
+
                 //contex.hide();
                 //document.getElementById("txt_items").focus();
                 edit = true;
             });
     });
 
-    $(document).on('click', '.baja-Caja', function () {//elimina usuario
-        if (confirm("Seguro que desea dar de baja esta materia")) {
-            let elemento = $(this)[0].parentElement.parentElement;
-            let pacodapo = $(elemento).attr('UserDocu');
-            $.post('/MRFSistem/AccesoDatos/Caja/DarBaja.php',
-                { pacodapo }, function (responce) {
-                    if (responce == 'baja') {
-                        ListarCaja();
-                        MostrarMensaje("Caja dado de baja", "warning");
-                    }
-
-                });
-        }
-    });
 
     $('#btn_nuevo').click(function (e) {//nuevo registro de Caja
         verificarApertura();
@@ -236,8 +287,8 @@ $(document).ready(function () {
     });
 
     function Limpiar() {//limpiar formulario
-        $('#form1').trigger('reset');
-        $('#form2').trigger('reset');
+        //$('#form1').trigger('reset');
+        //$('#form2').trigger('reset');
         $("#btn_nuevo").attr("disabled", false);
         $('#formulario').hide();
         $('#lista').show();
@@ -338,6 +389,11 @@ $(document).ready(function () {
         return num;
     }
 
+    function round(num) {//funcion para redondear numero mas presisios
+        var m = Number((Math.abs(num) * 100).toPrecision(15));
+        return Math.round(m) / 100 * Math.sign(num);
+    }
+    
 
 });
 

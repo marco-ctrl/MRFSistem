@@ -43,11 +43,11 @@ if ($stm) {
         echo "registra";
     }
     else{
-        echo "noRegistra";
+        die(mysqli_error($conexion)." aconing");
     }
     
 } else {
-    echo "noRegistra";
+    die(mysqli_error($conexion)." aconfin");
 }
 
 mysqli_close($conexion);

@@ -142,8 +142,8 @@
                     </div>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="myModal"
-                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                        aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -263,47 +263,130 @@
 
                                     <div class="form-group">
                                         <label>Monto Inicial</label>
-                                        <input type="number" id="txt_moninicial" min="0" placeholder="Monto Inicial en BS."
-                                            class="form-control" disabled></input>
+                                        <div class="input-group">
+                                            <input type="number" id="txt_moninicial" min="0" class="form-control"
+                                                aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                                            <span class="input-group-text">Bs.</span>
+                                        </div>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label>Total Ingresos</label>
+                                        <div class="input-group">
+                                            <input type="number" id="txt_toting" min="0" class="form-control"
+                                                aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                                            <span class="input-group-text">Bs.</span>
+                                        </div>
+                                    </div>
 
                                 </form>
                             </div>
-                            <div class="modal-footer col-md-10">
-                                <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
-                                    text-center">
-                                    <i class="far fa-save ListarEgresos"></i>
-                                    Guardar
-                                </button>
-                                <button type="button" id="btn_cancelar" class="btn btn-danger btn-lg
-                        text-center"><i class="far fa-window-close ListarEgresos"></i>
-                                    Cancelar
-                                </button>
+                            <div class="col-md-5">
+                                <form id="form1" clas="p-2">
+                                    <div class="form-group">
+                                        <label>Total Egresos</label>
+                                        <div class="input-group">
+                                            <input type="number" id="txt_totegr" min="0" class="form-control"
+                                                aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                                            <span class="input-group-text">Bs.</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Monto Final</label>
+                                        <div class="input-group">
+                                            <input type="number" id="txt_monfin" min="0" class="form-control"
+                                                aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                                            <span class="input-group-text">Bs.</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Fecha de Cierre</label>
+                                        <input type="date" class="form-control" id="dat_inicaja"
+                                            value="<?php echo date('Y-m-d');?>" disabled></input>
+                                    </div>
+                                </form>
                             </div>
-
                         </div>
+                        <div class="col-md-11">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h5 class="m-0 font-weight-bold text-primary">Detalles de Ingresos y Egresos</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h5>Detalle Ingresos</h5>
+                                            <div class="table-responsive">
+                                                <table class="table table-light" id="tb_ingresos" width="100%"
+                                                    cellspacing="0">
+                                                    <thead class="bg-primary text-white">
+                                                        <tr>
+                                                            <th>ITEMS</th>
+                                                            <th>MONTO Bs.</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tb_detIngresos">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Detalle Egresos</h5>
+                                            <div class="table-responsive">
+                                                <table class="table table-light" id="tb_egresos" width="100%"
+                                                    cellspacing="0">
+                                                    <thead class="bg-primary text-white">
+                                                        <tr>
+                                                            <th>ITEMS</th>
+                                                            <th>MONTO Bs.</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tb_detEgresos">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="modal-footer col-md-10">
+                            <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
+                                    text-center">
+                                <i class="far fa-save"></i>
+                                Guardar
+                            </button>
+                            <button type="button" id="btn_cancelar" class="btn btn-danger btn-lg
+                        text-center"><i class="far fa-window-close"></i>
+                                Cancelar
+                            </button>
+                        </div>
+
                     </div>
 
+
                 </div>
-
-
-
-                <!-- Footer -->
-                <?php include 'Footer.php'?>
-
             </div>
+            <!-- Footer -->
+            <?php include 'Footer.php'?>
         </div>
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+    </div>
 
-        <!-- Logout Modal-->
-        <?php include 'LogoutModal.php'?>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-        <?php include 'Scripts.php'?>
-        <script src="/MRFSistem/Script/CodigoApp.js"></script>
-        <script src="/MRFSistem/Script/Caja.js"></script>
+    <!-- Logout Modal-->
+    <?php include 'LogoutModal.php'?>
+
+    <?php include 'Scripts.php'?>
+    <script src="/MRFSistem/Script/CodigoApp.js"></script>
+    <script src="/MRFSistem/Script/Caja.js"></script>
 
 </body>

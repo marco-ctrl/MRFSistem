@@ -208,6 +208,7 @@ $(document).ready(function () {
             '/MRFSistem/AccesoDatos/Ingresos/ModificarIngresos.php';
 
         $.post(url, postData, function (response) {
+            console.log(response);
             if (!edit && response == 'registra') {
                 actualizarSecuencia("ING", corre);
                 alertify.alert('Mensaje', 'Datos de Ingresos guardados correctamente', function () { alertify.success('Se guardó correctamente'); });

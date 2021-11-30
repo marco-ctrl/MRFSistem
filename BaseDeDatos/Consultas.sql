@@ -103,3 +103,25 @@ FROM aconing
 GROUP by DATE_FORMAT(cafecing, '%M')
 
 SELECT * FROM amiebro;
+
+#agrupar tipo de ingresos y subtotales
+SELECT `catiping`, SUM(`camoning`) as catoting 
+FROM `aconing`, `aconfin`, `aarqcaj` 
+WHERE aconfin.pacodapo=aconing.pacodeco
+and aconfin.facodcaj=aarqcaj.pacodcaj
+GROUP BY aconing.catiping;
+
+#agrupar descripcion de egrsos y subtotales
+SELECT `cadesegr`, format(SUM(`camonegr`), 2) as catotegr 
+FROM `aconegr`, `aconfin`, `aarqcaj` 
+WHERE aconfin.pacodapo=aconegr.pacodegr
+and aconfin.facodcaj=aarqcaj.pacodcaj
+GROUP BY aconegr.cadesegr
+
+#seleccion de egresos porcentuales
+SELECT cadesefe, format((SUM(camoning)/100)*cacanefe, 2) as total
+FROM `aegrefij`, aconing, aconfin, aarqcaj
+WHERE catipcan='PORCENTUAL'
+and aconing.pacodeco=aconfin.pacodapo
+AND aconfin.facodcaj=aarqcaj.pacodcaj
+GROUP BY cadesefe
