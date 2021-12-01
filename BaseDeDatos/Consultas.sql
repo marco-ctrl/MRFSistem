@@ -119,9 +119,11 @@ and aconfin.facodcaj=aarqcaj.pacodcaj
 GROUP BY aconegr.cadesegr
 
 #seleccion de egresos porcentuales
-SELECT cadesefe, format((SUM(camoning)/100)*cacanefe, 2) as total
-FROM `aegrefij`, aconing, aconfin, aarqcaj
-WHERE catipcan='PORCENTUAL'
-and aconing.pacodeco=aconfin.pacodapo
-AND aconfin.facodcaj=aarqcaj.pacodcaj
-GROUP BY cadesefe
+SELECT cadesefe, 
+	round(cacanefe, 0) as cacanefe, 
+	format((SUM(camoning)/100)*cacanefe, 2) as total
+    FROM aegrefij, aconing, aconfin, aarqcaj
+    WHERE catipcan='PORCENTUAL'
+    and aconing.pacodeco=aconfin.pacodapo
+    AND aconfin.facodcaj=aarqcaj.pacodcaj
+    GROUP BY cadesefe

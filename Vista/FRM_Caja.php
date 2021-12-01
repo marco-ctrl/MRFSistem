@@ -177,8 +177,7 @@
                                     class="fas fa-plus-circle"></i>
                                 Aperturar Caja
                             </button>
-                            <!-- Button trigger modal -->
-
+                            <input type="text" id="txt_codCajero" value="<?php echo $_SESSION['pacodusu'] ?>" hidden></input>
                         </div>
 
                     </div>
@@ -300,7 +299,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha de Cierre</label>
-                                        <input type="date" class="form-control" id="dat_inicaja"
+                                        <input type="date" class="form-control" id="dat_fincaja"
                                             value="<?php echo date('Y-m-d');?>" disabled></input>
                                     </div>
                                 </form>
@@ -324,6 +323,9 @@
                                                             <th>MONTO Bs.</th>
                                                         </tr>
                                                     </thead>
+                                                    <tfoot class="bg-primary text-white" id="tf_ingresos">
+
+                                                    </tfoot>
                                                     <tbody id="tb_detIngresos">
 
                                                     </tbody>
@@ -341,6 +343,9 @@
                                                             <th>MONTO Bs.</th>
                                                         </tr>
                                                     </thead>
+                                                    <tfoot class="bg-primary text-white" id="tf_egresos">
+
+                                                    </tfoot>
                                                     <tbody id="tb_detEgresos">
 
                                                     </tbody>

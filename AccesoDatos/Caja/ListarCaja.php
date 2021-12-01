@@ -25,7 +25,7 @@ while ($row = mysqli_fetch_array($resultado)) {
                     'camonfin' => $row['format(camonfin, 2)'],
                     'caestcaj' => $row['caestcaj'],
                     'catoting' => $row['format(catoting, 2)'],
-                    'catotegr' => $row['format(catoting, 2)']
+                    'catotegr' => $row['format(catotegr, 2)']
                     );
 }
 if ($json==null){

@@ -13,9 +13,6 @@ while($row=mysqli_fetch_array($stm)){
     $json[]=array('correlativo'=>$row['correlativo']);
 }
 
-//echo sizeof();
-//echo sizeof($json);
-//echo $stm;
 if(sizeof($json)>0){
     echo 'true';
 }

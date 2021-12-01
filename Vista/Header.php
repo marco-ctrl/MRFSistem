@@ -7,7 +7,7 @@ if(empty($_SESSION['active'])){
 
 //establecier zona horaria
 date_default_timezone_set('UTC');
-date_default_timezone_set('America/Lima'); 
+date_default_timezone_set('America/La_Paz'); 
 ?>
 
 <html>

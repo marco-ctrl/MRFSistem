@@ -101,6 +101,7 @@ $(document).ready(function () {
 
     function ListarDetalleIngresos() {//listar tabla detalle de ingresos
         let plantilla;
+        let plantilla1;
         $.ajax({
             url: '/MRFSistem/AccesoDatos/Caja/ListarTotalIngresos.php',
             type: 'POST',
@@ -116,11 +117,12 @@ $(document).ready(function () {
                         totIngresos += parseFloat(cel.catoting);
                     });
                     //console.log(suma);
-                    plantilla += `<tr>
+                    plantilla1 = `<tr>
                                     <td>TOTAL</td>
                                     <td align="right">${totIngresos}</td>
                                   </tr>`
                     $('#tb_detIngresos').html(plantilla);
+                    $('#tf_ingresos').html(plantilla1);
                     $('#txt_toting').val(totIngresos);
                     ListarDetalleEgresos();
                    
@@ -131,6 +133,7 @@ $(document).ready(function () {
 
     function ListarDetalleEgresos() {//listar tabla detalle de egresos
         let plantilla;
+        let plantilla1;
         $.ajax({
             url: '/MRFSistem/AccesoDatos/Caja/ListarTotalEgresos.php',
             type: 'POST',
@@ -146,11 +149,12 @@ $(document).ready(function () {
                         totEgresos += parseFloat(cel.catotegr);
                     });
                     //console.log(suma);
-                    plantilla += `<tr>
+                    plantilla1 = `<tr>
                                     <td>TOTAL</td>
                                     <td align="right">${totEgresos}</td>
                                   </tr>`
                     $('#tb_detEgresos').html(plantilla);
+                    $('#tf_egresos').html(plantilla1);
                     $('#txt_totegr').val(totEgresos);
                     monFinal = (monInicial + totIngresos) - totEgresos;
                     $('#txt_monfin').val(round(monFinal));
@@ -161,12 +165,15 @@ $(document).ready(function () {
     }
 
     function MostrarTabla(plantilla, usu) {//////Mostrar Tabla///////////
+        let disable;
         let estado
         if (usu.caestcaj == 1) {
             estado = "ABIERTO";
+            disable="";
         }
         if (usu.caestcaj == 0) {
             estado = "CERRADO";
+            disable="disabled"
         }
         plantilla +=
             `<tr UserDocu="${usu.pacodcaj}" class="table-light">
@@ -179,7 +186,7 @@ $(document).ready(function () {
                 <td>${usu.camonfin}</td>
                 <td>`+ estado + `</td>
                 <td>
-                    <a class="cerrar-caja btn btn-danger">Cerrar</a>
+                    <button type="button" class="cerrar-caja btn btn-danger" ${disable}>Cerrar</button>
                 </td>
             </tr>`
         return plantilla;
@@ -188,6 +195,12 @@ $(document).ready(function () {
     $(document).on('click', '.cerrar-caja', function () {//modifica usuario
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodcaj = $(elemento).attr('UserDocu');
+        agregarEgresoPorcentual(pacodcaj);
+    });
+
+    function cerrarCaja(pacodcaj){
+        //let elemento = $(this)[0].parentElement.parentElement;
+        //let pacodcaj = $(elemento).attr('UserDocu');
         fechaActual();
         $.post('/MRFSistem/AccesoDatos/Caja/SingleCaja.php',
             { pacodcaj }, function (responce) {
@@ -208,8 +221,7 @@ $(document).ready(function () {
                 //document.getElementById("txt_items").focus();
                 edit = true;
             });
-    });
-
+    }
 
     $('#btn_nuevo').click(function (e) {//nuevo registro de Caja
         verificarApertura();
@@ -282,7 +294,7 @@ $(document).ready(function () {
     });
 
     $('#btn_guardar').click(function (e) {
-        GuardarCaja();
+        CerrarCaja();
         //Limpiar();
     });
 
@@ -292,6 +304,7 @@ $(document).ready(function () {
         $("#btn_nuevo").attr("disabled", false);
         $('#formulario').hide();
         $('#lista').show();
+        edit=false;
     }
 
     function AbrirCaja() {//guardar Caja
@@ -321,34 +334,34 @@ $(document).ready(function () {
 
     }
 
-    function GuardarCaja() {//guardar Caja
+    function CerrarCaja() {//guardar Caja
         const postData = {
             pacodcaj: codCaja,
-            cainicaj: $('#dat_caja').val(),
-            camonini: $('#txt_monini').val()
+            cainicaj: $('#dat_inicaja').val(),
+            camonini: $('#txt_monini').val(),
+            cafincaj: $('#dat_fincaja').val(),
+            camonfin: $('#txt_monfin').val(),
+            caestcaj: 0,
+            catoting: $('#txt_toting').val(),
+            catotegr: $('#txt_totegr').val()
         };
         console.log(postData);
-        let url = edit === false ?
-            '/MRFSistem/AccesoDatos/Caja/AperturarCaja.php' :
-            '/MRFSistem/AccesoDatos/Caja/ModificarCaja.php';
+        let url = '/MRFSistem/AccesoDatos/Caja/CerrarCaja.php';
         //$.ajax();
 
         $.post(url, postData, function (response) {
             console.log(response);
-            if (!edit && response == 'registra') {
-                actualizarSecuencia("CAJ", corre);
-                //MostrarMensaje("Datos de Egreso guardados correctamente", "success");
-                alertify.alert('Mensaje', 'Se Aperturo una nueva Caja', function () { alertify.success('Caja Aperturada'); });
-            }
             if (edit && response == 'modificado') {
-                MostrarMensaje("datos de Egreso modificados correctamente", "success")
+                //MostrarMensaje("datos de Egreso modificados correctamente", "success")
+                alertify.alert('Mensaje', 'Se Cerro la Caja', function () { alertify.success('Caja cerrada exitosamente'); });
+            
             }
             edit = false;
 
             $('#formulario').hide();
             $('#lista').show();
-            //ListarCaja();
-            //Limpiar();
+            ListarCaja();
+            Limpiar();
         });
 
     }
@@ -394,6 +407,24 @@ $(document).ready(function () {
         return Math.round(m) / 100 * Math.sign(num);
     }
     
+    function agregarEgresoPorcentual(pacodcaj){
+        
+        const postData = {
+            pacodcaj: pacodcaj,
+            pacodusu: $('#txt_codCajero').val()
+        };
+        console.log(postData);
+        let url = '/MRFSistem/AccesoDatos/Caja/RegistrarEgresosPorcentual.php';
+        //$.ajax();
 
+        $.post(url, postData, function (response) {
+            console.log(response);
+            if (!edit && response == 'registra') {
+                cerrarCaja(pacodcaj);
+            }
+            
+        });
+
+    }
 });
 
