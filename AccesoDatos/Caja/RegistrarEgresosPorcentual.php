@@ -4,11 +4,11 @@ include '../Conexion/Conexion.php';
 date_default_timezone_set('UTC');
 date_default_timezone_set('America/La_Paz');
 
-//$pacodcaj = $_POST['pacodcaj']; //codigo caja
-//$pacodusu = $_POST['pacodusu']; //codigo cajero
+$pacodcaj = $_POST['pacodcaj']; //codigo caja
+$pacodusu = $_POST['pacodusu']; //codigo cajero
 
-$pacodcaj = 'CAJ-000001'; //codigo caja
-$pacodusu = 'USU-000004'; //codigo cajero
+//$pacodcaj = 'CAJ-000001'; //codigo caja
+//$pacodusu = 'USU-000004'; //codigo cajero
 
 $egrPorcentual = array();
 
@@ -29,6 +29,7 @@ FROM aegrefij, aconing, aconfin, aarqcaj
 WHERE catipcan='PORCENTUAL'
 and aconing.pacodeco=aconfin.pacodapo
 AND aconfin.facodcaj=aarqcaj.pacodcaj
+and aegrefij.caestefe=1
 and aconfin.facodcaj='{$pacodcaj}'
 GROUP BY cadesefe";
 

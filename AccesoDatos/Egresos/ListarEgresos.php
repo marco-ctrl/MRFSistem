@@ -2,6 +2,8 @@
 
 include '../Conexion/Conexion.php';
 
+$pacodcaj=$_POST['pacodcaj'];
+
 $consulta = "SELECT format(camonegr, 2), 
 cadesegr, 
 pacodegr, 
@@ -13,11 +15,15 @@ cafecapo,
 cahorapo, 
 pacodapo,
 caestapo, 
-facodusu FROM aconegr, ausurio, amiebro, aconfin 
+facodusu,
+pacodcaj
+FROM aconegr, ausurio, amiebro, aconfin, aarqcaj 
 WHERE pacodapo=pacodegr
 and facodusu=pacodusu
 and facodmie=pacodmie
 and caestapo=true
+and aconfin.facodcaj=aarqcaj.pacodcaj
+and aconfin.facodcaj='{$pacodcaj}'
 order by pacodegr desc";
 
 $resultado = mysqli_query($conexion, $consulta);

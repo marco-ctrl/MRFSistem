@@ -98,9 +98,15 @@ and caestmie=true
 and facodciu=pacodciu
 order by pacodmie desc LIMIT 15
 
+#selecciona total por mes ingresos
 SELECT SUM(`camoning`) as total, DATE_FORMAT(cafecing, '%m') as mes
 FROM aconing
 GROUP by DATE_FORMAT(cafecing, '%M')
+
+#selecciona total por mes egresos
+SELECT SUM(`camonegr`) as total, DATE_FORMAT(cafecegr, '%m') as mes
+FROM aconegr
+GROUP by DATE_FORMAT(cafecegr, '%M')
 
 SELECT * FROM amiebro;
 

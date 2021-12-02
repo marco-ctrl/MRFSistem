@@ -1,9 +1,9 @@
-<?php include 'Header.php' ?>
+<?php include 'Header.php'?>
 
 <body id="page-top">
 
     <!-- Div cargando -->
-    <?php include 'Cargando.php' ?>
+    <?php include 'Cargando.php'?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -44,45 +44,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-archive"></i>
-                    <span>Archivos</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Archivos:</h6>
-                        <a class="collapse-item" href="FRM_Caja"><i class="fas fa-cash-register"></i>
-                            Caja</a>
-                        <a class="collapse-item" href="FRM_Ingresos"><i class="fas fa-donate"></i>
-                            Ingresos</a>
-                        <a class="collapse-item" href="FRM_Egresos"><i class="fas fa-hand-holding-usd"></i> Egresos</a>
-                        <a class="collapse-item" href="FRM_EgresosFijo"><i class="fas fa-columns"></i> Items de
-                            Egresos</a>
-
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="far fa-file-pdf"></i>
-                    <span>Reportes</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header"> Reportes:</h6>
-                        <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Informacion Alumno</a>
-                        <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Control de Pago</a>
-                        <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Control de Asistencia</a>
-
-                    </div>
-                </div>
-            </li>
+            <?php include_once 'includes/ControlFinanzas/interfaces.php'?>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -130,7 +92,7 @@
             <div id="content">
 
                 <!-- Top Bar -->
-                <?php include 'NavBar.php' ?>
+                <?php include 'NavBar.php'?>
 
                 <div class="container-fluid" id="finanzas">
 
@@ -144,6 +106,24 @@
                     <!--row content-->
                     <div class="row">
                         <!--  Acceso directo a las Actividades -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <a href="FRM_Caja" class="collapse-item" style="text-decoration:none">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Archivos:</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">CAJA</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-cash-register fa-2x text-gray-700"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                         <div class="col-xl-3 col-md-6 mb-4">
                             <a href="FRM_Ingresos" class="collapse-item" style="text-decoration:none">
                                 <div class="card border-left-success shadow h-100 py-2">
@@ -181,9 +161,81 @@
                                 </div>
                             </a>
                         </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <a href="FRM_Egresos" class="collapse-item" style="text-decoration:none">
+                                <div class="card border-left-info shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Reportes:</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">INFORME MENSUAL</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="far fa-file-pdf fa-2x text-gray-700"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
 
 
                     </div>
+
+                    <div class="row">
+
+                        <div class="col-xl-8 col-lg-7">
+
+                            <!-- Area Chart -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">INGRESOS</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="grf_ingresos"></canvas>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+
+                            <!-- Bar Chart -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">EGRESOS</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <canvas id="grf_egresos"></canvas>
+                                    </div>
+                                    <hr>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Donut Chart -->
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-pie pt-4">
+                                        <canvas id="myPieChart"></canvas>
+                                    </div>
+                                    <hr>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
 
 
                 </div>
@@ -206,5 +258,7 @@
     <?php include 'LogoutModal.php'?>
 
     <?php include 'Scripts.php'?>
+    <script src="/MRFSistem/vendor/chart.js/Chart.min.js"></script>
+    <script src="/MRFSistem/js/demo/chart-bar-demo.js"></script>
 
 </body>

@@ -7,6 +7,7 @@ $(document).ready(function () {
     var monInicial = 0
     var totIngresos = 0;
     var totEgresos = 0;
+    var totEgresosPor = 0;
     var monFinal = 0;
 
     //ListarItems();
@@ -41,36 +42,28 @@ $(document).ready(function () {
         let cafecmax = $('#dat_maximo').val();
         let plantilla = '';
         $.ajax({
-            url: '/MRFSistem/AccesoDatos/Caja/BuscarEgresoFecha.php',
+            url: '/MRFSistem/AccesoDatos/Caja/BuscarFechaCaja.php',
             type: 'POST',
             data: { cafecmin, cafecmax },
             success: function (response) {
+                ////console.log(response);
                 if (response != "no encontrado") {
                     let cel = JSON.parse(response);
 
                     cel.forEach(cel => {
                         plantilla = MostrarTabla(plantilla, cel);
                     });
-                    $('#tb_Caja').html(plantilla);
+                    $('#tb_caja').html(plantilla);
                 }
+
                 else {
-                    $('#tb_Caja').html(plantilla);
-                    let mensaje = `<div class="alert alert-dismissible alert-warning">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>La Materia ${buscar} no se encuentra registrado en la base de datos</strong></div>`;
-                    $('#mensaje').html(mensaje);
-                    $('#mensaje').show();
+                    if (response == "no encontrado") {
+                        plantilla = '<tr><td colspan="9" align="center">Datos no encontrados!</td></tr>'
+                        $('#tb_caja').html(plantilla);
+                    }
                 }
-            },
-            error: function (xhr, status) {
-                alert('error al buscar miembro');
             }
         });
-        //}
-        /* else {
-             $('#mensaje').hide();
-             ListarCaja();
-         }*/
     });
 
 
@@ -82,10 +75,10 @@ $(document).ready(function () {
                 var contenedor = document.getElementById('contenedor_carga');
                 contenedor.style.visibility = 'visible';
                 contenedor.style.opacity = '200'
-                //console.log("cargando..");
+                ////console.log("cargando..");
             },
             success: function (response) {
-                //console.log(response);
+                ////console.log(response);
                 if (response != "false") {
                     let Caja = JSON.parse(response);
                     let plantilla = '';
@@ -108,7 +101,7 @@ $(document).ready(function () {
             data: { codCaja },
             success: function (response) {
                 if (response != "no encontrado") {
-                    //console.log(response);
+                    ////console.log(response);
                     let cel = JSON.parse(response);
 
                     cel.forEach(cel => {
@@ -116,7 +109,7 @@ $(document).ready(function () {
                                     <td align="right">${cel.catoting}</td></tr>`;
                         totIngresos += parseFloat(cel.catoting);
                     });
-                    //console.log(suma);
+                    ////console.log(suma);
                     plantilla1 = `<tr>
                                     <td>TOTAL</td>
                                     <td align="right">${totIngresos}</td>
@@ -124,15 +117,15 @@ $(document).ready(function () {
                     $('#tb_detIngresos').html(plantilla);
                     $('#tf_ingresos').html(plantilla1);
                     $('#txt_toting').val(totIngresos);
-                    ListarDetalleEgresos();
-                   
+                    ListarDetalleEgresosPorcentual();
+
                 }
             },
         });
     }
 
-    function ListarDetalleEgresos() {//listar tabla detalle de egresos
-        let plantilla;
+    function ListarDetalleEgresos(plantilla) {//listar tabla detalle de egresos
+        //let plantilla;
         let plantilla1;
         $.ajax({
             url: '/MRFSistem/AccesoDatos/Caja/ListarTotalEgresos.php',
@@ -140,7 +133,7 @@ $(document).ready(function () {
             data: { codCaja },
             success: function (response) {
                 if (response != "no encontrado") {
-                    //console.log(response);
+                    ////console.log(response);
                     let cel = JSON.parse(response);
 
                     cel.forEach(cel => {
@@ -148,7 +141,8 @@ $(document).ready(function () {
                                     <td align="right">${cel.catotegr}</td></tr>`;
                         totEgresos += parseFloat(cel.catotegr);
                     });
-                    //console.log(suma);
+                    ////console.log(suma);
+                    totEgresos += totEgresosPor;
                     plantilla1 = `<tr>
                                     <td>TOTAL</td>
                                     <td align="right">${totEgresos}</td>
@@ -158,22 +152,46 @@ $(document).ready(function () {
                     $('#txt_totegr').val(totEgresos);
                     monFinal = (monInicial + totIngresos) - totEgresos;
                     $('#txt_monfin').val(round(monFinal));
-                    //console.log(round(monFinal));
+                    ////console.log(round(monFinal));
                 }
             },
         });
     }
+
+    function ListarDetalleEgresosPorcentual() {//listar tabla detalle de egresos
+        let plantilla;
+        let plantilla1;
+        $.ajax({
+            url: '/MRFSistem/AccesoDatos/Caja/ListarTotalEgresosPorcentual.php',
+            type: 'POST',
+            data: { codCaja },
+            success: function (response) {
+                if (response != "no encontrado") {
+                    ////console.log(response);
+                    let cel = JSON.parse(response);
+
+                    cel.forEach(cel => {
+                        plantilla += `<tr><td>${cel.cadesefe}(${cel.cacanefe}%)</td>
+                                    <td align="right">${cel.total}</td></tr>`;
+                        totEgresosPor += parseFloat(cel.total);
+                    });
+                    ListarDetalleEgresos(plantilla);
+                }
+            },
+        });
+    }
+
 
     function MostrarTabla(plantilla, usu) {//////Mostrar Tabla///////////
         let disable;
         let estado
         if (usu.caestcaj == 1) {
             estado = "ABIERTO";
-            disable="";
+            disable = "";
         }
         if (usu.caestcaj == 0) {
             estado = "CERRADO";
-            disable="disabled"
+            disable = "disabled"
         }
         plantilla +=
             `<tr UserDocu="${usu.pacodcaj}" class="table-light">
@@ -195,16 +213,15 @@ $(document).ready(function () {
     $(document).on('click', '.cerrar-caja', function () {//modifica usuario
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodcaj = $(elemento).attr('UserDocu');
-        agregarEgresoPorcentual(pacodcaj);
+        //agregarEgresoPorcentual(pacodcaj);
+        cerrarCaja(pacodcaj);
     });
 
-    function cerrarCaja(pacodcaj){
-        //let elemento = $(this)[0].parentElement.parentElement;
-        //let pacodcaj = $(elemento).attr('UserDocu');
+    function cerrarCaja(pacodcaj) {
         fechaActual();
         $.post('/MRFSistem/AccesoDatos/Caja/SingleCaja.php',
             { pacodcaj }, function (responce) {
-                console.log(responce);
+                ////console.log(responce);
                 $('#lista').hide();
                 $('#formulario').show();
                 $("#btn_nuevo").attr("disabled", true);
@@ -216,9 +233,7 @@ $(document).ready(function () {
                 });
                 monInicial = parseFloat($('#txt_moninicial').val());
                 ListarDetalleIngresos();
-
-                //contex.hide();
-                //document.getElementById("txt_items").focus();
+                ////console.log(codCaja);
                 edit = true;
             });
     }
@@ -249,10 +264,10 @@ $(document).ready(function () {
                 var contenedor = document.getElementById('contenedor_carga');
                 contenedor.style.visibility = 'visible';
                 contenedor.style.opacity = '200'
-                //console.log("cargando..");
+                ////console.log("cargando..");
             },
             success: function (response) {
-                //console.log(response);
+                ////console.log(response);
                 if (response == "false") {
                     aperturarCaja();
                     myModal.show();
@@ -266,8 +281,6 @@ $(document).ready(function () {
     }
 
     function aperturarCaja() {
-        //$('#lista').hide();
-        //$('#formulario').show();
         fechaActual();
         let num = "";
         verificarSecuencia("CAJ");
@@ -283,7 +296,7 @@ $(document).ready(function () {
         corre = getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codCaja = getCodigo() + '-' + num;
-        console.log(codCaja);
+        ////console.log(codCaja);
         // 
         document.getElementById('txt_monini').focus();
     }
@@ -291,10 +304,14 @@ $(document).ready(function () {
     $('#btn_cancelar').click(function (e) {
         Limpiar();
         edit = false;
+        totEgresosPor = 0;
+        totIngresos = 0;
+        totEgresos = 0;
+        monFinal = 0;
     });
 
     $('#btn_guardar').click(function (e) {
-        CerrarCaja();
+        agregarEgresoPorcentual(codCaja);
         //Limpiar();
     });
 
@@ -304,7 +321,7 @@ $(document).ready(function () {
         $("#btn_nuevo").attr("disabled", false);
         $('#formulario').hide();
         $('#lista').show();
-        edit=false;
+        edit = false;
     }
 
     function AbrirCaja() {//guardar Caja
@@ -313,11 +330,11 @@ $(document).ready(function () {
             cainicaj: $('#dat_caja').val(),
             camonini: $('#txt_monini').val()
         };
-        console.log(postData);
+        ////console.log(postData);
         let url = '/MRFSistem/AccesoDatos/Caja/AperturarCaja.php';
 
         $.post(url, postData, function (response) {
-            console.log(response);
+            ////console.log(response);
             if (!edit && response == 'registra') {
                 actualizarSecuencia("CAJ", corre);
                 myModal.hide();
@@ -334,7 +351,8 @@ $(document).ready(function () {
 
     }
 
-    function CerrarCaja() {//guardar Caja
+    function ArqueoCaja() {//guardar Caja
+        ////console.log(codCaja);
         const postData = {
             pacodcaj: codCaja,
             cainicaj: $('#dat_inicaja').val(),
@@ -345,16 +363,16 @@ $(document).ready(function () {
             catoting: $('#txt_toting').val(),
             catotegr: $('#txt_totegr').val()
         };
-        console.log(postData);
+        ////console.log(postData);
         let url = '/MRFSistem/AccesoDatos/Caja/CerrarCaja.php';
         //$.ajax();
 
         $.post(url, postData, function (response) {
-            console.log(response);
-            if (edit && response == 'modificado') {
+            ////console.log(response);
+            if (response == 'modificado') {
                 //MostrarMensaje("datos de Egreso modificados correctamente", "success")
                 alertify.alert('Mensaje', 'Se Cerro la Caja', function () { alertify.success('Caja cerrada exitosamente'); });
-            
+
             }
             edit = false;
 
@@ -406,23 +424,23 @@ $(document).ready(function () {
         var m = Number((Math.abs(num) * 100).toPrecision(15));
         return Math.round(m) / 100 * Math.sign(num);
     }
-    
-    function agregarEgresoPorcentual(pacodcaj){
-        
+
+    function agregarEgresoPorcentual(pacodcaj) {
+
         const postData = {
             pacodcaj: pacodcaj,
             pacodusu: $('#txt_codCajero').val()
         };
-        console.log(postData);
+        //console.log(postData);
         let url = '/MRFSistem/AccesoDatos/Caja/RegistrarEgresosPorcentual.php';
         //$.ajax();
 
         $.post(url, postData, function (response) {
-            console.log(response);
-            if (!edit && response == 'registra') {
-                cerrarCaja(pacodcaj);
+            //console.log(response);
+            if (response == 'registra') {
+                ArqueoCaja();
             }
-            
+
         });
 
     }

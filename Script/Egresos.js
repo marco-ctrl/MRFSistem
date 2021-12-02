@@ -18,7 +18,20 @@ $(document).ready(function () {
         setInterval(myFunc, 1000);
     }
 
-    ListarEgresos();
+    var codCaja = $('#txt_codCaja').val();
+    if (codCaja != "") {
+        ListarEgresos();
+    }
+    else {
+        if (codCaja == "") {
+            let plantilla = '';
+            plantilla = '<tr><td colspan="5" align="center">No se encontro una caja abierta, Favor de abrir una nueva caja!</td></tr>'
+            $('#tb_egresos').html(plantilla);
+            $("#dat_inicio").attr("disabled", true);
+            $("#dat_maximo").attr("disabled", true);
+            $("#btn_busFec").attr("disabled", true);
+        }
+    }
 
     $('#formulario').hide();//ocultar formulario
 
@@ -95,9 +108,11 @@ $(document).ready(function () {
 
 
     function ListarEgresos() {//listar Egresos
+        var pacodcaj = $('#txt_codCaja').val();
         $.ajax({
             url: '/MRFSistem/AccesoDatos/Egresos/ListarEgresos.php',
-            type: 'GET',
+            type: 'POST',
+            data: {pacodcaj},
             beforeSend: function () {
                 var contenedor = document.getElementById('contenedor_carga');
                 contenedor.style.visibility = 'visible';
@@ -105,14 +120,20 @@ $(document).ready(function () {
             },
             success: function (response) {
                 //console.log(response);
+                let plantilla = '';
                 if (response != "false") {
                     let Egresos = JSON.parse(response);
-                    let plantilla = '';
                     Egresos.forEach(con => {
                         plantilla = MostrarTabla(plantilla, con);
                     });
                     $('#tb_egresos').html(plantilla);
                 }
+                else {
+                    if (response == "false") {
+                        plantilla = '<tr><td colspan="5" align="center">Tabla vacia</td></tr>'
+                    }
+                }
+                $('#tb_egresos').html(plantilla);
 
             }
         });
@@ -177,6 +198,34 @@ $(document).ready(function () {
     });
 
     $('#btn_nuevo').click(function (e) {//nuevo registro de Egresos
+        verificarApertura();
+    });
+
+    function verificarApertura() {
+        $.ajax({
+            url: '/MRFSistem/AccesoDatos/Caja/VerificarApertura.php',
+            type: 'GET',
+            beforeSend: function () {
+                var contenedor = document.getElementById('contenedor_carga');
+                contenedor.style.visibility = 'visible';
+                contenedor.style.opacity = '200'
+                //console.log("cargando..");
+            },
+            success: function (response) {
+                //console.log(response);
+                if (response == "false") {
+                    alertify.alert('Mensaje', 'No existe una caja abierta', function () { alertify.error('Favor de abrir una caja!'); });
+
+                }
+                else {
+                    registrarEgresos();
+                }
+
+            }
+        });
+    }
+
+    function registrarEgresos(){
         edit = false;
         $('#lista').hide();
         $('#formulario').show();
@@ -198,7 +247,7 @@ $(document).ready(function () {
         console.log(codEconomico);
         $("#btn_nuevo").attr("disabled", true);
         //document.getElementById('txt_items').focus();
-    });
+    }
 
     $('#btn_cancelar').click(function (e) {
         Limpiar();
