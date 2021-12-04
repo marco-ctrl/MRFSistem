@@ -2,31 +2,38 @@
     <div class="row">
         <!--<form id="form_user">-->
         <div class="col-md-4">
-            <form id="form1">
+            <form id="form1" class="needs-validation">
                 <div class="form-group">
                     <input type="hidden" id="txt_codMiembro" placeholder="Codigo" class="form-control"></input>
                 </div>
-                <div class="form-group">
+                <div class="form-group has-validation">
                     <label>Carnet de Identidad</label>
-                    <input type="number" id="txt_ci" placeholder="Carnet de Identidad" class="form-control"
-                        min="0"></input>
+                    <input type="number" id="txt_ci" placeholder="Carnet de Identidad" class="form-control" min="0"
+                        pattern="[0-9]" title="debe introducir solo numeros" onkeypress="return soloNumeros(event)"
+                        required></input>
+                    <div class="invalid-feedback">
+                        Please choose a username.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Nombre</label>
-                    <input type="text" id="txt_nombre" placeholder="Nombre" class="form-control"></input>
+                    <input type="text" id="txt_nombre" placeholder="Nombre" class="form-control"
+                        onkeypress="return soloLetras(event)" required></input>
                 </div>
                 <div class="form-group">
                     <label>Apellido Paterno</label>
-                    <input type="text" id="txt_paterno" placeholder="Apellido Paterno" class="form-control"></input>
+                    <input type="text" id="txt_paterno" placeholder="Apellido Paterno" class="form-control"
+                        onkeypress="return soloLetras(event)" required></input>
                 </div>
                 <div class="form-group">
                     <label>Apellido Materno</label>
-                    <input type="text" id="txt_materno" placeholder="Apellido Materno" class="form-control"></input>
+                    <input type="text" id="txt_materno" placeholder="Apellido Materno" class="form-control"
+                        onkeypress="return soloLetras(event)" required></input>
                 </div>
                 <div class="form-group">
                     <label>Numero de Contacto</label>
-                    <input type="number" id="txt_numcontacto" placeholder="Numero de Contacto"
-                        class="form-control"></input>
+                    <input type="number" id="txt_numcontacto" placeholder="Numero de Contacto" class="form-control"
+                        onkeypress="return soloNumeros(event)" required></input>
                 </div>
                 <div class="form-group">
                     <label>Fecha de Nacimiento</label>
@@ -51,7 +58,8 @@
                 </div>
                 <div class="form-group">
                     <label>Profesion</label>
-                    <input type="text" id="inp_profesion" list="dat_profesion" class="form-control"/>
+                    <input type="text" id="inp_profesion" list="dat_profesion" class="form-control"
+                        onkeypress="return soloLetras(event)" required />
                     <datalist id="dat_profesion">
                     </datalist>
                 </div>
@@ -62,31 +70,31 @@
             <form id="form2">
                 <div class="form-group">
                     <label>Direccion</label>
-                    <textarea id="txt_direccion" rows="3" placeholder="Direccion de Domicilio"
-                        class="form-control"></textarea>
+                    <textarea id="txt_direccion" rows="3" placeholder="Direccion de Domicilio" class="form-control"
+                        onkeypress="return Direccion(event)" required></textarea>
                 </div>
                 <div class="form-group text-center">
                     <label>Crecimiento Espiritual</label>
                 </div>
                 <div class="form-group">
                     <label>Fecha de Conversion</label>
-                    <input type="date" id="dat_feccon" min="1950-01-01" max="<?php echo date('Y-m-d'); ?>" placeholder=""
-                        class="form-control"></input>
+                    <input type="date" id="dat_feccon" min="1950-01-01" max="<?php echo date('Y-m-d'); ?>"
+                        placeholder="" class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label>Fecha de Bautismo</label>
-                    <input type="date" id="dat_fecbau" min="1950-01-01" max="<?php echo date('Y-m-d'); ?>" placeholder=""
-                        class="form-control"></input>
+                    <input type="date" id="dat_fecbau" min="1950-01-01" max="<?php echo date('Y-m-d'); ?>"
+                        placeholder="" class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label>Entrada a la Iglesia</label>
-                    <input type="date" id="dat_fecigl" min="1994-01-01" max="<?php echo date('Y-m-d'); ?>" placeholder=""
-                        class="form-control"></input>
+                    <input type="date" id="dat_fecigl" min="1994-01-01" max="<?php echo date('Y-m-d'); ?>"
+                        placeholder="" class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label>Encuentro Con Dios</label>
-                    <input type="date" id="dat_fecenc" min="1994-01-01" max="<?php echo date('Y-m-d'); ?>" placeholder=""
-                        class="form-control"></input>
+                    <input type="date" id="dat_fecenc" min="1994-01-01" max="<?php echo date('Y-m-d'); ?>"
+                        placeholder="" class="form-control"></input>
                 </div>
                 <div class="form-group text-center">
                     <label>Asignar Celula</label>
@@ -100,7 +108,7 @@
                 <div class="form-group">
                     <label for="">Funcion en la Celula</label>
                     <select id="cbx_funcion" class="form-control btn-primary">
-                        <option value="0">Funcion en la celula</option>
+                        <option value="">Funcion en la celula</option>
                         <option value="DISCIPULO/A">DISCIPULO/A</option>
                         <option value="ASISTENTE">ASISTENTE</option>
                         <option value="ANFITRION">ANFITRION</option>
@@ -185,9 +193,9 @@ function readFile(input) {
         let context = canvas.getContext('2d');
         reader.onload = function(e) {
             imagen.src = e.target.result
-            imagen.onload=function(){
-            context.drawImage(imagen, 0, 0, 140, 120);
-        }
+            imagen.onload = function() {
+                context.drawImage(imagen, 0, 0, 140, 120);
+            }
         }
         reader.readAsDataURL(input.files[0]);
 

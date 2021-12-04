@@ -137,7 +137,7 @@ $(document).ready(function () {
     });
 
     $('#btn_guardarMiembro').click(function (e) {//permiete guardar Usuario
-        CapturarCrecimiento();
+        /*CapturarCrecimiento();
         if (banPro) {
             agregarProfesion();
         }
@@ -152,7 +152,7 @@ $(document).ready(function () {
         DeshabilitarFormulario();
         $('#profile').hide();
         $('#home').show();
-        banPro = false;
+        banPro = false;*/
     });
 
     function limpiar() {

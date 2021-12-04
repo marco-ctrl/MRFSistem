@@ -43,49 +43,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-archive"></i>
-                    <span>Archivos</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Archivos:</h6>
-                        <a class="collapse-item" href="FRM_Alumno"><i class="fas fa-user-graduate"></i>
-                            Alumnos</a>
-                        <a class="collapse-item" href="FRM_Maestro"><i class="fas fa-chalkboard-teacher"></i>
-                            Maestros</a>
-                        <a class="collapse-item" href="FRM_Contenido"><i class="fas fa-book"></i> Materias</a>
-                        <a class="collapse-item" href="FRM_Curso"><i class="fas fa-chalkboard"></i>
-                            Cursos</a>
-                        <a class="collapse-item" href="FRM_Matriculacion"><i class="fas fa-server"></i>
-                            Matriculacion</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="far fa-file-pdf"></i>
-                    <span>Reportes</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header"> Reportes:</h6>
-                        <a class="collapse-item" href="INF_Alumno"><i class="far fa-file-pdf"></i> Informacion
-                            Alumno</a>
-                        <a class="collapse-item" href="ControlPago" href="#"><i class="far fa-file-pdf"></i> Control de
-                            Pago</a>
-                        <a class="collapse-item" href="ControlAsistencia" href="#"><i class="far fa-file-pdf"></i>
-                            Control de Asistencia</a>
-
-                    </div>
-                </div>
-            </li>
+            <?php include_once('includes/EscuelaLideres/interfaces.php'); ?>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
