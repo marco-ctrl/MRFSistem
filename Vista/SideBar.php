@@ -18,11 +18,11 @@
             <span>Inicio</span></a>
     </li>
 
-    <li class="nav-item">
+    <!--<li class="nav-item">
         <a class="nav-link" href="#">
             <i class="fas fa-user"></i>
             <span>Perfil</span></a>
-    </li>
+    </li>-->
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -69,10 +69,6 @@
                     Usuarios</a>
                 <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Reporte de
                     Celulas</a>
-                <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Reporte de
-                    Aportes</a>
-                <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Escuela
-                    de Lideres</a>
             </div>
         </div>
     </li>

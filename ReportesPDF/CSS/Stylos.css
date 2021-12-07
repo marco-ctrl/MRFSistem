@@ -2,15 +2,15 @@ h3,h4{
     text-align: center;
 }
 
-table,td {
+.table,.td {
 	border: 1px solid black;
 }
 
-table{
+.table{
     margin: 0 auto;
 }
 
-table {
+.table {
     border-collapse:collapse;
   }
 

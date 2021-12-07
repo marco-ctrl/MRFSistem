@@ -7,7 +7,7 @@ include '../Conexion/Conexion.php';
     $pacodusu = $_POST['pacodusu'];
     $facodmie = $_POST['facodmie'];
     $canomusu = $_POST['canomusu'];
-    $caconusu = $_POST['caconusu'];
+    $caconusu = sha1($_POST['caconusu']);
     $catipusu = $_POST['catipusu'];
     $caestusu = $_POST['caestusu'];
 

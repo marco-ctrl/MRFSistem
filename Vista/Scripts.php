@@ -14,6 +14,8 @@
 
 <!-- Page level plugins -->
 <script src="/MRFSistem/alertifyjs/alertify.js"></script>
+<script type="text/javascript" src="/MRFSistem/js/jquery.plugin.js"></script> 
+<script type="text/javascript" src="/MRFSistem/js/jquery.maxlength.js"></script>
 
 <!--Fecha Actual-->
 <script src="/MRFSistem/Script/FechaActual.js"></script>

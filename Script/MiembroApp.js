@@ -137,7 +137,7 @@ $(document).ready(function () {
     });
 
     $('#btn_guardarMiembro').click(function (e) {//permiete guardar Usuario
-        /*CapturarCrecimiento();
+        CapturarCrecimiento();
         if (banPro) {
             agregarProfesion();
         }
@@ -152,7 +152,7 @@ $(document).ready(function () {
         DeshabilitarFormulario();
         $('#profile').hide();
         $('#home').show();
-        banPro = false;*/
+        banPro = false;
     });
 
     function limpiar() {
@@ -240,15 +240,16 @@ $(document).ready(function () {
             type: 'POST',
             data: { pacodmie },
             beforeSend: function () {
-                
+
             },
             complete: function () {
-                
+
             },
             success: function (responce) {
                 //console.log(responce);
                 $('#home').hide();
                 $('#profile').show();
+                $("#btn_guardarMiembro").attr("disabled", false);
                 const miembro = JSON.parse(responce);
                 let foto;
                 miembro.forEach(miembro => {
@@ -310,7 +311,7 @@ $(document).ready(function () {
             success: function (response) {
                 let profesion = JSON.parse(response);
                 let i = 0;
-                plantilla = '';
+                let plantilla = '<option value="">Eligir Profesion</option>';
                 profesion.forEach(profesion => {
                     plantilla += `<option data-codigo="${profesion.pacodpro}" data-nombre="${profesion.canompro}" value="${profesion.canompro}"></option>`;
                 });
@@ -364,7 +365,7 @@ $(document).ready(function () {
             type: 'GET',
             success: function (response) {
                 let celula = JSON.parse(response);
-                let plantilla = '<option value=0>Eligir Celula</option>';
+                let plantilla = '<option value="0">Eligir Celula</option>';
                 celula.forEach(cel => {
                     plantilla += `<option value="${cel.pacodcel}" class="cod-profesion">${cel.canomcel}</option>`;
                 });
@@ -375,8 +376,11 @@ $(document).ready(function () {
     }
 
     $('#cbx_celula').change(function (e) {//asigar codigo profesion
+        
         codCelula = $('#cbx_celula').val();
         console.log("codigo celula: " + codCelula);
+        capturarCampos();
+        camposVacios();
         e.preventDefault();
 
     });
@@ -387,7 +391,7 @@ $(document).ready(function () {
             type: 'GET',
             success: function (response) {
                 let ciudad = JSON.parse(response);
-                let plantilla = '<option value=0>Eligir Ciudad</option>';
+                let plantilla = '<option value="0">Eligir Ciudad</option>';
                 ciudad.forEach(ciudad => {
                     plantilla += `<option value="${ciudad.pacodciu}" class="ciudad">${ciudad.canomciu}</option>`;
                 });
@@ -467,10 +471,10 @@ $(document).ready(function () {
                 if (!edit && response == 'registra') {
                     actualizarSecuencia("MBR", corre1);
                     GuardarMiembroCelula();
-                    MostrarMensaje("Datos de Miembro guardado correctamente", "success");
+                    alertify.alert('Mensaje', 'Datos de Miembros guardados correctamente', function () { alertify.success('Se guardó correctamente'); });
                 }
                 if (edit && response == 'modificado') {
-                    MostrarMensaje("Datos de Miembro modificados correctamente", "success");
+                    alertify.alert('Mensaje', 'Datos de Miembros Modificados correctamente', function () { alertify.success('Se guardó correctamente'); });
 
                 }
                 edit = false;
@@ -490,13 +494,18 @@ $(document).ready(function () {
     }
 
     $('#cbx_ciudad').change(function (e) {//asignar codigo de cuidad
+        
         codCiudad = $('#cbx_ciudad').val();
         console.log("codigo ciudad " + codCiudad);
+        capturarCampos();
+        camposVacios();
         e.preventDefault();
 
     });
 
     $('#cbx_funcion').change(function (e) {//asignar codigo de cuidad
+        capturarCampos();
+        camposVacios();
         funMiembro = $('#cbx_funcion').val();
         console.log("funcion " + funMiembro);
 
@@ -599,7 +608,7 @@ $(document).ready(function () {
         $("#dat_fecenc").attr("disabled", false);
         $("#cbx_celula").attr("disabled", false);
         $("#cbx_funcion").attr("disabled", false);
-        $("#btn_guardarMiembro").attr("disabled", false);
+        //$("#btn_guardarMiembro").attr("disabled", false);
         $("#btn_nuevo").attr("disabled", true);
         document.getElementById("txt_ci").focus();
     }
@@ -649,5 +658,122 @@ $(document).ready(function () {
 
     }
 
+    //Validacion de Campos Vacios
+    var ci, nombre, apPaterno, apMaterno, telefono, estCivil, direccion,
+    profesion, nomCiudad, nomCelula, funCel;
+
+    function capturarCampos() {
+        ci = $('#txt_ci').val();
+        nombre = $('#txt_nombre').val();
+        apPaterno = $('#txt_paterno').val();
+        apMaterno = $('#txt_materno').val();
+        telefono = $('#txt_numcontacto').val();
+        estCivil = $('#cbx_estadoCivil').val();
+        direccion = $('#txt_direccion').val();
+        profesion = $('#inp_profesion').val();
+        nomCiudad = $('#cbx_ciudad').val();
+        nomCelula = $('#cbx_celula').val();
+        funCel = $('#cbx_funcion').val();
+    }
+
+    
+    //$('#txt_ci').maxlength();
+    $('#txt_ci').maxlength({showFeedback: false, max: 15});
+    $('#txt_numcontacto').maxlength({showFeedback: false, max: 15});
+    
+    $("#btn_guardarMiembro").attr("disabled", true);
+
+    $('#txt_ci').keyup(function (e) {
+        capturarCampos();
+        camposVacios();
+    });
+    $('#txt_nombre').keyup(function (e) {
+        capturarCampos();
+        camposVacios();
+        //soloLetras(e);
+    });
+    $('#txt_paterno').keyup(function (e) {
+        capturarCampos();
+        camposVacios();
+    });
+    $('#txt_materno').keyup(function (e) {
+        capturarCampos();
+        camposVacios();
+    });
+    $('#txt_numcontacto').keyup(function (e) {
+        capturarCampos();
+        camposVacios();
+    });
+    $('#txt_direccion').keyup(function (e) {
+        capturarCampos();
+        camposVacios();
+    });
+    $('#inp_profesion').keyup(function (e) {
+        capturarCampos();
+        camposVacios();
+    });
+
+    $('#cbx_funcion').change(function (e) {//asigar codigo profesion
+        capturarCampos();
+        camposVacios();
+        e.preventDefault();
+
+    });
+
+    $('#cbx_estadoCivil').change(function (e) {//asigar codigo profesion
+        capturarCampos();
+        camposVacios();
+        e.preventDefault();
+
+    });
+
+    var contador;
+
+    function camposVacios() {
+        //console.log("ciu"+nomCiudad);
+        contador = 0;
+        if (ci == "") {
+            contador++;
+        }
+        if (nombre == "") {
+            contador++;
+        }
+        if (apPaterno == "") {
+            contador++;
+        }
+        if (apMaterno == "") {
+            contador++;
+        }
+        if (telefono == "") {
+            contador++;
+        }
+        if (estCivil == "0") {
+            contador++;
+        }
+        if (direccion == "") {
+            contador++;
+        }
+        if (profesion == "") {
+            contador++;
+        }
+        if (nomCiudad == "0") {
+            contador++;
+        }
+        if (nomCelula == "0") {
+            contador++;
+        }
+        if(funCel == "0"){
+            contador++;
+        }
+        if (contador > 0) {
+            $("#btn_guardarMiembro").attr("disabled", true);
+            //alertify.alert('Mensaje', 'Deber llenar todos los campos requeridos por el Sistema!');
+        }
+        else {
+            if (contador == 0) {
+                $("#btn_guardarMiembro").attr("disabled", false);
+            }
+        }
+    }
 
 });

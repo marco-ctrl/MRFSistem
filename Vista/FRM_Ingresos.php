@@ -48,12 +48,6 @@ if (mysqli_num_rows($resultado) > 0) {
                     <span>Inicio</span></a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-user"></i>
-                    <span>Perfil</span></a>
-            </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
 

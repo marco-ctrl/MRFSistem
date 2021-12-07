@@ -16,7 +16,7 @@
       require_once "AccesoDatos/Conexion/Conexion.php";
 
       $canomusu=$_POST['txt_usuario'];
-      $caconusu=$_POST['txt_pass'];
+      $caconusu=sha1($_POST['txt_pass']);
 
       $consulta = "SELECT caconusu, 
                           catipusu, 

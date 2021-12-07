@@ -5,7 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once "../AccesoDatos/Conexion/Conexion.php";
 
 //include '../../MRFIglesiaBermejo/AccesoDatos/Alumno/ListarAlumno.php';
-$css = file_get_contents('CSS/Stylos.css');
+$css = file_get_contents('css/Stylos.css');
 
 
 $pacodcur = $_GET['pacodcur'];
@@ -80,43 +80,43 @@ $resultado = mysqli_query($conexion, $consulta);
 
 
 
-$html .= '<table>
+$html .= '<table class="table">
             <tr>
-                <td>N°</td>
-                <td><b>NOMBRES</b></td>
-                <td>ENERO</td>
-                <td>FEBRE</td>
-                <td>MARZO</td>
-                <td>ABRIL</td>
-                <td>MAYO</td>
-                <td>JUNIO</td>
-                <td>JULIO</td>
-                <td>AGOST</td>
-                <td>SEPTI</td>
-                <td>OCTUB</td>
-                <td>NOVIE</td>
-                <td>DICIE</td>
-                <td>&nbsp;Obs.&nbsp;</td>
+                <td class="td">N°</td>
+                <td class="td"><b>NOMBRES</b></td>
+                <td class="td">ENERO</td>
+                <td class="td">FEBRE</td>
+                <td class="td">MARZO</td>
+                <td class="td">ABRIL</td>
+                <td class="td">MAYO</td>
+                <td class="td">JUNIO</td>
+                <td class="td">JULIO</td>
+                <td class="td">AGOST</td>
+                <td class="td">SEPTI</td>
+                <td class="td">OCTUB</td>
+                <td class="td">NOVIE</td>
+                <td class="td">DICIE</td>
+                <td class="td">&nbsp;Obs.&nbsp;</td>
             </tr>';
 $cont=1;
 
 while ($row = mysqli_fetch_array($resultado)) {
     $html.='<tr>
-    <td>'.$cont.' </td>
-    <td>'.$row['canommie'].' '.$row['capatmie'].' '.$row['camatmie'].'</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td class="td">'.$cont.' </td>
+    <td class="td">'.$row['canommie'].' '.$row['capatmie'].' '.$row['camatmie'].'</td>
+    <td class="td"></td>
+    <td class="td"></td>
+    <td class="td"></td>
+    <td class="td"></td>
+    <td class="td"></td>
+    <td class="td"></td>
+    <td class="td"></td>
+    <td class="td"></td>
+    <td class="td"></td>
+    <td class="td"></td>
+    <td class="td"></td>
+    <td class="td"></td>
+    <td class="td"></td>
 </tr>';
    $cont+=1;
 }

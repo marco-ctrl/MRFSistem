@@ -121,6 +121,7 @@ $(document).ready(function () {
             { pacodusu }, function (responce) {
                 $('#lista').hide();
                 $('#formulario').show();
+                $("#cbx_tipo").attr("disabled", false);
                 const miembro = JSON.parse(responce);
                 miembro.forEach(miembro => {
                     codMiembro = miembro.facodmie,
@@ -128,7 +129,7 @@ $(document).ready(function () {
                         $('#txt_codigo').val(miembro.facodmie),
                         $('#cbx_tipo').val(miembro.catipusu),
                         $('#txt_usuario').val(miembro.canomusu),
-                        $('#txt_contrasena').val(miembro.caconusu),
+                        $('#txt_contrasena').val(generarContrasena(8,'')),
                         $('#txt_miembro').val(miembro.canommie + ' ' + miembro.capatmie + ' ' + miembro.camatmie)
                 });
                 //contex.hide();
@@ -158,13 +159,16 @@ $(document).ready(function () {
         let pacodmie = $(elemento).attr('codMbr');
         $.post('/MRFSistem/AccesoDatos/Miembro/SingleMiembro.php',
             { pacodmie }, function (responce) {
-                console.log(responce);
+                //console.log(responce);
                 const miembro = JSON.parse(responce);
                 miembro.forEach(miembro => {
                     codMiembro = miembro.pacodmie,
                         $('#txt_codigo').val(miembro.pacodmie),
                         $('#txt_miembro').val(miembro.canommie + ' ' + miembro.capatmie + ' ' + miembro.camatmie)
                 });
+                $("#cbx_tipo").attr("disabled", false);
+                camposVaciosUsuario();
+                generarUsuario();
                 document.getElementById("cbx_tipo").focus();
             });
 
@@ -269,7 +273,6 @@ $(document).ready(function () {
                 <td>${usu.canommie} ${usu.capatmie} ${usu.camatmie}</td>
                 <td>${usu.catipusu}</td>
                 <td>${usu.canomusu}</td>
-                <td>${usu.caconusu}</td>
                 <td>
                     <button class="baja-usuario btn btn-danger">
                     <i class="fas fa-user-minus"></i></button>
@@ -304,6 +307,10 @@ $(document).ready(function () {
 
     ////////guardar Usuario///////////////
     function GuardarUsuario() {
+        let nombreMiembro=$('#txt_miembro').val();
+        let rolUsuario=$('#cbx_tipo').val();
+        let nombreUsuario= $('#txt_usuario').val();
+        let password=$('#txt_contrasena').val();
         const postData = {
             facodmie: codMiembro,
             pacodusu: codUsuario,
@@ -333,11 +340,15 @@ $(document).ready(function () {
                 console.log(response);
                 if (!edit && response == 'registra') {
                     actualizarSecuencia("USU", corre);
-                    MostrarMensaje("Datos de usuario guardados correctamente", "success");
+                    alertify.alert('Mensaje', 'Datos de Usuario guardados correctamente', function () { alertify.success('Se guardó correctamente'); });
+                    
                 }
                 if (edit && response == 'modificado') {
-                    MostrarMensaje("Datos de usuario modificados correctamente", "success");
+                    alertify.alert('Mensaje', 'Datos de Usuarios modificados correctamente', function () { alertify.success('Se guardó correctamente'); });
+                    
                 }
+                abrirNuevoTab('/MRFSistem/ReportesPDF/PDF_Usuario.php?nombre='+nombreMiembro+'&rol='+rolUsuario+'&codigo='+codUsuario+'&usuario='+nombreUsuario+'&pass='+password);
+
                 edit = false;
                 ListarUsuario();
                 $('#formulario').hide();
@@ -353,9 +364,9 @@ $(document).ready(function () {
     function habilitarFormulario() {
         $("#txt_usuario").attr("disabled", false);
         $("#txt_contrasena").attr("disabled", false);
-        $("#cbx_tipo").attr("disabled", false);
+        //
         $("#txt_buscarMiembro").attr("disabled", false);
-        $("#btn_guardar").attr("disabled", false);
+        //$("#btn_guardar").attr("disabled", false);
         $("#btn_nuevo").attr("disabled", true);
         document.getElementById("btn_miembro").focus();
     }
@@ -370,6 +381,78 @@ $(document).ready(function () {
         $("#btn_nuevo").attr("disabled", false);
     }
 
+    function camposVaciosUsuario() {//validacion de campos vacios formulario usuario
+        let codigoMiembro=$("#txt_codigo").val();
+        let tipoUsuario= $("#cbx_tipo").val();
+        let contador=0;
+        if(codigoMiembro==''){
+            contador++
+        }
+        if(tipoUsuario=='0'){
+            contador++
+        }
+        if(contador==0){
+            $("#btn_guardar").attr("disabled", false);
+        }
+        else{
+            $("#btn_guardar").attr("disabled", true);
+        }
+    }
+
+    $("#cbx_tipo").change(function (e) {
+        generarUsuario();
+        camposVaciosUsuario();
+        e.preventDefault();
+
+    });
+
+    function generarUsuario() {
+        if ($("#cbx_tipo").val() != "0") {
+            let tipoUsuario = $("#cbx_tipo").val().toLowerCase();
+            let nombreMiembro = $("#txt_miembro").val().toLowerCase();
+            let numero = codUsuario;
+            let nomUsuario = nombreMiembro.substr(0, 4) + '_' + numero.substr(7, 3) + '@' + tipoUsuario.substr(0, 5);
+            $("#txt_usuario").val(nomUsuario);
+            $("#txt_contrasena").val(generarContrasena(8, ""));
+        }
+        else {
+            $("#txt_usuario").val("");
+        }
+
+    }
+
+    function generarContrasena(length, type){
+        switch(type){
+            case 'num':
+                characters = "0123456789";
+                break;
+            case 'alf':
+                characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                break;
+            case 'rand':
+                //FOR ↓
+                break;
+            default:
+                characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                break;
+        }
+        var pass = "";
+        for (i=0; i < length; i++){
+            if(type == 'rand'){
+                pass += String.fromCharCode((Math.floor((Math.random() * 100)) % 94) + 33);
+            }else{
+                pass += characters.charAt(Math.floor(Math.random()*characters.length));   
+            }
+        }
+        return pass;
+    }
+
+    function abrirNuevoTab(url) {
+        // Abrir nuevo tab
+        var win = window.open(url, '_blank');
+        // Cambiar el foco al nuevo tab (punto opcional)
+        win.focus();
+    }
 
 });
 

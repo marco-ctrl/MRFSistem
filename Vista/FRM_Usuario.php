@@ -58,8 +58,7 @@
                                 <form id="form1">
                                     <div class="form-group">
                                         <label>ROL de Usuario</label>
-                                        <select id="cbx_tipo" class="btn-default form-control
-                            text-center">
+                                        <select id="cbx_tipo" class="btn-default form-control">
                                             <option value="0" class="form-control">ROL DE USUARIO</option>
                                             <option value="LIDER" class="form-control">LIDER</option>
                                             <option value="ADMINISTRADOR" class="form-control">ADMINISTRADOR</option>
@@ -71,12 +70,12 @@
                                     <div class="form-group">
                                         <label>Usuario</label>
                                         <input type="text" id="txt_usuario" placeholder="Usuario"
-                                            class="form-control"></input>
+                                            class="form-control" readonly></input>
                                     </div>
                                     <div class="form-group">
                                         <label>Contraseña</label>
                                         <input type="text" id="txt_contrasena" placeholder="Contraseña"
-                                            class="form-control"></input>
+                                            class="form-control" readonly></input>
                                     </div>
                                 </form>
                             </div>
@@ -157,7 +156,6 @@
                                                     <th>MIEMBRO</th>
                                                     <th>FUNCION</th>
                                                     <th>USUARIO</th>
-                                                    <th>CONTRASEÑA</th>
                                                     <th>BAJA</th>
                                                     <th style="width:15%">MODIFICAR</th>
                                                 </tr>
@@ -167,7 +165,6 @@
                                                     <th>MIEMBRO</th>
                                                     <th>FUNCION</th>
                                                     <th>USUARIO</th>
-                                                    <th>CONTRASEÑA</th>
                                                     <th>BAJA</th>
                                                     <th style="width:15%">MODIFICAR</th>
                                                 </tr>

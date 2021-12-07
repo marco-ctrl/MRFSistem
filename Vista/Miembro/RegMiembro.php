@@ -11,29 +11,26 @@
                     <input type="number" id="txt_ci" placeholder="Carnet de Identidad" class="form-control" min="0"
                         pattern="[0-9]" title="debe introducir solo numeros" onkeypress="return soloNumeros(event)"
                         required></input>
-                    <div class="invalid-feedback">
-                        Please choose a username.
-                    </div>
                 </div>
                 <div class="form-group">
                     <label>Nombre</label>
-                    <input type="text" id="txt_nombre" placeholder="Nombre" class="form-control"
+                    <input type="text" id="txt_nombre" maxlength="30" placeholder="Nombre" class="form-control"
                         onkeypress="return soloLetras(event)" required></input>
                 </div>
                 <div class="form-group">
                     <label>Apellido Paterno</label>
-                    <input type="text" id="txt_paterno" placeholder="Apellido Paterno" class="form-control"
-                        onkeypress="return soloLetras(event)" required></input>
+                    <input type="text" id="txt_paterno" maxlength="30" placeholder="Apellido Paterno"
+                        class="form-control" onkeypress="return soloLetras(event)" required></input>
                 </div>
                 <div class="form-group">
                     <label>Apellido Materno</label>
-                    <input type="text" id="txt_materno" placeholder="Apellido Materno" class="form-control"
-                        onkeypress="return soloLetras(event)" required></input>
+                    <input type="text" id="txt_materno" maxlength="30" placeholder="Apellido Materno"
+                        class="form-control" onkeypress="return soloLetras(event)" required></input>
                 </div>
                 <div class="form-group">
                     <label>Numero de Contacto</label>
-                    <input type="number" id="txt_numcontacto" placeholder="Numero de Contacto" class="form-control"
-                        onkeypress="return soloNumeros(event)" required></input>
+                    <input type="number" id="txt_numcontacto" maxlength="15" placeholder="Numero de Contacto"
+                        class="form-control" onkeypress="return soloNumeros(event)" required></input>
                 </div>
                 <div class="form-group">
                     <label>Fecha de Nacimiento</label>
@@ -70,8 +67,8 @@
             <form id="form2">
                 <div class="form-group">
                     <label>Direccion</label>
-                    <textarea id="txt_direccion" rows="3" placeholder="Direccion de Domicilio" class="form-control"
-                        onkeypress="return Direccion(event)" required></textarea>
+                    <textarea id="txt_direccion" rows="3" maxlength="100" placeholder="Direccion de Domicilio"
+                        class="form-control" onkeypress="return Direccion(event)" required></textarea>
                 </div>
                 <div class="form-group text-center">
                     <label>Crecimiento Espiritual</label>
@@ -108,7 +105,7 @@
                 <div class="form-group">
                     <label for="">Funcion en la Celula</label>
                     <select id="cbx_funcion" class="form-control btn-primary">
-                        <option value="">Funcion en la celula</option>
+                        <option value="0">Funcion en la celula</option>
                         <option value="DISCIPULO/A">DISCIPULO/A</option>
                         <option value="ASISTENTE">ASISTENTE</option>
                         <option value="ANFITRION">ANFITRION</option>
@@ -174,14 +171,23 @@
     </div>
     <div class="modal-footer">
         <button type="button" id="btn_guardarMiembro" class="btn btn-primary btn-lg
-                                    text-center">
+                                    text-center" disable>
             <i class="far fa-save "></i>
             Guardar
         </button>
+
         <button type="button" id="btn_cancelar" class="btn btn-danger btn-lg
                         text-center"><i class="far fa-window-close "></i>
             Cancelar
         </button>
+    </div>
+</div>
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body">
+        Debe llenar los campos requeridos del formulario!
+        <div class="mt-2 pt-2 border-top">
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Cerrar</button>
+        </div>
     </div>
 </div>
 <script>
