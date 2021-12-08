@@ -41,7 +41,7 @@
                                     <form action=# class="row text-center">
                                         <div class="input-group mb-3 col-6">
                                             <input type="text" class="form-control" id="buscarCelula"
-                                                placeholder="Buscar.."></input>
+                                                placeholder="Buscar..."></input>
                                             <button class="btn btn-primary" id="btn_busFec"><i
                                                     class="fas fa-search"></i></button>
                                         </div>
@@ -85,13 +85,14 @@
                                 <form id="form1" clas="p-2">
                                     <div class="form-group">
                                         <label>Nombre de Celula</label>
-                                        <input type="text" id="txt_nomCelula" placeholder="Nombre"
-                                            class="form-control"></input>
+                                        <input type="text" id="txt_nomCelula" placeholder="Nombre" class="form-control"
+                                        maxlength="30" required></input>
                                     </div>
                                     <div class="form-group">
                                         <label>Numero de Celula</label>
                                         <input type="number" id="txt_numCelula" placeholder="Numero"
-                                            class="form-control"></input>
+                                            class="form-control" onkeypress="return soloNumeros(event)"
+                                            required></input>
                                     </div>
                                 </form>
                             </div>
@@ -99,15 +100,17 @@
                                 <form id="form2" clas="p-2">
                                     <div class="form-group">
                                         <label>Barrio</label>
-                                        <select id="cbx_barrio" class="form-control">
-
-                                        </select>
+                                        <input type="text" id="inp_barrio" placeholder="Barrio" list="dat_barrio"
+                                            class="form-control" maxlength="30" onkeypress="return Direccion(event)" required />
+                                        <datalist id="dat_barrio">
+                                        </datalist>
                                     </div>
                                     <div class="form-group">
                                         <label>Calle</label>
-                                        <select id="cbx_calle" class="form-control">
-
-                                        </select>
+                                        <input type="text" id="inp_calle" placeholder="Calle" list="dat_calle"
+                                            class="form-control" maxlength="30" onkeypress="return Direccion(event)" required />
+                                        <datalist id="dat_calle">
+                                        </datalist>
                                     </div>
                                 </form>
                             </div>

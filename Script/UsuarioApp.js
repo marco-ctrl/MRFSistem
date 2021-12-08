@@ -122,6 +122,7 @@ $(document).ready(function () {
                 $('#lista').hide();
                 $('#formulario').show();
                 $("#cbx_tipo").attr("disabled", false);
+                
                 const miembro = JSON.parse(responce);
                 miembro.forEach(miembro => {
                     codMiembro = miembro.facodmie,
@@ -133,6 +134,7 @@ $(document).ready(function () {
                         $('#txt_miembro').val(miembro.canommie + ' ' + miembro.capatmie + ' ' + miembro.camatmie)
                 });
                 //contex.hide();
+                camposVaciosUsuario();
                 edit = true;
             });
     });

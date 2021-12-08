@@ -5,13 +5,19 @@
             <h5 class="m-0 font-weight-bold text-primary">Lista de Miembros</h5>
         </div>
         <div class="card-body">
-            <form action=# class="row text-center">
-                <div class="input-group mb-3 col-6">
-                    <input type="text" class="form-control" id="buscarMiembro" placeholder="Buscar.."></input>
-                    <button class="btn btn-primary" id="btn_busFec"><i class="fas fa-search"></i></button>
+            <div class="row">
+                <div class="col-md-8">
+                    <form action=# class="row text-center">
+                        <div class="input-group mb-3 col-6">
+                            <input type="text" class="form-control" id="buscarMiembro" placeholder="Buscar.."></input>
+                            <button class="btn btn-primary" id="btn_busFec"><i class="fas fa-search"></i></button>
+                        </div>
+
+                    </form>
                 </div>
 
-            </form>
+            </div>
+
 
             <div class="table-responsive">
                 <table class="table table-light" id="dataTable" width="100%" cellspacing="0">
@@ -41,7 +47,7 @@
                             <th>MODIFICAR</th>
                         </tr>
                     </tfoot>
-                    
+
                     <tbody id="tb_miembro">
 
                     </tbody>

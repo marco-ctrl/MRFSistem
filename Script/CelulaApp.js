@@ -7,8 +7,12 @@ $(document).ready(function () {
     var codCalle;
     var latitud;
     var longitud;
-    var edit=false;
+    var edit = false;
     var corre1;
+    var addBarrio = false;
+    var addCalle = false;
+    var nomBarrio;
+    var nomCalle;
 
     const tilesProvider = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     var mymap = L.map('map').setView([-22.735938864584394, -64.34173274785282], 15);
@@ -22,6 +26,7 @@ $(document).ready(function () {
     listarBarrio();
     listarCalle();
     ListarCelula();
+    camposVacios();
 
     $('#formulario').hide();//ocultar formulario
 
@@ -41,6 +46,7 @@ $(document).ready(function () {
         };
         //Add a marker to show where you clicked.
         marker = L.marker([latitud, longitud]).addTo(mymap);
+        camposVacios();
     });
 
     $('#buscarCelula').keyup(function (e) {//permite hacer busqueda de miembros
@@ -81,13 +87,13 @@ $(document).ready(function () {
     });
 
 
-    $('#btn_guardar').click(function (e){
+    $('#btn_guardar').click(function (e) {
         GuardarCelula();
         Limpiar();
     });
 
     $(document).on('click', '.modificar-celula', function () {//modifica usuario
-       
+
         //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodcel = $(elemento).attr('UserDocu');
@@ -98,15 +104,17 @@ $(document).ready(function () {
                 const celula = JSON.parse(responce);
                 celula.forEach(cel => {
                     codCelula = cel.pacodcel,
-                    codBarrio = cel.facodbar,
-                    codCalle  = cel.facodcal,
-                    latitud = cel.calatcel,
-                    longitud = cel.calogcel,
-                    $('#txt_nomCelula').val(cel.canomcel),
-                    $('#txt_numCelula').val(cel.canumcel),
-                    $('#cbx_barrio').val(cel.pacodbar),
-                    $('#cbx_calle').val(cel.pacodcal)
-                    });
+                        codBarrio = cel.facodbar,
+                        codCalle = cel.facodcal,
+                        latitud = cel.calatcel,
+                        longitud = cel.calogcel,
+                        nomBarrio= cel.canombar,
+                        nomCalle= cel.canomcal,
+                        $('#txt_nomCelula').val(cel.canomcel),
+                        $('#txt_numCelula').val(cel.canumcel),
+                        $('#inp_barrio').val(cel.canombar),
+                        $('#inp_calle').val(cel.canomcal)
+                });
                 //contex.hide();
                 if (marker != undefined) {
                     mymap.removeLayer(marker);
@@ -130,20 +138,6 @@ $(document).ready(function () {
 
                 });
         }
-    });
-
-    $('#cbx_barrio').change(function (e) {//asignar codigo de cuidad
-        codBarrio = $('#cbx_barrio').val();
-        console.log("codigo barrio " + codBarrio);
-        e.preventDefault();
-
-    });
-
-    $('#cbx_calle').change(function (e) {//asignar codigo de cuidad
-        codCalle = $('#cbx_calle').val();
-        console.log("codigo calle " + codCalle);
-        e.preventDefault();
-
     });
 
     $('#btn_nuevo').click(function (e) {//nuevo registro de Celula 
@@ -178,6 +172,11 @@ $(document).ready(function () {
         $.ajax({
             url: '/MRFSistem/AccesoDatos/Celula/ListarCelula.php',
             type: 'GET',
+            beforeSend: function () {
+                var contenedor = document.getElementById('contenedor_carga');
+                contenedor.style.visibility = 'visible';
+                contenedor.style.opacity = '200'
+            },
             success: function (response) {
                 let celula = JSON.parse(response);
                 let plantilla = '';
@@ -198,8 +197,8 @@ $(document).ready(function () {
                 <td>
                     <button class="baja-celula btn btn-danger">
                     <i class="fas fa-trash-alt "></i></button>
-                </>
-                <td style="width:15%">
+                </td>
+                <td>
                     <button class="modificar-celula btn btn-secondary">
                     <i class="far fa-edit "></i></button>
                 </td>
@@ -244,7 +243,11 @@ $(document).ready(function () {
             canumcel: $('#txt_numCelula').val(),
             caestcel: true,
             calatcel: latitud,
-            calogcel: longitud
+            calogcel: longitud,
+            nomBarrio: nomBarrio,
+            addBarrio: addBarrio,
+            addCalle: addCalle,
+            nomCalle: nomCalle
         };
         console.log(postData);
         let url = edit === false ?
@@ -255,20 +258,20 @@ $(document).ready(function () {
             console.log(response);
             if (!edit && response == 'registra') {
                 actualizarSecuencia("CEL", corre1);
-                MostrarMensaje("Datos de Celula guardados correctamente", "success");
+                alertify.alert('Mensaje', 'Datos de Celulas guardados correctamente', function () { alertify.success('Se guardó correctamente'); });
                 ListarCelula();
             }
             if (edit && response == 'modificado') {
-                MostrarMensaje("datos de Celula modificados correctamente", "success")
+                alertify.alert('Mensaje', 'Datos de Celulas modificados correctamente', function () { alertify.success('Se modifico correctamente'); });
                 ListarCelula();
             }
             edit = false;
-           
+
             $('#formulario').hide();
             $('#lista').show();
-            
+
         });
-        
+
     }
 
     function MostrarMensaje(cadena, clase) {
@@ -280,20 +283,68 @@ $(document).ready(function () {
         $('#mensaje').show();
     }
 
+
     function listarBarrio() {//listar Barrio
         $.ajax({
             url: '/MRFSistem/AccesoDatos/Barrio/ListarBarrio.php',
             type: 'GET',
             success: function (response) {
                 let barrio = JSON.parse(response);
-                let plantilla = '<option value=0>Eligir Bario</option>';
+                let plantilla = '<option value="">Eligir Barrio</option>';
                 barrio.forEach(barrio => {
-                    plantilla += `<option value="${barrio.pacodbar}" class="cod-barrio">${barrio.canombar}</option>`;
+                    //plantilla += `<option value="${barrio.pacodbar}" class="cod-barrio">${barrio.canombar}</option>`;
+                    plantilla += `<option data-codigo="${barrio.pacodbar}" data-nombre="${barrio.canombar}" value="${barrio.canombar}"></option>`;
                 });
-                $('#cbx_barrio').html(plantilla);
+                $('#dat_barrio').html(plantilla);
             }
         });
     }
+
+    $('#inp_barrio').on('input', function () {//asigar codigo barrio
+        camposVacios();
+        var val = $('#inp_barrio').val().toUpperCase();
+        var ejemplo = $('#dat_barrio').find('option[value="' + val + '"]').data('codigo');
+        var ejemplo1 = $('#dat_barrio').find('option[value="' + val + '"]').data('nombre');
+
+        if (ejemplo === undefined) {
+            console.log("EmpName no está definido");
+            //banPro = true;
+            //nuevaProfesion();
+            addBarrio=true;
+            nomBarrio = val;
+            codBarrio="";
+            console.log(codBarrio);
+        } else {
+            codBarrio = ejemplo;
+            nomBarrio = ejemplo1;
+            //banPro = false;
+            console.log("EmpName está definido");
+            console.log(codBarrio);
+        }
+    });
+
+    $('#inp_calle').on('input', function () {//asigar codigo calle
+        camposVacios();
+        var val = $('#inp_calle').val().toUpperCase();
+        var ejemplo = $('#dat_calle').find('option[value="' + val + '"]').data('codigo');
+        var ejemplo1 = $('#dat_calle').find('option[value="' + val + '"]').data('nombre');
+
+        if (ejemplo === undefined) {
+            console.log("EmpName no está definido");
+            //banPro = true;
+            //nuevaProfesion();
+            addCalle=true;
+            nomCalle = val;
+            codCalle="";
+            console.log(codCalle);
+        } else {
+            codCalle = ejemplo;
+            nomCalle = ejemplo1;
+            //banPro = false;
+            console.log("EmpName está definido");
+            console.log(codCalle);
+        }
+    });
 
     function listarCalle() {//listar Calle
         $.ajax({
@@ -301,11 +352,12 @@ $(document).ready(function () {
             type: 'GET',
             success: function (response) {
                 let calle = JSON.parse(response);
-                let plantilla = '<option value=0>Eligir Calle</option>';
+                let plantilla = '<option value="">Eligir Calle</option>';
                 calle.forEach(calle => {
-                    plantilla += `<option value="${calle.pacodcal}" class="cod-calle">${calle.canomcal}</option>`;
+                    //plantilla += `<option value="" class="cod-calle">${calle.canomcal}</option>`;
+                    plantilla += `<option data-codigo="${calle.pacodcal}" data-nombre="${calle.canomcal}" value="${calle.canomcal}"></option>`;
                 });
-                $('#cbx_calle').html(plantilla);
+                $('#dat_calle').html(plantilla);
             }
         });
     }
@@ -317,6 +369,51 @@ $(document).ready(function () {
         $('#formulario').hide();
         $('#lista').show();
     }
+
+    function camposVacios(){
+        let celula=$('#txt_nomCelula').val();
+        let numero=$('#txt_numCelula').val();
+        let barrio=$('#inp_barrio').val();
+        let calle=$('#inp_calle').val();
+        let Latitud=latitud;
+        let Longitud=longitud;
+
+        let contador=0;
+
+        if (celula==''){
+            contador++
+        }
+        if (numero==''){
+            contador++
+        }
+        if (barrio==''){
+            contador++
+        }
+        if (calle==''){
+            contador++
+        }
+        if (Latitud===undefined){
+            contador++
+        }
+        if (Longitud===undefined){
+            contador++
+        }
+
+        if(contador>0){
+            $('#btn_guardar').attr('disabled', true);
+        }
+        else{
+            $('#btn_guardar').attr('disabled', false);
+        }
+    }
+
+    $('#txt_nomCelula').keyup(function (e) { 
+        camposVacios();
+    });
+
+    $('#txt_numCelula').keyup(function (e) { 
+        camposVacios();
+    });
 
     function localizacion(pocision) {
         var latitud = pocision.coords.latitude;

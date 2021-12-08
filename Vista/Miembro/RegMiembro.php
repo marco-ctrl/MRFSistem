@@ -56,7 +56,7 @@
                 <div class="form-group">
                     <label>Profesion</label>
                     <input type="text" id="inp_profesion" list="dat_profesion" class="form-control"
-                        onkeypress="return soloLetras(event)" required />
+                    maxlength="30" onkeypress="return soloLetras(event)" required />
                     <datalist id="dat_profesion">
                     </datalist>
                 </div>

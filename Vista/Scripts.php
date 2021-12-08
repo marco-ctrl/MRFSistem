@@ -23,3 +23,4 @@
 <!-- Script personalizados -->
 <script src="/MRFSistem/Script/App.js"></script>
 <script src="/MRFSistem/Script/Idioma.js"></script>
+<script src="/MRFSistem/Script/Validacion.js"></script>
