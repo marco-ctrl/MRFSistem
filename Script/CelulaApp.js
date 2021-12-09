@@ -101,6 +101,7 @@ $(document).ready(function () {
             { pacodcel }, function (responce) {
                 $('#lista').hide();
                 $('#formulario').show();
+                
                 const celula = JSON.parse(responce);
                 celula.forEach(cel => {
                     codCelula = cel.pacodcel,
@@ -108,20 +109,25 @@ $(document).ready(function () {
                         codCalle = cel.facodcal,
                         latitud = cel.calatcel,
                         longitud = cel.calogcel,
-                        nomBarrio= cel.canombar,
-                        nomCalle= cel.canomcal,
+                        nomBarrio = cel.canombar,
+                        nomCalle = cel.canomcal,
                         $('#txt_nomCelula').val(cel.canomcel),
                         $('#txt_numCelula').val(cel.canumcel),
                         $('#inp_barrio').val(cel.canombar),
                         $('#inp_calle').val(cel.canomcal)
                 });
                 //contex.hide();
+                mymap.setView([latitud, longitud], 15);
+                L.tileLayer(tilesProvider, {
+                    maxZoom: 18,
+                }).addTo(mymap);
                 if (marker != undefined) {
                     mymap.removeLayer(marker);
                 };
                 marker = L.marker([latitud, longitud]).addTo(mymap);
                 document.getElementById("txt_nomCelula").focus();
                 edit = true;
+                camposVacios();
             });
     });
 
@@ -310,9 +316,9 @@ $(document).ready(function () {
             console.log("EmpName no está definido");
             //banPro = true;
             //nuevaProfesion();
-            addBarrio=true;
+            addBarrio = true;
             nomBarrio = val;
-            codBarrio="";
+            codBarrio = "";
             console.log(codBarrio);
         } else {
             codBarrio = ejemplo;
@@ -333,9 +339,9 @@ $(document).ready(function () {
             console.log("EmpName no está definido");
             //banPro = true;
             //nuevaProfesion();
-            addCalle=true;
+            addCalle = true;
             nomCalle = val;
-            codCalle="";
+            codCalle = "";
             console.log(codCalle);
         } else {
             codCalle = ejemplo;
@@ -370,48 +376,48 @@ $(document).ready(function () {
         $('#lista').show();
     }
 
-    function camposVacios(){
-        let celula=$('#txt_nomCelula').val();
-        let numero=$('#txt_numCelula').val();
-        let barrio=$('#inp_barrio').val();
-        let calle=$('#inp_calle').val();
-        let Latitud=latitud;
-        let Longitud=longitud;
+    function camposVacios() {
+        let celula = $('#txt_nomCelula').val();
+        let numero = $('#txt_numCelula').val();
+        let barrio = $('#inp_barrio').val();
+        let calle = $('#inp_calle').val();
+        let Latitud = latitud;
+        let Longitud = longitud;
 
-        let contador=0;
+        let contador = 0;
 
-        if (celula==''){
+        if (celula == '') {
             contador++
         }
-        if (numero==''){
+        if (numero == '') {
             contador++
         }
-        if (barrio==''){
+        if (barrio == '') {
             contador++
         }
-        if (calle==''){
+        if (calle == '') {
             contador++
         }
-        if (Latitud===undefined){
+        if (Latitud === undefined) {
             contador++
         }
-        if (Longitud===undefined){
+        if (Longitud === undefined) {
             contador++
         }
 
-        if(contador>0){
+        if (contador > 0) {
             $('#btn_guardar').attr('disabled', true);
         }
-        else{
+        else {
             $('#btn_guardar').attr('disabled', false);
         }
     }
 
-    $('#txt_nomCelula').keyup(function (e) { 
+    $('#txt_nomCelula').keyup(function (e) {
         camposVacios();
     });
 
-    $('#txt_numCelula').keyup(function (e) { 
+    $('#txt_numCelula').keyup(function (e) {
         camposVacios();
     });
 

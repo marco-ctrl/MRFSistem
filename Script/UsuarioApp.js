@@ -292,6 +292,11 @@ $(document).ready(function () {
         $.ajax({
             url: '/MRFSistem/AccesoDatos/Usuario/ListarUsuario.php',
             type: 'GET',
+            beforeSend: function () {
+                var contenedor = document.getElementById('contenedor_carga');
+                contenedor.style.visibility = 'visible';
+                contenedor.style.opacity = '200'
+            },
             success: function (response) {
                 if (response != 'false') {
                     let usuario = JSON.parse(response);

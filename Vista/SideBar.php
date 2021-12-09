@@ -17,6 +17,11 @@
             <i class="fas fa-home"></i>
             <span>Inicio</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="FRM_Mapa">
+            <i class="fas fa-map-marked-alt"></i> 
+            <span>Mapa Celulas</span></a>
+    </li>
 
     <!--<li class="nav-item">
         <a class="nav-link" href="#">
@@ -72,7 +77,7 @@
             </div>
         </div>
     </li>
-
+    
     <!-- Divider -->
     <hr class="sidebar-divider">
 
