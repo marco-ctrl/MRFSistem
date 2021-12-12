@@ -1,7 +1,9 @@
 $(document).ready(function () {
     const tilesProvider = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     var mymap = L.map('map').setView([-22.735938864584394, -64.34173274785282], 15);
-    L.tileLayer(tilesProvider, {
+    L.tileLayer(tilesProvider,  {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }, {
         maxZoom: 18,
     }).addTo(mymap);
     //Marcador en el mapa//
@@ -16,7 +18,6 @@ $(document).ready(function () {
             type: "GET",
             url: "/MRFSistem/AccesoDatos/Celula/UbicacionCelulas.php",
             success: function (response) {
-                console.log(response);
                 const celula = JSON.parse(response);
                 celula.forEach(usu => {
                     let plantilla='<h6 align="center">INFORMACION</h6><hr><div class="row">'+

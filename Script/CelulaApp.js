@@ -49,6 +49,12 @@ $(document).ready(function () {
         camposVacios();
     });
 
+    var myModal = new bootstrap.Modal(document.getElementById('md_miembro'), {
+        keyboard: false,
+        backdrop: 'static',
+        focus: true
+      })
+
     $('#buscarCelula').keyup(function (e) {//permite hacer busqueda de miembros
         if ($('#buscarCelula').val()) {
             let buscar = $('#buscarCelula').val().toUpperCase();
@@ -131,6 +137,47 @@ $(document).ready(function () {
             });
     });
 
+    $(document).on('click', '.miembros-celula', function () {//modifica usuario
+        console.log('hola mundo');
+        myModal.show();
+        //habilitarFormulario();
+        /*let elemento = $(this)[0].parentElement.parentElement;
+        let pacodcel = $(elemento).attr('UserDocu');
+        $.post('/MRFSistem/AccesoDatos/Celula/SingleCelula.php',
+            { pacodcel }, function (responce) {
+                $('#lista').hide();
+                $('#formulario').show();
+                
+                const celula = JSON.parse(responce);
+                celula.forEach(cel => {
+                    codCelula = cel.pacodcel,
+                        codBarrio = cel.facodbar,
+                        codCalle = cel.facodcal,
+                        latitud = cel.calatcel,
+                        longitud = cel.calogcel,
+                        nomBarrio = cel.canombar,
+                        nomCalle = cel.canomcal,
+                        $('#txt_nomCelula').val(cel.canomcel),
+                        $('#txt_numCelula').val(cel.canumcel),
+                        $('#inp_barrio').val(cel.canombar),
+                        $('#inp_calle').val(cel.canomcal)
+                });
+                //contex.hide();
+                mymap.setView([latitud, longitud], 15);
+                L.tileLayer(tilesProvider, {
+                    maxZoom: 18,
+                }).addTo(mymap);
+                if (marker != undefined) {
+                    mymap.removeLayer(marker);
+                };
+                marker = L.marker([latitud, longitud]).addTo(mymap);
+                document.getElementById("txt_nomCelula").focus();
+                edit = true;
+                camposVacios();
+            });*/
+    });
+
+
     $(document).on('click', '.baja-celula', function () {//elimina usuario
         if (confirm("Seguro que desea dar de baja esta celula")) {
             let elemento = $(this)[0].parentElement.parentElement;
@@ -200,13 +247,18 @@ $(document).ready(function () {
                 <td>${usu.canomcel}</td>
                 <td>${usu.canumcel}</td>
                 <td>B/${usu.canombar} C/${usu.canomcal}</td>
-                <td>
-                    <button class="baja-celula btn btn-danger">
+                <td ALIGN="CENTER">
+                    <button class="baja-celula btn btn-danger" title="Dar de Baja Celula">
                     <i class="fas fa-trash-alt "></i></button>
+                    
                 </td>
-                <td>
-                    <button class="modificar-celula btn btn-secondary">
+                <td ALIGN="CENTER">
+                    <button class="modificar-celula btn btn-secondary" title="Modificar Celula">
                     <i class="far fa-edit "></i></button>
+                </td>
+                <td ALIGN="CENTER">
+                    <button class="miembros-celula btn btn-primary" title="Miembros de la Celula"
+                    data-bs-toggle="modal" data-bs-target="#md_miembro"><i class="fas fa-users"></i></button>
                 </td>
             </tr>`
         return plantilla;
@@ -420,6 +472,8 @@ $(document).ready(function () {
     $('#txt_numCelula').keyup(function (e) {
         camposVacios();
     });
+
+
 
     function localizacion(pocision) {
         var latitud = pocision.coords.latitude;

@@ -594,7 +594,7 @@ $(document).ready(function () {
                 Nuevo=false;
                 edit=false;
                 ListarMiembro();
-                
+                ListarMiembro1();
             });
         
     }

@@ -40,28 +40,28 @@ $curso = mysqli_fetch_array($resultado);
 $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'Legal-L']);
 $html = '<h3>ESCUELA DE LIDERES - IGLESIA "BERMEJO"</h3>
         <H4>Bermejo - Bolivia</H4>';
-$html .= '<table>
+$html .= '<table class="table">
         <tr>
-            <td colspan="2">'.$curso['canommat'].''.$curso['caparcur'].'<br>Gestion: '.$curso['cagescur'].'</td>
-            <td colspan="8">Docente: '.$curso['canommie'].' '.$curso['capatmie'].' '.$curso['camatmie'].'</td>
-            <td colspan="7">Fecha: '.$curso['cafecini'].'</td>
-            <td colspan="5" align="center">Nota de Examenes</td>
-            <td colspan="5" align="center">Actividades Evaluativas</td>
+            <td colspan="2" class="td">'.$curso['canommat'].''.$curso['caparcur'].'<br>Gestion: '.$curso['cagescur'].'</td>
+            <td colspan="8" class="td">Docente: '.$curso['canommie'].' '.$curso['capatmie'].' '.$curso['camatmie'].'</td>
+            <td colspan="7" class="td">Fecha: '.$curso['cafecini'].'</td>
+            <td colspan="5" class="td" align="center">Nota de Examenes</td>
+            <td colspan="5" class="td" align="center">Actividades Evaluativas</td>
         </tr>
         <tr>
             <td>N°</td>
-            <td align="center">Nombres y Apellidos</td>
-            <td colspan="15" align="center">Control de Asistencia</td>
-            <td WIDTH="35">1.E.</td>
-            <td WIDTH="35">2.E.</td>
-            <td WIDTH="35">3.E.</td>
-            <td WIDTH="35">4.E.</td>
-            <td WIDTH="35">5.E.</td>
-            <td WIDTH="35">P.E.</td>
-            <td WIDTH="35">Dev.</td>
-            <td WIDTH="35">E.F.</td>
-            <td WIDTH="35">A.P.</td>
-            <td WIDTH="35">N.F.</td>
+            <td align="center" class="td">Nombres y Apellidos</td>
+            <td colspan="15" align="center" class="td">Control de Asistencia</td>
+            <td WIDTH="35" class="td">1.E.</td>
+            <td WIDTH="35" class="td">2.E.</td>
+            <td WIDTH="35" class="td">3.E.</td>
+            <td WIDTH="35" class="td">4.E.</td>
+            <td WIDTH="35" class="td">5.E.</td>
+            <td WIDTH="35" class="td">P.E.</td>
+            <td WIDTH="35" class="td">Dev.</td>
+            <td WIDTH="35" class="td">E.F.</td>
+            <td WIDTH="35" class="td">A.P.</td>
+            <td WIDTH="35" class="td">N.F.</td>
         </tr>';
 
 
@@ -101,33 +101,33 @@ $cont=1;
 
 while ($row = mysqli_fetch_array($resultado)) {
     $html.='<tr>
-    <td>'.$cont.' </td>
-    <td>'.$row['canommie'].' '.$row['capatmie'].' '.$row['camatmie'].'</td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
-    <td WIDTH="35"></td>
+    <td class="td">'.$cont.' </td>
+    <td class="td">'.$row['canommie'].' '.$row['capatmie'].' '.$row['camatmie'].'</td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
+    <td WIDTH="35" class="td"></td>
 </tr>';
    $cont+=1;
 }

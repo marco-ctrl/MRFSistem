@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-md-4 p-3">
                             <button type="button" id="btn_nuevo" class="btn btn-primary btn-block
-                text-center"><i class="fas fa-plus-circle"></i>
+                text-center" title="Registrar Celula"><i class="fas fa-plus-circle"></i>
                                 Registrar Celula
                             </button>
                         </div>
@@ -42,8 +42,8 @@
                                         <div class="input-group mb-3 col-6">
                                             <input type="text" class="form-control" id="buscarCelula"
                                                 placeholder="Buscar..."></input>
-                                            <button class="btn btn-primary" id="btn_busFec"><i
-                                                    class="fas fa-search"></i></button>
+                                            <button class="btn btn-primary" id="btn_busFec"><i class="fas fa-search"
+                                                    tittle="buscar"></i></button>
                                         </div>
 
                                     </form>
@@ -55,8 +55,9 @@
                                                     <th>NOMBRE</th>
                                                     <th>NUMERO</th>
                                                     <th>DIRECCION</th>
-                                                    <th>BAJA</th>
+                                                    <th>DAR_BAJA</th>
                                                     <th>MODIFICAR</th>
+                                                    <th>MIEMBROS</th>
                                                 </tr>
                                             </thead>
                                             <tfoot class="bg-primary text-white">
@@ -64,8 +65,9 @@
                                                     <th>NOMBRE</th>
                                                     <th>NUMERO</th>
                                                     <th>DIRECCION</th>
-                                                    <th>BAJA</th>
+                                                    <th>DAR_BAJA</th>
                                                     <th>MODIFICAR</th>
+                                                    <th>MIEMBROS</th>
                                                 </tr>
                                             </tfoot>
 
@@ -86,7 +88,7 @@
                                     <div class="form-group">
                                         <label>Nombre de Celula</label>
                                         <input type="text" id="txt_nomCelula" placeholder="Nombre" class="form-control"
-                                        maxlength="30" required></input>
+                                            maxlength="30" required></input>
                                     </div>
                                     <div class="form-group">
                                         <label>Numero de Celula</label>
@@ -101,14 +103,16 @@
                                     <div class="form-group">
                                         <label>Barrio</label>
                                         <input type="text" id="inp_barrio" placeholder="Barrio" list="dat_barrio"
-                                            class="form-control" maxlength="30" onkeypress="return Direccion(event)" required />
+                                            class="form-control" maxlength="30" onkeypress="return Direccion(event)"
+                                            required />
                                         <datalist id="dat_barrio">
                                         </datalist>
                                     </div>
                                     <div class="form-group">
                                         <label>Calle</label>
                                         <input type="text" id="inp_calle" placeholder="Calle" list="dat_calle"
-                                            class="form-control" maxlength="30" onkeypress="return Direccion(event)" required />
+                                            class="form-control" maxlength="30" onkeypress="return Direccion(event)"
+                                            required />
                                         <datalist id="dat_calle">
                                         </datalist>
                                     </div>
@@ -135,7 +139,7 @@
                             </button>
                         </div>
                     </div>
-
+                    <?php include 'includes/Celulas/MiembroCelula.php' ?>
                 </div>
 
             </div>
