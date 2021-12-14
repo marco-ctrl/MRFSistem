@@ -247,19 +247,24 @@ $(document).ready(function () {
                 <td>${usu.canomcel}</td>
                 <td>${usu.canumcel}</td>
                 <td>B/${usu.canombar} C/${usu.canomcal}</td>
-                <td ALIGN="CENTER">
+                <td>
+                    <button class="miembros-celula btn btn-primary" title="Miembros de la Celula"
+                    data-bs-toggle="modal" data-bs-target="#md_miembro"><i class="fas fa-users"></i></button>
+                </td>
+                <td>
+                    <button class="miembros-celula btn btn-warning" title="Agregar Lider de Celula"
+                    data-bs-toggle="modal"><i class="fas fa-user-plus"></i></button>
+                </td>
+                <td>
                     <button class="baja-celula btn btn-danger" title="Dar de Baja Celula">
                     <i class="fas fa-trash-alt "></i></button>
                     
                 </td>
-                <td ALIGN="CENTER">
+                <td>
                     <button class="modificar-celula btn btn-secondary" title="Modificar Celula">
                     <i class="far fa-edit "></i></button>
                 </td>
-                <td ALIGN="CENTER">
-                    <button class="miembros-celula btn btn-primary" title="Miembros de la Celula"
-                    data-bs-toggle="modal" data-bs-target="#md_miembro"><i class="fas fa-users"></i></button>
-                </td>
+                
             </tr>`
         return plantilla;
     }

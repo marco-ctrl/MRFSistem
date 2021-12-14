@@ -55,9 +55,7 @@
                                                     <th>NOMBRE</th>
                                                     <th>NUMERO</th>
                                                     <th>DIRECCION</th>
-                                                    <th>DAR_BAJA</th>
-                                                    <th>MODIFICAR</th>
-                                                    <th>MIEMBROS</th>
+                                                    <th ALIGN="CENTER" colspan="4">ACCIONES</th>
                                                 </tr>
                                             </thead>
                                             <tfoot class="bg-primary text-white">
@@ -65,9 +63,8 @@
                                                     <th>NOMBRE</th>
                                                     <th>NUMERO</th>
                                                     <th>DIRECCION</th>
-                                                    <th>DAR_BAJA</th>
-                                                    <th>MODIFICAR</th>
-                                                    <th>MIEMBROS</th>
+                                                    <th ALING="CENTER" colspan="4">ACCIONES</th>
+                                                    
                                                 </tr>
                                             </tfoot>
 
@@ -162,4 +159,6 @@
     <?php include 'Scripts.php'?>
     <script src="/MRFSistem/Script/CodigoApp.js"></script>
     <script src="/MRFSistem/Script/CelulaApp.js"></script>
+    <script src="/MRFSistem/Script/MiecelApp.js"></script>
+    <script src="/MRFSistem/Script/Validacion.js"></script>
 </body>

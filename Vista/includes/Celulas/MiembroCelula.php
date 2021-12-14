@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Miembros de Celula</h5>
+                <h5 class="modal-title" id="title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -11,8 +11,8 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <form id="form1">
-                            
+                        <form id="formMiecel1">
+
                             <div class="form-group has-validation">
                                 <label>Carnet de Identidad</label>
                                 <input type="number" id="txt_ci" placeholder="Carnet de Identidad" class="form-control"
@@ -29,17 +29,15 @@
                                 <input type="text" id="txt_paterno" maxlength="30" placeholder="Apellido Paterno"
                                     class="form-control" onkeypress="return soloLetras(event)" required></input>
                             </div>
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+                        <form id="formMiecel2">
                             <div class="form-group">
                                 <label>Apellido Materno</label>
                                 <input type="text" id="txt_materno" maxlength="30" placeholder="Apellido Materno"
                                     class="form-control" onkeypress="return soloLetras(event)" required></input>
                             </div>
-
-
-                        </form>
-                    </div>
-                    <div class="col-md-4">
-                        <form id="form2">
                             <div class="form-group">
                                 <label>Numero de Contacto</label>
                                 <input type="number" id="txt_numcontacto" maxlength="15"
@@ -51,35 +49,11 @@
                                 <input type="date" id="txt_fecnac" min="1920-01-01" max="<?php echo date('Y-m-d'); ?>"
                                     value="<?php echo date('Y-m-d'); ?>" class="form-control"></input>
                             </div>
-                            <div class="form-group">
-                                <label>Lugar de Nacimiento</label>
-                                <select id="cbx_ciudad" class="form-control">
 
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Estado Civil</label>
-                                <select id="cbx_estadoCivil" class="form-control">
-                                    <option value="0" class="form-control">Estado Civil</option>
-                                    <option value="SOLTERO/A" class="form-control">SOLTERO/A
-                                    </option>
-                                    <option value="CASADO/A" class="form-control">CASADO/A</option>
-                                    <option value="VIUDO/A" class="form-control">VIUDO/A</option>
-                                    <option value="DIVORCIADO/A" class="form-control">DIVORCIADO/A
-                                    </option>
-                                </select>
-                            </div>
                         </form>
                     </div>
                     <div class="col-md-4">
-                        <form id="form3">
-                            <div class="form-group">
-                                <label>Profesion</label>
-                                <input type="text" id="inp_profesion" list="dat_profesion" class="form-control"
-                                    maxlength="30" onkeypress="return soloLetras(event)" required />
-                                <datalist id="dat_profesion">
-                                </datalist>
-                            </div>
+                        <form id="formMiecel3">
                             <div class="form-group">
                                 <label>Direccion</label>
                                 <textarea id="txt_direccion" rows="3" maxlength="100"
@@ -89,6 +63,15 @@
                             <div class="form-group">
                                 <input type="hidden" id="txt_codMiembro" placeholder="Codigo"
                                     class="form-control"></input>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Funcion en la Celula</label>
+                                <select id="cbx_funcion" class="form-control">
+                                    <option value="0">Funcion en la celula</option>
+                                    <option value="DISCIPULO/A">DISCIPULO/A</option>
+                                    <option value="ASISTENTE">ASISTENTE</option>
+                                    <option value="ANFITRION">ANFITRION</option>
+                                </select>
                             </div>
                         </form>
                     </div>
@@ -102,21 +85,23 @@
                             <tr>
                                 <td>NOMBRE</td>
                                 <td>APELLIDO</td>
-                                <td>CELULA</td>
                                 <td>FUNCION</td>
-                                <td style="width:15%">SELECCIONAR</td>
+                                <td>BAJA</td>
+                                <td>MODIFICAR</td>
                             </tr>
                         </thead>
-                        <tbody id="tb_miembro1">
+                        <tbody id="tb_miecel">
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="btn_nuevo" type="button" class="btn btn-primary" data-dismiss="modal">
-                    <i class="fas fa-user-plus "></i> Nuevo</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">
-                    <i class="fas fa-window-close "></i> Cerrar</button>
+                <button id="btn_AgregarMiecel" type="button" class="btn btn-primary"
+                title="Agregar Miembro"><i class="fas fa-user-plus"></i> Agregar</button>
+                <button id="btn_nuevoMiecel" type="button" class="btn btn-warning"
+                title="Nuevo Miembro"><i class="far fa-file"></i> Nuevo</button>
+                <button type="button" id="btn_cerrarMiecel" class="btn btn-danger" data-dismiss="modal"
+                title="Cerrar"><i class="fas fa-window-close "></i> Cerrar</button>
             </div>
         </div>
     </div>
