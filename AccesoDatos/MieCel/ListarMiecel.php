@@ -35,7 +35,8 @@ while ($row = mysqli_fetch_array($resultado)) {
                     'canommie' => $row['canommie'],
                     'pacodmie' => $row['pacodmie'],
                     'canomcel' => $row['canomcel'],
-                    'cafunmie' => $row['cafunmie']);
+                    'cafunmie' => $row['cafunmie'],
+                    'pacodmcl' => $row['pacodmcl']);
 }
 if ($json==null){
     echo 'false';

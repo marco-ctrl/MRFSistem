@@ -19,7 +19,7 @@ $(document).ready(function () {
             type: 'POST',
             data: { pacodmie, codigoCel },
             success: function (responce) {
-                //console.log(responce);
+                ////console.log(responce);
                 //$("#btn_guardarMiembro").attr("disabled", false);
                 const miembro = JSON.parse(responce);
                 miembro.forEach(miembro => {
@@ -35,7 +35,7 @@ $(document).ready(function () {
                     codigoMieCel = miembro.pacodmcl
                 });
                 editMiecel = true;
-                console.log(codigoMieCel+' '+codigoMie+' '+codigoCel);
+                //console.log(codigoMieCel+' '+codigoMie+' '+codigoCel);
                 habilitarFormulario();
                 $("#btn_AgregarMiecel").html("<i class='far fa-save'></i> Guardar");
                 
@@ -59,6 +59,23 @@ $(document).ready(function () {
         ListarMieCel(pacodcel);
     });
 
+    $(document).on('click', '.baja-miecel', function () {//elimina usuario
+        if (confirm("Seguro que desea dar de baja esta Miembro")) {
+            let elemento = $(this)[0].parentElement.parentElement;
+            let pacodmie = $(elemento).attr('codMcl');
+            $.post('/MRFSistem/AccesoDatos/MieCel/DarBaja.php',
+                { pacodmie }, function (responce) {
+                    if (responce == 'baja') {
+                        ListarMieCel(codigoCel);
+                        alertify.alert('Mensaje', 'Miembro de Celula dado de baja');
+                        //MostrarMensaje("Celula dado de baja", "warning");
+                        ListarMieCel(codigoCel);
+                    }
+
+                });
+        }
+    });
+
     function ListarMieCel(codCel) {//listar de tabla miembros de celulas
         $.ajax({
             url: '/MRFSistem/AccesoDatos/MieCel/ListarMiecel.php',
@@ -71,7 +88,8 @@ $(document).ready(function () {
                 if (miembros != false) {
                     miembros.forEach(miembros => {
                         plantilla +=
-                            `<tr codMbr="${miembros.pacodmie}" class="table-light">
+                            `<tr codMbr="${miembros.pacodmie}" 
+                                 codMcl="${miembros.pacodmcl}"class="table-light">
                             <td>${miembros.canommie}</td> 
                             <td>${miembros.capatmie} ${miembros.camatmie}</td>
                             <td>${miembros.cafunmie}</td>
@@ -110,7 +128,7 @@ $(document).ready(function () {
         corre1 = getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codigoMie = getCodigo() + '-' + num;
-        //console.log(codigoMie+' correlativo '+corre1);
+        ////console.log(codigoMie+' correlativo '+corre1);
         let num1 = "";
         verificarSecuencia("MCL");
         if (getBan() != "true") {
@@ -125,8 +143,8 @@ $(document).ready(function () {
         corre2 = getCorrelativo();
         num1 = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num1);
         codigoMieCel = getCodigo() + '-' + num1;
-        //console.log(codigoMieCel + ' correlativo ' + corre2);
-        //console.log(codigoCel);
+        ////console.log(codigoMieCel + ' correlativo ' + corre2);
+        ////console.log(codigoCel);
     }
 
     function ObtenerNumeroCorrelativo(numero, num) {//sirve para obtener numero correlativo
@@ -166,11 +184,16 @@ $(document).ready(function () {
             cacelmie: $('#txt_numcontacto').val(),
             cafecnac: $('#txt_fecnac').val(),
             cadirmie: $('#txt_direccion').val().toUpperCase(),
+            pacodmcl: codigoMieCel,
+            cafunmie: $('#cbx_funcion').val(),
+            caestmcl: true,
+            facodcel: codigoCel,
+            facodmie: codigoMie
         };
-        //console.log(postData);
+        ////console.log(postData);
         let URL = editMiecel === false ?
             '/MRFSistem/AccesoDatos/MieCel/AgregarMiembro.php' :
-            '/MRFSistem/AccesoDatos/MieCel/ModificarMiembro.php';
+            '/MRFSistem/AccesoDatos/MieCel/ModificarMiecel.php';
 
         $.ajax({
             url: URL,
@@ -193,7 +216,8 @@ $(document).ready(function () {
                 }
                 if (editMiecel && response == 'modificado') {
                     alertify.alert('Mensaje', 'Datos de Miembros Modificados correctamente', function () { alertify.success('Se guardó correctamente'); });
-
+                    ListarMieCel(codigoCel);
+                    LimpiarMiecel();
                 }
                 editMiecel = false;
 
@@ -213,7 +237,7 @@ $(document).ready(function () {
 
         let url = '/MRFSistem/AccesoDatos/MieCel/AgregarMieCel.php';
         $.post(url, postData, function (response) {
-            //console.log(response);
+            ////console.log(response);
             if (!editMiecel && response == 'registra') {
                 actualizarSecuencia("MCL", corre2);
             }
@@ -223,16 +247,19 @@ $(document).ready(function () {
             editMiecel = false;
             ListarMieCel(codigoCel);
             LimpiarMiecel();
-            DeshabilitarFormulario();
+            //DeshabilitarFormulario();
             //ListarMiembro();
         });
-        //console.log('completado..');
+        ////console.log('completado..');
     }
 
     function LimpiarMiecel() {
         $('#formMiecel1').trigger('reset');
         $('#formMiecel2').trigger('reset');
         $('#formMiecel3').trigger('reset');
+        $("#btn_AgregarMiecel").html("<i class='fas fa-user-plus'></i> Agregar");
+        DeshabilitarFormulario();
+        editMiecel=false;        
     }
 
     $('#btn_AgregarMiecel').click(function (e) {
@@ -249,7 +276,8 @@ $(document).ready(function () {
     });
 
     $('#btn_cerrarMiecel').click(function (e) {
-        DeshabilitarFormulario();
+        //DeshabilitarFormulario();
+        LimpiarMiecel()
         e.preventDefault();
     });
 
