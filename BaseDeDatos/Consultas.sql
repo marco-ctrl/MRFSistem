@@ -133,3 +133,6 @@ SELECT cadesefe,
     and aconing.pacodeco=aconfin.pacodapo
     AND aconfin.facodcaj=aarqcaj.pacodcaj
     GROUP BY cadesefe
+
+#Sirve para configurar mysql 
+SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));

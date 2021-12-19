@@ -35,6 +35,7 @@ function graficarIngresos() {
     type: "GET",
     url: "/MRFSistem/AccesoDatos/Ingresos/Graficar.php",
     success: function (responce) {
+      console.log(responce);
       // Bar Chart Example
       var mes = [];
       var total = [];

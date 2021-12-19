@@ -937,7 +937,7 @@ ALTER TABLE `acursom`
 ALTER TABLE `aiteinf`
   ADD CONSTRAINT `FK_iteinf_infrme` FOREIGN KEY (`facodinf`) REFERENCES `ainfrme` (`pacodinf`),
   ADD CONSTRAINT `FK_iteinf_miecel` FOREIGN KEY (`facodmcl`) REFERENCES `amiecel` (`pacodmcl`),
-  ADD CONSTRAINT `FK_iteinf_viscel` FOREIGN KEY (`facodvcl`) REFERENCES `avidcel` (`pacodvcl`),
+  ADD CONSTRAINT `FK_iteinf_viscel` FOREIGN KEY (`facodvcl`) REFERENCES `aviscel` (`pacodvcl`),
   ADD CONSTRAINT `FK_Iteminforme_Informe` FOREIGN KEY (`facodinf`) REFERENCES `ainfrme` (`pacodinf`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `FK_Iteminforme_Miembro-celula` FOREIGN KEY (`facodmcl`) REFERENCES `amiecel` (`pacodmcl`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `FK_Iteminforme_Visita_celula` FOREIGN KEY (`facodvcl`) REFERENCES `aviscel` (`pacodvcl`) ON DELETE RESTRICT ON UPDATE RESTRICT;

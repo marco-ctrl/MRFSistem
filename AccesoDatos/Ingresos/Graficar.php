@@ -81,8 +81,10 @@ while ($row = mysqli_fetch_array($resultado)) {
 
 }
 if ($json == null) {
-    echo 'false';
+    die(mysqli_error($conexion));
 } else {
     echo json_encode($json);
 }
 mysqli_close($conexion);
+
+//echo ("hola mundo");

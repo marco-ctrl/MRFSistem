@@ -4,7 +4,7 @@ $host = "localhost";
 $port = "5432";
 $bdname = "mrfbermejobd";
 $user = "root";
-$password = "uajms";
+$password = "uajms1234";
 
 $conexion = mysqli_connect($host, $user, $password, $bdname);
 // Check connection
