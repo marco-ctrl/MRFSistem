@@ -18,6 +18,7 @@ $anio=$row['anio'];
 $mes1=asignarMes($row, $mes);
 
 
+
 $css = file_get_contents('css/Stylos.css');
 
 $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'Letter']);

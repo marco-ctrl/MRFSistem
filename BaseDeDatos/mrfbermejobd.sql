@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-12-2021 a las 19:26:32
+-- Tiempo de generación: 16-12-2021 a las 04:45:27
 -- Versión del servidor: 8.0.20
 -- Versión de PHP: 7.4.7
 
@@ -31,7 +31,7 @@ CREATE TABLE `aalumno` (
   `facodmie` varchar(10) NOT NULL,
   `pacodalu` varchar(10) NOT NULL,
   `caestalu` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `aalumno`
@@ -50,6 +50,32 @@ INSERT INTO `aalumno` (`facodmie`, `pacodalu`, `caestalu`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `aarqcaj`
+--
+
+CREATE TABLE `aarqcaj` (
+  `pacodcaj` varchar(10) NOT NULL,
+  `cainicaj` date NOT NULL,
+  `cafincaj` date DEFAULT NULL,
+  `camonini` decimal(10,2) NOT NULL,
+  `camonfin` decimal(10,2) DEFAULT NULL,
+  `caestcaj` tinyint(1) NOT NULL,
+  `catoting` decimal(10,2) DEFAULT NULL,
+  `catotegr` decimal(10,2) DEFAULT NULL
+);
+
+--
+-- Volcado de datos para la tabla `aarqcaj`
+--
+
+INSERT INTO `aarqcaj` (`pacodcaj`, `cainicaj`, `cafincaj`, `camonini`, `camonfin`, `caestcaj`, `catoting`, `catotegr`) VALUES
+('CAJ-000001', '2021-11-26', '2021-12-01', '250.00', '245.59', 0, '963.59', '968.00'),
+('CAJ-000002', '2021-12-01', '2021-12-01', '245.59', '423.59', 0, '1245.00', '1067.00'),
+('CAJ-000004', '2021-12-11', '2021-12-11', '423.59', '528.79', 0, '763.00', '657.80');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `abardir`
 --
 
@@ -57,7 +83,7 @@ CREATE TABLE `abardir` (
   `caestbar` tinyint(1) NOT NULL,
   `canombar` varchar(30) NOT NULL,
   `pacodbar` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `abardir`
@@ -88,7 +114,7 @@ CREATE TABLE `acaldir` (
   `caestcal` tinyint(1) NOT NULL,
   `canomcal` varchar(30) NOT NULL,
   `pacodcal` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `acaldir`
@@ -116,13 +142,13 @@ INSERT INTO `acaldir` (`caestcal`, `canomcal`, `pacodcal`) VALUES
 CREATE TABLE `acelula` (
   `caestcel` tinyint(1) NOT NULL,
   `canomcel` varchar(30) NOT NULL,
-  `canumcel` varchar(4)  NOT NULL,
+  `canumcel` varchar(4) NOT NULL,
   `pacodcel` varchar(10) NOT NULL,
   `facodbar` varchar(10) NOT NULL,
   `calatcel` decimal(20,10) NOT NULL,
   `facodcal` varchar(10) NOT NULL,
   `calogcel` decimal(20,10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `acelula`
@@ -150,7 +176,7 @@ CREATE TABLE `aciudad` (
   `caestciu` tinyint(1) NOT NULL,
   `canomciu` varchar(30) NOT NULL,
   `pacodciu` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `aciudad`
@@ -179,7 +205,7 @@ CREATE TABLE `aconegr` (
   `cadesegr` varchar(150) NOT NULL,
   `pacodegr` varchar(10) NOT NULL,
   `cafecegr` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `aconegr`
@@ -213,7 +239,7 @@ CREATE TABLE `aconfin` (
   `pacodapo` varchar(10) NOT NULL,
   `facodusu` varchar(10) NOT NULL,
   `facodcaj` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `aconfin`
@@ -264,7 +290,7 @@ CREATE TABLE `aconido` (
   `caestcon` tinyint(1) NOT NULL,
   `canommat` varchar(20) NOT NULL,
   `pacodcon` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `aconido`
@@ -288,7 +314,7 @@ CREATE TABLE `aconing` (
   `pacodeco` varchar(10) NOT NULL,
   `catiping` varchar(50) NOT NULL,
   `cafecing` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `aconing`
@@ -326,8 +352,8 @@ CREATE TABLE `acreesp` (
   `cafecbau` date DEFAULT NULL,
   `cafeccon` date DEFAULT NULL,
   `cafecigl` date DEFAULT NULL,
-  `pacodcre` varchar(10)  NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `pacodcre` varchar(10) NOT NULL
+);
 
 --
 -- Volcado de datos para la tabla `acreesp`
@@ -359,7 +385,7 @@ CREATE TABLE `acursom` (
   `facodmae` varchar(10) NOT NULL,
   `pacodcur` varchar(10) NOT NULL,
   `caparcur` varchar(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `acursom`
@@ -384,7 +410,7 @@ CREATE TABLE `aegrefij` (
   `cacanefe` double(10,2) NOT NULL,
   `caestefe` tinyint(1) NOT NULL,
   `catipcan` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `aegrefij`
@@ -407,7 +433,7 @@ INSERT INTO `aegrefij` (`pacodefe`, `cadesefe`, `cacanefe`, `caestefe`, `catipca
 CREATE TABLE `ainfrme` (
   `cafecinf` date NOT NULL,
   `pacodinf` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 -- --------------------------------------------------------
 
@@ -420,7 +446,7 @@ CREATE TABLE `aiteinf` (
   `facodinf` varchar(10) NOT NULL,
   `facodmcl` varchar(10) NOT NULL,
   `facodvcl` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 -- --------------------------------------------------------
 
@@ -432,7 +458,7 @@ CREATE TABLE `amaetro` (
   `facodmie` varchar(10) NOT NULL,
   `pacodmae` varchar(10) NOT NULL,
   `caestmae` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `amaetro`
@@ -458,7 +484,7 @@ CREATE TABLE `amatula` (
   `facodalu` varchar(10) NOT NULL,
   `facodcur` varchar(10) NOT NULL,
   `facodusu` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `amatula`
@@ -497,7 +523,7 @@ CREATE TABLE `amiebro` (
   `caurlfot` varchar(90) DEFAULT NULL,
   `cabanmae` tinyint(1) NOT NULL,
   `cabanalu` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `amiebro`
@@ -531,7 +557,7 @@ CREATE TABLE `amiecel` (
   `facodmie` varchar(10) NOT NULL,
   `pacodmcl` varchar(10) NOT NULL,
   `caestmcl` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `amiecel`
@@ -562,7 +588,7 @@ INSERT INTO `amiecel` (`cafunmie`, `facodcel`, `facodmie`, `pacodmcl`, `caestmcl
 CREATE TABLE `aproion` (
   `canompro` varchar(30) NOT NULL,
   `pacodpro` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `aproion`
@@ -600,7 +626,7 @@ CREATE TABLE `ausurio` (
   `facodmie` varchar(10) NOT NULL,
   `pacodusu` varchar(10) NOT NULL,
   `caestusu` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `ausurio`
@@ -625,7 +651,7 @@ CREATE TABLE `aviscel` (
   `pacodvcl` varchar(10) NOT NULL,
   `caestvcl` tinyint(1) NOT NULL,
   `pacodvis` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 -- --------------------------------------------------------
 
@@ -641,7 +667,7 @@ CREATE TABLE `avisita` (
   `catelvis` varchar(15) NOT NULL,
   `caestvis` tinyint(1) NOT NULL,
   `pacodvis` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 -- --------------------------------------------------------
 
@@ -652,7 +678,7 @@ CREATE TABLE `avisita` (
 CREATE TABLE `num_correlativo` (
   `codigo` varchar(10) NOT NULL,
   `correlativo` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Volcado de datos para la tabla `num_correlativo`
@@ -689,6 +715,12 @@ INSERT INTO `num_correlativo` (`codigo`, `correlativo`) VALUES
 ALTER TABLE `aalumno`
   ADD PRIMARY KEY (`pacodalu`),
   ADD KEY `IXFK_Alumno_Miembro` (`facodmie`);
+
+--
+-- Indices de la tabla `aarqcaj`
+--
+ALTER TABLE `aarqcaj`
+  ADD PRIMARY KEY (`pacodcaj`);
 
 --
 -- Indices de la tabla `abardir`
