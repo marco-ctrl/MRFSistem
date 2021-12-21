@@ -29,3 +29,12 @@ img.derecho{
     width: 120px;
     height: 120px;
 }
+
+.columna{
+    width:20%;
+    float:left;
+  }
+
+p.interlineado{
+    line-height : 200%;
+}

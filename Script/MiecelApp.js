@@ -14,8 +14,10 @@ $(document).ready(function () {
         habilitarFormulario;
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodmie = $(elemento).attr('codMbr');
+        console.log(codigoCel);
+        console.log(pacodmie);
         $.ajax({
-            url: '/MRFSistem/AccesoDatos/MieCel/SingleMieCel.php',
+            url: '/MRFSistem/AccesoDatos/MieCel/SingleMiecel.php',
             type: 'POST',
             data: { pacodmie, codigoCel },
             success: function (responce) {

@@ -4,7 +4,7 @@ window.onload = function(){
     contenedor.style.opacity = '0'
 }
 
-function configureLoadingScreen(screen){
+/*function configureLoadingScreen(screen){
     $(document)
         .ajaxStart(function () {
             screen.fadeIn();
@@ -12,12 +12,12 @@ function configureLoadingScreen(screen){
         .ajaxStop(function () {
             screen.fadeOut();
         });
-}
+}*/
 
 $(document).ready(function () {
 
     var screen = $('#contenedor_carga');
-    configureLoadingScreen(screen);
+    //configureLoadingScreen(screen);
 
     
     $("#mn_ingresos").click(function(event) {

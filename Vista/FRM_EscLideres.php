@@ -106,7 +106,7 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Archivos:</div>
+                                                    Modulos:</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">ALUMNOS</div>
                                             </div>
                                             <div class="col-auto">
@@ -125,7 +125,7 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Archivos:</div>
+                                                    Modulos:</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">MAESTRO</div>
                                             </div>
                                             <div class="col-auto">
@@ -144,7 +144,7 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Archivos:</div>
+                                                    Modulos:</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">CURSO</div>
                                             </div>
                                             <div class="col-auto">
@@ -163,7 +163,7 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Archivos:</div>
+                                                    Modulos:</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">MATERIA</div>
                                             </div>
                                             <div class="col-auto">
@@ -187,7 +187,7 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Archivos:</div>
+                                                    Modulos:</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">MATRICULAS</div>
                                             </div>
                                             <div class="col-auto">

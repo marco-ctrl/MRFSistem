@@ -6,7 +6,7 @@ require_once "../AccesoDatos/Conexion/Conexion.php";
 
 //include '../../MRFIglesiaBermejo/AccesoDatos/Alumno/ListarAlumno.php';
 
-//$css = file_get_contents('CSS/Stylos.css');
+$css = file_get_contents('CSS/Stylos.css');
 
 $pacodcur = $_GET['pacodcur'];
 //$pacodcur = 'CUR-000001';
@@ -35,9 +35,9 @@ caparcur
     and pacodcur='{$pacodcur}'";
 $resultado = mysqli_query($conexion, $sql);
 
-$curso = mysqli_fetch_array($resultado);?>
+$curso = mysqli_fetch_array($resultado);
 
-<link href="/MRFSistem/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+/*<!--<link href="/MRFSistem/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <link href="CSS/Stylos.css" rel="stylesheet">
 
 <button type="button" id="btn_generar" class="">
@@ -45,12 +45,12 @@ $curso = mysqli_fetch_array($resultado);?>
     Generar Reporte
 </button>
 
-<hr>
+<hr>-->*/
 
 
 
-<?php
-//$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'Legal-L']);
+
+$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'Legal-L']);
 $html = '<div id="imprimir">
         <h3>ESCUELA DE LIDERES - IGLESIA "BERMEJO"</h3>
         <H4>Bermejo - Bolivia</H4>';
@@ -153,11 +153,11 @@ $html.='<p>P.E.=Promedio Examen &nbsp;&nbsp; Dev.=Devocional 20pts. &nbsp;&nbsp;
             N.F.=Nota Final</p>';
 $html.='<P align="center"><b>"Y TODO LO QUE HAGAIS, HACEDLO COMO PARA EL SEÑOR"</b></P>
         </div>';
-//$mpdf->WriteHTML($css,\Mpdf\HTMLParserMode::HEADER_CSS);
-//$mpdf->WriteHTML($html);
-//$mpdf->Output();
-echo $html;
+$mpdf->WriteHTML($css,\Mpdf\HTMLParserMode::HEADER_CSS);
+$mpdf->WriteHTML($html);
+$mpdf->Output();
+//echo $html;
 ?>
 
-<script src="Script/html2pdf.bundle.min.js"></script>
-<script src="JSPdf/ControlAsistencia.js"></script>
+<!--<script src="Script/html2pdf.bundle.min.js"></script>
+<script src="JSPdf/ControlAsistencia.js"></script>-->

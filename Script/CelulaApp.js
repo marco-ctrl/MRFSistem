@@ -228,7 +228,12 @@ $(document).ready(function () {
             beforeSend: function () {
                 var contenedor = document.getElementById('contenedor_carga');
                 contenedor.style.visibility = 'visible';
-                contenedor.style.opacity = '200'
+                contenedor.style.opacity = '200';
+            },
+            complete: function() {
+                var contenedor = document.getElementById('contenedor_carga');
+                contenedor.style.visibility = 'hidden';
+                contenedor.style.opacity = '0';
             },
             success: function (response) {
                 let celula = JSON.parse(response);

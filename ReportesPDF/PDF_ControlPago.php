@@ -5,7 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once "../AccesoDatos/Conexion/Conexion.php";
 
 //include '../../MRFIglesiaBermejo/AccesoDatos/Alumno/ListarAlumno.php';
-$css = file_get_contents('css/Stylos.css');
+$css = file_get_contents('CSS/Stylos.css');
 
 
 $pacodcur = $_GET['pacodcur'];
