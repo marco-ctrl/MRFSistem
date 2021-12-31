@@ -6,7 +6,7 @@ include '../Conexion/Conexion.php';
 
 $consulta = "SELECT SUM(`camoning`) as total, DATE_FORMAT(cafecing, '%m') as mes
 FROM aconing
-GROUP by DATE_FORMAT(cafecing, '%M')";
+GROUP by mes";
 
 $resultado = mysqli_query($conexion, $consulta);
 

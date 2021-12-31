@@ -38,7 +38,7 @@ $curso = mysqli_fetch_array($resultado);
 
 
 $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L']);
-$html = '<div><img src="/MRFSistem/img/Asambleas.png" class="derecho">
+$html = '<div><img src="/MRFSistem/img/Asambleas.svg" class="derecho">
 <aside><h3>ASAMBLEAS DE DIOS DE BOLIVIA <br>
             IGLESIA "BERMEJO"<br>
             <u>ESCUELA DE LIDERES</u><br>

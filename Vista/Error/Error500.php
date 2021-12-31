@@ -1,4 +1,4 @@
-<?php include 'Header.php'?>
+<?php include '../Header.php'?>
 
 <body id="page-top">
 
@@ -30,17 +30,15 @@
             <div id="content">
 
                 <!-- Top Bar -->
-                <?php include 'NavBar.php'?>
+                <?php include '../NavBar.php'?>
 
                 <div class="container-fluid" id="trabajo">
 
                     <!-- 404 Error Text -->
                     <div class="text-center">
-                        <div class="error mx-auto" data-text="403">403</div>
-                        <p class="lead text-gray-800 mb-5">Usted no tiene permiso para acceder al
-                            directorio solicitado. No existe un documento índice,
-                            o el directorio está protegido contra lectura.</p>
-                        <p class="text-gray-500 mb-0">¡Acceso Prohibido!</p>
+                        <div class="error mx-auto" data-text="500">500</div>
+                        <p class="lead text-gray-800 mb-5">Esta página no funciona</p>
+                        <p class="text-gray-500 mb-0">HTTP ERROR 500</p>
                         <a href="/MRFSistem/Vista/FRM_principal">&larr; volver al inicio</a>
                     </div>
 
@@ -51,7 +49,7 @@
 
 
             <!-- Footer -->
-            <?php include 'Footer.php'?>
+            <?php include '../Footer.php'?>
 
         </div>
     </div>
@@ -61,8 +59,8 @@
     </a>
 
     <!-- Logout Modal-->
-    <?php include 'LogoutModal.php'?>
+    <?php include '../LogoutModal.php'?>
 
-    <?php include 'Scripts.php'?>
+    <?php include '../Scripts.php'?>
     <script src="/MRFSistem/Script/App.js"></script>
 </body>

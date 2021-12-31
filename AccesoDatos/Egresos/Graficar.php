@@ -6,7 +6,7 @@ include '../Conexion/Conexion.php';
 
 $consulta = "SELECT SUM(`camonegr`) as total, DATE_FORMAT(cafecegr, '%m') as mes
 FROM aconegr
-GROUP by DATE_FORMAT(cafecegr, '%M')";
+GROUP by mes";
 
 $resultado = mysqli_query($conexion, $consulta);
 

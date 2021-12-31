@@ -1,6 +1,7 @@
 Options -Indexes
 
-ErrorDocument 403 /MRFSistem/Vista/Error403.php
+ErrorDocument 403 /MRFSistem/Vista/Error/Error403.php
+ErrorDocument 500 /MRFSistem/Vista/Error/Error500.php
 
 <IfModule mod_rewrite.c>
 # Activar RewriteEngine

@@ -30,11 +30,45 @@ img.derecho{
     height: 120px;
 }
 
-.columna{
-    width:20%;
+div.Informe{
+    width:100%;
+    line-height : 150%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.columnaItems{
+    width:35%;
     float:left;
   }
 
-p.interlineado{
-    line-height : 200%;
+  .columna{
+    width:30%;
+    float:left;
+  }
+
+td.interlineado{
+    line-height : 150%;
+}
+
+table.Informe{
+    width:100%;
+    line-height : 150%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+td.total{
+    text-align: right;
+    vertical-align: bottom;
+}
+
+div.total{
+    width:30%;
+    float:left;
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+p.western{
+    margin-bottom: 0in;
+    line-height: 100%;
 }
