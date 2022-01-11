@@ -6,7 +6,7 @@ $mysqlDatabaseName ='mrfbermejobd';
 $mysqlUserName ='root';
 $mysqlPassword ='uajms1234';
 $mysqlHostName ='localhost';
-$fecha=date('jmyhis');
+$fecha=date('ymjhis');
 $mysqlExportPath =$mysqlDatabaseName.'_'.$fecha.'.sql';
 
 

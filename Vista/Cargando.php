@@ -2,5 +2,5 @@
         <div id="carga">
        
         </div>
-        <p class="text-white" id="cargando">Cargando...</p>
+        <p class="text-white" id="cargando"></p>
     </div>
