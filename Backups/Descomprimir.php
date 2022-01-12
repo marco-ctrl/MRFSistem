@@ -6,43 +6,57 @@ if ($_FILES["zip_file"]["name"]) {
     $ruta = $_FILES["zip_file"]["tmp_name"];
     $tipo = $_FILES["zip_file"]["type"];
 
-    // Función descomprimir 
-    $zip = new ZipArchive;
-    if ($zip->open($ruta) === TRUE) {
-        //$zip_ready=zip_read($zip);
-        //echo ''.zip_entry_name($zip);
-        //función para extraer el ZIP
-        $extraido = $zip->extractTo('temp/');
-        //
-        $nombreSQL = str_replace('.zip', '.sql', $nombre);
-        //echo $extraido . ' ' . $nombreSQL;
+    //datos de la base de datos
+    $dbHost     = 'localhost';
+    $dbUsername = 'root';
+    $dbPassword = 'uajms1234';
+    $dbName     = 'pruebabd';
 
-
-        $dbHost     = 'localhost';
-        $dbUsername = 'root';
-        $dbPassword = 'uajms1234';
-        $dbName     = 'pruebabd';
-        $filePath   = 'temp/' . $nombreSQL;
-
-        //echo '<br>' . $filePath;
-
-        restoreDatabaseTables($dbHost, $dbUsername, $dbPassword, $dbName, $filePath);
-
-
-
-        $zip->close();
-        // Fin de mostrar ficheros de carpetas
-       // $mensaje= '<div class="alert alert-success" alert-dismissible fade show role="alert">';
-        $mensaje= " La Base de Datos ha sido Restaurada correctamente";
-        //$mensaje.= '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-        //$mensaje.= '</div>';
-        echo $mensaje;
+    if ($tipo == "application/sql") {
+        restoreDatabaseTables($dbHost, $dbUsername, $dbPassword, $dbName, $ruta);
+            //$mensaje = " La Base de Datos ha sido Restaurada correctamente";
+            //echo $mensaje;
     } else {
-        echo '<br><ul class="list-group">';
-        echo '<li class="list-group-item">';
-        echo "Ocurrió un error y el archivo no se pudo descomprimir y/o formato no es ZIP";
-        echo '</li></ul>';
+        if ($tipo == "application/zip") {
+            if (VerificarExtencionSql($ruta)) {
+                $zip = new ZipArchive;
+                if ($zip->open($ruta) === TRUE) {
+                    $extraido = $zip->extractTo('temp/');
+                    $nombreSQL = str_replace('.zip', '.sql', $nombre);
+
+                    $filePath   = 'temp/' . $nombreSQL;
+
+                    restoreDatabaseTables($dbHost, $dbUsername, $dbPassword, $dbName, $filePath);
+
+                    $zip->close();
+                    //$mensaje = " La Base de Datos ha sido Restaurada correctamente";
+                    //echo $mensaje;
+                } else {
+
+                    echo "Ocurrió un error y el archivo no se pudo descomprimir y/o formato no es ZIP";
+                }
+            } else {
+                echo "Ocurrió un error al archivo comprimido no es formato sql";
+            }
+        }
     }
+}
+
+function VerificarExtencionSql($ruta)
+{
+    $zip1 = zip_open($ruta);
+    $zip_entry = zip_read($zip1);
+    $nombreArchivoZip = zip_entry_name($zip_entry);
+
+    $tamanoCadena = strlen($nombreArchivoZip);
+    $posicionCoincidencia = strrpos($nombreArchivoZip, '.sql', ($tamanoCadena - 4));
+
+    if ($posicionCoincidencia === false) {
+        return false;
+    } else {
+        return true;
+    }
+    zip_close($zip1);
 }
 
 function restoreDatabaseTables($dbHost, $dbUsername, $dbPassword, $dbName, $filePath)
@@ -79,5 +93,11 @@ function restoreDatabaseTables($dbHost, $dbUsername, $dbPassword, $dbName, $file
             $templine = '';
         }
     }
-    return !empty($error) ? $error : true;
+    //return !empty($error) ? $error : true;
+    if (empty($error)){
+        echo "Se restauro correctamente la base de datos";
+    }
+    else{
+        echo $error;
+    }
 }

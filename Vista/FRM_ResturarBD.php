@@ -30,15 +30,15 @@
                 <div class="container-fluid" id="trabajo">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">MRFSISTEM</h1>
+                        <h1 class="h3 mb-0 text-gray-800">RESTAURAR BASE DE DATOS</h1>
 
                     </div>
 
                     <form enctype="multipart/form-data" id="formRestaurar" method="post" action="#">
 
                         <div class="form-group">
-                            <label for="exampleFormControlFile1">Subir archivo ZIP:</label>
-                            <input required type="file" class="form-control-file" name="zip_file" accept=".zip"
+                            <label for="exampleFormControlFile1">Subir archivo ZIP o SQL:</label>
+                            <input required type="file" class="form-control-file" name="zip_file" accept=".zip,.sql"
                                 onchange="validarRestaurarBD()">
                         </div>
                         <div class="form-group">
