@@ -11,6 +11,7 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
     $pacodmie = $_POST['pacodmie'];
     $canommie = $_POST['canommie'];
     $cacidmie = $_POST['cacidmie'];
+    $cacidext = $_POST['cacidext'];
     $capatmie = $_POST['capatmie'];
     $camatmie = $_POST['camatmie'];
     $cadirmie = $_POST['cadirmie'];
@@ -35,19 +36,20 @@ $bytesArchivo = file_get_contents($path);
     //$imagen = $_POST['imagen'];
     //echo ' '.$documento.' '.$nombre.' '.$profesion; cafotmie='{$bytesArchivo}', 
     $sql = "UPDATE  amiebro SET
-        camatmie='{$camatmie}', 
-        capatmie='{$capatmie}', 
-        cacelmie='{$cacelmie}', 
-        cacidmie='{$cacidmie}', 
-        cadirmie='{$cadirmie}', 
-        caestmie= true, 
-        ceestciv='{$caestciv}', 
-        cafecnac='{$cafecnac}', 
-        caurlfot='{$url}',
-        canommie='{$canommie}', 
-        facodciu='{$facodciu}', 
-        facodpro='{$facodpro}'
-        WHERE pacodmie='{$pacodmie}'";
+        camatmie = '{$camatmie}', 
+        capatmie = '{$capatmie}', 
+        cacelmie = '{$cacelmie}', 
+        cacidmie = '{$cacidmie}',
+        cacidext = '{$cacidext}',
+        cadirmie = '{$cadirmie}', 
+        caestmie = true, 
+        ceestciv = '{$caestciv}', 
+        cafecnac = '{$cafecnac}', 
+        caurlfot = '{$url}',
+        canommie = '{$canommie}', 
+        facodciu = '{$facodciu}', 
+        facodpro = '{$facodpro}'
+        WHERE pacodmie = '{$pacodmie}'";
     $stm = mysqli_query($conexion, $sql);
 }
 if($stm){
@@ -78,5 +80,3 @@ else{
 }
 
 mysqli_close($conexion);
-
-?>

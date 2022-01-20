@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 window.onload = function () {
     var contenedor = document.getElementById('contenedor_carga');
@@ -62,8 +62,6 @@ $(document).ready(function () {
         var f = $(this);
         var formData = new FormData(document.getElementById("formRestaurar"));
         formData.append("dato", "valor");
-        //console.log('hola mundo');
-        //formData.append(f.attr("name"), $(this)[0].files[0]);
         $.ajax({
             url: "/MRFSistem/Backups/Descomprimir.php",
             type: "post",
@@ -95,5 +93,7 @@ $(document).ready(function () {
             });
     });
 
-    
+    $('input').focus(function(){
+        $(this).css('outline-color', 'red');
+    });
 });

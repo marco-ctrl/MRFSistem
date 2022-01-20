@@ -1,64 +1,120 @@
+<?php 
+    $fecha_actual = date("d-m-Y");
+    
+?>
 <div class="container p-4">
     <div class="row">
-        <!--<form id="form_user">-->
+        <!--<div class="row">-->
+        <!--<form id="form_miembro">-->
         <div class="col-md-4">
             <form id="form1" class="needs-validation">
                 <div class="form-group">
                     <input type="hidden" id="txt_codMiembro" placeholder="Codigo" class="form-control"></input>
                 </div>
-                <div class="form-group has-validation">
+                <div class="form-group">
                     <label>Carnet de Identidad</label>
-                    <input type="number" id="txt_ci" placeholder="Carnet de Identidad" class="form-control" min="0"
-                        pattern="[0-9]" title="debe introducir solo numeros" onkeypress="return soloNumeros(event)"
-                        required></input>
+                    <div class="input-group border-bottom-danger" id="div_ci">
+                        <input type="number" id="txt_ci" placeholder="Carnet de Identidad" class="form-control"
+                            title="introducir el carnet de identidad" onkeyup="numberMobile(event);" required
+                            style="width: 60%;">
+                        <input type="text" id="txt_ciExtencion" placeholder="Extencion" class="form-control"
+                            title="introducir extencion en caso de que tenga"
+                            onkeyup="this.value=alfaNumerico(this.value);" required style="width: 20%;">
+                        <span id="chk_ci" class="btn-danger form-control">
+                            <!--<i class="fas fa-check"></i>-->
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                    </div>
+                    <span id="val_ci" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
                     <label>Nombre</label>
-                    <input type="text" id="txt_nombre" maxlength="30" placeholder="Nombre" class="form-control"
-                        onkeypress="return soloLetras(event)" required></input>
+                    <div class="input-group border-bottom-danger" id="div_nombre">
+                        <input type="text" id="txt_nombre" placeholder="Nombre" class="form-control"
+                            onkeyup="this.value=soloTexto(this.value)" style="width: 80%;" required></input>
+                        <span id="chk_nombre" class="btn-danger form-control">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                    </div>
+                    <span id="val_nombre" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
                     <label>Apellido Paterno</label>
-                    <input type="text" id="txt_paterno" maxlength="30" placeholder="Apellido Paterno"
-                        class="form-control" onkeypress="return soloLetras(event)" required></input>
+                    <div class="input-group border-bottom-danger" id="div_paterno">
+                        <input type="text" id="txt_paterno" maxlength="30" placeholder="Apellido Paterno"
+                            class="form-control" onkeyup="this.value=soloTexto(this.value)" style="width: 80%;"
+                            required></input>
+                        <span id="chk_paterno" class="btn-danger form-control">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                    </div>
+                    <span id="val_paterno" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
                     <label>Apellido Materno</label>
                     <input type="text" id="txt_materno" maxlength="30" placeholder="Apellido Materno"
-                        class="form-control" onkeypress="return soloLetras(event)" required></input>
+                        class="form-control" onkeyup="this.value=soloTexto(this.value)" required></input>
                 </div>
                 <div class="form-group">
                     <label>Numero de Contacto</label>
-                    <input type="number" id="txt_numcontacto" maxlength="15" placeholder="Numero de Contacto"
-                        class="form-control" onkeypress="return soloNumeros(event)" required></input>
+                    <div class="input-group border-bottom-danger" id="div_numcontacto">
+                        <input type="tel" id="txt_numcontacto" maxlength="15" placeholder="Numero de Contacto"
+                            class="form-control" required style="width: 80%;"></input>
+                        <span id="chk_numcontacto" class="btn-danger form-control">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                    </div>
+                    <span id="val_numcontacto" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
                     <label>Fecha de Nacimiento</label>
-                    <input type="date" id="txt_fecnac" min="1920-01-01" max="<?php echo date('Y-m-d'); ?>"
-                        value="<?php echo date('Y-m-d'); ?>" class="form-control"></input>
+                    <input type="date" id="txt_fecnac"
+                        min="<?php echo date("Y-m-d",strtotime($fecha_actual."- 100 year"));?>"
+                        max="<?php echo date("Y-m-d",strtotime($fecha_actual."- 12 year")); ?>"
+                        value="<?php echo date("Y-m-d",strtotime($fecha_actual."- 12 year")); ?>" class="form-control"
+                        onkeydown="return ValidarEscrituraFecha()"></input>
                 </div>
                 <div class="form-group">
                     <label>Lugar de Nacimiento</label>
-                    <select id="cbx_ciudad" class="form-control">
+                    <div class="input-group border-bottom-danger" id="div_ciudad">
+                        <select id="cbx_ciudad" class="form-control" style="width: 80%;">
 
-                    </select>
+                        </select>
+                        <span id="chk_ciudad" class="btn-danger form-control">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                    </div>
+                    <span id="val_ciudad" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
                     <label>Estado Civil</label>
-                    <select id="cbx_estadoCivil" class="form-control">
-                        <option value="0" class="form-control">Estado Civil</option>
-                        <option value="SOLTERO/A" class="form-control">SOLTERO/A</option>
-                        <option value="CASADO/A" class="form-control">CASADO/A</option>
-                        <option value="VIUDO/A" class="form-control">VIUDO/A</option>
-                        <option value="DIVORCIADO/A" class="form-control">DIVORCIADO/A</option>
-                    </select>
+                    <div class="input-group border-bottom-danger" id="div_estadoCivil">
+                        <select id="cbx_estadoCivil" class="form-control" style="width: 80%;">
+                            <option value="0" class="form-control">Estado Civil</option>
+                            <option value="SOLTERO/A" class="form-control">SOLTERO/A</option>
+                            <option value="CASADO/A" class="form-control">CASADO/A</option>
+                            <option value="VIUDO/A" class="form-control">VIUDO/A</option>
+                            <option value="DIVORCIADO/A" class="form-control">DIVORCIADO/A</option>
+                        </select>
+                        <span id="chk_estadoCivil" class="btn-danger form-control">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                    </div>
+                    <span id="val_estadoCivil" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
                     <label>Profesion</label>
-                    <input type="text" id="inp_profesion" list="dat_profesion" class="form-control"
-                    maxlength="30" onkeypress="return soloLetras(event)" required />
-                    <datalist id="dat_profesion">
-                    </datalist>
+                    <div class="input-group border-bottom-danger" id="div_profesion">
+                        <input type="text" id="inp_profesion" list="dat_profesion" style="width: 80%;"
+                            class="form-control" maxlength="30" onkeyup="this.value=soloProfesion(this.value)"
+                            placeholder="Profesion" required />
+                        <datalist id="dat_profesion">
+                        </datalist>
+                        <span id="chk_profesion" class="btn-danger form-control">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                    </div>
+                    <span id="val_profesion" class="text-danger">Completa este campo</span>
                 </div>
 
             </form>
@@ -67,8 +123,15 @@
             <form id="form2">
                 <div class="form-group">
                     <label>Direccion</label>
-                    <textarea id="txt_direccion" rows="3" maxlength="100" placeholder="Direccion de Domicilio"
-                        class="form-control" onkeypress="return Direccion(event)" required></textarea>
+                    <div class="input-group border-bottom-danger" id="div_direccion">
+                        <textarea id="txt_direccion" rows="3" maxlength="100" style="width: 80%;"
+                            placeholder="Direccion de Domicilio" class="form-control"
+                            onkeyup="this.value=textoDireccion(this.value);" required></textarea>
+                        <span id="chk_direccion" class="btn-danger form-control">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                    </div>
+                    <span id="val_direccion" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group text-center">
                     <label>Crecimiento Espiritual</label>
@@ -76,41 +139,54 @@
                 <div class="form-group">
                     <label>Fecha de Conversion</label>
                     <input type="date" id="dat_feccon" min="1950-01-01" max="<?php echo date('Y-m-d'); ?>"
-                        placeholder="" class="form-control"></input>
+                        placeholder="" class="form-control" onkeydown="return false"></input>
                 </div>
                 <div class="form-group">
                     <label>Fecha de Bautismo</label>
                     <input type="date" id="dat_fecbau" min="1950-01-01" max="<?php echo date('Y-m-d'); ?>"
-                        placeholder="" class="form-control"></input>
+                        placeholder="" class="form-control" onkeydown="return false"></input>
                 </div>
                 <div class="form-group">
                     <label>Entrada a la Iglesia</label>
-                    <input type="date" id="dat_fecigl" min="1994-01-01" max="<?php echo date('Y-m-d'); ?>"
-                        placeholder="" class="form-control"></input>
+                    <input type="date" id="dat_fecigl" min="1994-12-12" max="<?php echo date('Y-m-d'); ?>"
+                        placeholder="" class="form-control" onkeydown="return false"></input>
                 </div>
                 <div class="form-group">
                     <label>Encuentro Con Dios</label>
-                    <input type="date" id="dat_fecenc" min="1994-01-01" max="<?php echo date('Y-m-d'); ?>"
-                        placeholder="" class="form-control"></input>
+                    <input type="date" id="dat_fecenc" min="2001-01-01" max="<?php echo date('Y-m-d'); ?>"
+                        placeholder="" class="form-control" onkeydown="return false"></input>
                 </div>
                 <div class="form-group text-center">
                     <label>Asignar Celula</label>
                 </div>
                 <div class="form-group">
                     <label for="">Celula</label>
-                    <select id="cbx_celula" class="form-control">Celula
+                    <div class="input-group border-bottom-danger" id="div_celula">
+                        <select id="cbx_celula" class="form-control" style="width: 80%;">Celula
 
-                    </select>
+                        </select>
+                        <span id="chk_celula" class="btn-danger form-control">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                    </div>
+                    <span id="val_celula" class="text-danger">Completa este campo</span>
+
                 </div>
                 <div class="form-group">
                     <label for="">Funcion en la Celula</label>
-                    <select id="cbx_funcion" class="form-control btn-primary">
+                    <div class="input-group border-bottom-danger" id="div_funcion">
+                    <select id="cbx_funcion" class="form-control" style="width: 80%;">
                         <option value="0">Funcion en la celula</option>
                         <option value="DISCIPULO/A">DISCIPULO/A</option>
                         <option value="ASISTENTE">ASISTENTE</option>
                         <option value="ANFITRION">ANFITRION</option>
                         <option value="LIDER">LIDER</option>
                     </select>
+                    <span id="chk_funcion" class="btn-danger form-control">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                    </div>
+                    <span id="val_funcion" class="text-danger">Completa este campo</span>
                 </div>
             </form>
         </div>
@@ -168,10 +244,14 @@
             </div>
             <canvas id="canvas" width="140" height="120" style="display: none;"></canvas>
         </div>
+        <!--</form>-->
+        <!--</div>-->
+
+
     </div>
     <div class="modal-footer">
         <button type="button" id="btn_guardarMiembro" class="btn btn-primary btn-lg
-                                    text-center" disable>
+            text-center" title="Llene todos los campos requeridos" disable>
             <i class="far fa-save "></i>
             Guardar
         </button>
@@ -181,6 +261,8 @@
             Cancelar
         </button>
     </div>
+
+
 </div>
 <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-body">
@@ -211,6 +293,16 @@ function readFile(input) {
 var fileUpload = document.getElementById('file-upload');
 fileUpload.onchange = function(e) {
     readFile(e.srcElement);
+}
+
+function ValidarEscrituraFecha() {
+    if (event.keyCode == 9) {
+        // Código para la tecla TAB
+        //console.log("Oprimiste la tecla TAB");
+
+    } else {
+        return false;
+    }
 }
 </script>
 <script src="/MRFSistem/Script/CrecimientoApp.js"></script>

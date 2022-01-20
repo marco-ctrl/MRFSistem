@@ -23,11 +23,12 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
     $caestmie = $_POST['caestmie'];
     $facodpro = $_POST['facodpro'];
     $facodciu = $_POST['facodciu'];
+    $cacidext = $_POST['cacidext'];
     $cafotmie = $imagenCodificadaLimpia;
 
     $date = date('jmyhis');
 //echo ''.$date ;
-    $path = "Imagenes/$pacodmie$canommie$date.jpg";
+    $path = "Imagenes/$pacodmie$canommie.jpg";
 
     $url = "/MRFSistem/AccesoDatos/Miembro/$path";
 //$url = "Imagenes/"$pacodmie$canommie.".jmysqli";
@@ -42,6 +43,7 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
     `capatmie`,
     `cacelmie`,
     `cacidmie`,
+    `cacidext`,
     `cadirmie`,
     `caestmie`,
     `ceestciv`,
@@ -59,6 +61,7 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
         '{$capatmie}',
         '{$cacelmie}',
         '{$cacidmie}',
+        '{$cacidext}',
         '{$cadirmie}',
         true,
         '{$caestciv}',

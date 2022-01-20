@@ -36,9 +36,9 @@
 
                     <form enctype="multipart/form-data" id="formRestaurar" method="post" action="#">
 
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Subir archivo ZIP o SQL:</label>
-                            <input required type="file" class="form-control-file" name="zip_file" accept=".zip,.sql"
+                        <div class="mb-3">
+                            <label for="formFile">Subir archivo ZIP o SQL:</label>
+                            <input type="file" required class="form-control" name="zip_file" accept=".zip,.sql"
                                 onchange="validarRestaurarBD()">
                         </div>
                         <div class="form-group">
