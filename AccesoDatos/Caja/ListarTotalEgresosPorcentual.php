@@ -14,7 +14,7 @@ and aconing.pacodeco=aconfin.pacodapo
 AND aconfin.facodcaj=aarqcaj.pacodcaj
 and aconfin.facodcaj='{$pacodcaj}'
 and aegrefij.caestefe=1
-GROUP BY cadesefe";
+GROUP BY cadesefe, cacanefe";
 
 $resultado = mysqli_query($conexion, $consulta);
 

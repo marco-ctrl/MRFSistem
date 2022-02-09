@@ -14,7 +14,8 @@ canommat,
 canommie,
 capatmie,
 camatmie,
-caparcur
+caparcur,
+caestcon
 	FROM acursom, 
 		aconido, 
 		amiebro,
@@ -23,7 +24,7 @@ caparcur
 	and facodmae=pacodmae
     and facodmie=pacodmie
     and caestcur=true
-    and caestcur=true";
+    and caestcon=true";
 $resultado = mysqli_query($conexion, $consulta);
 
 $json=array();

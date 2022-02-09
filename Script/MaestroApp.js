@@ -144,7 +144,7 @@ $(document).ready(function () {
                         $('#txt_direccion').val(miembro.cadirmie),
                         $('#txt_numContacto').val(miembro.cacelmie)
                 });
-                
+                camposVacios();
             });
 
     });
@@ -157,6 +157,7 @@ $(document).ready(function () {
         DeshabilitarFormulario();
         $('#formulario').hide();
         $('#lista').show();
+        camposVacios();
     });
 
     //////////////Registrar Nuevo Usuario///////////
@@ -335,6 +336,42 @@ $(document).ready(function () {
         $("#btn_nuevo").attr("disabled", false);
     }
 
+    $("#btn_guardar").attr("disabled", true);
+
+    
+    var contador;
+
+    function camposVacios() {
+        contador = 0;
+        miembro = $('#txt_miembro').val();
+        console.log(miembro);
+        
+        if (miembro == "") {
+            $("#val_miembro").html("Selecciona un miembro");
+            $("#div_miembro").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            
+            contador++;
+        }
+        else {
+
+            $("#div_miembro").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_miembro").html("");
+            
+        }
+        
+        if (contador > 0) {
+            $("#btn_guardar").attr("disabled", true);
+            $("#btn_guardar").attr("title", "Llene todos los campos requeridos");
+            //alertify.alert('Mensaje', 'Deber llenar todos los campos requeridos por el Sistema!');
+        }
+        else {
+            if (contador == 0) {
+                $("#btn_guardar").attr("disabled", false);
+                $("#btn_guardar").attr("title", "Guardar datos de Maestro");
+
+            }
+        }
+    }
 
 });
 

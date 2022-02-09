@@ -9,10 +9,10 @@ $(document).ready(function () {
 
     //Fecha Actual
     var hoy = new Date().format('Y-m-d');
-    $('#dat_fecini').val(hoy),
+    //$('#dat_fecini').val(hoy),
 
-        //Listar Datos//
-        listarMateria();
+    //Listar Datos//
+    listarMateria();
     ListarMaestro();
     ListarCurso();
 
@@ -48,10 +48,10 @@ $(document).ready(function () {
                 const miembro = JSON.parse(responce);
                 miembro.forEach(miembro => {
                     codMaestro = miembro.pacodmae,
-                        $('#txt_maestro').val(miembro.canommie + ' ' + miembro.capatmie + ' ' + miembro.camatmie)
+                    $('#txt_maestro').val(miembro.canommie + ' ' + miembro.capatmie + ' ' + miembro.camatmie)
                 });
-                console.log(codMaestro);
-
+                //console.log(codMaestro);
+                camposVacios();
             });
 
     });
@@ -124,6 +124,7 @@ $(document).ready(function () {
                 //contex.hide();
                 document.getElementById("cbx_materia").focus();
                 edit = true;
+                camposVacios();
             });
     });
 
@@ -174,7 +175,8 @@ $(document).ready(function () {
 
     $('#btn_cancelar').click(function (e) {
         Limpiar();
-
+        edit=false;
+        camposVacios();
     });
 
     //Funciones//////
@@ -313,11 +315,128 @@ $(document).ready(function () {
     function Limpiar() {//limpiar formulario
         $('#form1').trigger('reset');
         $('#form2').trigger('reset');
-        $('#dat_fecini').val(hoy),
-            $("#btn_nuevo").attr("disabled", false);
+        //$('#dat_fecini').val(hoy);
+        $("#btn_nuevo").attr("disabled", false);
         $('#formulario').hide();
         $('#lista').show();
     }
 
+    $("#btn_guardar").attr("disabled", true);
+
+    //Validacion de Campos Vacios
+    $('#cbx_materia').change(function (e) {//asigar codigo profesion
+        //capturarCampos();
+        camposVacios();
+        e.preventDefault();
+
+    });
+
+    $('#cbx_paralelo').change(function (e) {//asigar codigo profesion
+        //capturarCampos();
+        camposVacios();
+        e.preventDefault();
+
+    });
+
+    $('#txt_descripcion').keyup(function (e) {
+        camposVacios();
+        //soloLetras(e);
+    });
+
+    var contador;
+
+    function camposVacios() {
+        contador = 0;
+        materia = $('#cbx_materia').val();
+        paralelo = $('#cbx_paralelo').val();
+        maestro = $('#txt_maestro').val();
+        descripcion = $('#txt_descripcion').val();
+
+        if (materia == "0") {
+            $("#val_materia").html("Completa este campo");
+            $("#div_materia").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_materia").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_materia").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+
+            $("#div_materia").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_materia").html("");
+            $("#chk_materia").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_materia").html('<i class="fas fa-check"></i>');
+
+        }
+        if (paralelo == "0") {
+            $("#val_paralelo").html("Completa este campo");
+            $("#div_paralelo").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_paralelo").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_paralelo").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+
+            $("#div_paralelo").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_paralelo").html("");
+            $("#chk_paralelo").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_paralelo").html('<i class="fas fa-check"></i>');
+
+        }
+        if (maestro == "") {
+            $("#val_maestro").html("Completa este campo");
+            $("#div_maestro").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_maestro").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_maestro").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+
+            $("#div_maestro").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_maestro").html("");
+            $("#chk_maestro").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_maestro").html('<i class="fas fa-check"></i>');
+
+        }
+        if (descripcion == "") {
+            $("#val_descripcion").html("Completa este campo");
+            $("#div_descripcion").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_descripcion").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_descripcion").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+            if (descripcion.toString().length < 5) {
+                $("#div_descripcion").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+                $("#val_descripcion").html("Este campo debe tener al menos 5 letras");
+                $("#chk_descripcion").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+                $("#chk_descripcion").html('<i class="fas fa-exclamation-triangle"></i>');
+                //console.log('descripcion debe tener almenos 7 carateres');
+                contador++;
+            }
+            else {
+                $("#div_descripcion").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+                $("#val_descripcion").html("");
+                $("#chk_descripcion").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+                $("#chk_descripcion").html('<i class="fas fa-check"></i>');
+                //console.log('corecto');
+            }
+        }
+        if (contador > 0) {
+            $("#btn_guardar").attr("disabled", true);
+            $("#btn_guardar").attr("title", "Llene todos los campos requeridos");
+            //alertify.alert('Mensaje', 'Deber llenar todos los campos requeridos por el Sistema!');
+        }
+        else {
+            if (contador == 0) {
+                $("#btn_guardar").attr("disabled", false);
+                $("#btn_guardar").attr("title", "Guardar datos de Curso");
+
+            }
+        }
+    }
 
 });

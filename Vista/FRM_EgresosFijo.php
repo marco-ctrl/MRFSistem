@@ -2,8 +2,8 @@
 
 <body id="page-top">
 
-     <!-- Div cargando -->
-     <?php include 'Cargando.php' ?>
+    <!-- Div cargando -->
+    <?php include 'Cargando.php' ?>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -108,11 +108,12 @@
                                 <div class="card-body">
                                     <form action=# class="row text-center">
                                         <div class="input-group mb-3 col-6">
-                                            <input type="text" class="form-control" id="buscarItem" placeholder="Buscar.."></input>
+                                            <input type="text" class="form-control" id="buscarItem"
+                                                placeholder="Buscar.."></input>
                                             <button class="btn btn-primary" id="btn_busFec"><i
                                                     class="fas fa-search"></i></button>
                                         </div>
-                                       
+
                                     </form>
 
                                     <div class="table-responsive">
@@ -154,30 +155,49 @@
                                 <form id="form1" clas="p-2">
                                     <div class="form-group">
                                         <label>Tipo de Item</label>
-                                        <select id="cbx_tipItem" class="form-control">
-                                            <option value="0">Seleccionar Tipo de Item</option>
-                                            <option value="EFECTIVO">EFECTIVO</option>
-                                            <option value="PORCENTUAL">PORCENTUAL</option>
-                                        </select>
+                                        <div class="input-group border-bottom-danger" id="div_tipItem">
+                                            <select id="cbx_tipItem" class="form-control">
+                                                <option value="0">Seleccionar Tipo de Item</option>
+                                                <option value="EFECTIVO">EFECTIVO</option>
+                                                <option value="PORCENTUAL">PORCENTUAL</option>
+                                            </select>
+                                            <span id="chk_tipItem" class="input-group-text text-white bg-danger">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_tipItem" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Cantidad</label>
-                                        <div class="input-group">
+                                        <div class="input-group border-bottom-danger" id="div_cantidad">
                                             <input type="number" id="txt_cantidad" min="0" class="form-control"
-                                                aria-label="Dollar amount (with dot and two decimal places)">
-                                            <span class="input-group-text">Bs.</span>
+                                                aria-label="Dollar amount (with dot and two decimal places)"
+                                                placeholder="Cantidad">
+                                            
+                                            <span id="chk_cantidad" class="input-group-text text-white bg-danger">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
                                         </div>
+                                        <span id="val_cantidad" class="text-danger">Completa este campo</span>
+
                                     </div>
 
                                     <div class="form-group">
                                         <label>Descripcion</label>
-                                        <textarea type="text" class="form-control" id="txt_descripcion"></textarea>
+                                        <div class="input-group border-bottom-danger" id="div_descripcion">
+                                            <textarea type="text" class="form-control" id="txt_descripcion"
+                                            placeholder="Descripcion"></textarea>
+                                            <span id="chk_descripcion" class="input-group-text text-white bg-danger">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_descripcion" class="text-danger">Completa este campo</span>
                                     </div>
                                     <br>
 
                                 </form>
                             </div>
-                            
+
 
 
                         </div>

@@ -136,19 +136,19 @@
                                             <label>Buscar Desde </label>
                                         </div>
                                         <div class="form-group p-1">
-                                            <input type="date" class="form-control" id="dat_inicio" 
-                                                min="<?php echo $fecha ?>"
-                                                max="<?php echo date('Y-m-d') ?>"
-                                                value="<?php echo $fecha ?>"></input>
+                                            <input type="date" class="form-control" id="dat_inicio"
+                                                min="<?php echo $fecha ?>" max="<?php echo date('Y-m-d') ?>"
+                                                value="<?php echo $fecha ?>"
+                                                onkeydown="return ValidarEscrituraFecha()"></input>
                                         </div>
                                         <div class="form-group p-1">
                                             <label>Hasta</label>
                                         </div>
                                         <div class="form-group p-1">
                                             <input type="date" class="form-control" id="dat_maximo"
-                                            min="<?php echo $fecha ?>"
-                                                max="<?php echo date('Y-m-d') ?>"
-                                                value="<?php echo date('Y-m-d') ?>"></input>
+                                                min="<?php echo $fecha ?>" max="<?php echo date('Y-m-d') ?>"
+                                                value="<?php echo date('Y-m-d') ?>"
+                                                onkeydown="return ValidarEscrituraFecha()"></input>
                                             <!--value="<?php //echo date('Y-m-d');?>"-->
                                         </div>
                                         <div class="form-group p-1">
@@ -194,19 +194,33 @@
                                 <form id="form1" clas="p-2">
                                     <div class="form-group">
                                         <label>Items</label>
-                                        <input type="text" id="txt_items" list="dat_items"
-                                            class="form-control" />
-                                        <datalist id="dat_items">
-                                        </datalist>
+                                        <div class="input-group border-bottom-danger" id="div_items">
+                                            <input type="text" id="txt_items" list="dat_items" class="form-control"
+                                                placeholder="Descripcion" />
+                                            <datalist id="dat_items">
+                                            </datalist>
+                                            <span id="chk_items" class="input-group-text text-white bg-danger">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_items" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Cantidad de Egreso</label>
-                                        <input type="number" id="txt_cantidad" min="0" placeholder="Cantidad en BS."
-                                            class="form-control"></input>
+                                        <div class="input-group border-bottom-danger" id="div_cantidad">
+                                            <input type="number" id="txt_cantidad" min="0" placeholder="Cantidad en BS."
+                                                class="form-control"></input>
+                                            <span class="input-group-text">Bs.</span>
+                                            <span id="chk_cantidad" class="input-group-text text-white bg-danger">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_cantidad" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha de Egreso</label>
-                                        <input type="date" class="form-control" id="dat_Egreso"></input>
+                                        <input type="date" class="form-control" id="dat_Egreso"
+                                            onkeydown="return ValidarEscrituraFecha()"></input>
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha de Registro</label>
@@ -217,7 +231,7 @@
                             </div>
                             <div class="col-md-5">
                                 <form id="form2" clas="p-2">
-                                    
+
                                     <div class="form-group">
                                         <label>Hora de Registro</label>
                                         <input type="datetime" class="form-control" id="hor_aporte" disabled></input>
@@ -246,7 +260,7 @@
 
                         <div class="modal-footer col-md-10">
                             <button type="button" id="btn_guardarEgreso" class="btn btn-primary btn-lg
-                                    text-center">
+                                    text-center" title="Llene todos los campos requeridos">
                                 <i class="far fa-save"></i>
                                 Guardar
                             </button>
@@ -283,7 +297,17 @@
 <script src="/MRFSistem/js/demo/datatables-demo.js"></script>-->
     <script src="/MRFSistem/Script/CodigoApp.js"></script>
     <script src="/MRFSistem/Script/Egresos.js"></script>
+    <script>
+    function ValidarEscrituraFecha() {
+        if (event.keyCode == 9) {
+            // Código para la tecla TAB
+            //console.log("Oprimiste la tecla TAB");
 
+        } else {
+            return false;
+        }
+    }
+    </script>
 
 
 </body>

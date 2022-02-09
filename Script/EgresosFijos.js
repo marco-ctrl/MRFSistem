@@ -3,15 +3,15 @@ $(document).ready(function () {
     var codEgreFijo;
     var codUsu;
     var corre;
-    var edit=false;
+    var edit = false;
 
-    
-    
+
+
     ListarEgresosFijos();
 
     $('#formulario').hide();//ocultar formulario
 
-    
+
     $('#buscarItem').keyup(function (e) {//permite hacer busqueda de miembros
         if ($('#buscarItem').val()) {
             let buscar = $('#buscarItem').val().toUpperCase();
@@ -53,7 +53,7 @@ $(document).ready(function () {
         $.ajax({
             url: '/MRFSistem/AccesoDatos/EgresosFijos/ListarEgresosFijos.php',
             type: 'GET',
-            beforeSend: function(){
+            beforeSend: function () {
                 var contenedor = document.getElementById('contenedor_carga');
                 contenedor.style.visibility = 'visible';
                 contenedor.style.opacity = '200'
@@ -69,7 +69,7 @@ $(document).ready(function () {
             }
         });
     }
-    
+
     function MostrarTabla(plantilla, usu) {//////Mostrar Tabla///////////
         plantilla +=
             `<tr UserDocu="${usu.pacodefe}" class="table-light">
@@ -90,24 +90,25 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.modificar-egreFijo', function () {//modifica usuario
-        
+
         //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodefe = $(elemento).attr('UserDocu');
         $.post('/MRFSistem/AccesoDatos/EgresosFijos/SingleEgresosFijos.php',
             { pacodefe }, function (responce) {
                 $('#lista').hide();
-        $('#formulario').show();
+                $('#formulario').show();
                 const celula = JSON.parse(responce);
                 celula.forEach(con => {
                     codEgreFijo = con.pacodefe,
-                    $('#txt_descripcion').val(con.cadesefe),
-                    $('#txt_cantidad').val(con.cacanefe),
-                    $('#cbx_tipItem').val(con.catipcan)
-                    });
+                        $('#txt_descripcion').val(con.cadesefe),
+                        $('#txt_cantidad').val(con.cacanefe),
+                        $('#cbx_tipItem').val(con.catipcan)
+                });
                 //contex.hide();
                 document.getElementById("cbx_tipItem").focus();
                 edit = true;
+                camposVacios();
             });
     });
 
@@ -141,7 +142,7 @@ $(document).ready(function () {
             obtenerCorrelativo("EGE");
             setCorrelativo(obtenerSiguinete("EGE"));
         }
-        corre=getCorrelativo();
+        corre = getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codEgreFijo = getCodigo() + '-' + num;
         console.log(codEgreFijo);
@@ -151,10 +152,11 @@ $(document).ready(function () {
 
     $('#btn_cancelar').click(function (e) {
         Limpiar();
-        edit=false;
+        edit = false;
+        camposVacios();
     });
 
-    $('#btn_guardar').click(function (e){
+    $('#btn_guardar').click(function (e) {
         GuardarEgresosFijos();
         //Limpiar();
     });
@@ -188,13 +190,13 @@ $(document).ready(function () {
                 MostrarMensaje("datos de Egresos Fijos modificados correctamente", "success")
             }
             edit = false;
-           
+
             $('#formulario').hide();
             $('#lista').show();
             ListarEgresosFijos();
             Limpiar();
         });
-        
+
     }
 
     function MostrarMensaje(cadena, clase) {
@@ -231,6 +233,92 @@ $(document).ready(function () {
                 break;
         }
         return num;
+    }
+
+    $("#btn_guardar").attr("disabled", true);
+
+    //Validacion de Campos Vacios
+    $('#txt_cantidad').keyup(function (e) {
+        //capturarCampos();
+        camposVacios();
+    });
+
+    $('#cbx_tipItem').change(function (e) {//asigar codigo profesion
+        //capturarCampos();
+        camposVacios();
+        e.preventDefault();
+
+    });
+
+    $('#txt_descripcion').keyup(function (e) {
+        //capturarCampos();
+        camposVacios();
+    });
+
+
+    var contador;
+
+    function camposVacios() {
+        item = $('#cbx_tipItem').val();
+        cantidad = $('#txt_cantidad').val();
+        descripcion = $('#txt_descripcion').val();
+        contador = 0;
+        if (cantidad == "") {
+            $("#val_cantidad").html("Completa este campo");
+            $("#div_cantidad").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_cantidad").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_cantidad").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+                $("#div_cantidad").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+                $("#val_cantidad").html("");
+                $("#chk_cantidad").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+                $("#chk_cantidad").html('<i class="fas fa-check"></i>');
+            
+        }
+        if (item == "0") {
+            $("#div_tipItem").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_tipItem").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_tipItem").html('<i class="fas fa-exclamation-triangle"></i>');
+            $("#val_tipItem").html("Completa este campo");
+            contador++;
+        }
+        else {
+            $("#div_tipItem").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_tipItem").html("");
+            $("#chk_tipItem").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_tipItem").html('<i class="fas fa-check"></i>');
+        }
+        if (descripcion == "") {
+            $("#val_descripcion").html("Completa este campo");
+            $("#div_descripcion").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_descripcion").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_descripcion").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+                $("#div_descripcion").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+                $("#val_descripcion").html("");
+                $("#chk_descripcion").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+                $("#chk_descripcion").html('<i class="fas fa-check"></i>');
+            
+        }
+        
+        if (contador > 0) {
+            $("#btn_guardar").attr("disabled", true);
+            $("#btn_guardar").attr("title", "Llene todos los campos requeridos");
+            //alertify.alert('Mensaje', 'Deber llenar todos los campos requeridos por el Sistema!');
+        }
+        else {
+            if (contador == 0) {
+                $("#btn_guardar").attr("disabled", false);
+                $("#btn_guardar").attr("title", "Guardar datos de Ingreso");
+
+            }
+        }
     }
 
 

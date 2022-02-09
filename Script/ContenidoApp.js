@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     var condContenido;
     var corre;
-    var edit=false;
+    var edit = false;
 
     ListarContenido();
 
@@ -60,7 +60,7 @@ $(document).ready(function () {
             }
         });
     }
-    
+
     function MostrarTabla(plantilla, usu) {//////Mostrar Tabla///////////
         plantilla +=
             `<tr UserDocu="${usu.pacodcon}" class="table-light">
@@ -80,7 +80,7 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.modificar-contenido', function () {//modifica usuario
-       
+
         //habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodcon = $(elemento).attr('UserDocu');
@@ -91,12 +91,13 @@ $(document).ready(function () {
                 const celula = JSON.parse(responce);
                 celula.forEach(con => {
                     codContenido = con.pacodcon,
-                    $('#txt_contenido').val(con.canommat),
-                    $('#txt_descripcion').val(con.cadescon)
-                    });
+                        $('#txt_contenido').val(con.canommat),
+                        $('#txt_descripcion').val(con.cadescon)
+                });
                 //contex.hide();
                 document.getElementById("txt_contenido").focus();
                 edit = true;
+                camposVacios();
             });
     });
 
@@ -129,7 +130,7 @@ $(document).ready(function () {
             obtenerCorrelativo("CON");
             setCorrelativo(obtenerSiguinete("CON"));
         }
-        corre=getCorrelativo();
+        corre = getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codContenido = getCodigo() + '-' + num;
         console.log(codContenido);
@@ -139,10 +140,12 @@ $(document).ready(function () {
 
     $('#btn_cancelar').click(function (e) {
         Limpiar();
+        edit = false;
+        camposVacios();
 
     });
 
-    $('#btn_guardar').click(function (e){
+    $('#btn_guardar').click(function (e) {
         GuardarContenido();
         Limpiar();
     });
@@ -176,12 +179,12 @@ $(document).ready(function () {
                 MostrarMensaje("datos de Materia modificados correctamente", "success")
             }
             edit = false;
-           
+
             $('#formulario').hide();
             $('#lista').show();
             ListarContenido();
         });
-        
+
     }
 
     function MostrarMensaje(cadena, clase) {
@@ -220,6 +223,87 @@ $(document).ready(function () {
         return num;
     }
 
+    $("#btn_guardar").attr("disabled", true);
 
+    //Validacion de Campos Vacios
+    $('#txt_contenido').keyup(function (e) {
+        camposVacios();
+    });
+
+    $('#txt_descripcion').keyup(function (e) {
+        camposVacios();
+        //soloLetras(e);
+    });
+    
+    var contador;
+
+    function camposVacios() {
+        contador = 0;
+        contenido = $('#txt_contenido').val();
+        descripcion = $('#txt_descripcion').val();
+
+        if (contenido == "") {
+            $("#val_contenido").html("Completa este campo");
+            $("#div_contenido").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_contenido").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_contenido").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+            if (contenido.toString().length < 3) {
+                $("#div_contenido").switchClass("border-bottom-success", "border-bottom-danger", 100);
+                $("#val_contenido").html("Este campo debe tener al menos 3 letras");
+                $("#chk_contenido").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+                $("#chk_contenido").html('<i class="fas fa-exclamation-triangle"></i>');
+                //console.log('contenido debe tener almenos 7 carateres');
+                contador++;
+            }
+            else {
+                $("#div_contenido").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+                $("#val_contenido").html("");
+                $("#chk_contenido").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+                $("#chk_contenido").html('<i class="fas fa-check"></i>');
+                //console.log('corecto');
+            }
+        }
+        if (descripcion == "") {
+            $("#val_descripcion").html("Completa este campo");
+            $("#div_descripcion").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_descripcion").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_descripcion").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+            if (descripcion.toString().length < 5) {
+                $("#div_descripcion").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+                $("#val_descripcion").html("Este campo debe tener al menos 5 letras");
+                $("#chk_descripcion").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+                $("#chk_descripcion").html('<i class="fas fa-exclamation-triangle"></i>');
+                //console.log('descripcion debe tener almenos 7 carateres');
+                contador++;
+            }
+            else {
+                $("#div_descripcion").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+                $("#val_descripcion").html("");
+                $("#chk_descripcion").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+                $("#chk_descripcion").html('<i class="fas fa-check"></i>');
+                //console.log('corecto');
+            }
+        }
+        if (contador > 0) {
+            $("#btn_guardar").attr("disabled", true);
+            $("#btn_guardar").attr("title", "Llene todos los campos requeridos");
+            //alertify.alert('Mensaje', 'Deber llenar todos los campos requeridos por el Sistema!');
+        }
+        else {
+            if (contador == 0) {
+                $("#btn_guardar").attr("disabled", false);
+                $("#btn_guardar").attr("title", "Guardar datos de Materia");
+
+            }
+        }
+    }
 });
 

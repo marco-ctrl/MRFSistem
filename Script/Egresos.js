@@ -179,6 +179,7 @@ $(document).ready(function () {
                 //contex.hide();
                 //document.getElementById("txt_items").focus();
                 edit = true;
+                camposVacios();
             });
     });
 
@@ -251,7 +252,8 @@ $(document).ready(function () {
 
     $('#btn_cancelar').click(function (e) {
         Limpiar();
-
+        edit=false;
+        camposVacios();
     });
 
     $('#btn_guardarEgreso').click(function (e) {
@@ -337,6 +339,69 @@ $(document).ready(function () {
                 break;
         }
         return num;
+    }
+
+    $("#btn_guardarEgreso").attr("disabled", true);
+
+    //Validacion de Campos Vacios
+    $('#txt_cantidad').keyup(function (e) {
+        //capturarCampos();
+        camposVacios();
+    });
+
+    $('#txt_items').keyup(function (e) {//asigar codigo profesion
+        //capturarCampos();
+        camposVacios();
+        e.preventDefault();
+
+    });
+
+    var contador;
+
+    function camposVacios() {
+        item = $('#txt_items').val();
+        cantidadEgreso = $('#txt_cantidad').val();
+        contador = 0;
+        if (cantidadEgreso == "") {
+            $("#val_cantidad").html("Completa este campo");
+            $("#div_cantidad").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_cantidad").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_cantidad").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+            $("#div_cantidad").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_cantidad").html("");
+            $("#chk_cantidad").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_cantidad").html('<i class="fas fa-check"></i>');
+
+        }
+        if (item == "") {
+            $("#div_items").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_items").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_items").html('<i class="fas fa-exclamation-triangle"></i>');
+            $("#val_items").html("Completa este campo");
+            contador++;
+        }
+        else {
+            $("#div_items").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_items").html("");
+            $("#chk_items").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_items").html('<i class="fas fa-check"></i>');
+        }
+        if (contador > 0) {
+            $("#btn_guardarEgreso").attr("disabled", true);
+            $("#btn_guardarEgreso").attr("title", "Llene todos los campos requeridos");
+            //alertify.alert('Mensaje', 'Deber llenar todos los campos requeridos por el Sistema!');
+        }
+        else {
+            if (contador == 0) {
+                $("#btn_guardarEgreso").attr("disabled", false);
+                $("#btn_guardarEgreso").attr("title", "Guardar datos de Ingreso");
+
+            }
+        }
     }
 
 

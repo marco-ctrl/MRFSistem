@@ -200,28 +200,42 @@ if (mysqli_num_rows($resultado) > 0) {
                                 <form id="form1" clas="p-2">
                                     <div class="form-group">
                                         <label>Item</label>
-                                        <select id="cbx_tipIng" class="form-control">
-                                            <option value="0">Seleccionar Item</option>
-                                            <option value="DIEZMOS">DIEZMOS</option>
-                                            <option value="OFRENDAS">OFRENDAS</option>
-                                            <option value="OFRENDA DE CELULAS">OFRENDA DE CELULAS</option>
-                                            <option value="OFRENDA DE JOVENES">OFRENDA DE JOVENES</option>
-                                            <option value="OFRENDA AYUNO">OFRENDA AYUNO</option>
-                                            <option value="OTROS INGRESOS">OTROS INGRESOS</option>
-                                        </select>
+                                        <div class="input-group border-bottom-danger" id="div_tipIng">
+                                            <select id="cbx_tipIng" class="form-control">
+                                                <option value="0">Seleccionar Item</option>
+                                                <option value="DIEZMOS">DIEZMOS</option>
+                                                <option value="OFRENDAS">OFRENDAS</option>
+                                                <option value="OFRENDA DE CELULAS">OFRENDA DE CELULAS</option>
+                                                <option value="OFRENDA DE JOVENES">OFRENDA DE JOVENES</option>
+                                                <option value="OFRENDA AYUNO">OFRENDA AYUNO</option>
+                                                <option value="OTROS INGRESOS">OTROS INGRESOS</option>
+                                            </select>
+                                            <span id="chk_tipIng" class="input-group-text text-white bg-danger">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_tipIng" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Cantidad de Ingreso</label>
-                                        <div class="input-group">
+                                        <div class="input-group border-bottom-danger" id="div_cantidad">
                                             <input type="number" id="txt_cantidad" min="0" class="form-control"
-                                                aria-label="Dollar amount (with dot and two decimal places)">
+                                                aria-label="Dollar amount (with dot and two decimal places)"
+                                                placeholder="Cantidad en Bs">
                                             <span class="input-group-text">Bs.</span>
+                                            <span id="chk_cantidad" class="input-group-text text-white bg-danger">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
                                         </div>
+                                        <span id="val_cantidad" class="text-danger">Completa este campo</span>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Fecha de Ingreso</label>
-                                        <input type="date" class="form-control" id="dat_ingreso"></input>
+                                        <input type="date" class="form-control" id="dat_ingreso"
+                                            max="<?php echo date('Y-m-d'); ?>"
+                                            onkeydown="return ValidarEscrituraFecha()"></input>
+
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha de Registro</label>
@@ -260,7 +274,7 @@ if (mysqli_num_rows($resultado) > 0) {
 
                         <div class="modal-footer col-md-10">
                             <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
-                                    text-center">
+                                    text-center" title="Llene los campos requeridos">
                                 <i class="far fa-save ListarIngresos"></i>
                                 Guardar
                             </button>
@@ -292,6 +306,16 @@ if (mysqli_num_rows($resultado) > 0) {
     <?php include 'Scripts.php'?>
     <script src="/MRFSistem/Script/CodigoApp.js"></script>
     <script src="/MRFSistem/Script/Ingresos.js"></script>
+    <script>
+    function ValidarEscrituraFecha() {
+        if (event.keyCode == 9) {
+            // Código para la tecla TAB
+            //console.log("Oprimiste la tecla TAB");
 
+        } else {
+            return false;
+        }
+    }
+    </script>
 
 </body>

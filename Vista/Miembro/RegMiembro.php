@@ -20,7 +20,7 @@
                         <input type="text" id="txt_ciExtencion" placeholder="Extencion" class="form-control"
                             title="introducir extencion en caso de que tenga"
                             onkeyup="this.value=alfaNumerico(this.value);" required style="width: 20%;">
-                        <span id="chk_ci" class="btn-danger form-control">
+                        <span id="chk_ci" class="input-group-text bg-danger text-white">
                             <!--<i class="fas fa-check"></i>-->
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
@@ -32,7 +32,7 @@
                     <div class="input-group border-bottom-danger" id="div_nombre">
                         <input type="text" id="txt_nombre" placeholder="Nombre" class="form-control"
                             onkeyup="this.value=soloTexto(this.value)" style="width: 80%;" required></input>
-                        <span id="chk_nombre" class="btn-danger form-control">
+                        <span id="chk_nombre" class="input-group-text bg-danger text-white">
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
                     </div>
@@ -44,7 +44,7 @@
                         <input type="text" id="txt_paterno" maxlength="30" placeholder="Apellido Paterno"
                             class="form-control" onkeyup="this.value=soloTexto(this.value)" style="width: 80%;"
                             required></input>
-                        <span id="chk_paterno" class="btn-danger form-control">
+                        <span id="chk_paterno" class="input-group-text bg-danger text-white">
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
                     </div>
@@ -60,7 +60,7 @@
                     <div class="input-group border-bottom-danger" id="div_numcontacto">
                         <input type="tel" id="txt_numcontacto" maxlength="15" placeholder="Numero de Contacto"
                             class="form-control" required style="width: 80%;"></input>
-                        <span id="chk_numcontacto" class="btn-danger form-control">
+                        <span id="chk_numcontacto" class="input-group-text bg-danger text-white">
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
                     </div>
@@ -80,7 +80,7 @@
                         <select id="cbx_ciudad" class="form-control" style="width: 80%;">
 
                         </select>
-                        <span id="chk_ciudad" class="btn-danger form-control">
+                        <span id="chk_ciudad" class="input-group-text bg-danger text-white">
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
                     </div>
@@ -96,7 +96,7 @@
                             <option value="VIUDO/A" class="form-control">VIUDO/A</option>
                             <option value="DIVORCIADO/A" class="form-control">DIVORCIADO/A</option>
                         </select>
-                        <span id="chk_estadoCivil" class="btn-danger form-control">
+                        <span id="chk_estadoCivil" class="input-group-text bg-danger text-white">
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
                     </div>
@@ -110,7 +110,7 @@
                             placeholder="Profesion" required />
                         <datalist id="dat_profesion">
                         </datalist>
-                        <span id="chk_profesion" class="btn-danger form-control">
+                        <span id="chk_profesion" class="input-group-text bg-danger text-white">
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
                     </div>
@@ -127,7 +127,7 @@
                         <textarea id="txt_direccion" rows="3" maxlength="100" style="width: 80%;"
                             placeholder="Direccion de Domicilio" class="form-control"
                             onkeyup="this.value=textoDireccion(this.value);" required></textarea>
-                        <span id="chk_direccion" class="btn-danger form-control">
+                        <span id="chk_direccion" class="input-group-text bg-danger text-white">
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
                     </div>
@@ -139,22 +139,22 @@
                 <div class="form-group">
                     <label>Fecha de Conversion</label>
                     <input type="date" id="dat_feccon" min="1950-01-01" max="<?php echo date('Y-m-d'); ?>"
-                        placeholder="" class="form-control" onkeydown="return false"></input>
+                        placeholder="" onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label>Fecha de Bautismo</label>
                     <input type="date" id="dat_fecbau" min="1950-01-01" max="<?php echo date('Y-m-d'); ?>"
-                        placeholder="" class="form-control" onkeydown="return false"></input>
+                        placeholder="" onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label>Entrada a la Iglesia</label>
                     <input type="date" id="dat_fecigl" min="1994-12-12" max="<?php echo date('Y-m-d'); ?>"
-                        placeholder="" class="form-control" onkeydown="return false"></input>
+                        placeholder="" onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
                 </div>
                 <div class="form-group">
                     <label>Encuentro Con Dios</label>
                     <input type="date" id="dat_fecenc" min="2001-01-01" max="<?php echo date('Y-m-d'); ?>"
-                        placeholder="" class="form-control" onkeydown="return false"></input>
+                        placeholder="" onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
                 </div>
                 <div class="form-group text-center">
                     <label>Asignar Celula</label>
@@ -165,7 +165,7 @@
                         <select id="cbx_celula" class="form-control" style="width: 80%;">Celula
 
                         </select>
-                        <span id="chk_celula" class="btn-danger form-control">
+                        <span id="chk_celula" class="input-group-text bg-danger text-white">
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
                     </div>
@@ -182,7 +182,7 @@
                         <option value="ANFITRION">ANFITRION</option>
                         <option value="LIDER">LIDER</option>
                     </select>
-                    <span id="chk_funcion" class="btn-danger form-control">
+                    <span id="chk_funcion" class="input-group-text bg-danger text-white">
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
                     </div>
@@ -263,14 +263,6 @@
     </div>
 
 
-</div>
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-body">
-        Debe llenar los campos requeridos del formulario!
-        <div class="mt-2 pt-2 border-top">
-            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Cerrar</button>
-        </div>
-    </div>
 </div>
 <script>
 function readFile(input) {

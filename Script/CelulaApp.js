@@ -53,7 +53,7 @@ $(document).ready(function () {
         keyboard: false,
         backdrop: 'static',
         focus: true
-      })
+    })
 
     $('#buscarCelula').keyup(function (e) {//permite hacer busqueda de miembros
         if ($('#buscarCelula').val()) {
@@ -107,7 +107,7 @@ $(document).ready(function () {
             { pacodcel }, function (responce) {
                 $('#lista').hide();
                 $('#formulario').show();
-                
+
                 const celula = JSON.parse(responce);
                 celula.forEach(cel => {
                     codCelula = cel.pacodcel,
@@ -217,7 +217,9 @@ $(document).ready(function () {
 
     $('#btn_cancelar').click(function (e) {
         Limpiar();
-
+        edit=false;
+        $('html, body').animate({ scrollTop: 0 }, 'slow'); //seleccionamos etiquetas,clase o identificador destino, creamos animación hacia top de la página.
+        return false; 
     });
 
     //Funciones//////
@@ -230,7 +232,7 @@ $(document).ready(function () {
                 contenedor.style.visibility = 'visible';
                 contenedor.style.opacity = '200';
             },
-            complete: function() {
+            complete: function () {
                 var contenedor = document.getElementById('contenedor_carga');
                 contenedor.style.visibility = 'hidden';
                 contenedor.style.opacity = '0';
@@ -449,19 +451,105 @@ $(document).ready(function () {
         let contador = 0;
 
         if (celula == '') {
-            contador++
+            $("#val_nomCelula").html("Completa este campo");
+            $("#div_nomCelula").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_nomCelula").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_nomCelula").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+            if (celula.toString().length < 3) {
+                $("#div_nomCelula").switchClass("border-bottom-success", "border-bottom-danger", 100);
+                $("#val_nomCelula").html("Este campo debe tener al menos 3 letras");
+                $("#chk_nomCelula").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+                $("#chk_nomCelula").html('<i class="fas fa-exclamation-triangle"></i>');
+                //console.log('nomCelula debe tener almenos 7 carateres');
+                contador++;
+            }
+            else {
+                $("#div_nomCelula").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+                $("#val_nomCelula").html("");
+                $("#chk_nomCelula").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+                $("#chk_nomCelula").html('<i class="fas fa-check"></i>');
+                //console.log('corecto');
+            }
         }
         if (numero == '') {
-            contador++
+            $("#val_numCelula").html("Completa este campo");
+            $("#div_numCelula").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_numCelula").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_numCelula").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+            $("#div_numCelula").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_numCelula").html("");
+            $("#chk_numCelula").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_numCelula").html('<i class="fas fa-check"></i>');
+            //console.log('corecto');
         }
         if (barrio == '') {
-            contador++
+            $("#val_barrio").html("Completa este campo");
+            $("#div_barrio").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_barrio").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_barrio").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+            if (barrio.toString().length < 3) {
+                $("#div_barrio").switchClass("border-bottom-success", "border-bottom-danger", 100);
+                $("#val_barrio").html("Este campo debe tener al menos 3 letras");
+                $("#chk_barrio").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+                $("#chk_barrio").html('<i class="fas fa-exclamation-triangle"></i>');
+                //console.log('barrio debe tener almenos 7 carateres');
+                contador++;
+            }
+            else {
+                $("#div_barrio").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+                $("#val_barrio").html("");
+                $("#chk_barrio").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+                $("#chk_barrio").html('<i class="fas fa-check"></i>');
+                //console.log('corecto');
+            }
         }
         if (calle == '') {
-            contador++
+            $("#val_calle").html("Completa este campo");
+            $("#div_calle").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_calle").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_calle").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+            if (calle.toString().length < 3) {
+                $("#div_calle").switchClass("border-bottom-success", "border-bottom-danger", 100);
+                $("#val_calle").html("Este campo debe tener al menos 3 letras");
+                $("#chk_calle").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+                $("#chk_calle").html('<i class="fas fa-exclamation-triangle"></i>');
+                //console.log('calle debe tener almenos 7 carateres');
+                contador++;
+            }
+            else {
+                $("#div_calle").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+                $("#val_calle").html("");
+                $("#chk_calle").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+                $("#chk_calle").html('<i class="fas fa-check"></i>');
+                //console.log('corecto');
+            }
         }
         if (Latitud === undefined) {
-            contador++
+            $("#val_mapa").html("Completa este campo");
+            $("#div_mapa").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            
+            contador++;
+        }
+        else {
+            $("#div_mapa").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_mapa").html("");
+            
         }
         if (Longitud === undefined) {
             contador++
@@ -469,9 +557,11 @@ $(document).ready(function () {
 
         if (contador > 0) {
             $('#btn_guardar').attr('disabled', true);
+            $('#btn_guardar').attr('title', "Completa todos los campos requeridos");
         }
         else {
             $('#btn_guardar').attr('disabled', false);
+            $('#btn_guardar').attr('title', "Guardar datos de Celula");
         }
     }
 

@@ -8,14 +8,16 @@ $pacodmie=$_POST['pacodmie'];
 $consulta = "SELECT camatmie, 
 capatmie, 
 cacelmie, 
-cacidmie, 
+cacidmie,
+cacidext, 
 cadirmie, 
 cafecnac, 
 canommie, 
 pacodmie, 
 canomcel,
 cafunmie,
-pacodmcl
+pacodmcl,
+pacodcel
 FROM amiebro m, acelula, amiecel 
 where pacodmie=facodmie
 and pacodcel=facodcel
@@ -32,13 +34,15 @@ while ($row = mysqli_fetch_array($resultado)) {
                     'capatmie' => $row['capatmie'],
                     'cacelmie' => $row['cacelmie'],
                     'cacidmie' => $row['cacidmie'],
+                    'cacidext' => $row['cacidext'],
                     'cadirmie' => $row['cadirmie'],
                     'cafecnac' => $row['cafecnac'],
                     'canommie' => $row['canommie'],
                     'pacodmie' => $row['pacodmie'],
                     'canomcel' => $row['canomcel'],
                     'cafunmie' => $row['cafunmie'],
-                    'pacodmcl' => $row['pacodmcl']);
+                    'pacodmcl' => $row['pacodmcl'],
+                    'pacodcel' => $row['pacodcel']);
 }
 if ($json==null){
     echo 'false';

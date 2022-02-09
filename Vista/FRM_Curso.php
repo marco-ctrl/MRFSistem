@@ -1,8 +1,8 @@
 <?php include 'Header.php' ?>
 
 <body id="page-top">
-     <!-- Div cargando -->
-     <?php include 'Cargando.php' ?>
+    <!-- Div cargando -->
+    <?php include 'Cargando.php' ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -39,30 +39,6 @@
             <!-- Nav Item - Pages Collapse Menu -->
             <?php include_once('includes/EscuelaLideres/interfaces.php'); ?>
 
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Sistema
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-server"></i>
-                    <span>Base de Datos</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Base de Datos</h6>
-                        <a class="collapse-item" href="login.html"><i class="fas fa-server"></i> Respaldar BD</a>
-                        <a class="collapse-item" href="register.html"><i class="fas fa-server"></i> Restaurar BD</a>
-                    </div>
-                </div>
-            </li>
 
             <!-- Nav Item - Charts -->
 
@@ -116,11 +92,8 @@
                                 <div class="col-md-5">
                                     <form class="row p-1 text-center">
                                         <div class="input-group mb-3">
-                                            <input type="text" id="txt_buscarCurso" class="form-control"
-                                                placeholder="Buscar Curso..." aria-label="Recipient's username"
-                                                aria-describedby="button-addon2">
-                                            <button class="btn btn-primary" type="button" id="button-addon2"><i
-                                                    class="fas fa-search fa-sm"></i></button>
+                                            <input type="text" id="txt_buscarCurso" class="form-control" placeholder="Buscar Curso..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                                            <button class="btn btn-primary" type="button" id="button-addon2"><i class="fas fa-search fa-sm"></i></button>
                                         </div>
                                     </form>
 
@@ -166,58 +139,62 @@
                             <form id="form1" clas="p-2">
                                 <div class="form-group">
                                     <label>Materia</label>
-                                    <select id="cbx_materia" class="form-control">
+                                    <div class="input-group border-bottom-danger" id="div_materia">
+                                        <select id="cbx_materia" class="form-control">
 
-                                    </select>
+                                        </select>
+                                        <span id="chk_materia" class="input-group-text text-white bg-danger">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </span>
+                                    </div>
+                                    <span id="val_materia" class="text-danger">Completa este campo</span>
                                 </div>
                                 <div class="form-group">
                                     <label>Paralelo</label>
-                                    <select id="cbx_paralelo" class="form-control">
-                                        <option value="0">Paralelo</option>
-                                        <option value="A">A</option>
-                                        <option value="B">B</option>
-                                        <option value="C">C</option>
-                                        <option value="D">D</option>
-                                    </select>
+                                    <div class="input-group border-bottom-danger" id="div_paralelo">
+                                        <select id="cbx_paralelo" class="form-control">
+                                            <option value="0">Paralelo</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                        </select>
+                                        <span id="chk_paralelo" class="input-group-text text-white bg-danger">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </span>
+                                    </div>
+                                    <span id="val_paralelo" class="text-danger">Completa este campo</span>
                                 </div>
                                 <div class="form-group">
                                     <label>Gestion</label>
                                     <select id="txt_gestion" class="form-control">
-                                        <?php 
-                            $gestion=Date('Y');
-                            for ($i=0; $i < 5 ; $i++) { 
-                                echo '<option value="'.$gestion.'">'.$gestion.'</option>';
-                                $gestion=$gestion-1;
-                            }
-                        ?>
+                                        <?php
+                                        $gestion = Date('Y');
+                                        for ($i = 0; $i < 5; $i++) {
+                                            echo '<option value="' . $gestion . '">' . $gestion . '</option>';
+                                            $gestion = $gestion - 1;
+                                        }
+                                        ?>
                                     </select>
                                 </div>
-                                <!--<div class="form-group">
-                    <label>Gestion</label>
-                    <input type="number" id="txt_gestion" placeholder="Gestion" class="form-control" value=""></input>
-                </div>-->
                                 <div class="form-group">
                                     <label>Fecha de Inicio</label>
-                                    <input type="date" id="dat_fecini" min="2020-01-01" placeholder=""
-                                        class="form-control"></input>
+                                    <input type="date" id="dat_fecini" min="<?php echo date('Y-m-d') ?>" placeholder="" class="form-control" value="<?php echo date('Y-m-d') ?>" onkeydown="return ValidarEscrituraFecha()"></input>
                                 </div>
                                 <br>
 
-                                <div class="modal fade" id="idModal" data-backdrop="static" data-keyboard="false"
-                                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal fade" id="idModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Seleccionar Maestro</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <input type="search" id="txt_buscarMiembro"
-                                                        class="form-control mr-ms-2" placeholder="Buscar Maestro">
+                                                    <input type="search" id="txt_buscarMiembro" class="form-control mr-ms-2" placeholder="Buscar Maestro">
                                                 </div>
                                                 <div id="mensaje1">
                                                 </div>
@@ -248,27 +225,36 @@
                             <form id="form2" clas="p-2">
                                 <div class="form-group">
                                     <label for="exampleSelect2">Seleccionar Maestro</label>
-                                    <button type="button" id="btn_miembro" class="btn btn-primary btn-block"
-                                        data-toggle="modal" data-target="#idModal">
+                                    <button type="button" id="btn_miembro" class="btn btn-primary btn-block" data-toggle="modal" data-target="#idModal">
                                         <i class="fas fa-search-plus"></i> Seleccionar Maestro
                                     </button>
                                 </div>
                                 <div class="form-group">
                                     <label>Maestro</label>
-                                    <input type="text" id="txt_maestro" placeholder="Maestro" class="form-control"
-                                        value="" disabled></input>
+                                    <div class="input-group border-bottom-danger" id="div_maestro">
+                                        <input type="text" id="txt_maestro" placeholder="Maestro" class="form-control" value="" disabled></input>
+                                        <span id="chk_maestro" class="input-group-text text-white bg-danger">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </span>
+                                    </div>
+                                    <span id="val_maestro" class="text-danger">Selecciona un Maestro</span>
                                 </div>
                                 <div class="form-group">
                                     <label>Descripcion</label>
-                                    <textarea class="form-control" id="txt_descripcion" placeholder="Descripcion"
-                                        rows="3"></textarea>
+                                    <div class="input-group border-bottom-danger" id="div_descripcion">
+                                        <textarea class="form-control" id="txt_descripcion" placeholder="Descripcion" rows="3"></textarea>
+                                        <span id="chk_descripcion" class="input-group-text text-white bg-danger">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </span>
+                                    </div>
+                                    <span id="val_descripcion" class="text-danger">Completa este campo</span>
                                 </div>
 
                             </form>
                         </div>
                         <div class="modal-footer col-md-10">
                             <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
-                                    text-center">
+                                    text-center" title="Llene todos los campos requeridos">
                                 <i class="far fa-save "></i>
                                 Guardar
                             </button>
@@ -287,7 +273,7 @@
 
 
             <!-- Footer -->
-            <?php include 'Footer.php'?>
+            <?php include 'Footer.php' ?>
 
         </div>
     </div>
@@ -297,13 +283,22 @@
     </a>
 
     <!-- Logout Modal-->
-    <?php include 'LogoutModal.php'?>
+    <?php include 'LogoutModal.php' ?>
 
-    <?php include 'Scripts.php'?>
+    <?php include 'Scripts.php' ?>
     <script src="/MRFSistem/Script/CodigoApp.js"></script>
     <script src="/MRFSistem/Script/CursoApp.js"></script>
+    <script>
+        function ValidarEscrituraFecha() {
+            if (event.keyCode == 9) {
+                // Código para la tecla TAB
+                //console.log("Oprimiste la tecla TAB");
+
+            } else {
+                return false;
+            }
+        }
+    </script>
 
 
 </body>
-
-<?php

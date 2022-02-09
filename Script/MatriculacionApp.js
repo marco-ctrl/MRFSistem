@@ -9,10 +9,10 @@ $(document).ready(function () {
 
     //fechaActual
     var hoy = new Date().format('Y-m-d');
-    $('#dat_matriculacion').val(hoy),
+    //$('#dat_matriculacion').val(hoy);
 
-        //Listar Datos//
-        listarMatriculacion();
+    //Listar Datos//
+    listarMatriculacion();
     ListarAlumno();
     ListarCurso();
 
@@ -61,8 +61,8 @@ $(document).ready(function () {
                     codAlumno = miembro.pacodalu,
                         $('#txt_alumno').val(miembro.canommie + ' ' + miembro.capatmie + ' ' + miembro.camatmie)
                 });
-                console.log(codAlumno);
-
+                //console.log(codAlumno);
+                camposVacios();
             });
 
     });
@@ -137,6 +137,7 @@ $(document).ready(function () {
                 //contex.hide();
                 document.getElementById("btn_curso").focus();
                 edit = true;
+                camposVacios();
             });
     });
 
@@ -164,7 +165,10 @@ $(document).ready(function () {
 
     $('#btn_cancelar').click(function (e) {
         Limpiar();
-
+        edit = false;
+        camposVacios();
+        $('html, body').animate({ scrollTop: 0 }, 'slow'); //seleccionamos etiquetas,clase o identificador destino, creamos animación hacia top de la página.
+        return false; 
     });
 
     //Funciones//////
@@ -325,8 +329,8 @@ $(document).ready(function () {
                         $('#txt_maestro').val(miembro.canommie + ' ' + miembro.capatmie + ' ' + miembro.camatmie)
                     $('#dat_fecini').val(miembro.cafecini)
                 });
-                console.log(codCurso);
-
+                //console.log(codCurso);
+                camposVacios();
             });
 
     });
@@ -339,6 +343,55 @@ $(document).ready(function () {
         $("#btn_nuevo").attr("disabled", false);
         $('#formulario').hide();
         $('#lista').show();
+    }
+
+    $("#btn_guardar").attr("disabled", true);
+
+    
+    var contador;
+
+    function camposVacios() {
+        contador = 0;
+        curso = $('#txt_codCurso').val();
+        alumno = $('#txt_alumno').val();
+        
+        if (curso == "") {
+            $("#val_curso").html("Selecciona un curso");
+            $("#div_curso").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            
+            contador++;
+        }
+        else {
+
+            $("#div_curso").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_curso").html("");
+            
+        }
+        if (alumno == "") {
+            $("#val_miembro").html("Selecciona un Alumno");
+            $("#div_miembro").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            
+            contador++;
+        }
+        else {
+
+            $("#div_miembro").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_miembro").html("");
+            
+        }
+        
+        if (contador > 0) {
+            $("#btn_guardar").attr("disabled", true);
+            $("#btn_guardar").attr("title", "Llene todos los campos requeridos");
+            //alertify.alert('Mensaje', 'Deber llenar todos los campos requeridos por el Sistema!');
+        }
+        else {
+            if (contador == 0) {
+                $("#btn_guardar").attr("disabled", false);
+                $("#btn_guardar").attr("title", "Guardar datos de Matriculacion");
+
+            }
+        }
     }
 
 

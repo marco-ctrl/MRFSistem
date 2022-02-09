@@ -72,7 +72,7 @@
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
-            <!--<div class="text-center d-none d-md-inline">-->
+            <!-- <div class="text-center d-none d-md-inline"> -->
             <div class="text-center d-sm-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
@@ -114,8 +114,9 @@
 
                                     <div class="form-group">
                                         <label>Monto Inicial</label>
-                                        <input type="number" id="txt_monini" min="0" placeholder="Monto Inicial en BS."
-                                            class="form-control"></input>
+                                        <input type="text" id="txt_monini" min="0" placeholder="Monto Inicial en BS."
+                                            class="form-control" readonly></input>
+                                        <span id="val_monini" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -133,7 +134,8 @@
                                     class="fas fa-plus-circle"></i>
                                 Aperturar Caja
                             </button>
-                            <input type="text" id="txt_codCajero" value="<?php echo $_SESSION['pacodusu'] ?>" hidden></input>
+                            <input type="text" id="txt_codCajero" value="<?php echo $_SESSION['pacodusu'] ?>"
+                                hidden></input>
                         </div>
 
                     </div>
@@ -152,14 +154,15 @@
                                         </div>
                                         <div class="form-group p-1">
                                             <input type="date" class="form-control" id="dat_inicio"
-                                            value="<?php echo date('Y-m-d');?>"></input>
+                                                value="<?php echo date('Y-m-d');?>" onkeydown="return ValidarEscrituraFecha()"></input>
                                         </div>
                                         <div class="form-group p-1">
                                             <label>Hasta</label>
                                         </div>
                                         <div class="form-group p-1">
-                                            <input type="date" class="form-control" id="dat_maximo" value="<?php echo date('Y-m-d');?>"
-                                            max="<?php echo date('Y-m-d');?>"></input>
+                                            <input type="date" class="form-control" id="dat_maximo"
+                                                value="<?php echo date('Y-m-d');?>"
+                                                max="<?php echo date('Y-m-d');?>" onkeydown="return ValidarEscrituraFecha()"></input>
                                             <!--value="<?php //echo date('Y-m-d');?>"-->
                                         </div>
                                         <div class="form-group p-1">
@@ -220,7 +223,7 @@
                                     <div class="form-group">
                                         <label>Monto Inicial</label>
                                         <div class="input-group">
-                                            <input type="number" id="txt_moninicial" min="0" class="form-control"
+                                            <input type="text" id="txt_moninicial" min="0" class="form-control"
                                                 aria-label="Dollar amount (with dot and two decimal places)" disabled>
                                             <span class="input-group-text">Bs.</span>
                                         </div>
@@ -228,7 +231,7 @@
                                     <div class="form-group">
                                         <label>Total Ingresos</label>
                                         <div class="input-group">
-                                            <input type="number" id="txt_toting" min="0" class="form-control"
+                                            <input type="text" id="txt_toting" min="0" class="form-control"
                                                 aria-label="Dollar amount (with dot and two decimal places)" disabled>
                                             <span class="input-group-text">Bs.</span>
                                         </div>
@@ -241,7 +244,7 @@
                                     <div class="form-group">
                                         <label>Total Egresos</label>
                                         <div class="input-group">
-                                            <input type="number" id="txt_totegr" min="0" class="form-control"
+                                            <input type="text" id="txt_totegr" min="0" class="form-control"
                                                 aria-label="Dollar amount (with dot and two decimal places)" disabled>
                                             <span class="input-group-text">Bs.</span>
                                         </div>
@@ -249,7 +252,7 @@
                                     <div class="form-group">
                                         <label>Monto Final</label>
                                         <div class="input-group">
-                                            <input type="number" id="txt_monfin" min="0" class="form-control"
+                                            <input type="text" id="txt_monfin" min="0" class="form-control"
                                                 aria-label="Dollar amount (with dot and two decimal places)" disabled>
                                             <span class="input-group-text">Bs.</span>
                                         </div>
@@ -350,5 +353,16 @@
     <?php include 'Scripts.php'?>
     <script src="/MRFSistem/Script/CodigoApp.js"></script>
     <script src="/MRFSistem/Script/Caja.js"></script>
+    <script>
+    function ValidarEscrituraFecha() {
+        if (event.keyCode == 9) {
+            // Código para la tecla TAB
+            //console.log("Oprimiste la tecla TAB");
+
+        } else {
+            return false;
+        }
+    }
+    </script>
 
 </body>

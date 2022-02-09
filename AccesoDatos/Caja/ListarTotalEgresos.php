@@ -10,8 +10,8 @@ FROM `aconegr`, `aconfin`, `aarqcaj`
 WHERE aconfin.pacodapo=aconegr.pacodegr
 and aconfin.facodcaj=aarqcaj.pacodcaj
 and aconfin.facodcaj='{$pacodcaj}'
-GROUP BY aconegr.cadesegr
-order by aconfin.pacodapo desc";
+GROUP BY cadesegr
+order by cadesegr desc";
 
 $resultado = mysqli_query($conexion, $consulta);
 

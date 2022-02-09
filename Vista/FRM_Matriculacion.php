@@ -1,8 +1,8 @@
 <?php include 'Header.php' ?>
 
 <body id="page-top">
-     <!-- Div cargando -->
-     <?php include 'Cargando.php' ?>
+    <!-- Div cargando -->
+    <?php include 'Cargando.php' ?>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -39,28 +39,6 @@
             <?php include_once('includes/EscuelaLideres/interfaces.php'); ?>
 
             <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Sistema
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-server"></i>
-                    <span>Base de Datos</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Base de Datos</h6>
-                        <a class="collapse-item" href="login.html"><i class="fas fa-server"></i> Respaldar BD</a>
-                        <a class="collapse-item" href="register.html"><i class="fas fa-server"></i> Restaurar BD</a>
-                    </div>
-                </div>
-            </li>
 
             <!-- Nav Item - Charts -->
 
@@ -87,7 +65,7 @@
                 <?php include 'NavBar.php' ?>
 
                 <div class="container-fluid" id="escuela">
-                    
+
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">GESTIONAR MATRICULACION DE ALUMNOS</h1>
@@ -158,10 +136,13 @@
                             <form id="form1" clas="p-2">
                                 <div class="form-group">
                                     <label for="exampleSelect2">Seleccionar Curso</label>
-                                    <button type="button" id="btn_curso" class="btn btn-primary btn-block"
-                                        data-toggle="modal" data-target="#idModalCurso">
-                                        <i class="fas fa-search-plus"></i> Seleccionar Curso
-                                    </button>
+                                    <div class="input-group border-bottom-danger" id="div_curso">
+                                        <button type="button" id="btn_curso" class="btn btn-primary btn-block"
+                                            data-toggle="modal" data-target="#idModalCurso">
+                                            <i class="fas fa-search-plus"></i> Seleccionar Curso
+                                        </button>
+                                    </div>
+                                    <span id="val_curso" class="text-danger">Seleccione un Curso</span>
                                 </div>
                                 <div class="form-group">
                                     <label>Codigo Curso</label>
@@ -192,7 +173,7 @@
 
                                 <div class="modal fade" id="idModal" data-backdrop="static" data-keyboard="false"
                                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
+                                    <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Seleccionar Alumno</h5>
@@ -233,7 +214,7 @@
                                 </div>
                                 <div class="modal fade" id="idModalCurso" data-backdrop="static" data-keyboard="false"
                                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
+                                    <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Seleccionar Curso</h5>
@@ -278,10 +259,13 @@
                             <form id="form2" clas="p-2">
                                 <div class="form-group">
                                     <label for="exampleSelect2">Seleccionar Alumno</label>
-                                    <button type="button" id="btn_miembro" class="btn btn-primary btn-block"
-                                        data-toggle="modal" data-target="#idModal">
-                                        <i class="fas fa-search-plus"></i> Seleccionar Alumno
-                                    </button>
+                                    <div class="input-group border-bottom-danger" id="div_miembro">
+                                        <button type="button" id="btn_miembro" class="btn btn-primary btn-block"
+                                            data-toggle="modal" data-target="#idModal">
+                                            <i class="fas fa-search-plus"></i> Seleccionar Alumno
+                                        </button>
+                                    </div>
+                                    <span id="val_miembro" class="text-danger">Seleccione un Alumno</span>
                                 </div>
                                 <div class="form-group">
                                     <label>Alumno</label>
@@ -290,11 +274,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Fecha de Matriculacion</label>
-                                    <input type="datetime" class="form-control" id="dat_matriculacion" disabled></input>
+                                    <input type="datetime" class="form-control" id="dat_matriculacion" 
+                                    value="<?php echo date('Y-m-d'); ?>" disabled></input>
                                 </div>
                                 <div class="form-group">
                                     <label>Hora de Matriculacion</label>
-                                    <input type="datetime" class="form-control" id="hor_matriculacion" value=""
+                                    <input type="datetime" class="form-control" id="hor_matriculacion" 
+                                        
                                         disabled></input>
                                 </div>
                                 <div class="form-group">
@@ -313,7 +299,7 @@
                         </div>
                         <div class="modal-footer col-md-10">
                             <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
-                                    text-center">
+                                    text-center" title="Llene los campos requeridos">
                                 <i class="far fa-save "></i>
                                 Guardar
                             </button>
@@ -348,5 +334,3 @@
 
 
 </body>
-
-<?php

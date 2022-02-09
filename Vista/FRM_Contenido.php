@@ -1,8 +1,8 @@
 <?php include 'Header.php' ?>
 
 <body id="page-top">
-     <!-- Div cargando -->
-     <?php include 'Cargando.php' ?>
+    <!-- Div cargando -->
+    <?php include 'Cargando.php' ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -39,32 +39,6 @@
             <!-- Nav Item - Pages Collapse Menu -->
             <?php include_once('includes/EscuelaLideres/interfaces.php'); ?>
 
-
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Sistema
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-server"></i>
-                    <span>Base de Datos</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Base de Datos</h6>
-                        <a class="collapse-item" href="login.html"><i class="fas fa-server"></i> Respaldar BD</a>
-                        <a class="collapse-item" href="register.html"><i class="fas fa-server"></i> Restaurar BD</a>
-                    </div>
-                </div>
-            </li>
 
             <!-- Nav Item - Charts -->
 
@@ -162,17 +136,31 @@
                             <div class="col-md-5">
                                 <form id="form" clas="p-2">
                                     <div class="form-group">
-                                        <input type="text" id="txt_contenido" placeholder="Nombre de Contenido"
-                                            class="form-control"></input>
+                                        <label for="">Materia</label>
+                                        <div class="input-group border-bottom-danger" id="div_contenido">
+                                            <input type="text" id="txt_contenido" placeholder="Nombre de Materia"
+                                                class="form-control" onkeyup="this.value=textoDireccion(this.value)"></input>
+                                            <span id="chk_contenido" class="input-group-text text-white bg-danger">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_contenido" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control" id="txt_descripcion" placeholder="Descripcion"
-                                            rows="3"></textarea>
+                                        <label for="">Descripcion</label>
+                                        <div class="input-group border-bottom-danger" id="div_descripcion">
+                                            <textarea class="form-control" id="txt_descripcion"
+                                                placeholder="Descripcion" rows="3" onkeyup="this.value=textoDireccion(this.value)"></textarea>
+                                            <span id="chk_descripcion" class="input-group-text text-white bg-danger">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_descripcion" class="text-danger">Completa este campo</span>
                                     </div>
                                     <br>
                                     <div class="modal-footer">
                                         <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
-                                    text-center">
+                                    text-center" title="Llene todos los campos requeridos">
                                             <i class="far fa-save "></i>
                                             Guardar
                                         </button>
@@ -213,5 +201,3 @@
 
 
 </body>
-
-<?php

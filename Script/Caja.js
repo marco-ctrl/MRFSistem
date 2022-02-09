@@ -108,20 +108,22 @@ $(document).ready(function () {
                 if (response != "no encontrado") {
                     ////console.log(response);
                     let cel = JSON.parse(response);
-
+                    let totalIngresos
                     cel.forEach(cel => {
+                        totalIngresos = cel.catoting.replace(",", "");
                         plantilla += `<tr><td>${cel.catiping}</td>
                                     <td align="right">${cel.catoting}</td></tr>`;
-                        totIngresos += parseFloat(cel.catoting);
+                        totIngresos += parseFloat(totalIngresos);
                     });
                     ////console.log(suma);
+                    let formatTotIngresos = new Intl.NumberFormat("en-US").format(totIngresos);
                     plantilla1 = `<tr>
                                     <td>TOTAL</td>
-                                    <td align="right">${totIngresos}</td>
+                                    <td align="right">${formatTotIngresos}</td>
                                   </tr>`
                     $('#tb_detIngresos').html(plantilla);
                     $('#tf_ingresos').html(plantilla1);
-                    $('#txt_toting').val(totIngresos);
+                    $('#txt_toting').val(new Intl.NumberFormat("en-US").format(totIngresos));
                     ListarDetalleEgresosPorcentual();
 
                 }
@@ -140,23 +142,27 @@ $(document).ready(function () {
                 if (response != "no encontrado") {
                     ////console.log(response);
                     let cel = JSON.parse(response);
-
+                    let totalEgresos;
                     cel.forEach(cel => {
+                        totalEgresos = cel.catotegr.replace(",", "");
                         plantilla += `<tr><td>${cel.cadesegr}</td>
                                     <td align="right">${cel.catotegr}</td></tr>`;
-                        totEgresos += parseFloat(cel.catotegr);
+                        totEgresos += parseFloat(totalEgresos);
                     });
                     ////console.log(suma);
                     totEgresos += totEgresosPor;
+                    let formatTotalEgresos = new Intl.NumberFormat("en-US").format(totEgresos);
                     plantilla1 = `<tr>
                                     <td>TOTAL</td>
-                                    <td align="right">${totEgresos}</td>
+                                    <td align="right">${formatTotalEgresos}</td>
                                   </tr>`
                     $('#tb_detEgresos').html(plantilla);
                     $('#tf_egresos').html(plantilla1);
-                    $('#txt_totegr').val(totEgresos);
-                    monFinal = (monInicial + totIngresos) - totEgresos;
-                    $('#txt_monfin').val(round(monFinal));
+                    $('#txt_totegr').val(new Intl.NumberFormat("en-US").format(totEgresos));
+                    let monIni = monInicial.toString().replace(",", "");
+                    let Ingresos = parseFloat(monIni) + totIngresos;
+                    monFinal = (parseFloat(monIni) + totIngresos) - totEgresos;
+                    $('#txt_monfin').val(new Intl.NumberFormat("en-US").format(round(monFinal)));
                     ////console.log(round(monFinal));
                 }
             },
@@ -236,7 +242,8 @@ $(document).ready(function () {
                         $('#dat_inicaja').val(con.cainicaj),
                         $('#txt_moninicial').val(con.camonini)
                 });
-                monInicial = parseFloat($('#txt_moninicial').val());
+                montoInicio = $('#txt_moninicial').val();
+                monInicial = parseFloat(montoInicio.replace(',', ''));
                 ListarDetalleIngresos();
                 ////console.log(codCaja);
                 edit = true;
@@ -301,9 +308,35 @@ $(document).ready(function () {
         corre = getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codCaja = getCodigo() + '-' + num;
-        ////console.log(codCaja);
+        console.log(codCaja);
         // 
-        document.getElementById('txt_monini').focus();
+        //document.getElementById('txt_monini').focus();
+        $.ajax({
+            url: '/MRFSistem/AccesoDatos/Caja/ObtenerMontoInicial.php',
+            type: 'GET',
+            beforeSend: function () {
+                console.log("cargando..");
+                $("#val_monini").html("Obteniedo monoto Inicial...");
+            },
+            complete: function() {
+                $("#val_monini").html("");
+                console.log('completado...');
+            },
+            error: function(xhr) { // if error occured
+                alert("Error occured.please try again");
+            },
+            success: function (response) {
+                console.log(response);
+                if (response != "false") {
+                    let Caja = JSON.parse(response);
+                    Caja.forEach(caja => {
+                        $('#txt_monini').val(caja.camonfin);    
+                    });
+                    
+                }
+
+            }
+        });
     }
 
     $('#btn_cancelar').click(function (e) {
@@ -330,10 +363,12 @@ $(document).ready(function () {
     }
 
     function AbrirCaja() {//guardar Caja
+        let montoInicial = $('#txt_monini').val();
+        montoInicial=montoInicial.replace(",", "");
         const postData = {
             pacodcaj: codCaja,
             cainicaj: $('#dat_caja').val(),
-            camonini: $('#txt_monini').val()
+            camonini: montoInicial
         };
         ////console.log(postData);
         let url = '/MRFSistem/AccesoDatos/Caja/AperturarCaja.php';
@@ -358,15 +393,24 @@ $(document).ready(function () {
 
     function ArqueoCaja() {//guardar Caja
         ////console.log(codCaja);
+        let reemplazarMonInicial = $('#txt_monini').val();
+        reemplazarMonInicial = reemplazarMonInicial.replace(",", "");
+        let reemplazarMonFinal = $('#txt_monfin').val();
+        reemplazarMonFinal = reemplazarMonFinal.replace(",", "");
+        let reemplazartoting = $('#txt_toting').val();
+        let reemplazartotegr = $('#txt_totegr').val();
+        reemplazartoting = reemplazartoting.replace(",", "");
+        reemplazartotegr = reemplazartotegr.replace(",", "");
+
         const postData = {
             pacodcaj: codCaja,
             cainicaj: $('#dat_inicaja').val(),
-            camonini: $('#txt_monini').val(),
+            camonini: reemplazarMonInicial,
             cafincaj: $('#dat_fincaja').val(),
-            camonfin: $('#txt_monfin').val(),
+            camonfin: reemplazarMonFinal,
             caestcaj: 0,
-            catoting: $('#txt_toting').val(),
-            catotegr: $('#txt_totegr').val()
+            catoting: reemplazartoting,
+            catotegr: reemplazartotegr
         };
         ////console.log(postData);
         let url = '/MRFSistem/AccesoDatos/Caja/CerrarCaja.php';

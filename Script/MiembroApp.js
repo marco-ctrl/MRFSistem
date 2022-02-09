@@ -195,7 +195,7 @@ $(document).ready(function () {
         if(miembros.cacidext != ""){
             extencion="-"+miembros.cacidext;
         }
-        console.log(miembros.cacidext);
+        //console.log(miembros.cacidext);
         plantilla +=
             `<tr UserDocu="${miembros.pacodmie}" class="table-light">
                 <td>${miembros.cacidmie}${extencion}</td>
@@ -532,7 +532,7 @@ $(document).ready(function () {
         limpiar();
         DeshabilitarFormulario();
         $('html, body').animate({ scrollTop: 0 }, 'slow'); //seleccionamos etiquetas,clase o identificador destino, creamos animación hacia top de la página.
-        return false;
+        return false; 
     });
 
     $("#btn_nuevo").click(function (event) {
@@ -751,7 +751,7 @@ $(document).ready(function () {
         if (ci == "") {
             $("#val_ci").html("Completa este campo");
             $("#div_ci").switchClass("border-bottom-success", "border-bottom-danger", 100);
-            $("#chk_ci").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+            $("#chk_ci").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
             $("#chk_ci").html('<i class="fas fa-exclamation-triangle"></i>');
 
             contador++;
@@ -760,7 +760,7 @@ $(document).ready(function () {
             if (ci.toString().length < 7) {
                 $("#div_ci").switchClass("border-bottom-success", "border-bottom-danger", 100);
                 $("#val_ci").html("Este campo debe tener al menos 7 digitos");
-                $("#chk_ci").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+                $("#chk_ci").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
                 $("#chk_ci").html('<i class="fas fa-exclamation-triangle"></i>');
                 //console.log('ci debe tener almenos 7 carateres');
                 contador++;
@@ -768,7 +768,7 @@ $(document).ready(function () {
             else {
                 $("#div_ci").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
                 $("#val_ci").html("");
-                $("#chk_ci").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
+                $("#chk_ci").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
                 $("#chk_ci").html('<i class="fas fa-check"></i>');
                 //console.log('corecto');
             }
@@ -776,7 +776,7 @@ $(document).ready(function () {
         if (nombre == "") {
             $("#val_nombre").html("Completa este campo");
             $("#div_nombre").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
-            $("#chk_nombre").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+            $("#chk_nombre").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
             $("#chk_nombre").html('<i class="fas fa-exclamation-triangle"></i>');
 
             contador++;
@@ -785,7 +785,7 @@ $(document).ready(function () {
             if (nombre.toString().length < 3) {
                 $("#div_nombre").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
                 $("#val_nombre").html("Este campo debe tener al menos 3 letras");
-                $("#chk_nombre").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+                $("#chk_nombre").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
                 $("#chk_nombre").html('<i class="fas fa-exclamation-triangle"></i>');
                 //console.log('nombre debe tener almenos 7 carateres');
                 contador++;
@@ -793,14 +793,14 @@ $(document).ready(function () {
             else {
                 $("#div_nombre").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
                 $("#val_nombre").html("");
-                $("#chk_nombre").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
+                $("#chk_nombre").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
                 $("#chk_nombre").html('<i class="fas fa-check"></i>');
                 //console.log('corecto');
             }
         }
         if (apPaterno == "") {
             $("#div_paterno").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
-            $("#chk_paterno").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+            $("#chk_paterno").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
             $("#chk_paterno").html('<i class="fas fa-exclamation-triangle"></i>');
             $("#val_paterno").html("Completa este campo");
             contador++;
@@ -809,7 +809,7 @@ $(document).ready(function () {
             if (apPaterno.toString().length < 3) {
                 $("#div_paterno").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
                 $("#val_paterno").html("Este campo debe tener al menos 3 letras");
-                $("#chk_paterno").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+                $("#chk_paterno").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
                 $("#chk_paterno").html('<i class="fas fa-exclamation-triangle"></i>');
                 //console.log('paterno debe tener almenos 7 carateres');
                 contador++;
@@ -817,7 +817,7 @@ $(document).ready(function () {
             else {
                 $("#div_paterno").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
                 $("#val_paterno").html("");
-                $("#chk_paterno").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
+                $("#chk_paterno").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
                 $("#chk_paterno").html('<i class="fas fa-check"></i>');
                 //console.log('corecto');
             }
@@ -825,7 +825,7 @@ $(document).ready(function () {
 
         if (telefono == "") {
             $("#div_numcontacto").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
-            $("#chk_numcontacto").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+            $("#chk_numcontacto").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
             $("#chk_numcontacto").html('<i class="fas fa-exclamation-triangle"></i>');
             $("#val_numcontacto").html("Completa este campo");
             contador++;
@@ -834,7 +834,7 @@ $(document).ready(function () {
             if (telefono.toString().length < 5) {
                 $("#div_numcontacto").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
                 $("#val_numcontacto").html("Este campo debe tener al menos 5 digitos");
-                $("#chk_numcontacto").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+                $("#chk_numcontacto").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
                 $("#chk_numcontacto").html('<i class="fas fa-exclamation-triangle"></i>');
                 //console.log('numcontacto debe tener almenos 7 carateres');
                 contador++;
@@ -842,14 +842,14 @@ $(document).ready(function () {
             else {
                 $("#div_numcontacto").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
                 $("#val_numcontacto").html("");
-                $("#chk_numcontacto").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
+                $("#chk_numcontacto").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
                 $("#chk_numcontacto").html('<i class="fas fa-check"></i>');
                 //console.log('corecto');
             }
         }
         if (estCivil == "0") {
             $("#div_estadoCivil").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
-            $("#chk_estadoCivil").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+            $("#chk_estadoCivil").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
             $("#chk_estadoCivil").html('<i class="fas fa-exclamation-triangle"></i>');
             $("#val_estadoCivil").html("Completa este campo");
             contador++;
@@ -857,12 +857,12 @@ $(document).ready(function () {
         else {
             $("#div_estadoCivil").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
             $("#val_estadoCivil").html("");
-            $("#chk_estadoCivil").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
+            $("#chk_estadoCivil").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
             $("#chk_estadoCivil").html('<i class="fas fa-check"></i>');
         }
         if (direccion == "") {
             $("#div_direccion").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
-            $("#chk_direccion").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+            $("#chk_direccion").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
             $("#chk_direccion").html('<i class="fas fa-exclamation-triangle"></i>');
             $("#val_direccion").html("Completa este campo");
             contador++;
@@ -871,7 +871,7 @@ $(document).ready(function () {
             if (direccion.toString().length < 10) {
                 $("#div_direccion").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
                 $("#val_direccion").html("Este campo debe tener al menos 10 caracteres");
-                $("#chk_direccion").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+                $("#chk_direccion").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
                 $("#chk_direccion").html('<i class="fas fa-exclamation-triangle"></i>');
                 //console.log('direccion debe tener almenos 7 carateres');
                 contador++;
@@ -879,14 +879,14 @@ $(document).ready(function () {
             else {
                 $("#div_direccion").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
                 $("#val_direccion").html("");
-                $("#chk_direccion").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
+                $("#chk_direccion").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
                 $("#chk_direccion").html('<i class="fas fa-check"></i>');
                 //console.log('corecto');
             }
         }
         if (profesion == "") {
             $("#div_profesion").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
-            $("#chk_profesion").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+            $("#chk_profesion").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
             $("#chk_profesion").html('<i class="fas fa-exclamation-triangle"></i>');
             $("#val_profesion").html("Completa este campo");
             contador++;
@@ -895,7 +895,7 @@ $(document).ready(function () {
             if (profesion.toString().length < 5) {
                 $("#div_profesion").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
                 $("#val_profesion").html("Este campo debe tener al menos 5 caracteres");
-                $("#chk_profesion").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+                $("#chk_profesion").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
                 $("#chk_profesion").html('<i class="fas fa-exclamation-triangle"></i>');
                 //console.log('profesion debe tener almenos 7 carateres');
                 contador++;
@@ -903,14 +903,14 @@ $(document).ready(function () {
             else {
                 $("#div_profesion").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
                 $("#val_profesion").html("");
-                $("#chk_profesion").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
+                $("#chk_profesion").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
                 $("#chk_profesion").html('<i class="fas fa-check"></i>');
                 //console.log('corecto');
             }
         }
         if (nomCiudad == "0") {
             $("#div_ciudad").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
-            $("#chk_ciudad").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+            $("#chk_ciudad").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
             $("#chk_ciudad").html('<i class="fas fa-exclamation-triangle"></i>');
             $("#val_ciudad").html("Completa este campo");
             contador++;
@@ -918,12 +918,12 @@ $(document).ready(function () {
         else {
             $("#div_ciudad").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
             $("#val_ciudad").html("");
-            $("#chk_ciudad").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
+            $("#chk_ciudad").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
             $("#chk_ciudad").html('<i class="fas fa-check"></i>');
         }
         if (nomCelula == "0") {
             $("#div_celula").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
-            $("#chk_celula").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+            $("#chk_celula").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
             $("#chk_celula").html('<i class="fas fa-exclamation-triangle"></i>');
             $("#val_celula").html("Completa este campo");
             contador++;
@@ -931,12 +931,12 @@ $(document).ready(function () {
         else {
             $("#div_celula").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
             $("#val_celula").html("");
-            $("#chk_celula").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
+            $("#chk_celula").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
             $("#chk_celula").html('<i class="fas fa-check"></i>');
         }
         if (funCel == "0") {
             $("#div_funcion").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
-            $("#chk_funcion").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+            $("#chk_funcion").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
             $("#chk_funcion").html('<i class="fas fa-exclamation-triangle"></i>');
             $("#val_funcion").html("Completa este campo");
             contador++;
@@ -944,7 +944,7 @@ $(document).ready(function () {
         else {
             $("#div_funcion").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
             $("#val_funcion").html("");
-            $("#chk_funcion").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
+            $("#chk_funcion").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
             $("#chk_funcion").html('<i class="fas fa-check"></i>');
         }
         if (contador > 0) {

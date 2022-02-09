@@ -40,30 +40,7 @@
             <!-- Nav Item - Pages Collapse Menu -->
             <?php include_once('includes/EscuelaLideres/interfaces.php'); ?>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Sistema
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-server"></i>
-                    <span>Base de Datos</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Base de Datos</h6>
-                        <a class="collapse-item" href="login.html"><i class="fas fa-server"></i> Respaldar BD</a>
-                        <a class="collapse-item" href="register.html"><i class="fas fa-server"></i> Restaurar BD</a>
-                    </div>
-                </div>
-            </li>
-
+            
             <!-- Nav Item - Charts -->
 
             <!-- Nav Item - Tables -->
@@ -120,11 +97,11 @@
 
                         <div class="col-xl-3 col-md-6 mb-4">
                             <a href="FRM_Maestro" class="collapse-item" style="text-decoration:none">
-                                <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card border-left-success shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                     Modulos:</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">MAESTRO</div>
                                             </div>
@@ -139,11 +116,11 @@
 
                         <div class="col-xl-3 col-md-6 mb-4">
                             <a href="FRM_Curso" class="collapse-item" style="text-decoration:none">
-                                <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card border-left-info shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                                     Modulos:</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">CURSO</div>
                                             </div>
@@ -158,11 +135,11 @@
 
                         <div class="col-xl-3 col-md-6 mb-4">
                             <a href="FRM_Contenido" class="collapse-item" style="text-decoration:none">
-                                <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card border-left-warning shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                     Modulos:</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">MATERIA</div>
                                             </div>
@@ -182,11 +159,11 @@
                         <!--  Acceso directo a las Actividades -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <a href="FRM_Matriculacion" class="collapse-item" style="text-decoration:none">
-                                <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card border-left-danger shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                     Modulos:</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">MATRICULAS</div>
                                             </div>
@@ -201,11 +178,11 @@
 
                         <div class="col-xl-3 col-md-6 mb-4">
                             <a href="INF_Alumno" class="collapse-item" style="text-decoration:none">
-                                <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card border-left-secondary shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
                                                     Reportes:</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">INFORMACION ALUMNO</div>
                                             </div>

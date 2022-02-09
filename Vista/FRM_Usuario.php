@@ -36,21 +36,34 @@
                                 <form id="form2" class="p-2">
                                     <div class="form-group">
                                         <label for="exampleSelect2">Buscar Miembro</label>
-                                        <button type="button" id="btn_miembro" class="btn btn-primary btn-block"
-                                            data-toggle="modal" data-target="#idModal">
-                                            <i class="fas fa-search-plus"></i> Buscar Miembro
-                                        </button>
+                                        <div class="input-group border-bottom-danger" id="div_miembro">
+                                            <button type="button" id="btn_miembro" class="btn btn-primary btn-block"
+                                                data-toggle="modal" data-target="#idModal">
+                                                <i class="fas fa-search-plus"></i> Buscar Miembro
+                                            </button>
+                                        </div>
+                                        <span id="val_miembro" class="text-danger">Selecciona un Miembro</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleSelect2">Codigo de Miembro</label>
-                                        <input type="text" id="txt_codigo" class="form-control" placeholder="Codigo"
-                                            disabled></input>
+                                        <div class="input-group border-bottom-danger" id="div_codigo">
+                                            <input type="text" id="txt_codigo" class="form-control" placeholder="Codigo"
+                                                disabled style="width: 80%;"></input>
+                                            <span id="chk_codigo" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleSelect2">Miembro</label>
-                                        <input type="text" id="txt_miembro" class="form-control" placeholder="Miembro"
-                                            disabled>
-                                        </input>
+                                        <div class="input-group border-bottom-danger" id="div_nomMiembro">
+                                            <input type="text" id="txt_miembro" class="form-control"
+                                                placeholder="Miembro" disabled style="width: 80%;"></input>
+                                            <span id="chk_nomMiembro" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -58,31 +71,48 @@
                                 <form id="form1">
                                     <div class="form-group">
                                         <label>ROL de Usuario</label>
-                                        <select id="cbx_tipo" class="btn-default form-control">
-                                            <option value="0" class="form-control">ROL DE USUARIO</option>
-                                            <option value="LIDER" class="form-control">LIDER</option>
-                                            <option value="ADMINISTRADOR" class="form-control">ADMINISTRADOR</option>
-                                            <option value="TESORERO" class="form-control">TESORERO</option>
-                                            <option value="SECRETARIO" class="form-control">SECRETARIO</option>
-                                            <option value="DIRECTOR" class="form-control">DIRECTOR</option>
-                                        </select>
+                                        <div class="input-group border-bottom-danger" id="div_tipo">
+                                            <select id="cbx_tipo" class="btn-default form-control" style="width: 80%;">
+                                                <option value="0" class="form-control">ROL DE USUARIO</option>
+                                                <option value="LIDER" class="form-control">LIDER</option>
+                                                <option value="ADMINISTRADOR" class="form-control">ADMINISTRADOR
+                                                </option>
+                                                <option value="TESORERO" class="form-control">TESORERO</option>
+                                                <option value="SECRETARIO" class="form-control">SECRETARIO</option>
+                                                <option value="DIRECTOR" class="form-control">DIRECTOR</option>
+                                            </select>
+                                            <span id="chk_tipo" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_tipo" class="text-danger">Selecciona un rol de Usuario</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Usuario</label>
-                                        <input type="text" id="txt_usuario" placeholder="Usuario"
-                                            class="form-control" readonly></input>
+                                        <div class="input-group border-bottom-danger" id="div_usuario">
+                                            <input type="text" id="txt_usuario" class="form-control"
+                                                placeholder="Usuario" readonly style="width: 80%;"></input>
+                                            <span id="chk_usuario" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label>Contraseña</label>
-                                        <input type="text" id="txt_contrasena" placeholder="Contraseña"
-                                            class="form-control" readonly></input>
+                                        <div class="input-group border-bottom-danger" id="div_contrasena">
+                                            <input type="password" id="txt_contrasena" class="form-control"
+                                                placeholder="Contraseña" readonly style="width: 80%;"></input>
+                                            <span id="chk_contrasena" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <div class="modal-footer col-md-8">
                             <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
-                                    text-center">
+                                    text-center" title="Completa todos los campos requeridos">
                                 <i class="far fa-save"></i>
                                 Guardar
                             </button>

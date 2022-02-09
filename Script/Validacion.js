@@ -37,7 +37,7 @@ function soloLetras(e) {
   }
 }
 
-function soloNumeros(e) {
+/*function soloNumeros(e) {
   var key = e.keyCode || e.which,
     tecla = String.fromCharCode(key).toLowerCase(),
     letras = "0123456789",
@@ -51,68 +51,73 @@ function soloNumeros(e) {
     }
   }*/
 
-  if (letras.indexOf(tecla) == -1 && !tecla_especial) {
-    return false;
-  }
+/*if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+  return false;
 }
+}*/
 
 function numberMobile(e) {
   var reemplazar = e.target.value;
   //e.target.value = e.target.value.replace(/[^\d]/g, e.target.value.substr(0, e.target.value.length - 1));
   e.target.value = e.target.value.replace(/[^\d]/g, '');
-  
+
   return false;
 }
 
-function letrasMobile(e) {
-  var reemplazar = e.target.value;
-  //e.target.value = e.target.value.replace(/[^\d]/g, e.target.value.substr(0, e.target.value.length - 1));
-  e.target.value = e.target.value.replace(/[0-9]/g, '');
-  
-  return false;
-}
 
-function soloTexto(string){//solo letras y numeros
+function soloTexto(string) {//solo letras y numeros
   var out = '';
   //Se añaden las letras validas
   var filtro = ' áéíóúabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ';//Caracteres validos
 
-  for (var i=0; i<string.length; i++)
-     if (filtro.indexOf(string.charAt(i)) != -1) 
-     out += string.charAt(i);
+  for (var i = 0; i < string.length; i++)
+    if (filtro.indexOf(string.charAt(i)) != -1)
+      out += string.charAt(i);
   return out;
 }
 
-function soloProfesion(string){//solo letras y numeros
+function soloNumeros(string) {//solo letras y numeros
+  var out = '';
+  //Se añaden las letras validas
+  var filtro = '0123456789';//Caracteres validos
+
+  for (var i = 0; i < string.length; i++)
+    if (filtro.indexOf(string.charAt(i)) != -1)
+      out += string.charAt(i);
+  return out;
+}
+
+
+function soloProfesion(string) {//solo letras y numeros
   var out = '';
   //Se añaden las letras validas
   var filtro = ' .áéíóúabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ';//Caracteres validos
 
-  for (var i=0; i<string.length; i++)
-     if (filtro.indexOf(string.charAt(i)) != -1) 
-     out += string.charAt(i);
+  for (var i = 0; i < string.length; i++)
+    if (filtro.indexOf(string.charAt(i)) != -1)
+      out += string.charAt(i);
   return out;
 }
 
-function alfaNumerico(string){
+function alfaNumerico(string) {
   var out = '';
   //Se añaden las letras validas
   var filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890';//Caracteres validos
 
-  for (var i=0; i<string.length; i++)
-     if (filtro.indexOf(string.charAt(i)) != -1) 
-     out += string.charAt(i);
+  for (var i = 0; i < string.length; i++)
+    if (filtro.indexOf(string.charAt(i)) != -1)
+      out += string.charAt(i);
   return out;
 }
 
-function textoDireccion(string){
+function textoDireccion(string) {
   var out = '';
   //Se añaden las letras validas
   var filtro = ' /.0123456789abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890';//Caracteres validos
 
-  for (var i=0; i<string.length; i++)
-     if (filtro.indexOf(string.charAt(i)) != -1) 
-     out += string.charAt(i);
+  for (var i = 0; i < string.length; i++)
+    if (filtro.indexOf(string.charAt(i)) != -1)
+      out += string.charAt(i);
   return out;
 }
 
@@ -134,4 +139,7 @@ function Direccion(e) {
   if (letras.indexOf(tecla) == -1 && !tecla_especial) {
     return false;
   }
+
+  
+
 }

@@ -27,6 +27,7 @@ $(document).ready(function () {
                 miembro.forEach(miembro => {
                     codigoMie = miembro.pacodmie,
                         $('#txt_ci').val(miembro.cacidmie),
+                        $('#txt_ciExtencion').val(miembro.cacidext),
                         $('#txt_nombre').val(miembro.canommie),
                         $('#txt_paterno').val(miembro.capatmie),
                         $('#txt_materno').val(miembro.camatmie),
@@ -34,13 +35,14 @@ $(document).ready(function () {
                         $('#txt_fecnac').val(miembro.cafecnac),
                         $('#txt_direccion').val(miembro.cadirmie),
                         $('#cbx_funcion').val(miembro.cafunmie),
-                    codigoMieCel = miembro.pacodmcl
+                        codigoMieCel = miembro.pacodmcl
                 });
                 editMiecel = true;
                 //console.log(codigoMieCel+' '+codigoMie+' '+codigoCel);
                 habilitarFormulario();
                 $("#btn_AgregarMiecel").html("<i class='far fa-save'></i> Guardar");
-                
+                capturarCampos();
+                camposVacios();
             }
         });
     });
@@ -89,9 +91,13 @@ $(document).ready(function () {
                 let plantilla = '';
                 if (miembros != false) {
                     miembros.forEach(miembros => {
+                        let extencion = '';
+                        if (miembros.cacidext != "") {
+                            extencion = "-" + miembros.cacidext;
+                        }
                         plantilla +=
                             `<tr codMbr="${miembros.pacodmie}" 
-                                 codMcl="${miembros.pacodmcl}"class="table-light">
+                                 codMcl="${miembros.pacodmcl}" class="table-light">
                             <td>${miembros.canommie}</td> 
                             <td>${miembros.capatmie} ${miembros.camatmie}</td>
                             <td>${miembros.cafunmie}</td>
@@ -180,6 +186,7 @@ $(document).ready(function () {
         const postData = {
             pacodmie: codigoMie,
             cacidmie: $('#txt_ci').val(),
+            cacidext: $('#txt_ciExtencion').val().toUpperCase(),
             canommie: $('#txt_nombre').val().toUpperCase(),
             capatmie: $('#txt_paterno').val().toUpperCase(),
             camatmie: $('#txt_materno').val().toUpperCase(),
@@ -261,7 +268,9 @@ $(document).ready(function () {
         $('#formMiecel3').trigger('reset');
         $("#btn_AgregarMiecel").html("<i class='fas fa-user-plus'></i> Agregar");
         DeshabilitarFormulario();
-        editMiecel=false;        
+        editMiecel = false;
+        capturarCampos();
+        camposVacios();
     }
 
     $('#btn_AgregarMiecel').click(function (e) {
@@ -279,7 +288,9 @@ $(document).ready(function () {
 
     $('#btn_cerrarMiecel').click(function (e) {
         //DeshabilitarFormulario();
-        LimpiarMiecel()
+        LimpiarMiecel();
+        capturarCampos();
+        camposVacios();
         e.preventDefault();
     });
 
@@ -287,6 +298,7 @@ $(document).ready(function () {
         $("#txt_nombre").attr("disabled", true);
         $("#txt_codMiembro").attr("disabled", true);
         $("#txt_ci").attr("disabled", true);
+        $("#txt_ciExtencion").attr("disabled", true);
         $("#txt_paterno").attr("disabled", true);
         $("#txt_materno").attr("disabled", true);
         $("#txt_numcontacto").attr("disabled", true);
@@ -295,12 +307,14 @@ $(document).ready(function () {
         //$("#btn_AgregarMiecel").attr("disabled", true);
         $("#cbx_funcion").attr("disabled", true);
         $("#btn_nuevoMiecel").attr("disabled", false);
+        $("#btn_AgregarMiecel").attr("disabled", true);
     }
 
     function habilitarFormulario() {
         $("#txt_nombre").attr("disabled", false);
         $("#txt_codMiembro").attr("disabled", false);
         $("#txt_ci").attr("disabled", false);
+        $("#txt_ciExtencion").attr("disabled", false);
         $("#txt_paterno").attr("disabled", false);
         $("#txt_materno").attr("disabled", false);
         $("#txt_numcontacto").attr("disabled", false);
@@ -309,7 +323,219 @@ $(document).ready(function () {
         //$("#btn_AgregarMiecel").attr("disabled", true);
         $("#cbx_funcion").attr("disabled", false);
         $("#btn_nuevoMiecel").attr("disabled", true);
+        $("#btn_AgregarMiecel").attr("disabled", true);
+    }
+
+    //Validacion de Campos Vacios
+    var ci, nombre, apPaterno, apMaterno, telefono, estCivil, direccion,
+        profesion, nomCiudad, nomCelula, funCel;
+
+    function capturarCampos() {
+        ci = $('#txt_ci').val();
+        nombre = $('#txt_nombre').val();
+        apPaterno = $('#txt_paterno').val();
+        telefono = $('#txt_numcontacto').val();
+        direccion = $('#txt_direccion').val();
+        funCel = $('#cbx_funcion').val();
     }
 
 
+    //$('#txt_ci').maxlength();
+    $('#txt_ci').maxlength({ showFeedback: false, max: 13 });
+    $('#txt_ciExtencion').maxlength({ showFeedback: false, max: 2 });
+    $('#txt_numcontacto').maxlength({ showFeedback: false, max: 15 });
+    $('#txt_nombre').maxlength({ showFeedback: false, max: 30 });
+
+    $("#btn_guardarMiembro").attr("disabled", true);
+
+    //Validacion de Campos Vacios
+    $('#txt_ci').keyup(function (e) {
+        capturarCampos();
+        camposVacios();
+    });
+
+    $('#txt_nombre').keyup(function (e) {
+        capturarCampos();
+        camposVacios();
+        //soloLetras(e);
+    });
+    $('#txt_paterno').keyup(function (e) {
+        capturarCampos();
+        camposVacios();
+    });
+    $('#txt_numcontacto').keyup(function (e) {
+        capturarCampos();
+        camposVacios();
+    });
+    $('#txt_direccion').keyup(function (e) {
+        capturarCampos();
+        camposVacios();
+    });
+
+    $('#cbx_funcion').change(function (e) {//asigar codigo profesion
+        capturarCampos();
+        camposVacios();
+        e.preventDefault();
+
+    });
+
+
+    var contador;
+
+    function camposVacios() {
+        contador = 0;
+        if (ci == "") {
+            $("#val_ci").html("Completa este campo");
+            $("#div_ci").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_ci").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+            $("#chk_ci").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+            if (ci.toString().length < 7) {
+                $("#div_ci").switchClass("border-bottom-success", "border-bottom-danger", 100);
+                $("#val_ci").html("Este campo debe tener al menos 7 digitos");
+                $("#chk_ci").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+                $("#chk_ci").html('<i class="fas fa-exclamation-triangle"></i>');
+                //console.log('ci debe tener almenos 7 carateres');
+                contador++;
+            }
+            else {
+                $("#div_ci").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+                $("#val_ci").html("");
+                $("#chk_ci").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
+                $("#chk_ci").html('<i class="fas fa-check"></i>');
+                //console.log('corecto');
+            }
+        }
+        if (nombre == "") {
+            $("#val_nombre").html("Completa este campo");
+            $("#div_nombre").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_nombre").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+            $("#chk_nombre").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+            if (nombre.toString().length < 3) {
+                $("#div_nombre").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+                $("#val_nombre").html("Este campo debe tener al menos 3 letras");
+                $("#chk_nombre").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+                $("#chk_nombre").html('<i class="fas fa-exclamation-triangle"></i>');
+                //console.log('nombre debe tener almenos 7 carateres');
+                contador++;
+            }
+            else {
+                $("#div_nombre").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+                $("#val_nombre").html("");
+                $("#chk_nombre").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
+                $("#chk_nombre").html('<i class="fas fa-check"></i>');
+                //console.log('corecto');
+            }
+        }
+        if (apPaterno == "") {
+            $("#div_paterno").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_paterno").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+            $("#chk_paterno").html('<i class="fas fa-exclamation-triangle"></i>');
+            $("#val_paterno").html("Completa este campo");
+            contador++;
+        }
+        else {
+            if (apPaterno.toString().length < 3) {
+                $("#div_paterno").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+                $("#val_paterno").html("Este campo debe tener al menos 3 letras");
+                $("#chk_paterno").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+                $("#chk_paterno").html('<i class="fas fa-exclamation-triangle"></i>');
+                //console.log('paterno debe tener almenos 7 carateres');
+                contador++;
+            }
+            else {
+                $("#div_paterno").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+                $("#val_paterno").html("");
+                $("#chk_paterno").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
+                $("#chk_paterno").html('<i class="fas fa-check"></i>');
+                //console.log('corecto');
+            }
+        }
+
+        if (telefono == "") {
+            $("#div_numcontacto").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_numcontacto").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+            $("#chk_numcontacto").html('<i class="fas fa-exclamation-triangle"></i>');
+            $("#val_numcontacto").html("Completa este campo");
+            contador++;
+        }
+        else {
+            if (telefono.toString().length < 5) {
+                $("#div_numcontacto").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+                $("#val_numcontacto").html("Este campo debe tener al menos 5 digitos");
+                $("#chk_numcontacto").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+                $("#chk_numcontacto").html('<i class="fas fa-exclamation-triangle"></i>');
+                //console.log('numcontacto debe tener almenos 7 carateres');
+                contador++;
+            }
+            else {
+                $("#div_numcontacto").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+                $("#val_numcontacto").html("");
+                $("#chk_numcontacto").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
+                $("#chk_numcontacto").html('<i class="fas fa-check"></i>');
+                //console.log('corecto');
+            }
+        }
+        if (direccion == "") {
+            $("#div_direccion").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_direccion").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+            $("#chk_direccion").html('<i class="fas fa-exclamation-triangle"></i>');
+            $("#val_direccion").html("Completa este campo");
+            contador++;
+        }
+        else {
+            if (direccion.toString().length < 10) {
+                $("#div_direccion").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+                $("#val_direccion").html("Este campo debe tener al menos 10 caracteres");
+                $("#chk_direccion").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+                $("#chk_direccion").html('<i class="fas fa-exclamation-triangle"></i>');
+                //console.log('direccion debe tener almenos 7 carateres');
+                contador++;
+            }
+            else {
+                $("#div_direccion").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+                $("#val_direccion").html("");
+                $("#chk_direccion").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
+                $("#chk_direccion").html('<i class="fas fa-check"></i>');
+                //console.log('corecto');
+            }
+        }
+        if (funCel == "0") {
+            $("#div_funcion").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_funcion").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
+            $("#chk_funcion").html('<i class="fas fa-exclamation-triangle"></i>');
+            $("#val_funcion").html("Completa este campo");
+            contador++;
+        }
+        else {
+            $("#div_funcion").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_funcion").html("");
+            $("#chk_funcion").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
+            $("#chk_funcion").html('<i class="fas fa-check"></i>');
+        }
+        if (contador > 0) {
+            $("#btn_AgregarMiecel").attr("disabled", true);
+            $("#btn_AgregarMiecel").attr("title", "Llene todos los campos requeridos");
+            //alertify.alert('Mensaje', 'Deber llenar todos los campos requeridos por el Sistema!');
+        }
+        else {
+            if (contador == 0) {
+                $("#btn_AgregarMiecel").attr("disabled", false);
+                $("#btn_AgregarMiecel").attr("title", "Guardar datos de Miembros de Celula");
+
+            }
+        }
+    }
+
 });
+
+
+
+//});

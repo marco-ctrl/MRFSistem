@@ -9,14 +9,14 @@ $(document).ready(function () {
     if (codCaja != "") {
         ListarIngresos();
     }
-    else{
-        if(codCaja==""){
-            let plantilla='';
+    else {
+        if (codCaja == "") {
+            let plantilla = '';
             plantilla = '<tr><td colspan="5" align="center">No se encontro una caja abierta, Favor de abrir una nueva caja!</td></tr>'
             $('#tb_economico').html(plantilla);
             $("#dat_inicio").attr("disabled", true);
             $("#dat_maximo").attr("disabled", true);
-            $("#btn_busFec").attr("disabled", true);    
+            $("#btn_busFec").attr("disabled", true);
         }
     }
     //ListarIngresos();
@@ -153,6 +153,7 @@ $(document).ready(function () {
                 //contex.hide();
                 document.getElementById("cbx_tipIng").focus();
                 edit = true;
+                camposVacios();
             });
     });
 
@@ -172,7 +173,9 @@ $(document).ready(function () {
     });
 
     $('#btn_nuevo').click(function (e) {//nuevo registro de Ingresos
-        verificarApertura();
+        //verificarApertura();
+        RegistrarIngresos();
+        camposVacios();
     });
 
     function RegistrarIngresos() {
@@ -316,6 +319,68 @@ $(document).ready(function () {
         return num;
     }
 
+    $("#btn_guardar").attr("disabled", true);
+
+    //Validacion de Campos Vacios
+    $('#txt_cantidad').keyup(function (e) {
+        //capturarCampos();
+        camposVacios();
+    });
+
+    $('#cbx_tipIng').change(function (e) {//asigar codigo profesion
+        //capturarCampos();
+        camposVacios();
+        e.preventDefault();
+
+    });
+
+    var contador;
+
+    function camposVacios() {
+        item = $('#cbx_tipIng').val();
+        cantidadIngreso = $('#txt_cantidad').val();
+        contador = 0;
+        if (cantidadIngreso == "") {
+            $("#val_cantidad").html("Completa este campo");
+            $("#div_cantidad").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_cantidad").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_cantidad").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+                $("#div_cantidad").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+                $("#val_cantidad").html("");
+                $("#chk_cantidad").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+                $("#chk_cantidad").html('<i class="fas fa-check"></i>');
+            
+        }
+        if (item == "0") {
+            $("#div_tipIng").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_tipIng").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_tipIng").html('<i class="fas fa-exclamation-triangle"></i>');
+            $("#val_tipIng").html("Completa este campo");
+            contador++;
+        }
+        else {
+            $("#div_tipIng").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_tipIng").html("");
+            $("#chk_tipIng").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_tipIng").html('<i class="fas fa-check"></i>');
+        }
+        if (contador > 0) {
+            $("#btn_guardar").attr("disabled", true);
+            $("#btn_guardar").attr("title", "Llene todos los campos requeridos");
+            //alertify.alert('Mensaje', 'Deber llenar todos los campos requeridos por el Sistema!');
+        }
+        else {
+            if (contador == 0) {
+                $("#btn_guardar").attr("disabled", false);
+                $("#btn_guardar").attr("title", "Guardar datos de Ingreso");
+
+            }
+        }
+    }
 
 });
 

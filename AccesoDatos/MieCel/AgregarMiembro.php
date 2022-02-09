@@ -11,12 +11,14 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
     $cadirmie = $_POST['cadirmie'];
     $cacelmie = $_POST['cacelmie'];
     $cafecnac = $_POST['cafecnac'];
+    $cacidext = $_POST['cacidext'];
     
     $sql = "INSERT INTO `mrfbermejobd`.`amiebro`
     (`camatmie`,
     `capatmie`,
     `cacelmie`,
     `cacidmie`,
+    `cacidext`,
     `cadirmie`,
     `caestmie`,
     `cafecnac`,
@@ -29,6 +31,7 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
         '{$capatmie}',
         '{$cacelmie}',
         '{$cacidmie}',
+        '{$cacidext}',
         '{$cadirmie}',
         false,
         '{$cafecnac}',

@@ -64,7 +64,7 @@
                                                     <th>NUMERO</th>
                                                     <th>DIRECCION</th>
                                                     <th ALING="CENTER" colspan="4">ACCIONES</th>
-                                                    
+
                                                 </tr>
                                             </tfoot>
 
@@ -84,14 +84,27 @@
                                 <form id="form1" clas="p-2">
                                     <div class="form-group">
                                         <label>Nombre de Celula</label>
-                                        <input type="text" id="txt_nomCelula" placeholder="Nombre" class="form-control"
-                                            maxlength="30" required></input>
+                                        <div class="input-group border-bottom-danger" id="div_nomCelula">
+                                            <input type="text" id="txt_nomCelula" placeholder="Nombre de Celula"
+                                                class="form-control" maxlength="30" required
+                                                onkeyup="this.value=soloTexto(this.value);" style="width: 80%;"></input>
+                                            <span id="chk_nomCelula" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_nomCelula" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Numero de Celula</label>
-                                        <input type="number" id="txt_numCelula" placeholder="Numero"
-                                            class="form-control" onkeypress="return soloNumeros(event)"
-                                            required></input>
+                                        <div class="input-group border-bottom-danger" id="div_numCelula">
+                                            <input type="number" id="txt_numCelula" placeholder="Numero"
+                                                class="form-control" onkeyup="this.value=soloNumeros(this.value);"
+                                                required style="width: 80%;"></input>
+                                            <span id="chk_numCelula" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_numCelula" class="text-danger">Completa este campo</span>
                                     </div>
                                 </form>
                             </div>
@@ -99,34 +112,50 @@
                                 <form id="form2" clas="p-2">
                                     <div class="form-group">
                                         <label>Barrio</label>
-                                        <input type="text" id="inp_barrio" placeholder="Barrio" list="dat_barrio"
-                                            class="form-control" maxlength="30" onkeypress="return Direccion(event)"
-                                            required />
-                                        <datalist id="dat_barrio">
-                                        </datalist>
+                                        <div class="input-group border-bottom-danger" id="div_barrio">
+                                            <input type="text" id="inp_barrio" placeholder="Barrio" list="dat_barrio"
+                                                class="form-control" maxlength="30"
+                                                onkeyup="this.value=textoDireccion(this.value);" required
+                                                style="width: 80%;" />
+                                            <datalist id="dat_barrio">
+                                            </datalist>
+                                            <span id="chk_barrio" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_barrio" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Calle</label>
-                                        <input type="text" id="inp_calle" placeholder="Calle" list="dat_calle"
-                                            class="form-control" maxlength="30" onkeypress="return Direccion(event)"
-                                            required />
-                                        <datalist id="dat_calle">
-                                        </datalist>
+                                        <div class="input-group border-bottom-danger" id="div_calle">
+                                            <input type="text" id="inp_calle" placeholder="Calle" list="dat_calle"
+                                                class="form-control" maxlength="30"
+                                                onkeyup="this.value=textoDireccion(this.value);" required
+                                                style="width: 80%;" />
+                                            <datalist id="dat_calle">
+                                            </datalist>
+                                            <span id="chk_calle" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_calle" class="text-danger">Completa este campo</span>
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-8">
+                            <div id="div_mapa" class="col-md-8 border-bottom-danger">
                                 <div id="map" class="mapas">
 
                                 </div>
                             </div>
+                            <span id="val_mapa" class="text-danger">Completa este campo</span>
+                                    
                         </div>
                         <br>
                         <div class="modal-footer col-md-8">
                             <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
-                                    text-center">
+                                    text-center" title="Completa todos los campos requeridos">
                                 <i class="far fa-save"></i>
                                 Guardar
                             </button>

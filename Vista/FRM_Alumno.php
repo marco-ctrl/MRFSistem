@@ -1,8 +1,12 @@
+<?php 
+    $fecha_actual = date("d-m-Y");
+    
+?>
 <?php include 'Header.php' ?>
 
 <body id="page-top">
-     <!-- Div cargando -->
-     <?php include 'Cargando.php' ?>
+    <!-- Div cargando -->
+    <?php include 'Cargando.php' ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -89,118 +93,206 @@
                         </div>
                     </div>
                     <div id="profile">
-                        <div class="row col-md-12">
+                        <div class="row">
+                            <!--<div class="row">-->
+                            <!--<form id="form_miembro">-->
                             <div class="col-md-4">
-                                <form id="form1">
+                                <form id="form1" class="needs-validation">
                                     <div class="form-group">
                                         <input type="hidden" id="txt_codMiembro" placeholder="Codigo"
                                             class="form-control"></input>
                                     </div>
                                     <div class="form-group">
                                         <label>Carnet de Identidad</label>
-                                        <input type="number" id="txt_ci" placeholder="Carnet de Identidad"
-                                            class="form-control" min="0"></input>
+                                        <div class="input-group border-bottom-danger" id="div_ci">
+                                            <input type="number" id="txt_ci" placeholder="Carnet de Identidad"
+                                                class="form-control" title="introducir el carnet de identidad"
+                                                onkeyup="numberMobile(event);" required style="width: 60%;">
+                                            <input type="text" id="txt_ciExtencion" placeholder="Extencion"
+                                                class="form-control" title="introducir extencion en caso de que tenga"
+                                                onkeyup="this.value=alfaNumerico(this.value);" required
+                                                style="width: 20%;">
+                                            <span id="chk_ci" class="input-group-text bg-danger text-white">
+                                                <!--<i class="fas fa-check"></i>-->
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_ci" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Nombre</label>
-                                        <input type="text" id="txt_nombre" placeholder="Nombre"
-                                            class="form-control"></input>
+                                        <div class="input-group border-bottom-danger" id="div_nombre">
+                                            <input type="text" id="txt_nombre" placeholder="Nombre" class="form-control"
+                                                onkeyup="this.value=soloTexto(this.value)" style="width: 80%;"
+                                                required></input>
+                                            <span id="chk_nombre" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_nombre" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Apellido Paterno</label>
-                                        <input type="text" id="txt_paterno" placeholder="Apellido Paterno"
-                                            class="form-control"></input>
+                                        <div class="input-group border-bottom-danger" id="div_paterno">
+                                            <input type="text" id="txt_paterno" maxlength="30"
+                                                placeholder="Apellido Paterno" class="form-control"
+                                                onkeyup="this.value=soloTexto(this.value)" style="width: 80%;"
+                                                required></input>
+                                            <span id="chk_paterno" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_paterno" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Apellido Materno</label>
-                                        <input type="text" id="txt_materno" placeholder="Apellido Materno"
-                                            class="form-control"></input>
+                                        <input type="text" id="txt_materno" maxlength="30"
+                                            placeholder="Apellido Materno" class="form-control"
+                                            onkeyup="this.value=soloTexto(this.value)" required></input>
                                     </div>
                                     <div class="form-group">
                                         <label>Numero de Contacto</label>
-                                        <input type="number" id="txt_numcontacto" placeholder="Numero de Contacto"
-                                            class="form-control"></input>
+                                        <div class="input-group border-bottom-danger" id="div_numcontacto">
+                                            <input type="tel" id="txt_numcontacto" maxlength="15"
+                                                placeholder="Numero de Contacto" class="form-control" required
+                                                style="width: 80%;"></input>
+                                            <span id="chk_numcontacto" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_numcontacto" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha de Nacimiento</label>
-                                        <input type="date" id="txt_fecnac" min="1920-01-01" max="2020-01-01"
-                                            placeholder="Fecha de Nacimiento" class="form-control"></input>
+                                        <input type="date" id="txt_fecnac"
+                                            min="<?php echo date("Y-m-d",strtotime($fecha_actual."- 100 year"));?>"
+                                            max="<?php echo date("Y-m-d",strtotime($fecha_actual."- 12 year")); ?>"
+                                            value="<?php echo date("Y-m-d",strtotime($fecha_actual."- 12 year")); ?>"
+                                            class="form-control" onkeydown="return ValidarEscrituraFecha()"></input>
                                     </div>
                                     <div class="form-group">
                                         <label>Lugar de Nacimiento</label>
-                                        <select id="cbx_ciudad" class="form-control">
+                                        <div class="input-group border-bottom-danger" id="div_ciudad">
+                                            <select id="cbx_ciudad" class="form-control" style="width: 80%;">
 
-                                        </select>
+                                            </select>
+                                            <span id="chk_ciudad" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_ciudad" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Estado Civil</label>
-                                        <select id="cbx_estadoCivil" class="form-control">
-                                            <option value="0" class="form-control">Estado Civil</option>
-                                            <option value="SOLTERO/A" class="form-control">SOLTERO/A</option>
-                                            <option value="CASADO/A" class="form-control">CASADO/A</option>
-                                            <option value="VIUDO/A" class="form-control">VIUDO/A</option>
-                                            <option value="DIVORCIADO/A" class="form-control">DIVORCIADO/A</option>
-                                        </select>
+                                        <div class="input-group border-bottom-danger" id="div_estadoCivil">
+                                            <select id="cbx_estadoCivil" class="form-control" style="width: 80%;">
+                                                <option value="0" class="form-control">Estado Civil</option>
+                                                <option value="SOLTERO/A" class="form-control">SOLTERO/A</option>
+                                                <option value="CASADO/A" class="form-control">CASADO/A</option>
+                                                <option value="VIUDO/A" class="form-control">VIUDO/A</option>
+                                                <option value="DIVORCIADO/A" class="form-control">DIVORCIADO/A</option>
+                                            </select>
+                                            <span id="chk_estadoCivil" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_estadoCivil" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Profesion</label>
-                                        <select id="cbx_profesion" class="form-control">
-
-                                        </select>
+                                        <div class="input-group border-bottom-danger" id="div_profesion">
+                                            <input type="text" id="inp_profesion" list="dat_profesion"
+                                                style="width: 80%;" class="form-control" maxlength="30"
+                                                onkeyup="this.value=soloProfesion(this.value)" placeholder="Profesion"
+                                                required />
+                                            <datalist id="dat_profesion">
+                                            </datalist>
+                                            <span id="chk_profesion" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_profesion" class="text-danger">Completa este campo</span>
                                     </div>
 
                                 </form>
                             </div>
-                            <div class="col-md-4 p-2">
+                            <div class="col-md-4 p-3">
                                 <form id="form2">
                                     <div class="form-group">
                                         <label>Direccion</label>
-                                        <textarea id="txt_direccion" rows="3" placeholder="Direccion de Domicilio"
-                                            class="form-control"></textarea>
+                                        <div class="input-group border-bottom-danger" id="div_direccion">
+                                            <textarea id="txt_direccion" rows="3" maxlength="100" style="width: 80%;"
+                                                placeholder="Direccion de Domicilio" class="form-control"
+                                                onkeyup="this.value=textoDireccion(this.value);" required></textarea>
+                                            <span id="chk_direccion" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_direccion" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group text-center">
                                         <label>Crecimiento Espiritual</label>
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha de Conversion</label>
-                                        <input type="date" id="dat_feccon" min="1994-01-01" max="2020-01-01"
-                                            placeholder="" class="form-control"></input>
+                                        <input type="date" id="dat_feccon" min="1950-01-01"
+                                            max="<?php echo date('Y-m-d'); ?>" placeholder=""
+                                            onkeydown="return ValidarEscrituraFecha()" class="form-control"
+                                            autocomplete="off"></input>
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha de Bautismo</label>
-                                        <input type="date" id="dat_fecbau" min="1994-01-01" max="2020-01-01"
-                                            placeholder="" class="form-control"></input>
+                                        <input type="date" id="dat_fecbau" min="1950-01-01"
+                                            max="<?php echo date('Y-m-d'); ?>" placeholder=""
+                                            onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
                                     </div>
                                     <div class="form-group">
                                         <label>Entrada a la Iglesia</label>
-                                        <input type="date" id="dat_fecigl" min="1994-01-01" max="2020-01-01"
-                                            placeholder="" class="form-control"></input>
+                                        <input type="date" id="dat_fecigl" min="1994-12-12"
+                                            max="<?php echo date('Y-m-d'); ?>" placeholder=""
+                                            onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
                                     </div>
                                     <div class="form-group">
                                         <label>Encuentro Con Dios</label>
-                                        <input type="date" id="dat_fecenc" min="1994-01-01" max="2020-01-01"
-                                            placeholder="" class="form-control"></input>
+                                        <input type="date" id="dat_fecenc" min="2001-01-01"
+                                            max="<?php echo date('Y-m-d'); ?>" placeholder=""
+                                            onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
                                     </div>
                                     <div class="form-group text-center">
                                         <label>Asignar Celula</label>
                                     </div>
                                     <div class="form-group">
                                         <label for="">Celula</label>
-                                        <select id="cbx_celula" class="form-control">Celula
+                                        <div class="input-group border-bottom-danger" id="div_celula">
+                                            <select id="cbx_celula" class="form-control" style="width: 80%;">Celula
 
-                                        </select>
+                                            </select>
+                                            <span id="chk_celula" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_celula" class="text-danger">Completa este campo</span>
+
                                     </div>
                                     <div class="form-group">
                                         <label for="">Funcion en la Celula</label>
-                                        <select id="cbx_funcion" class="form-control btn-primary">
-                                            <option value="0">Funcion en la celula</option>
-                                            <option value="DISCIPULO/A">DISCIPULO/A</option>
-                                            <option value="ASISTENTE">ASISTENTE</option>
-                                            <option value="ANFITRION">ANFITRION</option>
-                                        </select>
+                                        <div class="input-group border-bottom-danger" id="div_funcion">
+                                            <select id="cbx_funcion" class="form-control" style="width: 80%;">
+                                                <option value="0">Funcion en la celula</option>
+                                                <option value="DISCIPULO/A">DISCIPULO/A</option>
+                                                <option value="ASISTENTE">ASISTENTE</option>
+                                                <option value="ANFITRION">ANFITRION</option>
+                                                <option value="LIDER">LIDER</option>
+                                            </select>
+                                            <span id="chk_funcion" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_funcion" class="text-danger">Completa este campo</span>
                                     </div>
                                 </form>
                             </div>
+
                             <div class="col-md-4 p-3">
                                 <div class="d-block d-sm-block d-md-none">
                                     <button class="btn btn-secondary btn-block"
@@ -213,7 +305,7 @@
                                     <div class="col-md-6 d-none d-sm-none d-md-block">
                                         <form>
                                             <button type="button" id="encender" class="btn btn-secondary btn-block
-                            text-center"><i class="fas fa-video"></i> Encender</button>
+                            text-center"><i class="fas fa-video "></i> Encender</button>
                                         </form>
                                     </div>
                                     <div class="col-md-6 d-none d-sm-none d-md-block">
@@ -227,8 +319,7 @@
                                     <div class="col-md-6 p-2 d-none d-sm-none d-md-block">
                                         <div class="video-wrap">
                                             <video id="video" width="140" height="120"
-                                                poster="/MRFSistem/img/photo.svg">
-                                            </video>
+                                                poster="/MRFSistem/img/photo.svg"> </video>
                                             <!--<canvas id="canvas" width="140" height="120"></canvas>-->
                                         </div>
 
@@ -243,12 +334,12 @@
                                         <!-- Trigger canvas web API -->
                                         <div class="controller ">
                                             <button id="snap" class="btn btn-secondary btn-block
-                            text-center"><i class="fas fa-camera"></i> Capturar</button>
+                                                text-center"><i class="fas fa-camera "></i> Capturar</button>
                                         </div>
                                     </div>
                                     <div class="col-md-6 p-2 d-none d-sm-none d-md-block">
                                         <div class="controller">
-                                            <button class="btn btn-secondary btn-block" id="btn_buscar"
+                                            <button class="btn btn-secondary btn-block"
                                                 onclick="document.getElementById('file-upload').click();">
                                                 <i class="fas fa-search-plus "></i> Buscar Foto</button>
                                             <input type="file" style="display:none;" id="file-upload"
@@ -258,15 +349,19 @@
                                 </div>
                                 <canvas id="canvas" width="140" height="120" style="display: none;"></canvas>
                             </div>
+                            <!--</form>-->
+                            <!--</div>-->
+
+
                         </div>
                         <div class="modal-footer col-md-12">
 
                             <button type="button" id="btn_guardarAlu" class="btn btn-primary btn-lg
-                                    text-center">
+                                    text-center" title="Llene todos los campos requeridos">
                                 <i class="far fa-save "></i>
                                 Guardar
                             </button>
-                            <button type="button" id="btn_modificarAlu" class="btn btn-secondary btn-lg
+                            <button type="button" id="btn_modificarAlu" title="Modificar datos de Alumno" class="btn btn-secondary btn-lg
                                     text-center">
                                 <i class="far fa-edit "></i>
                                 Modificar
@@ -279,7 +374,7 @@
                         </div>
                         <div class="modal fade" id="idModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
                             aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title">Buscar Miembro</h5>
@@ -431,5 +526,3 @@
 
 
 </body>
-
-<?php

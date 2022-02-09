@@ -9,6 +9,7 @@ include '../Conexion/Conexion.php';
     $facodcel = $_POST['facodcel'];
     $facodmie = $_POST['facodmie'];
     $caestmcl = $_POST['caestmcl'];
+    $cacidext = $_POST['cacidext'];
 
     $sql = "INSERT INTO amiecel(
         cafunmie, 

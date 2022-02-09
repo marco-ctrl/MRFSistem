@@ -1,8 +1,8 @@
 <?php include 'Header.php' ?>
 
 <body id="page-top">
-     <!-- Div cargando -->
-     <?php include 'Cargando.php' ?>
+    <!-- Div cargando -->
+    <?php include 'Cargando.php' ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -40,29 +40,9 @@
             <?php include_once('includes/EscuelaLideres/interfaces.php'); ?>
 
             <!-- Divider -->
-            <hr class="sidebar-divider">
+           
 
             <!-- Heading -->
-            <div class="sidebar-heading">
-                Sistema
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-server"></i>
-                    <span>Base de Datos</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Base de Datos</h6>
-                        <a class="collapse-item" href="login.html"><i class="fas fa-server"></i> Respaldar BD</a>
-                        <a class="collapse-item" href="register.html"><i class="fas fa-server"></i> Restaurar BD</a>
-                    </div>
-                </div>
-            </li>
-
             <!-- Nav Item - Charts -->
 
             <!-- Nav Item - Tables -->
@@ -113,11 +93,14 @@
                             <div class="col-md-4">
                                 <form id="form2" class="p-2">
                                     <div class="form-group">
-                                        <label for="exampleSelect2">Buscar Miembro</label>
-                                        <button type="button" id="btn_miembro" class="btn btn-primary btn-block"
-                                            data-toggle="modal" data-target="#idModal">
-                                            <i class="fas fa-search-plus"></i> Buscar Miembro
-                                        </button>
+                                        <div class="input-group border-bottom-danger" id="div_miembro">
+                                            <label for="exampleSelect2">Buscar Miembro</label>
+                                            <button type="button" id="btn_miembro" class="btn btn-primary btn-block"
+                                                data-toggle="modal" data-target="#idModal">
+                                                <i class="fas fa-search-plus"></i> Buscar Miembro
+                                            </button>
+                                        </div>
+                                        <span id="val_miembro" class="text-danger">Seleccione un Miembro</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleSelect2">Codigo de Miembro</label>
@@ -155,7 +138,7 @@
                         </div>
                         <div class="modal-footer col-md-8">
                             <button type="button" id="btn_guardar" class="btn btn-primary btn-lg
-                                    text-center">
+                                    text-center" title="Llene todos los campos requeridos">
                                 <i class="far fa-save "></i>
                                 Guardar
                             </button>
@@ -167,7 +150,7 @@
                         </div>
                         <div class="modal fade" id="idModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
                             aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title">Buscar Miembro</h5>
@@ -253,19 +236,11 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
-
                 </div>
-
             </div>
-
-
-
             <!-- Footer -->
             <?php include 'Footer.php'?>
-
         </div>
     </div>
     <!-- Scroll to Top Button-->
@@ -282,5 +257,3 @@
 
 
 </body>
-
-<?php

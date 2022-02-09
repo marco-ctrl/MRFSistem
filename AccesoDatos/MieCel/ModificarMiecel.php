@@ -6,6 +6,7 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
     $pacodmie = $_POST['pacodmie'];
     $canommie = $_POST['canommie'];
     $cacidmie = $_POST['cacidmie'];
+    $cacidext = $_POST['cacidext'];
     $capatmie = $_POST['capatmie'];
     $camatmie = $_POST['camatmie'];
     $cadirmie = $_POST['cadirmie'];
@@ -23,6 +24,7 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
     capatmie='{$capatmie}',
     cacelmie='{$cacelmie}',
     cacidmie='{$cacidmie}',
+    cacidext='{$cacidext}',
     cadirmie='{$cadirmie}',
     caestmie=false,
     cafecnac='{$cafecnac}',

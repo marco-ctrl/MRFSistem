@@ -122,7 +122,7 @@ $(document).ready(function () {
                 $('#lista').hide();
                 $('#formulario').show();
                 $("#cbx_tipo").attr("disabled", false);
-                
+
                 const miembro = JSON.parse(responce);
                 miembro.forEach(miembro => {
                     codMiembro = miembro.facodmie,
@@ -130,7 +130,7 @@ $(document).ready(function () {
                         $('#txt_codigo').val(miembro.facodmie),
                         $('#cbx_tipo').val(miembro.catipusu),
                         $('#txt_usuario').val(miembro.canomusu),
-                        $('#txt_contrasena').val(generarContrasena(8,'')),
+                        $('#txt_contrasena').val(generarContrasena(8, '')),
                         $('#txt_miembro').val(miembro.canommie + ' ' + miembro.capatmie + ' ' + miembro.camatmie)
                 });
                 //contex.hide();
@@ -184,6 +184,8 @@ $(document).ready(function () {
         DeshabilitarFormulario();
         $('#formulario').hide();
         $('#lista').show();
+        $('html, body').animate({ scrollTop: 0 }, 'slow'); //seleccionamos etiquetas,clase o identificador destino, creamos animación hacia top de la página.
+        return false;
     });
 
     //////////////Registrar Nuevo Usuario///////////
@@ -314,10 +316,10 @@ $(document).ready(function () {
 
     ////////guardar Usuario///////////////
     function GuardarUsuario() {
-        let nombreMiembro=$('#txt_miembro').val();
-        let rolUsuario=$('#cbx_tipo').val();
-        let nombreUsuario= $('#txt_usuario').val();
-        let password=$('#txt_contrasena').val();
+        let nombreMiembro = $('#txt_miembro').val();
+        let rolUsuario = $('#cbx_tipo').val();
+        let nombreUsuario = $('#txt_usuario').val();
+        let password = $('#txt_contrasena').val();
         const postData = {
             facodmie: codMiembro,
             pacodusu: codUsuario,
@@ -348,13 +350,13 @@ $(document).ready(function () {
                 if (!edit && response == 'registra') {
                     actualizarSecuencia("USU", corre);
                     alertify.alert('Mensaje', 'Datos de Usuario guardados correctamente', function () { alertify.success('Se guardó correctamente'); });
-                    
+
                 }
                 if (edit && response == 'modificado') {
                     alertify.alert('Mensaje', 'Datos de Usuarios modificados correctamente', function () { alertify.success('Se guardó correctamente'); });
-                    
+
                 }
-                abrirNuevoTab('/MRFSistem/ReportesPDF/PDF_Usuario.php?nombre='+nombreMiembro+'&rol='+rolUsuario+'&codigo='+codUsuario+'&usuario='+nombreUsuario+'&pass='+password);
+                abrirNuevoTab('/MRFSistem/ReportesPDF/PDF_Usuario.php?nombre=' + nombreMiembro + '&rol=' + rolUsuario + '&codigo=' + codUsuario + '&usuario=' + nombreUsuario + '&pass=' + password);
 
                 edit = false;
                 ListarUsuario();
@@ -389,19 +391,72 @@ $(document).ready(function () {
     }
 
     function camposVaciosUsuario() {//validacion de campos vacios formulario usuario
-        let codigoMiembro=$("#txt_codigo").val();
-        let tipoUsuario= $("#cbx_tipo").val();
-        let contador=0;
-        if(codigoMiembro==''){
-            contador++
+        let codigoMiembro = $("#txt_codigo").val();
+        let tipoUsuario = $("#cbx_tipo").val();
+        let contador = 0;
+        if (codigoMiembro == '') {
+            $("#div_miembro").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#val_miembro").html("Selecciona un miembro");
+
+            $("#div_codigo").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_codigo").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_codigo").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            $("#div_nomMiembro").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_nomMiembro").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_nomMiembro").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
         }
-        if(tipoUsuario=='0'){
-            contador++
+        else {
+            $("#div_miembro").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_miembro").html("");
+            
+            $("#div_codigo").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#chk_codigo").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_codigo").html('<i class="fas fa-check"></i>');
+
+            $("#div_nomMiembro").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#chk_nomMiembro").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_nomMiembro").html('<i class="fas fa-check"></i>');
+            //console.log('corecto');
         }
-        if(contador==0){
+        if (tipoUsuario == '0') {
+            $("#div_tipo").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#val_tipo").html("Selecciona un rol de Usuario");
+            $("#chk_tipo").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_tipo").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            $("#div_usuario").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_usuario").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_usuario").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            $("#div_contrasena").switchClass("border-bottom-success", "border-bottom-danger", 100);
+            $("#chk_contrasena").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_contrasena").html('<i class="fas fa-exclamation-triangle"></i>');
+
+            contador++;
+        }
+        else {
+            $("#div_tipo").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_tipo").html("");
+            $("#chk_tipo").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_tipo").html('<i class="fas fa-check"></i>');
+            
+            $("#div_usuario").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#chk_usuario").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_usuario").html('<i class="fas fa-check"></i>');
+
+            $("#div_contrasena").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#chk_contrasena").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_contrasena").html('<i class="fas fa-check"></i>');
+            //console.log('corecto');
+        }
+        if (contador == 0) {
             $("#btn_guardar").attr("disabled", false);
+            $("#btn_guardar").attr("title", "Guardar datos de Usuario");
         }
-        else{
+        else {
             $("#btn_guardar").attr("disabled", true);
         }
     }
@@ -428,8 +483,8 @@ $(document).ready(function () {
 
     }
 
-    function generarContrasena(length, type){
-        switch(type){
+    function generarContrasena(length, type) {
+        switch (type) {
             case 'num':
                 characters = "0123456789";
                 break;
@@ -444,11 +499,11 @@ $(document).ready(function () {
                 break;
         }
         var pass = "";
-        for (i=0; i < length; i++){
-            if(type == 'rand'){
+        for (i = 0; i < length; i++) {
+            if (type == 'rand') {
                 pass += String.fromCharCode((Math.floor((Math.random() * 100)) % 94) + 33);
-            }else{
-                pass += characters.charAt(Math.floor(Math.random()*characters.length));   
+            } else {
+                pass += characters.charAt(Math.floor(Math.random() * characters.length));
             }
         }
         return pass;
