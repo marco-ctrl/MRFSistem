@@ -12,15 +12,7 @@ $(document).ready(function () {
 
     //fecha actual
     var hoy = new Date().format('Y-m-d');
-    Fecha();
-
-    function Fecha() {
-        $('#dat_fecbau').val(hoy);
-        $('#dat_feccon').val(hoy);
-        $('#dat_fecenc').val(hoy);
-        $('#dat_fecigl').val(hoy);
-    }
-
+    
 
     var video = document.getElementById('video');
     var canvas = document.getElementById('canvas');
@@ -40,6 +32,7 @@ $(document).ready(function () {
 
     ListarMiembro();
     ListarProfesion();
+    ListarMiembroPasivo();
     ListarCiudad();
     ListarCelula();
 
@@ -98,15 +91,14 @@ $(document).ready(function () {
     });
 
     $('#buscarMiembro').keyup(function (e) {//permite hacer busqueda de miembros
-        $('#profile').hide();
-        $('#home').show();
         if ($('#buscarMiembro').val()) {
             let buscar = $('#buscarMiembro').val().toUpperCase();
+            let condicion = $('#tipoBusqueda').val();
             let plantilla = '';
             $.ajax({
                 url: '/MRFSistem/AccesoDatos/Miembro/BuscarMiembro.php',
                 type: 'POST',
-                data: { buscar },
+                data: { buscar, condicion },
                 success: function (response) {
                     if (response != "no encontrado") {
                         let usuario = JSON.parse(response);
@@ -161,13 +153,10 @@ $(document).ready(function () {
         $('#form1').trigger('reset');
         $('#form2').trigger('reset');
         $('#form3').trigger('reset');
-        Fecha();
+        //Fecha();
         const context = canvas.getContext('2d');
         context.clearRect(0, 0, canvas.width, canvas.height);
         ImagenCanvas();
-        //DeshabilitarFormulario();
-        //$('#profile').hide();
-        //$('#home').show();
     }
 
     function ListarMiembro() {//lista usuarios
@@ -191,9 +180,9 @@ $(document).ready(function () {
 
 
     function MostrarTabla(plantilla, miembros) {
-        let extencion='';
-        if(miembros.cacidext != ""){
-            extencion="-"+miembros.cacidext;
+        let extencion = '';
+        if (miembros.cacidext != "") {
+            extencion = "-" + miembros.cacidext;
         }
         //console.log(miembros.cacidext);
         plantilla +=
@@ -250,7 +239,7 @@ $(document).ready(function () {
 
             },
             complete: function () {
-                
+
             },
             success: function (responce) {
                 //console.log(responce);
@@ -263,7 +252,7 @@ $(document).ready(function () {
                     codMiembro = miembro.pacodmie,
                         $('#txt_ci').val(miembro.cacidmie),
                         $('#txt_ciExtencion').val(miembro.cacidext);
-                        $('#txt_nombre').val(miembro.canommie),
+                    $('#txt_nombre').val(miembro.canommie),
                         $('#txt_paterno').val(miembro.capatmie),
                         $('#txt_materno').val(miembro.camatmie),
                         $('#txt_numcontacto').val(miembro.cacelmie),
@@ -353,6 +342,55 @@ $(document).ready(function () {
         }
     });
 
+    $('#txt_ci').on('input', function () {//asigar codigo profesion
+        var val = $('#txt_ci').val().toUpperCase();
+        let carnetIdentidad = $('#dat_ci').find('option[value="' + val + '"]').data('ci');
+        let carnetExt = $('#dat_ci').find('option[value="' + val + '"]').data('ciext');
+        if (carnetIdentidad === undefined) {
+            console.log("EmpName no está definido");
+            limpiar();
+            edit = false;
+        } else {
+            agregarDatosPorCi(carnetIdentidad);
+            edit = true;
+            console.log("EmpName está definido");
+        }
+    });
+
+    function agregarDatosPorCi(cacidmie) {
+        $.ajax({
+            url: '/MRFSistem/AccesoDatos/MieCel/BuscarMieCel.php',
+            type: 'POST',
+            data: { cacidmie },
+            success: function (response) {
+                if (response != "no encontrado") {
+                    let mbp = JSON.parse(response);
+                    mbp.forEach(mbp => {
+                        codMiembro = mbp.pacodmie;
+                        $('#txt_ci').val(mbp.cacidmie);
+                        $('#txt_ciExtencion').val(mbp.cacidext);
+                        $('#txt_nombre').val(mbp.canommie);
+                        $('#txt_paterno').val(mbp.capatmie);
+                        $('#txt_materno').val(mbp.camatmie);
+                        $('#txt_numcontacto').val(mbp.cacelmie);
+                        $('#txt_fecnac').val(mbp.cafecnac);
+                        $('#txt_direccion').val(mbp.cadirmie);
+                        $('#cbx_celula').val(mbp.pacodcel);
+                        $('#cbx_funcion').val(mbp.cafunmie);
+                    });
+                    capturarCampos();
+                    camposVacios();
+                }
+                else {
+                }
+            },
+            error: function (xhr, status) {
+                alert('error al buscar miembro');
+            }
+
+        });
+    }
+
     function agregarProfesion() {
         const postData = {
             pacodpro: codProfesion,
@@ -380,6 +418,26 @@ $(document).ready(function () {
                     plantilla += `<option value="${cel.pacodcel}" class="cod-profesion">${cel.canomcel}</option>`;
                 });
                 $('#cbx_celula').html(plantilla);
+            }
+        });
+
+    }
+
+    function ListarMiembroPasivo() {//listar miembros pasivos
+        $.ajax({
+            url: '/MRFSistem/AccesoDatos/MieCel/ListarMiembroPasivo.php',
+            type: 'GET',
+            success: function (response) {
+                let miembroPasivo = JSON.parse(response);
+                let plantilla;
+                miembroPasivo.forEach(mbp => {
+                    console.log(mbp.pacodcel);
+                    plantilla += `<option value="${mbp.cacidmie}"
+                                    data-ci="${mbp.cacidmie}"
+                                    data-ciext="${mbp.cacidext}">
+                                </option>`;
+                });
+                $('#dat_ci').html(plantilla);
             }
         });
 
@@ -532,7 +590,7 @@ $(document).ready(function () {
         limpiar();
         DeshabilitarFormulario();
         $('html, body').animate({ scrollTop: 0 }, 'slow'); //seleccionamos etiquetas,clase o identificador destino, creamos animación hacia top de la página.
-        return false; 
+        return false;
     });
 
     $("#btn_nuevo").click(function (event) {
@@ -687,6 +745,10 @@ $(document).ready(function () {
         nomCiudad = $('#cbx_ciudad').val();
         nomCelula = $('#cbx_celula').val();
         funCel = $('#cbx_funcion').val();
+        fechaConversion = $('#dat_feccon').val();
+        fechaBautiso = $('#dat_fecbau').val();
+        fechaEntradaIglesia = $('#dat_fecigl').val();
+        fechaEncuentro = $('#dat_fecenc').val();
     }
 
 
@@ -699,50 +761,38 @@ $(document).ready(function () {
     $("#btn_guardarMiembro").attr("disabled", true);
 
     //Validacion de Campos Vacios
-    $('#txt_ci').keyup(function (e) {
-        capturarCampos();
-        camposVacios();
-    });
-
-    $('#txt_nombre').keyup(function (e) {
-        capturarCampos();
-        camposVacios();
-        //soloLetras(e);
-    });
-    $('#txt_paterno').keyup(function (e) {
-        capturarCampos();
-        camposVacios();
-    });
-    $('#txt_materno').keyup(function (e) {
-        capturarCampos();
-        camposVacios();
-    });
-    $('#txt_numcontacto').keyup(function (e) {
-        capturarCampos();
-        camposVacios();
-    });
     $('#txt_direccion').keyup(function (e) {
         capturarCampos();
         camposVacios();
     });
-    $('#inp_profesion').keyup(function (e) {
+    
+    $('input[type=number]').keyup(function () {
         capturarCampos();
         camposVacios();
     });
 
-    $('#cbx_funcion').change(function (e) {//asigar codigo profesion
+    $('input[type=tel]').keyup(function () {
+        capturarCampos();
+        camposVacios();
+    });
+
+    $('input[type=text]').keyup(function () {
+        capturarCampos();
+        camposVacios();
+    });
+
+    $('input[type=date]').change(function () {
         capturarCampos();
         camposVacios();
         e.preventDefault();
-
     });
 
-    $('#cbx_estadoCivil').change(function (e) {//asigar codigo profesion
+    $('select').change(function () {
         capturarCampos();
         camposVacios();
         e.preventDefault();
-
     });
+
 
     var contador;
 
@@ -921,6 +971,61 @@ $(document).ready(function () {
             $("#chk_ciudad").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
             $("#chk_ciudad").html('<i class="fas fa-check"></i>');
         }
+
+        if (fechaConversion == ""){
+            $("#div_feccon").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_feccon").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_feccon").html('<i class="fas fa-exclamation-triangle"></i>');
+            $("#val_feccon").html("Completa este campo");
+            contador++;
+        }
+        else {
+            $("#div_feccon").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_feccon").html("");
+            $("#chk_feccon").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_feccon").html('<i class="fas fa-check"></i>');
+        }
+        if (fechaBautiso == ""){
+            $("#div_fecbau").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_fecbau").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_fecbau").html('<i class="fas fa-exclamation-triangle"></i>');
+            $("#val_fecbau").html("Completa este campo");
+            contador++;
+        }
+        else {
+            $("#div_fecbau").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_fecbau").html("");
+            $("#chk_fecbau").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_fecbau").html('<i class="fas fa-check"></i>');
+        }
+        if (fechaEntradaIglesia == ""){
+            $("#div_fecigl").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_fecigl").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_fecigl").html('<i class="fas fa-exclamation-triangle"></i>');
+            $("#val_fecigl").html("Completa este campo");
+            contador++;
+        }
+        else {
+            $("#div_fecigl").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_fecigl").html("");
+            $("#chk_fecigl").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_fecigl").html('<i class="fas fa-check"></i>');
+        }
+        if (fechaEncuentro == ""){
+            $("#div_fecenc").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_fecenc").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_fecenc").html('<i class="fas fa-exclamation-triangle"></i>');
+            $("#val_fecenc").html("Completa este campo");
+            contador++;
+        }
+        else {
+            $("#div_fecenc").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_fecenc").html("");
+            $("#chk_fecenc").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_fecenc").html('<i class="fas fa-check"></i>');
+        }
+        
+
         if (nomCelula == "0") {
             $("#div_celula").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
             $("#chk_celula").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");

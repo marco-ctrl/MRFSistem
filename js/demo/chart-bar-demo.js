@@ -90,7 +90,7 @@ function graficarIngresos() {
             yAxes: [{
               ticks: {
                 min: 0,
-                max: 3000,
+                max: 5000,
                 maxTicksLimit: 5,
                 padding: 10,
                 // Include a dollar sign in the ticks
@@ -195,7 +195,7 @@ function graficarEgresos() {
             yAxes: [{
               ticks: {
                 min: 0,
-                max: 3000,
+                max: 5000,
                 maxTicksLimit: 5,
                 padding: 10,
                 // Include a dollar sign in the ticks

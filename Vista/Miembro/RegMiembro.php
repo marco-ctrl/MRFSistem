@@ -16,7 +16,9 @@
                     <div class="input-group border-bottom-danger" id="div_ci">
                         <input type="number" id="txt_ci" placeholder="Carnet de Identidad" class="form-control"
                             title="introducir el carnet de identidad" onkeyup="numberMobile(event);" required
-                            style="width: 60%;">
+                            style="width: 60%;" list="dat_ci">
+                        <datalist id="dat_ci">
+                        </datalist>
                         <input type="text" id="txt_ciExtencion" placeholder="Extencion" class="form-control"
                             title="introducir extencion en caso de que tenga"
                             onkeyup="this.value=alfaNumerico(this.value);" required style="width: 20%;">
@@ -138,23 +140,48 @@
                 </div>
                 <div class="form-group">
                     <label>Fecha de Conversion</label>
-                    <input type="date" id="dat_feccon" min="1950-01-01" max="<?php echo date('Y-m-d'); ?>"
-                        placeholder="" onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
+                    <div class="input-group border-bottom-danger" id="div_feccon">
+                        <input type="date" id="dat_feccon" min="1950-01-01" max="<?php echo date('Y-m-d'); ?>"
+                            placeholder="" onkeydown="return ValidarEscrituraFecha()" class="form-control"
+                            autocomplete="off" value=""></input>
+                        <span id="chk_feccon" class="input-group-text bg-danger text-white">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                    </div>
+                    <span id="val_feccon" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
                     <label>Fecha de Bautismo</label>
-                    <input type="date" id="dat_fecbau" min="1950-01-01" max="<?php echo date('Y-m-d'); ?>"
-                        placeholder="" onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
+                    <div class="input-group border-bottom-danger" id="div_fecbau">
+                        <input type="date" id="dat_fecbau" min="1950-01-01" max="<?php echo date('Y-m-d'); ?>"
+                            placeholder="" onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
+                        <span id="chk_fecbau" class="input-group-text bg-danger text-white">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                    </div>
+                    <span id="val_fecbau" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
                     <label>Entrada a la Iglesia</label>
-                    <input type="date" id="dat_fecigl" min="1994-12-12" max="<?php echo date('Y-m-d'); ?>"
-                        placeholder="" onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
+                    <div class="input-group border-bottom-danger" id="div_fecigl">
+                        <input type="date" id="dat_fecigl" min="1994-12-12" max="<?php echo date('Y-m-d'); ?>"
+                            placeholder="" onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
+                        <span id="chk_fecigl" class="input-group-text bg-danger text-white">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                    </div>
+                    <span id="val_fecigl" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
                     <label>Encuentro Con Dios</label>
-                    <input type="date" id="dat_fecenc" min="2001-01-01" max="<?php echo date('Y-m-d'); ?>"
-                        placeholder="" onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
+                    <div class="input-group border-bottom-danger" id="div_fecenc">
+                        <input type="date" id="dat_fecenc" min="2001-01-01" max="<?php echo date('Y-m-d'); ?>"
+                            placeholder="" onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
+                        <span id="chk_fecenc" class="input-group-text bg-danger text-white">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                    </div>
+                    <span id="val_fecenc" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group text-center">
                     <label>Asignar Celula</label>
@@ -175,14 +202,15 @@
                 <div class="form-group">
                     <label for="">Funcion en la Celula</label>
                     <div class="input-group border-bottom-danger" id="div_funcion">
-                    <select id="cbx_funcion" class="form-control" style="width: 80%;">
-                        <option value="0">Funcion en la celula</option>
-                        <option value="DISCIPULO/A">DISCIPULO/A</option>
-                        <option value="ASISTENTE">ASISTENTE</option>
-                        <option value="ANFITRION">ANFITRION</option>
-                        <option value="LIDER">LIDER</option>
-                    </select>
-                    <span id="chk_funcion" class="input-group-text bg-danger text-white">
+                        <select id="cbx_funcion" class="form-control" style="width: 80%;">
+                            <option value="0">Funcion en la celula</option>
+                            <option value="DISCIPULO/A">DISCIPULO/A</option>
+                            <option value="ASISTENTE">ASISTENTE</option>
+                            <option value="ANFITRION">ANFITRION</option>
+                            <option value="LIDER">LIDER</option>
+                            <option value="PASTOR/A">PASTOR/A</option>
+                        </select>
+                        <span id="chk_funcion" class="input-group-text bg-danger text-white">
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
                     </div>
@@ -251,7 +279,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" id="btn_guardarMiembro" class="btn btn-primary btn-lg
-            text-center" title="Llene todos los campos requeridos" disable>
+            text-center tooltip-test" title="Llene todos los campos requeridos" disable>
             <i class="far fa-save "></i>
             Guardar
         </button>

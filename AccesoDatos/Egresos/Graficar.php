@@ -3,9 +3,11 @@
 include '../Conexion/Conexion.php';
 
 //$pacodcaj = $_POST['pacodcaj'];
+$anio=date('Y');
 
 $consulta = "SELECT SUM(`camonegr`) as total, DATE_FORMAT(cafecegr, '%m') as mes
 FROM aconegr
+where DATE_FORMAT(cafecegr, '%Y')='{$anio}'
 GROUP by mes";
 
 $resultado = mysqli_query($conexion, $consulta);

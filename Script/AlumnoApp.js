@@ -855,6 +855,9 @@ $(document).ready(function () {
         nomCelula = $('#cbx_celula').val();
         funCel = $('#cbx_funcion').val();
         fechaConversion = $('#dat_feccon').val();
+        fechaBautiso = $('#dat_fecbau').val();
+        fechaEntradaIglesia = $('#dat_fecigl').val();
+        fechaEncuentro = $('#dat_fecenc').val();
     }
 
 
@@ -867,49 +870,36 @@ $(document).ready(function () {
     $("#btn_guardarAlu").attr("disabled", true);
 
     //Validacion de Campos Vacios
-    $('#txt_ci').keyup(function (e) {
-        capturarCampos();
-        camposVacios();
-    });
-
-    $('#txt_nombre').keyup(function (e) {
-        capturarCampos();
-        camposVacios();
-        //soloLetras(e);
-    });
-    $('#txt_paterno').keyup(function (e) {
-        capturarCampos();
-        camposVacios();
-    });
-    $('#txt_materno').keyup(function (e) {
-        capturarCampos();
-        camposVacios();
-    });
-    $('#txt_numcontacto').keyup(function (e) {
-        capturarCampos();
-        camposVacios();
-    });
     $('#txt_direccion').keyup(function (e) {
         capturarCampos();
         camposVacios();
     });
-    $('#inp_profesion').keyup(function (e) {
+    
+    $('input[type=number]').keyup(function () {
         capturarCampos();
         camposVacios();
     });
 
-    $('#cbx_funcion').change(function (e) {//asigar codigo profesion
+    $('input[type=tel]').keyup(function () {
         capturarCampos();
         camposVacios();
-        e.preventDefault();
-
     });
 
-    $('#cbx_estadoCivil').change(function (e) {//asigar codigo profesion
+    $('input[type=text]').keyup(function () {
+        capturarCampos();
+        camposVacios();
+    });
+
+    $('input[type=date]').change(function () {
         capturarCampos();
         camposVacios();
         e.preventDefault();
+    });
 
+    $('select').change(function () {
+        capturarCampos();
+        camposVacios();
+        e.preventDefault();
     });
 
     var contador;
@@ -1090,12 +1080,58 @@ $(document).ready(function () {
             $("#chk_ciudad").html('<i class="fas fa-check"></i>');
         }
         if (fechaConversion == ""){
-            console.log(fechaConversion);
+            $("#div_feccon").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_feccon").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_feccon").html('<i class="fas fa-exclamation-triangle"></i>');
+            $("#val_feccon").html("Completa este campo");
             contador++;
         }
         else {
-            
+            $("#div_feccon").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_feccon").html("");
+            $("#chk_feccon").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_feccon").html('<i class="fas fa-check"></i>');
         }
+        if (fechaBautiso == ""){
+            $("#div_fecbau").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_fecbau").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_fecbau").html('<i class="fas fa-exclamation-triangle"></i>');
+            $("#val_fecbau").html("Completa este campo");
+            contador++;
+        }
+        else {
+            $("#div_fecbau").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_fecbau").html("");
+            $("#chk_fecbau").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_fecbau").html('<i class="fas fa-check"></i>');
+        }
+        if (fechaEntradaIglesia == ""){
+            $("#div_fecigl").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_fecigl").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_fecigl").html('<i class="fas fa-exclamation-triangle"></i>');
+            $("#val_fecigl").html("Completa este campo");
+            contador++;
+        }
+        else {
+            $("#div_fecigl").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_fecigl").html("");
+            $("#chk_fecigl").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_fecigl").html('<i class="fas fa-check"></i>');
+        }
+        if (fechaEncuentro == ""){
+            $("#div_fecenc").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
+            $("#chk_fecenc").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
+            $("#chk_fecenc").html('<i class="fas fa-exclamation-triangle"></i>');
+            $("#val_fecenc").html("Completa este campo");
+            contador++;
+        }
+        else {
+            $("#div_fecenc").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
+            $("#val_fecenc").html("");
+            $("#chk_fecenc").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
+            $("#chk_fecenc").html('<i class="fas fa-check"></i>');
+        }
+        
         if (nomCelula == "0") {
             $("#div_celula").switchClass("border-bottom-success", "border-bottom-danger", 100, "easeInOutQuad");
             $("#chk_celula").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");

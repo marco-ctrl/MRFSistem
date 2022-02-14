@@ -235,28 +235,52 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha de Conversion</label>
-                                        <input type="date" id="dat_feccon" min="1950-01-01"
-                                            max="<?php echo date('Y-m-d'); ?>" placeholder=""
-                                            onkeydown="return ValidarEscrituraFecha()" class="form-control"
-                                            autocomplete="off"></input>
+                                        <div class="input-group border-bottom-danger" id="div_feccon">
+                                            <input type="date" id="dat_feccon" min="1950-01-01"
+                                                max="<?php echo date('Y-m-d'); ?>" placeholder=""
+                                                onkeydown="return ValidarEscrituraFecha()" class="form-control"
+                                                autocomplete="off"></input>
+                                            <span id="chk_feccon" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_feccon" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha de Bautismo</label>
-                                        <input type="date" id="dat_fecbau" min="1950-01-01"
-                                            max="<?php echo date('Y-m-d'); ?>" placeholder=""
-                                            onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
+                                        <div class="input-group border-bottom-danger" id="div_fecbau">
+                                            <input type="date" id="dat_fecbau" min="1950-01-01"
+                                                max="<?php echo date('Y-m-d'); ?>" placeholder=""
+                                                onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
+                                            <span id="chk_fecbau" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_fecbau" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Entrada a la Iglesia</label>
-                                        <input type="date" id="dat_fecigl" min="1994-12-12"
-                                            max="<?php echo date('Y-m-d'); ?>" placeholder=""
-                                            onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
+                                        <div class="input-group border-bottom-danger" id="div_fecigl">
+                                            <input type="date" id="dat_fecigl" min="1994-12-12"
+                                                max="<?php echo date('Y-m-d'); ?>" placeholder=""
+                                                onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
+                                            <span id="chk_fecigl" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_fecigl" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Encuentro Con Dios</label>
-                                        <input type="date" id="dat_fecenc" min="2001-01-01"
-                                            max="<?php echo date('Y-m-d'); ?>" placeholder=""
-                                            onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
+                                        <div class="input-group border-bottom-danger" id="div_fecenc">
+                                            <input type="date" id="dat_fecenc" min="2001-01-01"
+                                                max="<?php echo date('Y-m-d'); ?>" placeholder=""
+                                                onkeydown="return ValidarEscrituraFecha()" class="form-control"></input>
+                                            <span id="chk_fecenc" class="input-group-text bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </span>
+                                        </div>
+                                        <span id="val_fecenc" class="text-danger">Completa este campo</span>
                                     </div>
                                     <div class="form-group text-center">
                                         <label>Asignar Celula</label>
@@ -374,7 +398,8 @@
                         </div>
                         <div class="modal fade" id="idModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
                             aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+                            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+                                role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title">Buscar Miembro</h5>

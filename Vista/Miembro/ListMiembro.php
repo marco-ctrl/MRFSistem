@@ -7,9 +7,18 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-8">
-                    <form action=# class="row text-center">
-                        <div class="input-group mb-3 col-6">
-                            <input type="text" class="form-control" id="buscarMiembro" placeholder="Buscar.."></input>
+                    <form action=# class="d-flex">
+                        <label for="">Buscar por </label>
+                        <select name="" id="tipoBusqueda" class="btn-primary form-control">
+                            <option value="cacidmie">Carnet Identidad</option>
+                            <option value="canommie">Nombre</option>
+                            <option value="capatmie">Apellido Paterno</option>
+                            <option value="camatmie">Apellido Materno</option>
+                        </select>
+                        <div class="input-group mb-3 col-8">
+
+                            <input type="search" class="form-control" id="buscarMiembro"
+                                placeholder="Buscar..."></input>
                             <button class="btn btn-primary" id="btn_busFec"><i class="fas fa-search"></i></button>
                         </div>
 

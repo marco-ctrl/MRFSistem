@@ -6,30 +6,21 @@ $consulta = "SELECT camatmie,
 capatmie, 
 cacelmie, 
 cacidmie,
-cacidext, 
+cacidmie, 
 cadirmie, 
-caestmie, 
-ceestciv, 
 cafecnac, 
-caurlfot, 
 canommie, 
 pacodmie, 
-facodciu, 
-facodpro,
-pacodpro,
-canompro,
-pacodciu,
-canomciu,
 canomcel,
 cafunmie,
+pacodmcl,
 pacodcel
-FROM amiebro, aproion, aciudad, amiecel, acelula   
-where facodpro=pacodpro 
-and caestmie=true
-and facodciu=pacodciu
-and facodcel=pacodcel
-and facodmie=pacodmie
-order by pacodmie desc LIMIT 15";
+FROM amiebro m, acelula, amiecel 
+where pacodmie=facodmie
+and pacodcel=facodcel
+and m.caestmie=0
+and amiecel.caestmcl=1
+order by cafunmie desc";
 $resultado = mysqli_query($conexion, $consulta);
 
 $json=array();
@@ -41,20 +32,12 @@ while ($row = mysqli_fetch_array($resultado)) {
                     'cacidmie' => $row['cacidmie'],
                     'cacidext' => $row['cacidext'],
                     'cadirmie' => $row['cadirmie'],
-                    'caestmie' => $row['caestmie'],
-                    'caestciv' => $row['ceestciv'],
                     'cafecnac' => $row['cafecnac'],
-                    'caurlfot' => $row['caurlfot'],
                     'canommie' => $row['canommie'],
                     'pacodmie' => $row['pacodmie'],
-                    'facodciu' => $row['facodciu'],
-                    'facodpro' => $row['facodpro'],
-                    'pacodpro' => $row['pacodpro'],
-                    'canompro' => $row['canompro'],
-                    'pacodciu' => $row['pacodciu'],
-                    'canomciu' => $row['canomciu'],
                     'canomcel' => $row['canomcel'],
                     'cafunmie' => $row['cafunmie'],
+                    'pacodmcl' => $row['pacodmcl'],
                     'pacodcel' => $row['pacodcel']);
 }
 if ($json==null){

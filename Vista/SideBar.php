@@ -23,12 +23,6 @@
             <span>Mapa Celulas</span></a>
     </li>
 
-    <!--<li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-user"></i>
-            <span>Perfil</span></a>
-    </li>-->
-
     <!-- Divider -->
     <hr class="sidebar-divider">
 
@@ -68,7 +62,7 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header"> Reportes:</h6>
-                <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Informacion de
+                <a class="collapse-item" href="FRM_InfoMiembro"><i class="far fa-file-pdf"></i> Informacion de
                     Miembro</a>
                 <a class="collapse-item" href="#"><i class="far fa-file-pdf"></i> Informacion de
                     Usuarios</a>

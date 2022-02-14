@@ -3,7 +3,9 @@
 include '../Conexion/Conexion.php';
 
 $buscar = $_POST['buscar'];
+$condicion = $_POST['condicion'];
 //$buscar = "B";
+//$condicion = "cacidmie";
 
 $consulta = "SELECT camatmie, 
 capatmie, 
@@ -22,12 +24,17 @@ facodpro,
 pacodpro,
 canompro,
 pacodciu,
-canomciu
-FROM amiebro m, aproion p, aciudad c 
+canomciu,
+canomcel,
+cafunmie,
+pacodcel
+FROM amiebro m, aproion p, aciudad c, amiecel, acelula
 where m.facodpro=p.pacodpro
 and m.caestmie=true 
 and m.facodciu=c.pacodciu
-and canommie like'%{$buscar}%'
+and facodcel=pacodcel
+and facodmie=pacodmie
+and {$condicion} like '%{$buscar}%'
 order by pacodmie desc LIMIT 15";
 $resultado = mysqli_query($conexion, $consulta);
 //if ($resultado) {
@@ -50,7 +57,10 @@ $resultado = mysqli_query($conexion, $consulta);
                         'pacodpro' => $row['pacodpro'],
                         'canompro' => $row['canompro'],
                         'pacodciu' => $row['pacodciu'],
-                        'canomciu' => $row['canomciu']);
+                        'canomciu' => $row['canomciu'],
+                        'canomcel' => $row['canomcel'],
+                        'cafunmie' => $row['cafunmie'],
+                        'pacodcel' => $row['pacodcel']);
     }
     if($json!=null){
         echo json_encode($json);

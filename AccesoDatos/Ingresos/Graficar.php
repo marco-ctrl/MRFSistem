@@ -3,10 +3,12 @@
 include '../Conexion/Conexion.php';
 
 //$pacodcaj = $_POST['pacodcaj'];
+$anio=date('Y');
 
-$consulta = "SELECT SUM(`camoning`) as total, DATE_FORMAT(cafecing, '%m') as mes
+$consulta = "SELECT SUM(`camoning`) as total, DATE_FORMAT(cafecing, '%m') as mes, DATE_FORMAT(cafecing, '%Y') as anio
 FROM aconing
-GROUP by mes";
+WHERE DATE_FORMAT(cafecing, '%Y')='{$anio}'
+GROUP by mes, anio";
 
 $resultado = mysqli_query($conexion, $consulta);
 
