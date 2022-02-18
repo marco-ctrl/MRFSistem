@@ -348,8 +348,11 @@ $(document).ready(function () {
         let carnetExt = $('#dat_ci').find('option[value="' + val + '"]').data('ciext');
         if (carnetIdentidad === undefined) {
             console.log("EmpName no está definido");
-            limpiar();
-            edit = false;
+            if (edit==false){
+                limpiar();
+            
+            }
+            //edit = false;
         } else {
             agregarDatosPorCi(carnetIdentidad);
             edit = true;

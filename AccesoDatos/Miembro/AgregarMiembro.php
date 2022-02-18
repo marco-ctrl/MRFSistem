@@ -24,18 +24,23 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
     $facodpro = $_POST['facodpro'];
     $facodciu = $_POST['facodciu'];
     $cacidext = $_POST['cacidext'];
+    $cafecenc = $_POST['cafecenc'];
+    $cafecbau = $_POST['cafecbau'];
+    $cafecigl = $_POST['cafecigl'];
+    $cafeccon = $_POST['cafeccon'];
+    $pacodcre = $_POST['pacodcre'];
     $cafotmie = $imagenCodificadaLimpia;
 
     $date = date('jmyhis');
-//echo ''.$date ;
+    //echo ''.$date ;
     $path = "Imagenes/$pacodmie$canommie.jpg";
 
     $url = "/MRFSistem/AccesoDatos/Miembro/$path";
-//$url = "Imagenes/"$pacodmie$canommie.".jmysqli";
+    //$url = "Imagenes/"$pacodmie$canommie.".jmysqli";
 
     file_put_contents($path, base64_decode($cafotmie));
     $bytesArchivo = file_get_contents($path);
-//$bytesArchivo = mysqli_escape_bytea($bytesArchivo);
+    //$bytesArchivo = mysqli_escape_bytea($bytesArchivo);
     //$imagen = $_POST['imagen'];
     //echo ' '.$documento.' '.$nombre.' '.$profesion; '{$bytesArchivo}',
     $sql = "INSERT INTO `mrfbermejobd`.`amiebro`
@@ -55,7 +60,11 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
     `facodpro`,
     `cafotmie`,
         `cabanmae`,
-        `cabanalu`)
+        `cabanalu`,
+        `cafecenc`, 
+        `cafecbau`, 
+        `cafeccon`, 
+        `cafecigl`)
         VALUES (
         '{$camatmie}',
         '{$capatmie}',
@@ -73,15 +82,15 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
         '{$facodpro}',
         '',
         false,
-        false);";
+        false,
+        '$cafecenc',
+        '$cafecbau',
+        '$cafeccon',
+        '$cafecigl');";
     $stm = mysqli_query($conexion, $sql);
 
     if ($stm) {
-        $cafecenc = $_POST['cafecenc'];
-        $cafecbau = $_POST['cafecbau'];
-        $cafecigl = $_POST['cafecigl'];
-        $cafeccon = $_POST['cafeccon'];
-        $pacodcre = $_POST['pacodcre'];
+
 
         $sql = "INSERT INTO acreesp(
             cafecenc,
@@ -112,8 +121,6 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
     }
 
     mysqli_close($conexion);
-
-}
-else{
+} else {
     echo $_POST['cafecnac'];
 }

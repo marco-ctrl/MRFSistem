@@ -6,6 +6,15 @@ require_once "../AccesoDatos/Conexion/Conexion.php";
 
 $buscar = $_GET['buscar'];
 $condicion = $_GET['condicion'];
+$where = '';
+
+if ($buscar=='' and $condicion==''){
+    $where='';
+}
+else{
+    $where="and {$condicion} like '%{$buscar}%'";
+    //echo ($where);
+}
 //$buscar = "DISCIPULO/A";
 //$condicion = "cafunmie";
 
@@ -60,10 +69,9 @@ and m.caestmie=true
 and m.facodciu=c.pacodciu
 and facodcel=pacodcel
 and facodmie=pacodmie
-and {$condicion} like '%{$buscar}%'
-order by pacodmie desc LIMIT 15";
+{$where}
+order by pacodmie desc ";
 $resultado = mysqli_query($conexion, $consulta);
-
 
 $html .= '<table class="table">
             <tr>

@@ -21,6 +21,11 @@ if (isset($_POST["pacodmie"]) && isset($_POST["canommie"]) && isset($_POST["caci
     $caestmie = $_POST['caestmie'];
     $facodpro = $_POST['facodpro'];
     $facodciu = $_POST['facodciu'];
+    $cafecenc = $_POST['cafecenc'];
+    $cafecbau = $_POST['cafecbau'];
+    $cafecigl = $_POST['cafecigl'];
+    $cafeccon = $_POST['cafeccon'];
+    
     $cafotmie = $imagenCodificadaLimpia;
 
     $date=date('jmyhis');
@@ -48,7 +53,11 @@ $bytesArchivo = file_get_contents($path);
         caurlfot = '{$url}',
         canommie = '{$canommie}', 
         facodciu = '{$facodciu}', 
-        facodpro = '{$facodpro}'
+        facodpro = '{$facodpro}',
+        cafecenc='{$cafecenc}', 
+	    cafecbau='{$cafecbau}', 
+	    cafecigl='{$cafecigl}', 
+	    cafeccon='{$cafeccon}' 
         WHERE pacodmie = '{$pacodmie}'";
     $stm = mysqli_query($conexion, $sql);
 }

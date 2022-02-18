@@ -28,18 +28,15 @@ cafeccon,
 cafecbau,
 cafecenc,
 cafecigl,
-pacodcre,
 pacodcel,
 cafunmie
 FROM amiebro m, 
 	 aproion p, 
 	 aciudad c,
-	 acreesp a,
-     acelula, 
+	 acelula, 
      amiecel
 where m.facodpro=p.pacodpro 
 and m.facodciu=c.pacodciu
-and a.pacodcre=m.pacodmie
 and pacodcel=facodcel
 and facodmie=pacodmie
 and m.pacodmie='{$pacodmie}'";
@@ -71,7 +68,6 @@ $resultado = mysqli_query($conexion, $consulta);
                         'cafecbau' => $row['cafecbau'],
                         'cafecenc' => $row['cafecenc'],
                         'cafecigl' => $row['cafecigl'],
-                        'pacodcre' => $row['pacodcre'],
                         'pacodcel' => $row['pacodcel'],
                         'cafunmie' => $row['cafunmie']);
     }

@@ -2,8 +2,8 @@
 $(document).ready(function () {
 
     var contenedor = document.getElementById('contenedor_carga');
-    var condicion;
-    var codigo
+    var condicion='';
+    var codigo='';
     //Declaracion de Variables///
 
     ListarMiembro();
@@ -76,7 +76,7 @@ $(document).ready(function () {
                 <td>${miembros.canomcel}</td>
                 <td>${miembros.cafunmie}</td>
                 <td>
-                    <button class="info-miembro btn btn-primary">
+                    <button class="info-miembro btn btn-primary ver-miembro">
                     <i class="fas fa-info-circle"></i>
                     </button>
                 </td>
@@ -138,6 +138,7 @@ $(document).ready(function () {
         var val = $('#buscarMiembro').val().toUpperCase();
         codigo = $('#dat_buscar').find('option[value="' + val + '"]').data('codigo');
         var nombre = $('#dat_buscar').find('option[value="' + val + '"]').data('nombre');
+        let tipo= $('#tipoBusqueda').val();
 
         let plantilla = '<tr><td colspan="8" align="center">Tabla vacia</td></tr>';
 
@@ -151,10 +152,17 @@ $(document).ready(function () {
             BuscarMiembro(codigo, condicion);
             console.log("EmpName está definido");
         }
+
+        if (tipo=="NOMBRE" || tipo=="APELLIDO PATERNO" || tipo=="APELLIDO MATERNO"){
+            codigo=val;
+            BuscarMiembro(codigo, condicion);
+        }
+        
     });
 
     $('#tipoBusqueda').change(function (e) {//asigar codigo profesion
         let tipoBusqeda = $('#tipoBusqueda').val();
+        $('#btn_reporte').attr("disabled", false);
         if (tipoBusqeda == "TODO") {
             $('#dat_buscar').html('');
             $("#buscarMiembro").attr("disabled", true);
@@ -166,6 +174,16 @@ $(document).ready(function () {
         else {
             $("#buscarMiembro").attr("disabled", false);
         }
+        if (tipoBusqeda == "NOMBRE") {
+            condicion = "canommie";
+        }
+        if (tipoBusqeda == "APELLIDO PATERNO") {
+            condicion = "capatmie";
+        }
+        if (tipoBusqeda == "APELLIDO MATERNO") {
+            condicion = "camatmie";
+        }
+        
         if (tipoBusqeda == "PROFESION") {
             condicion = "pacodpro";
             ListarProfesion();
@@ -184,6 +202,12 @@ $(document).ready(function () {
 
     $('#btn_reporte').click(function (event) {
         abrirNuevoTab('/MRFSistem/ReportesPDF/PDF_InfoMiembro.php?buscar='+codigo+'&condicion='+condicion);
+    });
+
+    $(document).on('click', '.ver-miembro', function () {
+        let elemento = $(this)[0].parentElement.parentElement;
+        let pacodmie = $(elemento).attr('UserDocu');
+        abrirNuevoTab('/MRFSistem/ReportesPDF/PDF_DatosPersonalMiembro.php?pacodmie='+pacodmie);
     });
 
     function abrirNuevoTab(url) {

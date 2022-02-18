@@ -193,6 +193,22 @@ $(document).ready(function () {
         }
     });
 
+    $(document).on('click', '.alta-celula', function () {//elimina usuario
+        if (confirm("Seguro que desea dar de alta esta celula")) {
+            let elemento = $(this)[0].parentElement.parentElement;
+            let pacodcel = $(elemento).attr('UserDocu');
+            $.post('/MRFSistem/AccesoDatos/Celula/DarAlta.php',
+                { pacodcel }, function (responce) {
+                    if (responce == 'baja') {
+                        ListarCelula();
+                        MostrarMensaje("Celula dado de alta", "success");
+                    }
+
+                });
+        }
+    });
+
+
     $('#btn_nuevo').click(function (e) {//nuevo registro de Celula 
         $('#lista').hide();
         $('#formulario').show();
@@ -249,6 +265,16 @@ $(document).ready(function () {
     }
 
     function MostrarTabla(plantilla, usu) {//////Mostrar Tabla///////////
+        console.log(usu.caestcel);
+        let estado="";
+        if (usu.caestcel == "1"){
+            estado=`<button class="baja-celula btn btn-danger" title="Dar de Baja Celula">
+            <i class="fas fa-trash-alt "></i></button>`;
+        }
+        else {
+            estado=`<button class="alta-celula btn btn-success" title="Dar de Alta Celula">
+            <i class="fas fa-trash-restore"></i></button>`;
+        }
         plantilla +=
             `<tr UserDocu="${usu.pacodcel}" class="table-light">
                 <td>${usu.canomcel}</td>
@@ -263,9 +289,7 @@ $(document).ready(function () {
                     data-bs-toggle="modal"><i class="fas fa-user-plus"></i></button>
                 </td>
                 <td>
-                    <button class="baja-celula btn btn-danger" title="Dar de Baja Celula">
-                    <i class="fas fa-trash-alt "></i></button>
-                    
+                    ${estado}
                 </td>
                 <td>
                     <button class="modificar-celula btn btn-secondary" title="Modificar Celula">

@@ -72,11 +72,6 @@ $html.='<table class="Informe">
             <td class="total" style="width:20%"><u>'.number_format($totIngresos, 2).'</u></td>
         </tr></table>';
 
-/*$html.='<div class="Informe">
-            <div class="columnaItems">'.$htmlItem.'</div>
-            <div class="columna" ALIGN="right">'.$htmlIngreso.'</div>
-            <div class="columna"><u>'.$htmlTotalIngresos.$totIngresos.'</u></div>
-      </div>';*/
 
 $html.='<P CLASS="western" ALIGN=left>
 <FONT FACE="Calibri, serif"><B>EGRESOS</B></FONT></P><BR>';

@@ -17,17 +17,27 @@ h3,h4{
 img.izquierdo{
     float: left;
     margin-right: 0px;
-    margin-left: 15px;
+    margin-left: 0px;
     width: 110px;
     height: 110px;
 }
 
 img.derecho{
     float: right;
-    margin-right: 20px;
+    margin-right: 0px;
     margin-left: 0px;
-    width: 120px;
+    width: 130px;
     height: 120px;
+    border-radius: 20%;
+}
+
+img.foto{
+    float: right;
+    margin-right: 0px;
+    margin-left: 0px;
+    width: 60px;
+    height: 50px;
+    border-radius: 20%;
 }
 
 div.Informe{
@@ -72,3 +82,7 @@ p.western{
     margin-bottom: 0in;
     line-height: 100%;
 }
+
+.interlineado { line-height: 200%;} 
+
+

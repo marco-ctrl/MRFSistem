@@ -46,6 +46,9 @@
                                                         <select name="" id="tipoBusqueda"
                                                             class="btn-primary form-control">
                                                             <option value="TODO">TODO</option>
+                                                            <option value="NOMBRE">NOMBRE</option>
+                                                            <option value="APELLIDO PATERNO">APELLIDO PATERNO</option>
+                                                            <option value="APELLIDO MATERNO">APELLIDO MATERNO</option>
                                                             <option value="PROFESION">PROFESION</option>
                                                             <option value="CELULA">CELULA</option>
                                                             <option value="FUNCION">FUNCION</option>
