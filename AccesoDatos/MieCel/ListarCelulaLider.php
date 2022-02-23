@@ -17,7 +17,8 @@ canombar,
 canomcal,
 cafunmie,
 caestcel,
-pacodmcl
+pacodmcl,
+pacodcel
 FROM amiebro m, acelula, amiecel, abardir, acaldir 
 where pacodmie=facodmie
 and pacodcel=facodcel
@@ -45,7 +46,8 @@ while ($row = mysqli_fetch_array($resultado)) {
                     'pacodmcl' => $row['pacodmcl'],
                     'canombar' => $row['canombar'],
                     'canomcal' => $row['canomcal'],
-                    'canumcel' => $row['canumcel']);
+                    'canumcel' => $row['canumcel'],
+                    'pacodcel' => $row['pacodcel']);
 }
 if ($json==null){
     echo 'false';

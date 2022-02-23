@@ -50,7 +50,6 @@ $pass=$_GET['pass'];
         </div>
     </div>
     <script src="Script/html2pdf.bundle.min.js"></script>
-    <script src="JSPdf/ControlAsistencia.js"></script>
     <script type="text/javascript" src="Script/qrcode.js"></script>
     <script type="text/javascript">
     var qrcode = new QRCode(document.getElementById("qrcode"), {
@@ -73,7 +72,7 @@ $pass=$_GET['pass'];
             html2pdf()
                 .set({
                     margin: 1,
-                    filename: 'documento.pdf',
+                    filename: "usurio-<?php echo $nombre.$rol ?>",
                     image: {
                         type: 'jpeg',
                         quality: 0.98
@@ -85,7 +84,7 @@ $pass=$_GET['pass'];
                     jsPDF: {
                         unit: "in",
                         format: "letter",
-                        orientation: 'landscape' // landscape o portrait
+                        orientation: 'portrait' // landscape o portrait
                     }
                 })
                 .from($elementoParaConvertir)

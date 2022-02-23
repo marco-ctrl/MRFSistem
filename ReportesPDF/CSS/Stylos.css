@@ -6,6 +6,11 @@ h3,h4{
 	border: 1px solid black;
 }
 
+.table,.th {
+	border: 1px solid black;
+}
+
+
 .table{
     margin: 0 auto;
 }
@@ -85,4 +90,8 @@ p.western{
 
 .interlineado { line-height: 200%;} 
 
-
+.mapas { 
+    height: 300px;
+    width: 500px;
+    
+}

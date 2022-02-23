@@ -32,10 +32,16 @@
             <h6 class="collapse-header"> Reportes:</h6>
             <a class="collapse-item" href="INF_Alumno"><i class="far fa-file-pdf"></i> Informacion
                 Alumno</a>
+            <a class="collapse-item" href="InfoCursos" href="#"><i class="far fa-file-pdf"></i>
+                Informacion Maestros</a>
             <a class="collapse-item" href="ControlPago" href="#"><i class="far fa-file-pdf"></i> Control de
                 Pago</a>
             <a class="collapse-item" href="ControlAsistencia" href="#"><i class="far fa-file-pdf"></i>
                 Control de Asistencia</a>
+            <a class="collapse-item" href="INF_Materias" href="#"><i class="far fa-file-pdf"></i>
+                Informacion de Materias</a>
+            <a class="collapse-item" href="INF_Cursos" href="#"><i class="far fa-file-pdf"></i>
+                Informacion de Curso</a>
 
         </div>
     </div>

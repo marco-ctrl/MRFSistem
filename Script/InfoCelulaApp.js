@@ -109,10 +109,12 @@ $(document).ready(function () {
         abrirNuevoTab('/MRFSistem/ReportesPDF/PDF_InfoCelula.php');
     });
 
-    $(document).on('click', '.ver-miembro', function () {
+    $(document).on('click', '.ver-celula', function () {
+        console.log('hola mundo');
         let elemento = $(this)[0].parentElement.parentElement;
-        let pacodmie = $(elemento).attr('UserDocu');
-        abrirNuevoTab('/MRFSistem/ReportesPDF/PDF_DatosPersonalMiembro.php?pacodmie='+pacodmie);
+        let pacodcel = $(elemento).attr('UserDocu');
+        console.log(pacodcel);
+        abrirNuevoTab('/MRFSistem/ReportesPDF/PDF_DatosCelula.php?pacodcel='+pacodcel);
     });
 
     function abrirNuevoTab(url) {

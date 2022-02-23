@@ -10,7 +10,7 @@ if ($_FILES["zip_file"]["name"]) {
     $dbHost     = 'localhost';
     $dbUsername = 'root';
     $dbPassword = 'uajms1234';
-    $dbName     = 'pruebabd';
+    $dbName     = 'mrfbermejobd';
 
     if ($tipo == "application/sql") {
         restoreDatabaseTables($dbHost, $dbUsername, $dbPassword, $dbName, $ruta);

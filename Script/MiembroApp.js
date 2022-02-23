@@ -231,6 +231,7 @@ $(document).ready(function () {
         habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodmie = $(elemento).attr('UserDocu');
+        console.log('hola mundo');
         $.ajax({
             url: '/MRFSistem/AccesoDatos/Miembro/SingleMiembro.php',
             type: 'POST',
@@ -246,6 +247,7 @@ $(document).ready(function () {
                 $('#home').hide();
                 $('#profile').show();
                 $("#btn_guardarMiembro").attr("disabled", false);
+                console.log(responce);
                 const miembro = JSON.parse(responce);
                 let foto;
                 miembro.forEach(miembro => {
