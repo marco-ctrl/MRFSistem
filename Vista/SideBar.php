@@ -91,7 +91,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Base de Datos</h6>
                 <a class="collapse-item" id="mn_respaldo" href="#"><i class="fas fa-server"></i> Respaldar BD</a>
-                <a class="collapse-item" href="FRM_ResturarBD"><i class="fas fa-server"></i> Restaurar BD</a>
+                <a class="collapse-item" href="FRM_RestaurarBD"><i class="fas fa-server"></i> Restaurar BD</a>
             </div>
         </div>
     </li>

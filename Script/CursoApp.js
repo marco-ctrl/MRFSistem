@@ -66,10 +66,10 @@ $(document).ready(function () {
                 data: { buscar },
                 success: function (response) {
                     if (response != "no encontrado") {
-                        let cel = JSON.parse(response);
+                        let cur = JSON.parse(response);
 
                         cur.forEach(cur => {
-                            plantilla = MostrarTabla(plantilla, cel);
+                            plantilla = MostrarTabla(plantilla, cur);
                         });
                         $('#tb_curso').html(plantilla);
                     }
@@ -204,7 +204,6 @@ $(document).ready(function () {
     function MostrarTabla(plantilla, cur) {//////Mostrar Tabla///////////
         plantilla +=
             `<tr UserDocu="${cur.pacodcur}" class="table-light">
-                <td>${cur.pacodcur}</td>
                 <td>${cur.canommat}</td>
                 <td>${cur.caparcur}</td>
                 <td>${cur.cagescur}</td>

@@ -45,7 +45,7 @@ $html.='<P CLASS="western" ALIGN=left>
 <FONT FACE="Calibri, serif"><B>INGRESOS</B></FONT></P>';
 
 
-$consulta = "SELECT catiping, format(SUM(`camoning`), 2) as catoting 
+$consulta = "SELECT catiping, SUM(`camoning`) as catoting 
 FROM `aconing`, `aconfin`, `aarqcaj` 
 WHERE aconfin.pacodapo=aconing.pacodeco
 and aconfin.facodcaj=aarqcaj.pacodcaj
@@ -80,7 +80,7 @@ $totEgresos=0;
 //LISTAR TOTAL DE EGRESOS PORCENTUAL
 $consulta1 = "SELECT cadesefe, 
 round(cacanefe, 0) as cacanefe, 
-format((SUM(camoning)/100)*cacanefe, 2) as total
+(SUM(camoning)/100)*cacanefe as total
 FROM aegrefij, aconing, aconfin, aarqcaj
 WHERE catipcan='PORCENTUAL'
 and aconing.pacodeco=aconfin.pacodapo
@@ -97,12 +97,12 @@ $htmlTotalEgresos='';
 //$html.='<TABLE>';
 while ($row = mysqli_fetch_array($resultado1)) {
     $htmlEgresos.=$row['cadesefe'].'('.$row['cacanefe'].'%)'.'<br>';
-    $htmlTotalEgresos.=$row['total'].'<br>';
+    $htmlTotalEgresos.=number_format($row['total'], 2).'<br>';
     $totEgresos=$totEgresos+$row['total'];
 }
 
 //LISTAR TOTAL DE EGRESOS EFECTIVO
-$consulta = "SELECT cadesegr, format(SUM(`camonegr`), 2) as catotegr 
+$consulta = "SELECT cadesegr, SUM(`camonegr`) as catotegr 
 FROM `aconegr`, `aconfin`, `aarqcaj` 
 WHERE aconfin.pacodapo=aconegr.pacodegr
 and aconfin.facodcaj=aarqcaj.pacodcaj
@@ -115,7 +115,8 @@ $resultado = mysqli_query($conexion, $consulta);
 
 while ($row = mysqli_fetch_array($resultado)) {
     $htmlEgresos.=$row['cadesegr'].'<br>';
-    $htmlTotalEgresos.=$row['catotegr'].'<br>';
+    $detalleEgresos=number_format($row['catotegr'], 2);
+    $htmlTotalEgresos.=$detalleEgresos.'<br>';
     $totEgresos=$totEgresos+$row['catotegr'];
 }
 
@@ -130,11 +131,11 @@ $html.='<TABLE class="Informe">
 $consulta = "SELECT `pacodcaj`, 
 cainicaj, 
 cafincaj, 
-format(camonini, 2) as SaldoIni, 
-format(camonfin, 2) as SaldoFin,
+camonini as SaldoIni, 
+camonfin as SaldoFin,
 caestcaj,
-format(catoting, 2) as totIngresos,
-format(catotegr, 2) as totEgresos
+catoting as totIngresos,
+catotegr as totEgresos
 FROM `aarqcaj`
 where pacodcaj='{$pacodcaj}'
 ORDER BY pacodcaj DESC";
@@ -155,7 +156,7 @@ $totalSaldoSaliente=number_format($totalSaldoSaliente, 2);
 $html.="<TABLE class='Informe'>
             <TR>
                 <TD style='width:50%'>*Saldo mes Anterior</TD>
-                <td ALIGN='right' style='width:20%'>{$row['SaldoIni']}</td>
+                <td ALIGN='right' style='width:20%'>".number_format($row['SaldoIni'], 2)."</td>
                 <td></td>
             </TR>
             <TR>
@@ -171,7 +172,7 @@ $html.="<TABLE class='Informe'>
             <TR>
                 <TD style='width:50%'>*Saldo para Sgt. mes</TD>
                 <td></td>
-                <td ALIGN='right' style='width:20%'>{$row['SaldoFin']}</td>
+                <td ALIGN='right' style='width:20%'>".number_format($row['SaldoFin'], 2)."</td>
             </TR>
             <TR>
                 <TD style='width:50%'>Sumas Iguales</TD>

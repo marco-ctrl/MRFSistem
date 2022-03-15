@@ -151,6 +151,7 @@ $(document).ready(function () {
 
             BuscarMiembro(codigo, condicion);
             console.log("EmpName está definido");
+
         }
 
         if (tipo=="NOMBRE" || tipo=="APELLIDO PATERNO" || tipo=="APELLIDO MATERNO"){
@@ -161,6 +162,7 @@ $(document).ready(function () {
     });
 
     $('#tipoBusqueda').change(function (e) {//asigar codigo profesion
+        $('#dat_buscar').html('');
         let tipoBusqeda = $('#tipoBusqueda').val();
         $('#btn_reporte').attr("disabled", false);
         if (tipoBusqeda == "TODO") {

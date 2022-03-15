@@ -77,7 +77,16 @@ $(document).ready(function () {
         $('#mensaje').show();
     }
 
+    $('#btn_reporte').click(function (e) {
+        abrirNuevoTab('/MRFSistem/ReportesPDF/PDF_InfoMaterias.php');
+    });
 
+    function abrirNuevoTab(url) {
+        // Abrir nuevo tab
+        var win = window.open(url, '_blank');
+        // Cambiar el foco al nuevo tab (punto opcional)
+        win.focus();
+    }
     
 });
 

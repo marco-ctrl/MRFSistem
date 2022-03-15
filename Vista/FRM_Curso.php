@@ -102,7 +102,6 @@
                                     <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
                                         <thead class="bg-primary text-white">
                                             <tr>
-                                                <td>CODIGO</td>
                                                 <td>MATERIA</td>
                                                 <td>PARALELO</td>
                                                 <td>GESTION</td>
@@ -115,7 +114,6 @@
                                         </thead>
                                         <tfoot class="bg-primary text-white">
                                             <tr>
-                                                <td>CODIGO</td>
                                                 <td>MATERIA</td>
                                                 <td>PARALELO</td>
                                                 <td>GESTION</td>

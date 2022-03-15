@@ -38,11 +38,11 @@
                                     <h5 class="m-0 font-weight-bold text-primary">Lista de Celulas</h5>
                                 </div>
                                 <div class="card-body">
-                                    <form action=# class="row text-center">
+                                    <form class="row text-center">
                                         <div class="input-group mb-3 col-6">
                                             <input type="text" class="form-control" id="buscarCelula"
                                                 placeholder="Buscar..."></input>
-                                            <button class="btn btn-primary" id="btn_busFec"><i class="fas fa-search"
+                                            <button type="button" class="btn btn-primary" id="btn_busFec"><i class="fas fa-search"
                                                     tittle="buscar"></i></button>
                                         </div>
 
