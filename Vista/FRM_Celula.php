@@ -42,8 +42,8 @@
                                         <div class="input-group mb-3 col-6">
                                             <input type="text" class="form-control" id="buscarCelula"
                                                 placeholder="Buscar..."></input>
-                                            <button type="button" class="btn btn-primary" id="btn_busFec"><i class="fas fa-search"
-                                                    tittle="buscar"></i></button>
+                                            <button type="button" class="btn btn-primary" id="btn_busFec"><i
+                                                    class="fas fa-search" title="buscar"></i></button>
                                         </div>
 
                                     </form>
@@ -150,7 +150,7 @@
                                 </div>
                             </div>
                             <span id="val_mapa" class="text-danger">Completa este campo</span>
-                                    
+
                         </div>
                         <br>
                         <div class="modal-footer col-md-8">
@@ -166,6 +166,7 @@
                         </div>
                     </div>
                     <?php include 'includes/Celulas/MiembroCelula.php' ?>
+                    <?php include 'includes/Celulas/LiderCelula.php' ?>
                 </div>
 
             </div>

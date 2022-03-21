@@ -22,7 +22,8 @@ pacodciu,
 canomciu,
 canomcel,
 cafunmie,
-pacodcel
+pacodcel, 
+pacodmcl
 FROM amiebro, aproion, aciudad, amiecel, acelula   
 where facodpro=pacodpro 
 and caestmie=true
@@ -55,7 +56,8 @@ while ($row = mysqli_fetch_array($resultado)) {
                     'canomciu' => $row['canomciu'],
                     'canomcel' => $row['canomcel'],
                     'cafunmie' => $row['cafunmie'],
-                    'pacodcel' => $row['pacodcel']);
+                    'pacodcel' => $row['pacodcel'],
+                    'pacodmcl' => $row['pacodmcl']);
 }
 if ($json==null){
     echo 'false';

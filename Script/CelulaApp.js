@@ -55,6 +55,12 @@ $(document).ready(function () {
         focus: true
     })
 
+    var ModalLider = new bootstrap.Modal(document.getElementById('md_lider'), {
+        keyboard: false,
+        backdrop: 'static',
+        focus: true
+    })
+
     $('#buscarCelula').keyup(function (e) {//permite hacer busqueda de miembros
         if ($('#buscarCelula').val()) {
             let buscar = $('#buscarCelula').val().toUpperCase();
@@ -138,43 +144,13 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.miembros-celula', function () {//modifica usuario
-        console.log('hola mundo');
         myModal.show();
-        //habilitarFormulario();
-        /*let elemento = $(this)[0].parentElement.parentElement;
-        let pacodcel = $(elemento).attr('UserDocu');
-        $.post('/MRFSistem/AccesoDatos/Celula/SingleCelula.php',
-            { pacodcel }, function (responce) {
-                $('#lista').hide();
-                $('#formulario').show();
-                
-                const celula = JSON.parse(responce);
-                celula.forEach(cel => {
-                    codCelula = cel.pacodcel,
-                        codBarrio = cel.facodbar,
-                        codCalle = cel.facodcal,
-                        latitud = cel.calatcel,
-                        longitud = cel.calogcel,
-                        nomBarrio = cel.canombar,
-                        nomCalle = cel.canomcal,
-                        $('#txt_nomCelula').val(cel.canomcel),
-                        $('#txt_numCelula').val(cel.canumcel),
-                        $('#inp_barrio').val(cel.canombar),
-                        $('#inp_calle').val(cel.canomcal)
-                });
-                //contex.hide();
-                mymap.setView([latitud, longitud], 15);
-                L.tileLayer(tilesProvider, {
-                    maxZoom: 18,
-                }).addTo(mymap);
-                if (marker != undefined) {
-                    mymap.removeLayer(marker);
-                };
-                marker = L.marker([latitud, longitud]).addTo(mymap);
-                document.getElementById("txt_nomCelula").focus();
-                edit = true;
-                camposVacios();
-            });*/
+        
+    });
+
+    $(document).on('click', '.lider-celula', function () {//modifica usuario
+        ModalLider.show();
+        
     });
 
 
@@ -285,7 +261,7 @@ $(document).ready(function () {
                     data-bs-toggle="modal" data-bs-target="#md_miembro"><i class="fas fa-users"></i></button>
                 </td>
                 <td>
-                    <button class="miembros-celula btn btn-warning" title="Agregar Lider de Celula"
+                    <button class="lider-celula btn btn-warning" title="Agregar Lider de Celula"
                     data-bs-toggle="modal"><i class="fas fa-user-plus"></i></button>
                 </td>
                 <td>

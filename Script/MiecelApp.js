@@ -55,12 +55,51 @@ $(document).ready(function () {
             { pacodcel }, function (responce) {
                 const celula = JSON.parse(responce);
                 celula.forEach(cel => {
-                    document.getElementById('title').innerHTML = 'Miembros de la Celula ' + cel.canomcel;
+                    document.getElementById('title').innerHTML = 'MIEMBROS DE LA CELULA ' + cel.canomcel;
 
                 });
 
             });
         ListarMieCel(pacodcel);
+    });
+
+    $(document).on('click', '.lider-celula', function () {//abrir pantalla asignar lidar celula
+        document.getElementById('lbl_lider').innerHTML = 'LIDER DE LA CELULA';
+        $('#listaMiembros').show();
+        $('#btn_guardarLider').attr("disabled", true);
+        $('#btn_CambiarLider').attr("disabled", true);
+        let elemento = $(this)[0].parentElement.parentElement;
+        let pacodcel = $(elemento).attr('UserDocu');
+        codigoCel = pacodcel;
+        $.post('/MRFSistem/AccesoDatos/Celula/SingleCelula.php',
+            { pacodcel }, function (responce) {
+                const celula = JSON.parse(responce);
+                celula.forEach(cel => {
+                    document.getElementById('titleLider').innerHTML = 'LIDER DE LA CELULA ' + cel.canomcel;
+
+                });
+
+            });
+        ListarMieCel(pacodcel);
+        ListarMiembro();
+    });
+
+    $(document).on('click', '.asignar-lider', function () {//modifica usuario
+        $('#btn_guardarLider').attr("disabled", false);
+        $('#btn_CambiarLider').attr("disabled", true);
+        
+        let elemento = $(this)[0].parentElement.parentElement;
+        codigoMie = $(elemento).attr('UserDocu');
+        codigoMieCel = $(elemento).attr('pacodmcl');
+        let nombreLider = $(elemento).attr('nombre');
+        let apePaternoLider = $(elemento).attr('apePaterno');
+        let apeMaternoLider = $(elemento).attr('apeMaterno');
+        $('#lbl_lider').html(nombreLider + " " + apePaternoLider + " " + apeMaternoLider);
+        $('.modal-dialog-scrollable .modal-body').animate({
+            scrollTop: 0
+          }, 'slow');
+        //console.log(codigoMieCel);
+
     });
 
     $(document).on('click', '.baja-miecel', function () {//elimina usuario
@@ -92,11 +131,13 @@ $(document).ready(function () {
                 if (miembros != false) {
                     miembros.forEach(miembros => {
                         let extencion = '';
+                        //console.log(miembros);
                         if (miembros.cacidext != "") {
                             extencion = "-" + miembros.cacidext;
                         }
-                        plantilla +=
-                            `<tr codMbr="${miembros.pacodmie}" 
+                        if (miembros.cafunmie != 'LIDER') {
+                            plantilla +=
+                                `<tr codMbr="${miembros.pacodmie}" 
                                  codMcl="${miembros.pacodmcl}" class="table-light">
                             <td>${miembros.canommie}</td> 
                             <td>${miembros.capatmie} ${miembros.camatmie}</td>
@@ -106,7 +147,16 @@ $(document).ready(function () {
                             <td ALIGN="CENTER"><button class="modificar-miecel btn btn-secondary">
                             <i class="far fa-edit "></i></button></td>
                             </tr>`;
-
+                            console.log("hola");
+                            //$("#btn_guardarLider").attr("disabled", false);
+                            //$("#btn_cambiarLider").attr("disabled", true);
+                        }
+                        if (miembros.cafunmie == 'LIDER') {
+                            $('#lbl_lider').html(miembros.canommie + " " + miembros.capatmie + " " + miembros.camatmie);
+                            $('#listaMiembros').hide();
+                            $('#btn_guardarLider').attr("disabled", true);
+                            $('#btn_CambiarLider').attr("disabled", false);
+                        }
                     });
                 }
                 else if (miembros == false) {
@@ -118,6 +168,47 @@ $(document).ready(function () {
                 $('#tb_miecel').html(plantilla);
             }
         });
+    }
+
+    function ListarMiembro() {//lista usuarios
+        $.ajax({
+            url: '/MRFSistem/AccesoDatos/Miembro/ListarMiembro.php',
+            type: 'GET',
+            success: function (response) {
+                //console.log(response);
+                if (response != 'false') {
+                    let miembros = JSON.parse(response);
+                    let plantilla = '';
+                    miembros.forEach(miembros => {
+                        plantilla = MostrarTabla(plantilla, miembros);
+                    });
+                    $('#tb_miembroLider').html(plantilla);
+                }
+
+            }
+        });
+    }
+
+
+    function MostrarTabla(plantilla, miembros) {
+        let extencion = '';
+        if (miembros.cacidext != "") {
+            extencion = "-" + miembros.cacidext;
+        }
+        plantilla +=
+            `<tr pacodmcl="${miembros.pacodmcl}" UserDocu="${miembros.pacodmie}" nombre="${miembros.canommie}" 
+                apePaterno="${miembros.capatmie}" apeMaterno="${miembros.camatmie}" class="table-light">
+                <td>${miembros.canommie}</td>
+                <td>${miembros.capatmie} ${miembros.camatmie}</td>
+                <td>${miembros.canomcel}</td>
+                <td>${miembros.cafunmie}</td>
+                <td>
+                    <button class="asignar-lider btn btn-primary">
+                        <i class="fas fa-user-plus "></i>
+                    </button>
+                </td>
+            </tr>`
+        return plantilla;
     }
 
     function NuevoMiecel() {//genera un codigo nuevo de miembro y miecel
@@ -227,6 +318,7 @@ $(document).ready(function () {
                     alertify.alert('Mensaje', 'Datos de Miembros Modificados correctamente', function () { alertify.success('Se guardó correctamente'); });
                     ListarMieCel(codigoCel);
                     LimpiarMiecel();
+                    ListarMiembro();
                 }
                 editMiecel = false;
 
@@ -262,6 +354,26 @@ $(document).ready(function () {
         ////console.log('completado..');
     }
 
+    function guardarLiderCelula() {
+        const postData = {
+            pacodmcl: codigoMieCel,
+            facodcel: codigoCel
+        };
+        let url = '/MRFSistem/AccesoDatos/MieCel/ModificarLiderCelula.php';
+        $.post(url, postData, function (response) {
+            ////console.log(response);
+            if (response == 'modificado') {
+                alertify.alert('Mensaje', 'Lider asignado correctamente', function () { alertify.success('Se guardó correctamente'); });
+            } else {
+                alertify.alert('Mensaje', 'Ocurrio un error al asignar Lider de Celula', function () { alertify.danger('Ocurrio un Error'); });
+            }
+            ListarMieCel(codigoCel);
+            LimpiarMiecel();
+            //DeshabilitarFormulario();
+            //ListarMiembro();
+        });
+    }
+
     function LimpiarMiecel() {
         $('#formMiecel1').trigger('reset');
         $('#formMiecel2').trigger('reset');
@@ -272,6 +384,20 @@ $(document).ready(function () {
         capturarCampos();
         camposVacios();
     }
+
+    $('#btn_guardarLider').click(function (e) {
+        guardarLiderCelula();
+        e.preventDefault();
+
+    });
+
+    $('#btn_CambiarLider').click(function (e) {
+        $("#listaMiembros").show();
+        $("#btn_CambiarLider").attr("disabled", true);
+        e.preventDefault();
+
+    });
+
 
     $('#btn_AgregarMiecel').click(function (e) {
         guardarMiecel();

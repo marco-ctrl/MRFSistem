@@ -163,7 +163,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-auto">
-                                                <i class="fas fa-map-marked fa-2x text-gray-700"></i>
+                                                <i class="fas fa-server fa-2x text-gray-700"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -182,7 +182,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-auto">
-                                                <i class="fas fa-map-marked fa-2x text-gray-700"></i>
+                                                <i class="fas fa-server fa-2x text-gray-700"></i>
                                             </div>
                                         </div>
                                     </div>

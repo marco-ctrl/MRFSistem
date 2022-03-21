@@ -87,7 +87,7 @@ $(document).ready(function () {
         let context = canvas.getContext('2d');
         context.drawImage(video, 0, 0, 140, 120);
         imagen.setAttribute('src', canvas.toDataURL('image/jpeg', 1.0));
-        //console.log(imagen.src);
+        ////console.log(imagen.src);
     });
 
     $('#buscarMiembro').keyup(function (e) {//permite hacer busqueda de miembros
@@ -164,7 +164,7 @@ $(document).ready(function () {
             url: '/MRFSistem/AccesoDatos/Miembro/ListarMiembro.php',
             type: 'GET',
             success: function (response) {
-                //console.log(response);
+                ////console.log(response);
                 if (response != 'false') {
                     let miembros = JSON.parse(response);
                     let plantilla = '';
@@ -184,7 +184,7 @@ $(document).ready(function () {
         if (miembros.cacidext != "") {
             extencion = "-" + miembros.cacidext;
         }
-        //console.log(miembros.cacidext);
+        ////console.log(miembros.cacidext);
         plantilla +=
             `<tr UserDocu="${miembros.pacodmie}" class="table-light">
                 <td>${miembros.cacidmie}${extencion}</td>
@@ -213,7 +213,7 @@ $(document).ready(function () {
         if (confirm("Seguro que desea dar de baja este Miembro de la iglesia")) {
             let elemento = $(this)[0].parentElement.parentElement;
             let pacodmie = $(elemento).attr('UserDocu');
-            console.log('dando de baja...');
+            //console.log('dando de baja...');
             $.post('/MRFSistem/AccesoDatos/Miembro/DarBaja.php',
                 { pacodmie }, function (responce) {
                     if (responce == 'baja') {
@@ -231,7 +231,7 @@ $(document).ready(function () {
         habilitarFormulario();
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodmie = $(elemento).attr('UserDocu');
-        console.log('hola mundo');
+        //console.log('hola mundo');
         $.ajax({
             url: '/MRFSistem/AccesoDatos/Miembro/SingleMiembro.php',
             type: 'POST',
@@ -243,11 +243,11 @@ $(document).ready(function () {
 
             },
             success: function (responce) {
-                //console.log(responce);
+                ////console.log(responce);
                 $('#home').hide();
                 $('#profile').show();
                 $("#btn_guardarMiembro").attr("disabled", false);
-                console.log(responce);
+                //console.log(responce);
                 const miembro = JSON.parse(responce);
                 let foto;
                 miembro.forEach(miembro => {
@@ -332,7 +332,7 @@ $(document).ready(function () {
         var ejemplo1 = $('#dat_profesion').find('option[value="' + val + '"]').data('nombre');
 
         if (ejemplo === undefined) {
-            console.log("EmpName no está definido");
+            //console.log("EmpName no está definido");
             banPro = true;
             nuevaProfesion();
             nomPro = val;
@@ -340,26 +340,28 @@ $(document).ready(function () {
             codProfesion = ejemplo;
             nomPro = ejemplo1;
             banPro = false;
-            console.log("EmpName está definido");
+            //console.log("EmpName está definido");
         }
     });
 
     $('#txt_ci').on('input', function () {//asigar codigo profesion
-        var val = $('#txt_ci').val().toUpperCase();
+        var val = $('#txt_ci').val();
         let carnetIdentidad = $('#dat_ci').find('option[value="' + val + '"]').data('ci');
-        let carnetExt = $('#dat_ci').find('option[value="' + val + '"]').data('ciext');
+        edit = false;
         if (carnetIdentidad === undefined) {
-            console.log("EmpName no está definido");
+            //console.log("EmpName no está definido");
             if (edit==false){
-                limpiar();
+                LimpiarMiembro();
             
             }
-            //edit = false;
+            
         } else {
             agregarDatosPorCi(carnetIdentidad);
             edit = true;
-            console.log("EmpName está definido");
+            //console.log("EmpName está definido");
         }
+        capturarCampos();
+        camposVacios();
     });
 
     function agregarDatosPorCi(cacidmie) {
@@ -403,7 +405,7 @@ $(document).ready(function () {
         }
         let url = '/MRFSistem/AccesoDatos/Profesion/AgregarProfesion.php';
 
-        console.log(codProfesion, $('#inp_profesion').val().toUpperCase());
+        //console.log(codProfesion, $('#inp_profesion').val().toUpperCase());
         $.post(url, postData, function (response) {
             if (response == "AgregaProfesion") {
                 GuardarMiembro();
@@ -436,7 +438,7 @@ $(document).ready(function () {
                 let miembroPasivo = JSON.parse(response);
                 let plantilla;
                 miembroPasivo.forEach(mbp => {
-                    console.log(mbp.pacodcel);
+                    //console.log(mbp.pacodcel);
                     plantilla += `<option value="${mbp.cacidmie}"
                                     data-ci="${mbp.cacidmie}"
                                     data-ciext="${mbp.cacidext}">
@@ -451,7 +453,7 @@ $(document).ready(function () {
     $('#cbx_celula').change(function (e) {//asigar codigo profesion
 
         codCelula = $('#cbx_celula').val();
-        console.log("codigo celula: " + codCelula);
+        //console.log("codigo celula: " + codCelula);
         capturarCampos();
         camposVacios();
         e.preventDefault();
@@ -484,7 +486,7 @@ $(document).ready(function () {
 
         let url = '/MRFSistem/AccesoDatos/MieCel/AgregarMieCel.php';
         $.post(url, postData, function (response) {
-            console.log(response);
+            //console.log(response);
             if (!edit && response == 'registra') {
                 actualizarSecuencia("MCL", corre2);
             }
@@ -494,14 +496,14 @@ $(document).ready(function () {
             edit = false;
             //ListarMiembro();
         });
-        console.log('completado..');
+        //console.log('completado..');
     }
 
     function GuardarMiembro() {
 
         //const canvas = document.getElementById('canvas');
         let foto = canvas.toDataURL('image/jpeg', 1.0);
-        //console.log(foto);
+        ////console.log(foto);
         const postData = {
             pacodmie: codMiembro,
             cacidmie: $('#txt_ci').val(),
@@ -523,7 +525,7 @@ $(document).ready(function () {
             cafecenc: getCafecenc(),
             pacodcre: codMiembro
         };
-        console.log(postData);
+        //console.log(postData);
         let URL = edit === false ?
             '/MRFSistem/AccesoDatos/Miembro/AgregarMiembro.php' :
             '/MRFSistem/AccesoDatos/Miembro/ModificarMiembro.php';
@@ -541,7 +543,7 @@ $(document).ready(function () {
                 $("#btn_guardarMiembro").attr("disabled", false);
             },
             success: function (response) {
-                console.log(response);
+                //console.log(response);
                 if (!edit && response == 'registra') {
                     actualizarSecuencia("MBR", corre1);
                     GuardarMiembroCelula();
@@ -570,7 +572,7 @@ $(document).ready(function () {
     $('#cbx_ciudad').change(function (e) {//asignar codigo de cuidad
 
         codCiudad = $('#cbx_ciudad').val();
-        console.log("codigo ciudad " + codCiudad);
+        //console.log("codigo ciudad " + codCiudad);
         capturarCampos();
         camposVacios();
         e.preventDefault();
@@ -581,7 +583,7 @@ $(document).ready(function () {
         capturarCampos();
         camposVacios();
         funMiembro = $('#cbx_funcion').val();
-        console.log("funcion " + funMiembro);
+        //console.log("funcion " + funMiembro);
 
         e.preventDefault();
 
@@ -599,6 +601,8 @@ $(document).ready(function () {
     });
 
     $("#btn_nuevo").click(function (event) {
+        capturarCampos();
+        camposVacios();
         $('#home').hide();
         $('#profile').show();
         limpiar();
@@ -619,7 +623,7 @@ $(document).ready(function () {
         corre1 = getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codMiembro = getCodigo() + '-' + num;
-        //console.log(codMiembro+' correlativo '+corre1);
+        ////console.log(codMiembro+' correlativo '+corre1);
         let num1 = "";
         verificarSecuencia("MCL");
         if (getBan() != "true") {
@@ -634,7 +638,7 @@ $(document).ready(function () {
         corre2 = getCorrelativo();
         num1 = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num1);
         codMieCel = getCodigo() + '-' + num1;
-        console.log(codMieCel + ' correlativo ' + corre2);
+        //console.log(codMieCel + ' correlativo ' + corre2);
     });
 
     function ObtenerNumeroCorrelativo(numero, num) {//sirve para obtener numero correlativo
@@ -730,7 +734,7 @@ $(document).ready(function () {
         correPro = getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codProfesion = getCodigo() + '-' + num;
-        console.log(codProfesion);
+        //console.log(codProfesion);
 
     }
 
@@ -756,6 +760,10 @@ $(document).ready(function () {
         fechaEncuentro = $('#dat_fecenc').val();
     }
 
+    function LimpiarMiembro() {
+        $('.limpiar').val('');
+        $('.limpiarSelect').val('0');
+    }
 
     //$('#txt_ci').maxlength();
     $('#txt_ci').maxlength({ showFeedback: false, max: 13 });
@@ -771,10 +779,10 @@ $(document).ready(function () {
         camposVacios();
     });
     
-    $('input[type=number]').keyup(function () {
+    /*$('input[type=number]').keyup(function () {
         capturarCampos();
         camposVacios();
-    });
+    });*/
 
     $('input[type=tel]').keyup(function () {
         capturarCampos();
@@ -786,13 +794,13 @@ $(document).ready(function () {
         camposVacios();
     });
 
-    $('input[type=date]').change(function () {
+    $('input[type=date]').change(function (e) {
         capturarCampos();
         camposVacios();
         e.preventDefault();
     });
 
-    $('select').change(function () {
+    $('select').change(function (e) {
         capturarCampos();
         camposVacios();
         e.preventDefault();
@@ -817,7 +825,7 @@ $(document).ready(function () {
                 $("#val_ci").html("Este campo debe tener al menos 7 digitos");
                 $("#chk_ci").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
                 $("#chk_ci").html('<i class="fas fa-exclamation-triangle"></i>');
-                //console.log('ci debe tener almenos 7 carateres');
+                ////console.log('ci debe tener almenos 7 carateres');
                 contador++;
             }
             else {
@@ -825,7 +833,7 @@ $(document).ready(function () {
                 $("#val_ci").html("");
                 $("#chk_ci").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
                 $("#chk_ci").html('<i class="fas fa-check"></i>');
-                //console.log('corecto');
+                ////console.log('corecto');
             }
         }
         if (nombre == "") {
@@ -842,7 +850,7 @@ $(document).ready(function () {
                 $("#val_nombre").html("Este campo debe tener al menos 3 letras");
                 $("#chk_nombre").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
                 $("#chk_nombre").html('<i class="fas fa-exclamation-triangle"></i>');
-                //console.log('nombre debe tener almenos 7 carateres');
+                ////console.log('nombre debe tener almenos 7 carateres');
                 contador++;
             }
             else {
@@ -850,7 +858,7 @@ $(document).ready(function () {
                 $("#val_nombre").html("");
                 $("#chk_nombre").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
                 $("#chk_nombre").html('<i class="fas fa-check"></i>');
-                //console.log('corecto');
+                ////console.log('corecto');
             }
         }
         if (apPaterno == "") {
@@ -866,7 +874,7 @@ $(document).ready(function () {
                 $("#val_paterno").html("Este campo debe tener al menos 3 letras");
                 $("#chk_paterno").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
                 $("#chk_paterno").html('<i class="fas fa-exclamation-triangle"></i>');
-                //console.log('paterno debe tener almenos 7 carateres');
+                ////console.log('paterno debe tener almenos 7 carateres');
                 contador++;
             }
             else {
@@ -874,7 +882,7 @@ $(document).ready(function () {
                 $("#val_paterno").html("");
                 $("#chk_paterno").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
                 $("#chk_paterno").html('<i class="fas fa-check"></i>');
-                //console.log('corecto');
+                ////console.log('corecto');
             }
         }
 
@@ -891,7 +899,7 @@ $(document).ready(function () {
                 $("#val_numcontacto").html("Este campo debe tener al menos 5 digitos");
                 $("#chk_numcontacto").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
                 $("#chk_numcontacto").html('<i class="fas fa-exclamation-triangle"></i>');
-                //console.log('numcontacto debe tener almenos 7 carateres');
+                ////console.log('numcontacto debe tener almenos 7 carateres');
                 contador++;
             }
             else {
@@ -899,7 +907,7 @@ $(document).ready(function () {
                 $("#val_numcontacto").html("");
                 $("#chk_numcontacto").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
                 $("#chk_numcontacto").html('<i class="fas fa-check"></i>');
-                //console.log('corecto');
+                ////console.log('corecto');
             }
         }
         if (estCivil == "0") {
@@ -928,7 +936,7 @@ $(document).ready(function () {
                 $("#val_direccion").html("Este campo debe tener al menos 10 caracteres");
                 $("#chk_direccion").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
                 $("#chk_direccion").html('<i class="fas fa-exclamation-triangle"></i>');
-                //console.log('direccion debe tener almenos 7 carateres');
+                ////console.log('direccion debe tener almenos 7 carateres');
                 contador++;
             }
             else {
@@ -936,7 +944,7 @@ $(document).ready(function () {
                 $("#val_direccion").html("");
                 $("#chk_direccion").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
                 $("#chk_direccion").html('<i class="fas fa-check"></i>');
-                //console.log('corecto');
+                ////console.log('corecto');
             }
         }
         if (profesion == "") {
@@ -952,7 +960,7 @@ $(document).ready(function () {
                 $("#val_profesion").html("Este campo debe tener al menos 5 caracteres");
                 $("#chk_profesion").switchClass("bg-success", "bg-danger", 100, "easeInOutQuad");
                 $("#chk_profesion").html('<i class="fas fa-exclamation-triangle"></i>');
-                //console.log('profesion debe tener almenos 7 carateres');
+                ////console.log('profesion debe tener almenos 7 carateres');
                 contador++;
             }
             else {
@@ -960,7 +968,7 @@ $(document).ready(function () {
                 $("#val_profesion").html("");
                 $("#chk_profesion").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
                 $("#chk_profesion").html('<i class="fas fa-check"></i>');
-                //console.log('corecto');
+                ////console.log('corecto');
             }
         }
         if (nomCiudad == "0") {

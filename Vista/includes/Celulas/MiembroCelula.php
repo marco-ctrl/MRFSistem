@@ -112,7 +112,6 @@
                                         <option value="DISCIPULO/A">DISCIPULO/A</option>
                                         <option value="ASISTENTE">ASISTENTE</option>
                                         <option value="ANFITRION">ANFITRION</option>
-                                        <option value="LIDER">LIDER</option>
                                     </select>
                                     <span id="chk_funcion" class="btn-danger form-control">
                                         <i class="fas fa-exclamation-triangle"></i>
