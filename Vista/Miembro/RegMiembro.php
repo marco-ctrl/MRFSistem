@@ -12,7 +12,7 @@
                     <input type="hidden" id="txt_codMiembro" placeholder="Codigo" class="form-control"></input>
                 </div>
                 <div class="form-group">
-                    <label>Carnet de Identidad</label>
+                    <label for="txt_ci">Carnet de Identidad</label>
                     <div class="input-group border-bottom-danger" id="div_ci">
                         <input type="number" id="txt_ci" placeholder="Carnet de Identidad" class="form-control"
                             title="introducir el carnet de identidad" required
@@ -30,7 +30,7 @@
                     <span id="val_ci" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
-                    <label>Nombre</label>
+                    <label for="txt_nombre">Nombre</label>
                     <div class="input-group border-bottom-danger" id="div_nombre">
                         <input type="text" id="txt_nombre" placeholder="Nombre" class="form-control limpiar"
                             onkeyup="this.value=soloTexto(this.value)" style="width: 80%;" required></input>
@@ -41,7 +41,7 @@
                     <span id="val_nombre" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
-                    <label>Apellido Paterno</label>
+                    <label for="txt_paterno">Apellido Paterno</label>
                     <div class="input-group border-bottom-danger" id="div_paterno">
                         <input type="text" id="txt_paterno" maxlength="30" placeholder="Apellido Paterno"
                             class="form-control limpiar" onkeyup="this.value=soloTexto(this.value)" style="width: 80%;"
@@ -53,12 +53,12 @@
                     <span id="val_paterno" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
-                    <label>Apellido Materno</label>
+                    <label for="txt_materno">Apellido Materno</label>
                     <input type="text" id="txt_materno" maxlength="30" placeholder="Apellido Materno limpiar"
                         class="form-control limpiar" onkeyup="this.value=soloTexto(this.value)" required></input>
                 </div>
                 <div class="form-group">
-                    <label>Numero de Contacto</label>
+                    <label for="txt_numcontacto">Numero de Contacto</label>
                     <div class="input-group border-bottom-danger" id="div_numcontacto">
                         <input type="tel" id="txt_numcontacto" maxlength="15" placeholder="Numero de Contacto"
                             class="form-control limpiar" required style="width: 80%;"></input>
@@ -69,7 +69,7 @@
                     <span id="val_numcontacto" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
-                    <label>Fecha de Nacimiento</label>
+                    <label for="txt_fecnac">Fecha de Nacimiento</label>
                     <input type="date" id="txt_fecnac"
                         min="<?php echo date("Y-m-d",strtotime($fecha_actual."- 100 year"));?>"
                         max="<?php echo date("Y-m-d",strtotime($fecha_actual."- 12 year")); ?>"
@@ -77,7 +77,7 @@
                         onkeydown="return ValidarEscrituraFecha()"></input>
                 </div>
                 <div class="form-group">
-                    <label>Lugar de Nacimiento</label>
+                    <label for="cbx_ciudad">Lugar de Nacimiento</label>
                     <div class="input-group border-bottom-danger" id="div_ciudad">
                         <select id="cbx_ciudad" class="form-control limpiarSelect" style="width: 80%;">
 
@@ -89,7 +89,7 @@
                     <span id="val_ciudad" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
-                    <label>Estado Civil</label>
+                    <label for="cbx_estadoCivil">Estado Civil</label>
                     <div class="input-group border-bottom-danger" id="div_estadoCivil">
                         <select id="cbx_estadoCivil" class="form-control limpiarSelect" style="width: 80%;">
                             <option value="0" class="form-control">Estado Civil</option>
@@ -105,7 +105,7 @@
                     <span id="val_estadoCivil" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
-                    <label>Profesion</label>
+                    <label for="inp_profesion">Profesion</label>
                     <div class="input-group border-bottom-danger limpiar" id="div_profesion">
                         <input type="text" id="inp_profesion" list="dat_profesion" style="width: 80%;"
                             class="form-control" maxlength="30" onkeyup="this.value=soloProfesion(this.value)"
@@ -124,7 +124,7 @@
         <div class="col-md-4 p-3">
             <form id="form2">
                 <div class="form-group">
-                    <label>Direccion</label>
+                    <label for="txt_direccion">Direccion</label>
                     <div class="input-group border-bottom-danger" id="div_direccion">
                         <textarea id="txt_direccion" rows="3" maxlength="100" style="width: 80%;"
                             placeholder="Direccion de Domicilio" class="form-control limpiar"
@@ -139,7 +139,7 @@
                     <label>Crecimiento Espiritual</label>
                 </div>
                 <div class="form-group">
-                    <label>Fecha de Conversion</label>
+                    <label for="dat_feccon">Fecha de Conversion</label>
                     <div class="input-group border-bottom-danger" id="div_feccon">
                         <input type="date" id="dat_feccon" min="1950-01-01" max="<?php echo date('Y-m-d'); ?>"
                             placeholder="" onkeydown="return ValidarEscrituraFecha()" class="form-control limpiar"
@@ -151,7 +151,7 @@
                     <span id="val_feccon" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
-                    <label>Fecha de Bautismo</label>
+                    <label for="dat_fecbau">Fecha de Bautismo</label>
                     <div class="input-group border-bottom-danger" id="div_fecbau">
                         <input type="date" id="dat_fecbau" min="1950-01-01" max="<?php echo date('Y-m-d'); ?>"
                             placeholder="" onkeydown="return ValidarEscrituraFecha()" class="form-control limpiar"></input>
@@ -162,7 +162,7 @@
                     <span id="val_fecbau" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
-                    <label>Entrada a la Iglesia</label>
+                    <label for="dat_fecigl">Entrada a la Iglesia</label>
                     <div class="input-group border-bottom-danger" id="div_fecigl">
                         <input type="date" id="dat_fecigl" min="1994-12-12" max="<?php echo date('Y-m-d'); ?>"
                             placeholder="" onkeydown="return ValidarEscrituraFecha()" class="form-control limpiar"></input>
@@ -173,7 +173,7 @@
                     <span id="val_fecigl" class="text-danger">Completa este campo</span>
                 </div>
                 <div class="form-group">
-                    <label>Encuentro Con Dios</label>
+                    <label for="dat_fecenc">Encuentro Con Dios</label>
                     <div class="input-group border-bottom-danger" id="div_fecenc">
                         <input type="date" id="dat_fecenc" min="2001-01-01" max="<?php echo date('Y-m-d'); ?>"
                             placeholder="" onkeydown="return ValidarEscrituraFecha()" class="form-control limpiar"></input>
@@ -187,7 +187,7 @@
                     <label>Asignar Celula</label>
                 </div>
                 <div class="form-group">
-                    <label for="">Celula</label>
+                    <label for="cbx_celula">Celula</label>
                     <div class="input-group border-bottom-danger" id="div_celula">
                         <select id="cbx_celula" class="form-control limpiarSelect" style="width: 80%;">Celula
 
@@ -200,7 +200,7 @@
 
                 </div>
                 <div class="form-group">
-                    <label for="">Funcion en la Celula</label>
+                    <label for="cbx_funcion">Funcion en la Celula</label>
                     <div class="input-group border-bottom-danger" id="div_funcion">
                         <select id="cbx_funcion" class="form-control limpiarSelect" style="width: 80%;">
                             <option value="0">Funcion en la celula</option>

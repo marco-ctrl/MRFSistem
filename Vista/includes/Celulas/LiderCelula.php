@@ -24,6 +24,7 @@
 
                 <div id="listaMiembros">
                     <hr>
+                    <h5 class="text-primary">Lista de Miembros Activos de la Iglesia</h5>
                     <div class="table-responsive">
                         <table class="table table-hover table-sm">
                             <thead class="bg-primary text-white">
