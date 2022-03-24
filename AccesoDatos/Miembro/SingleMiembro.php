@@ -29,7 +29,8 @@ cafecbau,
 cafecenc,
 cafecigl,
 pacodcel,
-cafunmie
+cafunmie,
+canomcel
 FROM amiebro m, 
 	 aproion p, 
 	 aciudad c,
@@ -69,7 +70,8 @@ $resultado = mysqli_query($conexion, $consulta);
                         'cafecenc' => $row['cafecenc'],
                         'cafecigl' => $row['cafecigl'],
                         'pacodcel' => $row['pacodcel'],
-                        'cafunmie' => $row['cafunmie']);
+                        'cafunmie' => $row['cafunmie'],
+                        'canomcel' => $row['canomcel']);
     }
     if($json!=null){
         echo json_encode($json);

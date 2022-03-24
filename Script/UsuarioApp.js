@@ -192,7 +192,7 @@ $(document).ready(function () {
     $("#btn_nuevo").click(function (event) {
         $('#lista').hide();
         $('#formulario').show();
-
+        camposVaciosUsuario();
         habilitarFormulario();
         let num = "";
         verificarSecuencia("USU");
@@ -394,6 +394,7 @@ $(document).ready(function () {
         let codigoMiembro = $("#txt_codigo").val();
         let tipoUsuario = $("#cbx_tipo").val();
         let contador = 0;
+        console.log(codigoMiembro);
         if (codigoMiembro == '') {
             $("#div_miembro").switchClass("border-bottom-success", "border-bottom-danger", 100);
             $("#val_miembro").html("Selecciona un miembro");

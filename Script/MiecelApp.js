@@ -14,14 +14,14 @@ $(document).ready(function () {
         habilitarFormulario;
         let elemento = $(this)[0].parentElement.parentElement;
         let pacodmie = $(elemento).attr('codMbr');
-        console.log(codigoCel);
-        console.log(pacodmie);
+        //console.log(codigoCel);
+        //console.log(pacodmie);
         $.ajax({
             url: '/MRFSistem/AccesoDatos/MieCel/SingleMiecel.php',
             type: 'POST',
             data: { pacodmie, codigoCel },
             success: function (responce) {
-                ////console.log(responce);
+                //////console.log(responce);
                 //$("#btn_guardarMiembro").attr("disabled", false);
                 const miembro = JSON.parse(responce);
                 miembro.forEach(miembro => {
@@ -38,7 +38,7 @@ $(document).ready(function () {
                         codigoMieCel = miembro.pacodmcl
                 });
                 editMiecel = true;
-                //console.log(codigoMieCel+' '+codigoMie+' '+codigoCel);
+                ////console.log(codigoMieCel+' '+codigoMie+' '+codigoCel);
                 habilitarFormulario();
                 $("#btn_AgregarMiecel").html("<i class='far fa-save'></i> Guardar");
                 capturarCampos();
@@ -87,7 +87,7 @@ $(document).ready(function () {
     $(document).on('click', '.asignar-lider', function () {//modifica usuario
         $('#btn_guardarLider').attr("disabled", false);
         $('#btn_CambiarLider').attr("disabled", true);
-        
+
         let elemento = $(this)[0].parentElement.parentElement;
         codigoMie = $(elemento).attr('UserDocu');
         codigoMieCel = $(elemento).attr('pacodmcl');
@@ -97,8 +97,8 @@ $(document).ready(function () {
         $('#lbl_lider').html(nombreLider + " " + apePaternoLider + " " + apeMaternoLider);
         $('.modal-dialog-scrollable .modal-body').animate({
             scrollTop: 0
-          }, 'slow');
-        //console.log(codigoMieCel);
+        }, 'slow');
+        ////console.log(codigoMieCel);
 
     });
 
@@ -125,13 +125,13 @@ $(document).ready(function () {
             type: 'POST',
             data: { codCel },
             success: function (response) {
-                //console.log(response);
+                ////console.log(response);
                 let miembros = JSON.parse(response);
                 let plantilla = '';
                 if (miembros != false) {
                     miembros.forEach(miembros => {
                         let extencion = '';
-                        //console.log(miembros);
+                        ////console.log(miembros);
                         if (miembros.cacidext != "") {
                             extencion = "-" + miembros.cacidext;
                         }
@@ -147,7 +147,7 @@ $(document).ready(function () {
                             <td ALIGN="CENTER"><button class="modificar-miecel btn btn-secondary">
                             <i class="far fa-edit "></i></button></td>
                             </tr>`;
-                            console.log("hola");
+                            //console.log("hola");
                             //$("#btn_guardarLider").attr("disabled", false);
                             //$("#btn_cambiarLider").attr("disabled", true);
                         }
@@ -175,14 +175,18 @@ $(document).ready(function () {
             url: '/MRFSistem/AccesoDatos/Miembro/ListarMiembro.php',
             type: 'GET',
             success: function (response) {
-                //console.log(response);
+                ////console.log(response);
                 if (response != 'false') {
                     let miembros = JSON.parse(response);
+                    let plantillaLista = '';
                     let plantilla = '';
                     miembros.forEach(miembros => {
                         plantilla = MostrarTabla(plantilla, miembros);
+                        plantillaLista += `<option value="${miembros.canommie} ${miembros.capatmie} ${miembros.camatmie}" data-codigo="${miembros.pacodmie}"></option>`;
+
                     });
                     $('#tb_miembroLider').html(plantilla);
+                    $('#dat_miembro').html(plantillaLista);
                 }
 
             }
@@ -211,6 +215,50 @@ $(document).ready(function () {
         return plantilla;
     }
 
+    $('#buscarMiembro').on('input', function () {//asigar codigo barrio
+        //camposVacios();
+        var val = $('#buscarMiembro').val().toUpperCase();
+        codigoMie = $('#dat_miembro').find('option[value="' + val + '"]').data('codigo');
+
+        if (codigoMie === undefined) {
+            //console.log("EmpName no está definido");
+            //banPro = true;
+            //nuevaProfesion();
+            codigoMie = "";
+            //console.log(codigoMie);
+        } else {
+            let pacodmie = codigoMie;
+            $.ajax({
+                url: '/MRFSistem/AccesoDatos/Miembro/SingleMiembro.php',
+                type: 'POST',
+                data: { pacodmie },
+                beforeSend: function () {
+
+                },
+                complete: function () {
+
+                },
+                success: function (responce) {
+                    //console.log(responce);
+                    const miembro = JSON.parse(responce);
+                    let plantilla = '';
+                    miembro.forEach(miembro => {
+                        plantilla = MostrarTabla(plantilla, miembro);
+                    });
+                    $('#tb_miembroLider').html(plantilla);
+                }
+            });
+            //console.log("EmpName está definido");
+            //console.log(codigoMie);
+        }
+        if (val=='') {
+            ListarMiembro();
+        }
+    });
+
+
+
+
     function NuevoMiecel() {//genera un codigo nuevo de miembro y miecel
         document.getElementById("txt_ci").focus();
         let num = "";
@@ -227,7 +275,7 @@ $(document).ready(function () {
         corre1 = getCorrelativo();
         num = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num);
         codigoMie = getCodigo() + '-' + num;
-        ////console.log(codigoMie+' correlativo '+corre1);
+        //////console.log(codigoMie+' correlativo '+corre1);
         let num1 = "";
         verificarSecuencia("MCL");
         if (getBan() != "true") {
@@ -242,8 +290,8 @@ $(document).ready(function () {
         corre2 = getCorrelativo();
         num1 = ObtenerNumeroCorrelativo(getCorrelativo().toString(), num1);
         codigoMieCel = getCodigo() + '-' + num1;
-        ////console.log(codigoMieCel + ' correlativo ' + corre2);
-        ////console.log(codigoCel);
+        //////console.log(codigoMieCel + ' correlativo ' + corre2);
+        //////console.log(codigoCel);
     }
 
     function ObtenerNumeroCorrelativo(numero, num) {//sirve para obtener numero correlativo
@@ -290,7 +338,7 @@ $(document).ready(function () {
             facodcel: codigoCel,
             facodmie: codigoMie
         };
-        ////console.log(postData);
+        //////console.log(postData);
         let URL = editMiecel === false ?
             '/MRFSistem/AccesoDatos/MieCel/AgregarMiembro.php' :
             '/MRFSistem/AccesoDatos/MieCel/ModificarMiecel.php';
@@ -308,7 +356,7 @@ $(document).ready(function () {
                 $("#btn_AgregarMiecel").attr("disabled", false);
             },
             success: function (response) {
-                //console.log(response);
+                ////console.log(response);
                 if (!editMiecel && response == 'registra') {
                     actualizarSecuencia("MBR", corre1);
                     GuardarMiembroCelula();
@@ -338,7 +386,7 @@ $(document).ready(function () {
 
         let url = '/MRFSistem/AccesoDatos/MieCel/AgregarMieCel.php';
         $.post(url, postData, function (response) {
-            ////console.log(response);
+            //////console.log(response);
             if (!editMiecel && response == 'registra') {
                 actualizarSecuencia("MCL", corre2);
             }
@@ -351,7 +399,7 @@ $(document).ready(function () {
             //DeshabilitarFormulario();
             //ListarMiembro();
         });
-        ////console.log('completado..');
+        //////console.log('completado..');
     }
 
     function guardarLiderCelula() {
@@ -361,7 +409,7 @@ $(document).ready(function () {
         };
         let url = '/MRFSistem/AccesoDatos/MieCel/ModificarLiderCelula.php';
         $.post(url, postData, function (response) {
-            ////console.log(response);
+            //////console.log(response);
             if (response == 'modificado') {
                 alertify.alert('Mensaje', 'Lider asignado correctamente', function () { alertify.success('Se guardó correctamente'); });
             } else {
@@ -524,7 +572,7 @@ $(document).ready(function () {
                 $("#val_ci").html("Este campo debe tener al menos 7 digitos");
                 $("#chk_ci").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
                 $("#chk_ci").html('<i class="fas fa-exclamation-triangle"></i>');
-                //console.log('ci debe tener almenos 7 carateres');
+                ////console.log('ci debe tener almenos 7 carateres');
                 contador++;
             }
             else {
@@ -532,7 +580,7 @@ $(document).ready(function () {
                 $("#val_ci").html("");
                 $("#chk_ci").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
                 $("#chk_ci").html('<i class="fas fa-check"></i>');
-                //console.log('corecto');
+                ////console.log('corecto');
             }
         }
         if (nombre == "") {
@@ -549,7 +597,7 @@ $(document).ready(function () {
                 $("#val_nombre").html("Este campo debe tener al menos 3 letras");
                 $("#chk_nombre").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
                 $("#chk_nombre").html('<i class="fas fa-exclamation-triangle"></i>');
-                //console.log('nombre debe tener almenos 7 carateres');
+                ////console.log('nombre debe tener almenos 7 carateres');
                 contador++;
             }
             else {
@@ -557,7 +605,7 @@ $(document).ready(function () {
                 $("#val_nombre").html("");
                 $("#chk_nombre").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
                 $("#chk_nombre").html('<i class="fas fa-check"></i>');
-                //console.log('corecto');
+                ////console.log('corecto');
             }
         }
         if (apPaterno == "") {
@@ -573,7 +621,7 @@ $(document).ready(function () {
                 $("#val_paterno").html("Este campo debe tener al menos 3 letras");
                 $("#chk_paterno").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
                 $("#chk_paterno").html('<i class="fas fa-exclamation-triangle"></i>');
-                //console.log('paterno debe tener almenos 7 carateres');
+                ////console.log('paterno debe tener almenos 7 carateres');
                 contador++;
             }
             else {
@@ -581,7 +629,7 @@ $(document).ready(function () {
                 $("#val_paterno").html("");
                 $("#chk_paterno").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
                 $("#chk_paterno").html('<i class="fas fa-check"></i>');
-                //console.log('corecto');
+                ////console.log('corecto');
             }
         }
 
@@ -598,7 +646,7 @@ $(document).ready(function () {
                 $("#val_numcontacto").html("Este campo debe tener al menos 5 digitos");
                 $("#chk_numcontacto").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
                 $("#chk_numcontacto").html('<i class="fas fa-exclamation-triangle"></i>');
-                //console.log('numcontacto debe tener almenos 7 carateres');
+                ////console.log('numcontacto debe tener almenos 7 carateres');
                 contador++;
             }
             else {
@@ -606,7 +654,7 @@ $(document).ready(function () {
                 $("#val_numcontacto").html("");
                 $("#chk_numcontacto").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
                 $("#chk_numcontacto").html('<i class="fas fa-check"></i>');
-                //console.log('corecto');
+                ////console.log('corecto');
             }
         }
         if (direccion == "") {
@@ -622,7 +670,7 @@ $(document).ready(function () {
                 $("#val_direccion").html("Este campo debe tener al menos 10 caracteres");
                 $("#chk_direccion").switchClass("btn-success", "btn-danger", 100, "easeInOutQuad");
                 $("#chk_direccion").html('<i class="fas fa-exclamation-triangle"></i>');
-                //console.log('direccion debe tener almenos 7 carateres');
+                ////console.log('direccion debe tener almenos 7 carateres');
                 contador++;
             }
             else {
@@ -630,7 +678,7 @@ $(document).ready(function () {
                 $("#val_direccion").html("");
                 $("#chk_direccion").switchClass("btn-danger", "btn-success", 100, "easeInOutQuad");
                 $("#chk_direccion").html('<i class="fas fa-check"></i>');
-                //console.log('corecto');
+                ////console.log('corecto');
             }
         }
         if (funCel == "0") {

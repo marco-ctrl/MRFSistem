@@ -188,6 +188,7 @@ $(document).ready(function () {
     $('#btn_nuevo').click(function (e) {//nuevo registro de Celula 
         $('#lista').hide();
         $('#formulario').show();
+        camposVacios();
         let num = "";
         verificarSecuencia("CEL");
         if (getBan() != "true") {
