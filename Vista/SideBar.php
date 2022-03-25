@@ -3,7 +3,10 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+            <!--<i class="fas fa-laugh-wink"></i>-->
+            
+            <img src="/MRFSistem/logo.jpg" alt="" width="70%" class="img-profile rounded-circle">
+            <!--<img src="/MRFSistem/image.jpg" alt="" width="70%" class="img-profile rounded-circle">-->
         </div>
         <div class="sidebar-brand-text mx-3">MRFSistem</div>
     </a>

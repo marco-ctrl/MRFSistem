@@ -94,34 +94,7 @@ $(document).ready(function () {
         if ($('#buscarMiembro').val()) {
             let buscar = $('#buscarMiembro').val().toUpperCase();
             let condicion = $('#tipoBusqueda').val();
-            let plantilla = '';
-            $.ajax({
-                url: '/MRFSistem/AccesoDatos/Miembro/BuscarMiembro.php',
-                type: 'POST',
-                data: { buscar, condicion },
-                success: function (response) {
-                    if (response != "no encontrado") {
-                        let usuario = JSON.parse(response);
-
-                        usuario.forEach(usuario => {
-                            plantilla = MostrarTabla(plantilla, usuario);
-                        });
-                        $('#tb_miembro').html(plantilla);
-                    }
-                    else {
-                        $('#tb_miembro').html(plantilla);
-                        let mensaje = `<div class="alert alert-dismissible alert-danger">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Miembro ${buscar} no se encuentra registrado en la base de datos</strong></div>`;
-                        $('#mensaje').html(mensaje);
-                        $('#mensaje').show();
-                    }
-                },
-                error: function (xhr, status) {
-                    alert('error al buscar miembro');
-                }
-
-            });
+            BuscarMiembro(buscar, condicion);
         }
         else {
             $('#mensaje').hide();
@@ -129,6 +102,51 @@ $(document).ready(function () {
         }
 
     });
+
+    $('#buscarMiembro1').keyup(function (e) {//permite hacer busqueda de miembros
+        if ($('#buscarMiembro1').val()) {
+            let buscar = $('#buscarMiembro1').val().toUpperCase();
+            let condicion = $('#tipoBusqueda1').val();
+            BuscarMiembro(buscar, condicion);
+        }
+        else {
+            $('#mensaje').hide();
+            ListarMiembro();
+        }
+
+    });
+
+    function BuscarMiembro(buscar, condicion) {
+        let plantilla = '';
+        $.ajax({
+            url: '/MRFSistem/AccesoDatos/Miembro/BuscarMiembro.php',
+            type: 'POST',
+            data: { buscar, condicion },
+            success: function (response) {
+                //console.log(response);
+                if (response != "no encontrado") {
+                    let usuario = JSON.parse(response);
+
+                    usuario.forEach(usuario => {
+                        plantilla = MostrarTabla(plantilla, usuario);
+                    });
+                    $('#tb_miembro').html(plantilla);
+                    //$('#tb_miembro').html(plantilla);
+                }
+                else {
+                    let mensaje = `<div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Miembro ${buscar} no se encuentra registrado en la base de datos</strong></div>`;
+                    $('#mensaje').html(mensaje);
+                    $('#mensaje').show();
+                }
+            },
+            error: function (xhr, status) {
+                alert('error al buscar miembro');
+            }
+
+        });
+    }
 
     $('#btn_guardarMiembro').click(function (e) {//permiete guardar Usuario
         CapturarCrecimiento();
