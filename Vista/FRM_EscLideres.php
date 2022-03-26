@@ -2,8 +2,8 @@
 
 <body id="page-top">
 
-     <!-- Div cargando -->
-     <?php include 'Cargando.php' ?>
+    <!-- Div cargando -->
+    <?php include 'Cargando.php' ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -14,7 +14,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <img src="/MRFSistem/logo.jpg" alt="" width="70%" class="img-profile rounded-circle">
                 </div>
                 <div class="sidebar-brand-text mx-3">MRFSistem</div>
             </a>
@@ -40,7 +40,7 @@
             <!-- Nav Item - Pages Collapse Menu -->
             <?php include_once('includes/EscuelaLideres/interfaces.php'); ?>
 
-            
+
             <!-- Nav Item - Charts -->
 
             <!-- Nav Item - Tables -->
@@ -182,9 +182,11 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                                <div
+                                                    class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
                                                     Reportes:</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">INFORMACION ALUMNO</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">INFORMACION ALUMNO
+                                                </div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-file-pdf fa-2x text-gray-700"></i>
@@ -222,7 +224,8 @@
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                     Reportes:</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">CONTROL ASISTENCIA</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">CONTROL ASISTENCIA
+                                                </div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-file-pdf fa-2x text-gray-700"></i>
@@ -254,7 +257,6 @@
     <?php include 'LogoutModal.php'?>
 
     <?php include 'Scripts.php'?>
-    
+
 
 </body>
-

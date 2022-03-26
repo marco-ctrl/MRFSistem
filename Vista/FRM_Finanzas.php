@@ -14,7 +14,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <img src="/MRFSistem/logo.jpg" alt="" width="70%" class="img-profile rounded-circle">
                 </div>
                 <div class="sidebar-brand-text mx-3">MRFSistem</div>
             </a>
@@ -163,7 +163,8 @@
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                                     Reportes:</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">INFORME MENSUAL</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">INFORME MENSUAL
+                                                </div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="far fa-file-pdf fa-2x text-gray-700"></i>
@@ -204,13 +205,13 @@
                                         <canvas id="grf_egresos"></canvas>
                                     </div>
                                     <hr>
-                                    
+
                                 </div>
                             </div>
 
                         </div>
 
-                        
+
                     </div>
 
 

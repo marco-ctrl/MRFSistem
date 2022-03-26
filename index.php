@@ -132,7 +132,6 @@
                                         </div>
                                         <hr>
                                     </form>
-                                    <hr>
                                 </div>
                             </div>
                         </div>

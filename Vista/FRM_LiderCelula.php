@@ -13,7 +13,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                 <div class="sidebar-brand-icon rotate-n-15">
-                <img src="/MRFSistem/logo.jpg" alt="" width="70%" class="img-profile rounded-circle">
+                    <img src="/MRFSistem/logo.jpg" alt="" width="70%" class="img-profile rounded-circle">
                 </div>
                 <div class="sidebar-brand-text mx-3">MRFSistem</div>
             </a>
@@ -22,11 +22,13 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="FRM_principal.php">
                     <i class="fas fa-home"></i>
                     <span>Inicio</span></a>
             </li>
+
+            
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -37,9 +39,60 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <?php include_once('includes/EscuelaLideres/interfaces.php'); ?>
+            <?php //include_once('includes/EscuelaLideres/interfaces.php'); ?>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Opciones</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Opciones:</h6>
+                        <a class="collapse-item" href="FRM_Alumno"><i class="fas fa-user-plus"></i>
+                            Agregar Miembro</a>
+                        <a class="collapse-item" href="FRM_Maestro"><i class="fas fa-list"></i>
+                            Listar Miembro</a>
+                    </div>
+                </div>
+            </li>
 
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="far fa-file-pdf"></i>
+                    <span>Reportes</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header"> Reportes:</h6>
+                        <a class="collapse-item" href="INF_Alumno"><i class="far fa-file-pdf"></i> Informacion
+                            Alumno</a>
+                        <a class="collapse-item" href="InfoCursos" href="#"><i class="far fa-file-pdf"></i>
+                            Informacion Maestros</a>
+                        <a class="collapse-item" href="ControlPago" href="#"><i class="far fa-file-pdf"></i> Control de
+                            Pago</a>
+                        <a class="collapse-item" href="ControlAsistencia" href="#"><i class="far fa-file-pdf"></i>
+                            Control de Asistencia</a>
+                        <a class="collapse-item" href="INF_Materias" href="#"><i class="far fa-file-pdf"></i>
+                            Informacion de Materias</a>
+                        <a class="collapse-item" href="INF_Cursos" href="#"><i class="far fa-file-pdf"></i>
+                            Informacion de Curso</a>
 
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <li class="nav-item">
+                <a class="nav-link" href="FRM_principal.php">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Informacion Celula</span></a>
+            </li>
             <!-- Nav Item - Charts -->
 
             <!-- Nav Item - Tables -->
@@ -139,7 +192,8 @@
                                         <label for="">Materia</label>
                                         <div class="input-group border-bottom-danger" id="div_contenido">
                                             <input type="text" id="txt_contenido" placeholder="Nombre de Materia"
-                                                class="form-control" onkeyup="this.value=textoDireccion(this.value)"></input>
+                                                class="form-control"
+                                                onkeyup="this.value=textoDireccion(this.value)"></input>
                                             <span id="chk_contenido" class="input-group-text text-white bg-danger">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                             </span>
@@ -150,7 +204,8 @@
                                         <label for="">Descripcion</label>
                                         <div class="input-group border-bottom-danger" id="div_descripcion">
                                             <textarea class="form-control" id="txt_descripcion"
-                                                placeholder="Descripcion" rows="3" onkeyup="this.value=textoDireccion(this.value)"></textarea>
+                                                placeholder="Descripcion" rows="3"
+                                                onkeyup="this.value=textoDireccion(this.value)"></textarea>
                                             <span id="chk_descripcion" class="input-group-text text-white bg-danger">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                             </span>

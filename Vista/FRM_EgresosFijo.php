@@ -13,7 +13,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <img src="/MRFSistem/logo.jpg" alt="" width="70%" class="img-profile rounded-circle">
                 </div>
                 <div class="sidebar-brand-text mx-3">MRFSistem</div>
             </a>
@@ -39,30 +39,7 @@
             <!-- Nav Item - Pages Collapse Menu -->
             <?php include_once 'includes/ControlFinanzas/interfaces.php' ?>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Sistema
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-server"></i>
-                    <span>Base de Datos</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Base de Datos</h6>
-                        <a class="collapse-item" href="login.html"><i class="fas fa-server"></i> Respaldar BD</a>
-                        <a class="collapse-item" href="register.html"><i class="fas fa-server"></i> Restaurar BD</a>
-                    </div>
-                </div>
-            </li>
-
+            
             <!-- Nav Item - Charts -->
 
             <!-- Nav Item - Tables -->
@@ -173,7 +150,7 @@
                                             <input type="number" id="txt_cantidad" min="0" class="form-control"
                                                 aria-label="Dollar amount (with dot and two decimal places)"
                                                 placeholder="Cantidad">
-                                            
+
                                             <span id="chk_cantidad" class="input-group-text text-white bg-danger">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                             </span>
@@ -186,7 +163,7 @@
                                         <label>Descripcion</label>
                                         <div class="input-group border-bottom-danger" id="div_descripcion">
                                             <textarea type="text" class="form-control" id="txt_descripcion"
-                                            placeholder="Descripcion"></textarea>
+                                                placeholder="Descripcion"></textarea>
                                             <span id="chk_descripcion" class="input-group-text text-white bg-danger">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                             </span>
