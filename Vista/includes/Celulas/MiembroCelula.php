@@ -152,3 +152,14 @@
         </div>
     </div>
 </div>
+<script>
+    function ValidarEscrituraFecha() {
+    if (event.keyCode == 9) {
+        // Código para la tecla TAB
+        //console.log("Oprimiste la tecla TAB");
+
+    } else {
+        return false;
+    }
+}
+</script>

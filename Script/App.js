@@ -26,6 +26,14 @@ $(document).ready(function () {
         $("#finanzas").load('FRM_Ingresos.php');
     });
 
+    /*$("#mn_agregarMiembro").click(function (event) {
+        $("#div_contenedor").load('/MRFSistem/Vista/includes/Celulas/AgregarMiembro.php');
+    });
+
+    $("#mn_listarMiembro").click(function (event) {
+        $("#div_contenedor").load('/MRFSistem/Vista/includes/Celulas/ListarMiembro.php');
+    });*/
+
     $("#mn_respaldo").click(function (event) {
         var pre = document.createElement('pre');
         //custom style.
