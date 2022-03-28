@@ -21,7 +21,7 @@ date_default_timezone_set('America/La_Paz');
     <meta name="author" content="">
 
     <title>MRFSistem</title>
-    <link rel="shortcut icon" href="/MRFSistem/img/iglesia.png">
+    <link rel="shortcut icon" href="/MRFSistem/logo.jpg">
     <!-- Custom fonts for this template-->
     <link href="/MRFSistem/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link

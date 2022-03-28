@@ -49,6 +49,7 @@
         $_SESSION['catipusu']=$data['catipusu'];
         $_SESSION['canomusu']=$data['canomusu'];
         $_SESSION['caurlfot']=$data['caurlfot'];
+        $_SESSION['facodmie']=$data['facodmie'];
         if($_SESSION['catipusu']=='ADMINISTRADOR'){
           header('location: Vista/FRM_principal');
         }
@@ -57,6 +58,9 @@
         }
         if($_SESSION['catipusu']=='TESORERO'){
           header('location: Vista/FRM_Finanzas.php');
+        }
+        if($_SESSION['catipusu']=='LIDER'){
+          header('location: Vista/FRM_LiderCelula.php');
         }
         
       }

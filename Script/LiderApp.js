@@ -53,61 +53,6 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on('click', '.miembros-celula', function () {//modifica usuario
-        let elemento = $(this)[0].parentElement.parentElement;
-        let pacodcel = $(elemento).attr('UserDocu');
-        codigoCel = pacodcel;
-        $.post('/MRFSistem/AccesoDatos/Celula/SingleCelula.php',
-            { pacodcel }, function (responce) {
-                const celula = JSON.parse(responce);
-                celula.forEach(cel => {
-                    document.getElementById('title').innerHTML = 'MIEMBROS DE LA CELULA ' + cel.canomcel;
-
-                });
-
-            });
-        ListarMieCel(pacodcel);
-    });
-
-    $(document).on('click', '.lider-celula', function () {//abrir pantalla asignar lidar celula
-        document.getElementById('lbl_lider').innerHTML = 'LIDER DE LA CELULA';
-        $('#listaMiembros').show();
-        $('#btn_guardarLider').attr("disabled", true);
-        $('#btn_CambiarLider').attr("disabled", true);
-        let elemento = $(this)[0].parentElement.parentElement;
-        let pacodcel = $(elemento).attr('UserDocu');
-        codigoCel = pacodcel;
-        $.post('/MRFSistem/AccesoDatos/Celula/SingleCelula.php',
-            { pacodcel }, function (responce) {
-                const celula = JSON.parse(responce);
-                celula.forEach(cel => {
-                    document.getElementById('titleLider').innerHTML = 'LIDER DE LA CELULA ' + cel.canomcel;
-
-                });
-
-            });
-        ListarMieCel(pacodcel);
-        ListarMiembro();
-    });
-
-    $(document).on('click', '.asignar-lider', function () {//modifica usuario
-        $('#btn_guardarLider').attr("disabled", false);
-        $('#btn_CambiarLider').attr("disabled", true);
-
-        let elemento = $(this)[0].parentElement.parentElement;
-        codigoMie = $(elemento).attr('UserDocu');
-        codigoMieCel = $(elemento).attr('pacodmcl');
-        let nombreLider = $(elemento).attr('nombre');
-        let apePaternoLider = $(elemento).attr('apePaterno');
-        let apeMaternoLider = $(elemento).attr('apeMaterno');
-        $('#lbl_lider').html(nombreLider + " " + apePaternoLider + " " + apeMaternoLider);
-        $('.modal-dialog-scrollable .modal-body').animate({
-            scrollTop: 0
-        }, 'slow');
-        ////console.log(codigoMieCel);
-
-    });
-
     $(document).on('click', '.baja-miecel', function () {//elimina usuario
         if (confirm("Seguro que desea dar de baja esta Miembro")) {
             let elemento = $(this)[0].parentElement.parentElement;
@@ -717,12 +662,20 @@ $(document).ready(function () {
     $("#mn_agregarMiembro").click(function (event) {
         $("#formulario").show();
         $("#lista").hide();
+        $("#principal").hide();
     });
 
     $("#mn_listarMiembro").click(function (event) {
        $("#formulario").hide();
         $("#lista").show();
+        $("#principal").hide();
         ListarMieCel(codigoCel);
+    });
+
+    $("#mn_inicio").click(function (event) {
+        $("#formulario").hide();
+        $("#lista").hide();
+        $("#principal").show();
     });
 
 });

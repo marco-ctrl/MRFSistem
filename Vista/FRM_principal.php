@@ -6,6 +6,9 @@
       if($_SESSION['catipusu']=='TESORERO'){
         header('location: FRM_Finanzas.php');
       }
+      if($_SESSION['catipusu']=='LIDER'){
+        header('location: FRM_LiderCelula.php');
+      }
 ?>
 
 <body id="page-top">

@@ -145,6 +145,7 @@
                                                     <tr>
                                                         <td>NOMBRE</td>
                                                         <td>APELLIDO</td>
+                                                        <td>FUNCION</td>
                                                         <td style="width:15%">SELECCIONAR</td>
                                                     </tr>
                                                 </thead>
@@ -184,7 +185,7 @@
                                             <thead class="bg-primary text-white">
                                                 <tr>
                                                     <th>MIEMBRO</th>
-                                                    <th>FUNCION</th>
+                                                    <th>ROL</th>
                                                     <th>USUARIO</th>
                                                     <th>BAJA</th>
                                                     <th style="width:15%">MODIFICAR</th>
@@ -193,7 +194,7 @@
                                             <tfoot class="bg-primary text-white">
                                                 <tr>
                                                     <th>MIEMBRO</th>
-                                                    <th>FUNCION</th>
+                                                    <th>ROL</th>
                                                     <th>USUARIO</th>
                                                     <th>BAJA</th>
                                                     <th style="width:15%">MODIFICAR</th>

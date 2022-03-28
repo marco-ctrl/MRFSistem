@@ -1,5 +1,33 @@
 <?php include 'Header.php' ?>
 
+<?php 
+    require_once "../AccesoDatos/Conexion/Conexion.php";
+    if(empty($_SESSION['active'])){
+        header('location: ../');
+      }
+    
+    
+    $celula = "";
+    $facodmie = $_SESSION['facodmie'];
+    $consulta = "SELECT 
+                    facodcel, canomcel 
+                FROM amiecel, acelula 
+                WHERE facodmie='MBR-000002' 
+                and facodcel=pacodcel";
+    
+    $resultado = mysqli_query($conexion, $consulta);
+
+    if( mysqli_num_rows($resultado) > 0 ){
+        $data=mysqli_fetch_array($resultado);
+        
+        $celula=$data['canomcel'];
+        //$fecha=$data['cainicaj'];
+    }
+    //session_start();
+    
+    
+?>
+
 <body id="page-top">
     <!-- Div cargando -->
     <?php include 'Cargando.php' ?>
@@ -23,7 +51,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="FRM_principal.php">
+                <a class="nav-link" href="#" id="mn_inicio">
                     <i class="fas fa-home"></i>
                     <span>Inicio</span></a>
             </li>
@@ -89,7 +117,7 @@
             <hr class="sidebar-divider my-0">
 
             <li class="nav-item">
-                <a class="nav-link" href="FRM_principal.php">
+                <a class="nav-link" href="#" id="mn_informacion">
                     <i class="fas fa-info-circle"></i>
                     <span>Informacion Celula</span></a>
             </li>
@@ -120,13 +148,73 @@
                 <div class="container-fluid" id="escuela">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">CELULA </h1>
+                        <h1 class="h3 mb-0 text-gray-800">CELULA <?php echo $celula ?></h1>
                         <a href="FRM_LiderCelula" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                             <i class="fas fa-desktop fa-sm text-white-50"></i> Volver Escritorio</a>
                     </div>
-                    <!--<div id="div_contenedor">
+                    <div id="principal">
+                        <div class="row">
+                            <!--  Acceso directo a las Actividades -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <a href="#" class="collapse-item" style="text-decoration:none" id="btn_agregarMiembro">
+                                    <div class="card border-left-primary shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div
+                                                        class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Opciones:</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">REGISTRAR MIEMBROS</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-user-plus fa-2x text-gray-700"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <a href="FRM_Usuario" class="collapse-item" style="text-decoration:none" id="btn_listarMiembro">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div
+                                                        class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                        Opciones:</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">LISTA MIEMBROS</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-list fa-2x text-gray-700"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
 
-                    </div>-->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <a href="FRM_Celula" class="collapse-item" style="text-decoration:none" id="btn_informacion">
+                                    <div class="card border-left-info shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div
+                                                        class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                        OPCIONES:</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">INFORMACION</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-info-circle fa-2x text-gray-700"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <div id="formulario">
                         <?php include 'includes/Celulas/AgregarMiembro.php'?>
                     </div>

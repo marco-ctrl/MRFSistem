@@ -23,22 +23,19 @@ $(document).ready(function () {
     $('#txt_buscarMiembro').keyup(function (e) {//permite hacer busqueda de miembros
         if ($('#txt_buscarMiembro').val()) {
             let buscar = $('#txt_buscarMiembro').val().toUpperCase();
-            let plantilla = '';
+            let condicion = 'canommie';
             $.ajax({
                 url: '/MRFSistem/AccesoDatos/Miembro/BuscarMiembro.php',
                 type: 'POST',
-                data: { buscar },
+                data: { buscar, condicion },
                 success: function (response) {
+                    let plantilla = '';
                     if (response != "no encontrado") {
                         let miembros = JSON.parse(response);
-
+                        
                         miembros.forEach(miembros => {
-                            plantilla +=
-                                `<tr codMbr="${miembros.pacodmie}" class="table-light">
-                            <td>${miembros.canommie}</td> 
-                            <td>${miembros.capatmie} ${miembros.camatmie}</td>
-                            <td style="width:15%"><button class="agregar-miembro btn btn-primary">
-                            <i class="fas fa-user-plus"></i></button></tr>`;
+                            plantilla = MostrarTablaMiembro(miembros, plantilla);
+                                
                         });
                         $('#tb_miembro').html(plantilla);
                     }
@@ -257,17 +254,26 @@ $(document).ready(function () {
                 let miembros = JSON.parse(response);
                 let plantilla = '';
                 miembros.forEach(miembros => {
-                    plantilla +=
-                        `<tr codMbr="${miembros.pacodmie}" class="table-light">
-                        <td>${miembros.canommie}</td> 
-                        <td>${miembros.capatmie} ${miembros.camatmie}</td>
-                        <td style="width:15%"><button class="agregar-miembro btn btn-primary" data-dismiss="modal">
-                        <i class="fas fa-user-plus "></i></button></td>
-                        </tr>`;
+                    plantilla = MostrarTablaMiembro(miembros, plantilla);
                 });
                 $('#tb_miembro').html(plantilla);
             }
         });
+    }
+
+    function MostrarTablaMiembro(miembros, plantilla) {
+        if (miembros.cafunmie == "LIDER"){
+            plantilla +=
+            `<tr codMbr="${miembros.pacodmie}" class="table-light">
+                        <td>${miembros.canommie}</td> 
+                        <td>${miembros.capatmie} ${miembros.camatmie}</td>
+                        <td>${miembros.cafunmie}</td>
+                        <td style="width:15%"><button class="agregar-miembro btn btn-primary" data-dismiss="modal">
+                        <i class="fas fa-user-plus "></i></button></td>
+                        </tr>`;
+        }
+        
+        return plantilla;
     }
 
     //////Mostrar Tabla de Usuario///////////
@@ -295,9 +301,9 @@ $(document).ready(function () {
             url: '/MRFSistem/AccesoDatos/Usuario/ListarUsuario.php',
             type: 'GET',
             beforeSend: function () {
-                var contenedor = document.getElementById('contenedor_carga');
+                /*var contenedor = document.getElementById('contenedor_carga');
                 contenedor.style.visibility = 'visible';
-                contenedor.style.opacity = '200'
+                contenedor.style.opacity = '200'*/
             },
             success: function (response) {
                 if (response != 'false') {
@@ -412,7 +418,7 @@ $(document).ready(function () {
         else {
             $("#div_miembro").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
             $("#val_miembro").html("");
-            
+
             $("#div_codigo").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
             $("#chk_codigo").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
             $("#chk_codigo").html('<i class="fas fa-check"></i>');
@@ -443,7 +449,7 @@ $(document).ready(function () {
             $("#val_tipo").html("");
             $("#chk_tipo").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
             $("#chk_tipo").html('<i class="fas fa-check"></i>');
-            
+
             $("#div_usuario").switchClass("border-bottom-danger", "border-bottom-success", 100, "easeInOutQuad");
             $("#chk_usuario").switchClass("bg-danger", "bg-success", 100, "easeInOutQuad");
             $("#chk_usuario").html('<i class="fas fa-check"></i>');
