@@ -1,4 +1,14 @@
-<?php include 'Header.php' ?>
+<?php include 'Header.php'; 
+if ($_SESSION['catipusu'] == 'DIRECTOR') {
+    header('location: FRM_EscLideres.php');
+}
+if ($_SESSION['catipusu'] == 'SECRETARIO') {
+    header('location: FRM_EscLideres.php');
+}
+if ($_SESSION['catipusu'] == 'TESORERO') {
+    header('location: FRM_Finanzas.php');
+}
+?>
 
 <?php 
     require_once "../AccesoDatos/Conexion/Conexion.php";
@@ -21,6 +31,7 @@
         $data=mysqli_fetch_array($resultado);
         
         $celula=$data['canomcel'];
+        $pacodcel=$data['facodcel'];
         //$fecha=$data['cainicaj'];
     }
     //session_start();
@@ -86,7 +97,7 @@
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+            <!--<li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="far fa-file-pdf"></i>
@@ -111,7 +122,7 @@
 
                     </div>
                 </div>
-            </li>
+            </li>-->
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -175,7 +186,7 @@
                                 </a>
                             </div>
                             <div class="col-xl-3 col-md-6 mb-4">
-                                <a href="FRM_Usuario" class="collapse-item" style="text-decoration:none" id="btn_listarMiembro">
+                                <a href="#" class="collapse-item" style="text-decoration:none" id="btn_listarMiembro">
                                     <div class="card border-left-success shadow h-100 py-2">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
@@ -195,7 +206,7 @@
                             </div>
 
                             <div class="col-xl-3 col-md-6 mb-4">
-                                <a href="FRM_Celula" class="collapse-item" style="text-decoration:none" id="btn_informacion">
+                                <a href="#" class="collapse-item" style="text-decoration:none" id="btn_informacion">
                                     <div class="card border-left-info shadow h-100 py-2">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
@@ -221,6 +232,10 @@
 
                     <div id="lista">
                         <?php include 'includes/Celulas/ListarMiembro.php'?>
+                    </div>
+
+                    <div id="informacion">
+                        <?php include 'includes/Celulas/InformacionCelula.php' ?>
                     </div>
 
                 </div>

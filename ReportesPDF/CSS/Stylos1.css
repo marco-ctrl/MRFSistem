@@ -1,0 +1,54 @@
+img.izquierdo{
+    float: left;
+    margin-right: 0px;
+    margin-left: 0px;
+    width: 110px;
+    height: 110px;
+}
+
+img.derecho{
+    float: right;
+    margin-right: 0px;
+    margin-left: 0px;
+    width: 130px;
+    height: 120px;
+    border-radius: 20%;
+}
+
+img.foto{
+    float: right;
+    margin-right: 0px;
+    margin-left: 0px;
+    width: 60px;
+    height: 50px;
+    border-radius: 20%;
+}
+
+div.Informe{
+    width:100%;
+    line-height : 150%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.columnaItems{
+    width:35%;
+    float:left;
+  }
+
+  .columna{
+    width:30%;
+    float:left;
+  }
+
+p.western{
+    margin-bottom: 0in;
+    line-height: 100%;
+}
+
+.interlineado { line-height: 200%;} 
+
+.mapas { 
+    height: 300px;
+    width: 500px;
+    
+}

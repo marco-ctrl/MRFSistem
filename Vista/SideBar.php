@@ -99,6 +99,12 @@
         </div>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="/MRFSistem/ManualUsuario.pdf">
+            <i class="fas fa-file-pdf"></i> 
+            <span>Manual de Usuario</span></a>
+    </li>
+
     <!-- Nav Item - Charts -->
 
     <!-- Nav Item - Tables -->

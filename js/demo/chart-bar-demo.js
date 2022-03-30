@@ -60,6 +60,7 @@ function graficarIngresos() {
             borderColor: [
               'rgba(82, 190, 128)',
               'rgba(82, 190, 128)'],
+            maxBarThickness: 25,
             data: total,
           }],
         },
@@ -85,7 +86,6 @@ function graficarIngresos() {
               ticks: {
                 maxTicksLimit: 6
               },
-              maxBarThickness: 25,
             }],
             yAxes: [{
               ticks: {
@@ -165,6 +165,7 @@ function graficarEgresos() {
             borderColor: [
               '#EC7063',
               '#EC7063'],
+            maxBarThickness: 25,
             data: total,
           }],
         },
@@ -190,7 +191,7 @@ function graficarEgresos() {
               ticks: {
                 maxTicksLimit: 6
               },
-              maxBarThickness: 25,
+
             }],
             yAxes: [{
               ticks: {

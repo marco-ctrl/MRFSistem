@@ -1,4 +1,17 @@
-<?php include 'Header.php' ?>
+<?php include 'Header.php'; 
+if ($_SESSION['catipusu'] == 'DIRECTOR') {
+    header('location: FRM_EscLideres.php');
+}
+if ($_SESSION['catipusu'] == 'SECRETARIO') {
+    header('location: FRM_EscLideres.php');
+}
+if ($_SESSION['catipusu'] == 'TESORERO') {
+    header('location: FRM_Finanzas.php');
+}
+if ($_SESSION['catipusu'] == 'LIDER') {
+    header('location: FRM_LiderCelula.php');
+}
+?>
 
 <body id="page-top">
     <!-- Div cargando -->

@@ -1,4 +1,14 @@
-<?php include 'Header.php' ?>
+<?php include 'Header.php';
+if ($_SESSION['catipusu'] == 'DIRECTOR') {
+    header('location: FRM_EscLideres.php');
+}
+if ($_SESSION['catipusu'] == 'SECRETARIO') {
+    header('location: FRM_EscLideres.php');
+}
+if ($_SESSION['catipusu'] == 'LIDER') {
+    header('location: FRM_LiderCelula.php');
+}
+?>
 
 <?php 
     require_once "../AccesoDatos/Conexion/Conexion.php";

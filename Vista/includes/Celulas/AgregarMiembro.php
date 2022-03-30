@@ -1,5 +1,5 @@
 <hr>
-<h4>Registrar Miembro</h4>
+<h4 id="lbl_registrar">Registrar Miembro</h4>
 <div class="row p-2">
     <div class="col-md-4">
         <form id="formMiecel1">

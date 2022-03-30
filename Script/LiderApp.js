@@ -11,6 +11,7 @@ $(document).ready(function () {
     //ListarMieCel(codigoCel);
     $("#formulario").hide();
     $("#lista").hide();
+    $("#informacion").hide();
 
 
     DeshabilitarFormulario();
@@ -47,8 +48,13 @@ $(document).ready(function () {
                 ////console.log(codigoMieCel+' '+codigoMie+' '+codigoCel);
                 habilitarFormulario();
                 $("#btn_AgregarMiecel").html("<i class='far fa-save'></i> Guardar");
+
                 capturarCampos();
                 camposVacios();
+                $('#lbl_registrar').html('Modificar Miembro');
+                $("#formulario").show();
+                $("#lista").hide();
+                $("#principal").hide();
             }
         });
     });
@@ -212,6 +218,7 @@ $(document).ready(function () {
 
     function NuevoMiecel() {//genera un codigo nuevo de miembro y miecel
         document.getElementById("txt_ci").focus();
+        $('#lbl_registrar').html('Agregar Miembro');
         let num = "";
         verificarSecuencia("MBR");
         if (getBan() != "true") {
@@ -663,21 +670,61 @@ $(document).ready(function () {
         $("#formulario").show();
         $("#lista").hide();
         $("#principal").hide();
+        $('#informacion').hide();
+        $('#lbl_registrar').html('Agregar Miembro');
     });
 
     $("#mn_listarMiembro").click(function (event) {
        $("#formulario").hide();
         $("#lista").show();
         $("#principal").hide();
+        $('#informacion').hide();
         ListarMieCel(codigoCel);
     });
 
     $("#mn_inicio").click(function (event) {
         $("#formulario").hide();
         $("#lista").hide();
+        $('#informacion').hide();
         $("#principal").show();
     });
 
+    $("#btn_agregarMiembro").click(function (event) {
+        $("#formulario").show();
+        $("#lista").hide();
+        $("#principal").hide();
+        $('#informacion').hide();
+        $('#lbl_registrar').html('Agregar Miembro');
+    });
+
+    $("#btn_listarMiembro").click(function (event) {
+       $("#formulario").hide();
+        $("#lista").show();
+        $("#principal").hide();
+        $('#informacion').hide();
+        ListarMieCel(codigoCel);
+    });
+
+    $("#btn_inicio").click(function (event) {
+        $("#formulario").hide();
+        $("#lista").hide();
+        $("#principal").show();
+        $('#informacion').hide();
+    });
+
+    $("#mn_informacion").click(function (event) {
+        $("#formulario").hide();
+        $("#lista").hide();
+        $("#principal").hide();
+        $('#informacion').show();
+    });
+
+    $("#btn_informacion").click(function (event) {
+        $("#formulario").hide();
+        $("#lista").hide();
+        $("#principal").hide();
+        $('#informacion').show();
+    });
 });
 
 

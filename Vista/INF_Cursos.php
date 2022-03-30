@@ -2,7 +2,14 @@
 
 <body id="page-top">
     <!-- Div cargando -->
-    <?php include 'Cargando.php' ?>
+    <?php include 'Cargando.php';
+    if ($_SESSION['catipusu'] == 'TESORERO') {
+        header('location: FRM_Finanzas.php');
+    }
+    if ($_SESSION['catipusu'] == 'LIDER') {
+        header('location: FRM_LiderCelula.php');
+    }
+    ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">

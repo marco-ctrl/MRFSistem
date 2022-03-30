@@ -1,14 +1,17 @@
-<?php include 'Header.php'; 
-    
-    if($_SESSION['catipusu']=='SECRETARIO'){
-        header('location: FRM_EscLideres.php');
-      }
-      if($_SESSION['catipusu']=='TESORERO'){
-        header('location: FRM_Finanzas.php');
-      }
-      if($_SESSION['catipusu']=='LIDER'){
-        header('location: FRM_LiderCelula.php');
-      }
+<?php include 'Header.php';
+
+if ($_SESSION['catipusu'] == 'DIRECTOR') {
+    header('location: FRM_EscLideres.php');
+}
+if ($_SESSION['catipusu'] == 'SECRETARIO') {
+    header('location: FRM_EscLideres.php');
+}
+if ($_SESSION['catipusu'] == 'TESORERO') {
+    header('location: FRM_Finanzas.php');
+}
+if ($_SESSION['catipusu'] == 'LIDER') {
+    header('location: FRM_LiderCelula.php');
+}
 ?>
 
 <body id="page-top">
@@ -192,7 +195,7 @@
                                 </div>
                             </a>
                         </div>
-                        
+
                     </div>
 
 
@@ -203,7 +206,7 @@
 
 
             <!-- Footer -->
-            <?php include 'Footer.php'?>
+            <?php include 'Footer.php' ?>
 
         </div>
     </div>
@@ -213,8 +216,8 @@
     </a>
 
     <!-- Logout Modal-->
-    <?php include 'LogoutModal.php'?>
+    <?php include 'LogoutModal.php' ?>
 
-    <?php include 'Scripts.php'?>
+    <?php include 'Scripts.php' ?>
 
 </body>

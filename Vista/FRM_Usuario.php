@@ -1,4 +1,17 @@
-<?php include 'Header.php' ?>
+<?php include 'Header.php';
+if ($_SESSION['catipusu'] == 'DIRECTOR') {
+    header('location: FRM_EscLideres.php');
+}
+if ($_SESSION['catipusu'] == 'SECRETARIO') {
+    header('location: FRM_EscLideres.php');
+}
+if ($_SESSION['catipusu'] == 'TESORERO') {
+    header('location: FRM_Finanzas.php');
+}
+if ($_SESSION['catipusu'] == 'LIDER') {
+    header('location: FRM_LiderCelula.php');
+}
+?>
 
 <body id="page-top">
     <!-- Div cargando -->
@@ -124,7 +137,7 @@
                         </div>
                         <div class="modal fade" id="idModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
                             aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title">Buscar Miembro</h5>

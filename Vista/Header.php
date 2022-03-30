@@ -38,5 +38,6 @@ date_default_timezone_set('America/La_Paz');
         crossorigin="" />
         <link rel="stylesheet" type="text/css" href="/MRFSistem/CSS/jquery.maxlength.css"> 
     <link href="/MRFSistem/CSS/EstilosPersonalisados.css" rel="stylesheet">
+    <link href="/MRFSistem/ReportesPDF/CSS/Stylos1.css" rel="stylesheet">
 
 </head>
